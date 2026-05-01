@@ -11,7 +11,7 @@
   display: grid;
   gap: $spacing-xl;
   padding-block: $spacing-xl;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   border-top: 1px solid $color-border;
 
   @include respond-to("md") {
@@ -32,13 +32,15 @@
   display: flex;
   align-items: center;
   gap: $spacing-md;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .site-footer__logo {
   display: block;
   width: auto;
   height: auto;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .site-footer__logo--government {
@@ -145,3 +147,4 @@
 .site-footer__copyright {
   margin: 0;
 }
+
