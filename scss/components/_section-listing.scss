@@ -123,15 +123,10 @@
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
   padding-block-end: $spacing-2xs;
-  padding-inline-start: $spacing-sm;
-  scroll-padding-inline: $spacing-sm 0;
+  padding-inline-start: $container-padding;
+  scroll-padding-inline: $container-padding 0;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-
-  @include respond-to("md") {
-    padding-inline-start: $container-padding;
-    scroll-padding-inline: $container-padding 0;
-  }
 }
 
 .resource-listing__viewport:focus-visible,

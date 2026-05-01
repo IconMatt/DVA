@@ -20,11 +20,13 @@
 .card-grid--resources,
 .card-grid--news-carousel {
   grid-auto-flow: column;
-  grid-auto-columns: minmax(17rem, 86%);
+  grid-auto-columns: 86vw;
   grid-template-columns: none;
+  padding-inline-end: $spacing-sm;
 
   @include respond-to("md") {
     grid-auto-columns: minmax(19rem, 48%);
+    padding-inline-end: $container-padding;
   }
 
   @include respond-to("lg") {
@@ -42,15 +44,6 @@
 .card-grid--resources .card-grid__item,
 .card-grid--news-carousel .card-grid__item {
   scroll-snap-align: start;
-}
-
-.card-grid--resources .card-grid__item:last-child,
-.card-grid--news-carousel .card-grid__item:last-child {
-  margin-inline-end: $spacing-sm;
-
-  @include respond-to("md") {
-    margin-inline-end: $container-padding;
-  }
 }
 
 .card-grid__item > .card {

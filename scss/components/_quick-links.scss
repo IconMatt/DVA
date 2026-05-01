@@ -52,7 +52,7 @@
 .quick-link__title {
   grid-column: 1;
   grid-row: 1;
-  font-size: var(--step-1);
+  font-size: $font-size-xl;
   font-weight: $font-weight-regular;
   line-height: $line-height-snug;
 }
@@ -85,6 +85,11 @@
   height: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
 }
 
+.quick-links--tray .quick-link__arrow img {
+  width: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
+  height: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
+}
+
 .quick-links--hero .quick-link__arrow img[src*="Search.svg"],
 .quick-links--hero .quick-link__arrow img[src*="Folder.svg"],
 .quick-links--hero .quick-link--emergency .quick-link__arrow img {
@@ -108,6 +113,8 @@
 // Blurred tint variant — softens the hero image behind the card without
 // the heavier glass treatment.
 .quick-link--glass {
+  --icon-bg: #{$color-zest};
+
   position: relative;
   overflow: hidden;
   background-color: $overlay-gray-18;
@@ -146,10 +153,6 @@
   color: $color-brown-900;
 }
 
-.quick-link--glass {
-  --icon-bg: #{$color-zest};
-}
-
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .quick-link--glass {
     background: $overlay-gray-55;
@@ -171,7 +174,7 @@
   background: $color-white;
   color: $color-brown-900;
   border-color: transparent;
-  min-height: clamp(4.75rem, 4.5rem + 1.1111vw, 5.5rem);
+  min-height: 0;
   padding: $spacing-sm;
   border-radius: $radius-lg;
 }
@@ -185,18 +188,17 @@
 }
 
 .quick-links--tray .quick-link__title {
-  font-size: var(--step-0);
+  font-size: $font-size-xl;
   font-weight: $font-weight-medium;
+
+  @include respond-to("md") {
+    font-size: $font-size-base;
+  }
 }
 
 .quick-links--tray .quick-link__arrow {
   align-self: center;
   flex-shrink: 0;
-}
-
-.quick-links--tray .quick-link__arrow img {
-  width: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
-  height: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
 }
 
 .quick-links--tray .quick-link--emergency {
@@ -207,11 +209,22 @@
   border-color: $color-slate-500;
 }
 
-.quick-links--tray .quick-link--emergency:hover {
-  --icon-bg: #{$color-zest};
+.quick-links--hero .quick-link--emergency .quick-link__arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+}
 
-  background: $color-white;
-  border-color: $color-border;
+.quick-links--hero .quick-link--emergency .quick-link__arrow img,
+.quick-links--tray .quick-link--emergency .quick-link__arrow img {
+  width: 1rem;
+  height: 1rem;
+}
+
+.quick-links--tray .quick-link--emergency:hover {
+  --icon-bg: #{$color-sand-stone};
+
+  background: $color-zest;
+  border-color: $color-zest;
   color: $color-brown-900;
 }
 

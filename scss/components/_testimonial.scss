@@ -39,8 +39,10 @@
   transform: translate3d(0, 0, 0);
   transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, transform;
+  margin-inline-start: calc(#{$container-padding} - 0.75rem);
 
   @include respond-to("md") {
+    margin-inline-start: 0;
     grid-column: 1;
     grid-row: 1;
     align-self: start;
@@ -177,9 +179,11 @@
   align-items: center;
   gap: $spacing-2xs;
   margin-block-start: calc(#{$spacing-md} - #{$spacing-xl});
+  margin-inline-start: calc(#{$container-padding} - 0.75rem);
 
   @include respond-to("md") {
     margin-block-start: 0;
+    margin-inline-start: 0;
     grid-column: 1;
     grid-row: 2;
     align-self: end;
