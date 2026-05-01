@@ -104,6 +104,7 @@
   align-items: center;
   gap: $spacing-2xs;
   width: fit-content;
+  justify-self: end;
   font-size: var(--step-0);
   font-weight: $font-weight-medium;
   color: $color-brown-900;
@@ -142,6 +143,10 @@
   display: flex;
   gap: $spacing-md;
   flex-wrap: wrap;
+}
+
+.site-footer__legal-inner .site-footer__link {
+  font-size: inherit;
 }
 
 .site-footer__copyright {
