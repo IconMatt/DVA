@@ -1,0 +1,25 @@
+{
+  "name": "dva-wellbeing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Front-end build for the Veteran and Family Wellbeing Agency site.",
+  "scripts": {
+    "dev": "sass --watch scss/main.scss:css/main.css --style=expanded --source-map",
+    "build": "sass scss/main.scss:css/main.css --style=compressed --no-source-map",
+    "lint:scss": "stylelint \"scss/**/*.scss\"",
+    "verify": "npm run lint:scss && npm run build"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard-scss": "^13.0.0"
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard-scss",
+    "rules": {
+      "selector-class-pattern": null,
+      "custom-property-pattern": null,
+      "scss/at-rule-no-unknown": true
+    }
+  }
+}

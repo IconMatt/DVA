@@ -1,0 +1,76 @@
+@use "sass:map";
+@use "tokens" as *;
+
+// Responsive: min-width only (mobile-first).
+@mixin respond-to($name) {
+  $value: map.get($breakpoints, $name);
+
+  @if not $value {
+    @error "Unknown breakpoint `#{$name}`. Expected one of: #{map.keys($breakpoints)}.";
+  }
+
+  @media (min-width: $value) {
+    @content;
+  }
+}
+
+// Accessible visually-hidden (for screen-reader-only text).
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Standard focus ring, keyboard-only.
+@mixin focus-ring {
+  outline: 3px solid $color-focus;
+  outline-offset: 2px;
+}
+
+// Page container — always 100% width, fluid gutter.
+@mixin container {
+  width: 100%;
+  margin-inline: auto;
+  padding-inline: $container-padding;
+}
+
+// Full-bleed panel — use as a pair.
+// bleed-wrap:    outer element, responsive margin keeps it off the viewport edge.
+// bleed-content: inner element, compensating padding aligns content with the page grid.
+@mixin bleed-wrap {
+  margin-inline: 0.75rem;
+
+  @include respond-to("md") {
+    margin-inline: 0.9rem;
+  }
+}
+
+@mixin bleed-content {
+  padding-inline: calc(#{$container-padding} - 0.75rem);
+
+  @include respond-to("md") {
+    padding-inline: calc(#{$container-padding} - 0.9rem);
+  }
+}
+
+// Eyebrow label — small all-caps-style label above a heading.
+// Use @include eyebrow on any __eyebrow element for consistent treatment.
+@mixin eyebrow {
+  font-size: var(--step-0);
+  font-weight: $font-weight-regular;
+  color: $color-brown-900;
+  letter-spacing: 0.02em;
+}
+
+// Reduced-motion guard.
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}

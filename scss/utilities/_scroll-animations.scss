@@ -1,0 +1,38 @@
+@use "../abstracts/mixins" as *;
+
+// Scroll-entrance animation — fade + translate up.
+// Elements opt in via [data-animate]. Direct children of
+// [data-animate-stagger] receive incremental --animate-delay values from JS.
+.js-animations [data-animate] {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 600ms ease,
+    transform 600ms ease;
+  transition-delay: var(--animate-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-animations [data-animate].is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+// Parallax host — isolates transforms and avoids paint jank.
+[data-parallax] {
+  will-change: transform;
+}
+
+@include reduced-motion {
+  .js-animations [data-animate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  [data-parallax] {
+    transform: none !important;
+    will-change: auto;
+  }
+}

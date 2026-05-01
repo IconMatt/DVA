@@ -1,0 +1,68 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-2xs;
+  padding: $spacing-2xs $spacing-md;
+  min-height: 44px;
+  font-family: $font-body;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  text-decoration: none;
+  border-radius: $radius-pill;
+  border: 1px solid transparent;
+  transition: background-color $transition-base, color $transition-base,
+    border-color $transition-base;
+  cursor: pointer;
+}
+
+.button--primary {
+  background: $color-brown-900;
+  color: $color-text-inverse;
+  border-color: $color-brown-900;
+}
+
+.button--primary:hover {
+  background: $color-brown-700;
+  border-color: $color-brown-700;
+  color: $color-text-inverse;
+}
+
+.button--secondary {
+  background: transparent;
+  color: $color-brown-900;
+  border-color: $color-brown-900;
+}
+
+.button--secondary:hover {
+  background: $color-brown-900;
+  color: $color-text-inverse;
+}
+
+.button--tertiary {
+  padding-inline: $spacing-sm;
+  background: transparent;
+  color: $color-brown-900;
+  border-color: $color-border-strong;
+}
+
+.button--tertiary:hover {
+  background: $color-sweet-grass;
+  color: $color-brown-900;
+}
+
+.button--emergency {
+  background: $color-emergency;
+  color: $color-text-inverse;
+  border-color: $color-emergency;
+}
+
+.button--emergency:hover {
+  background: $color-emergency-dark;
+  border-color: $color-emergency-dark;
+  color: $color-text-inverse;
+}

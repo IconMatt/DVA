@@ -1,0 +1,31 @@
+@use "../abstracts/tokens" as *;
+
+// Icon placeholder system — square glyph area, no art yet.
+// Swap to SVG sprites during Drupal integration.
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  background: currentcolor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  vertical-align: middle;
+}
+
+// Until SVG assets ship, render as a neutral dot so layout is predictable.
+.icon--search,
+.icon--access,
+.icon--phone,
+.icon--help,
+.icon--heart,
+.icon--facebook,
+.icon--instagram {
+  width: 1.1em;
+  height: 1.1em;
+  border-radius: $radius-pill;
+  background: currentcolor;
+  mask: none;
+  opacity: 0.9;
+}

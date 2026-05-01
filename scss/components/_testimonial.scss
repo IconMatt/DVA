@@ -1,0 +1,246 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.testimonial {
+  @include bleed-wrap;
+
+  margin-block: $spacing-xl;
+  background: $color-sweet-grass;
+  border-radius: $radius-hero;
+  overflow: hidden;
+}
+
+.testimonial__inner {
+  @include bleed-content;
+
+  position: relative;
+  display: grid;
+  min-height: clamp(32rem, 40vw, 44rem);
+  padding-block: $spacing-xl calc((#{$container-padding} - 0.75rem) * 1.5);
+  gap: $spacing-xl;
+  grid-template-columns: 1fr;
+
+  @include respond-to("md") {
+    padding-block: $spacing-2xl calc(#{$container-padding} - 0.9rem);
+    grid-template-columns: minmax(0, 1fr) clamp(12rem, 15vw, 16rem);
+    grid-template-rows: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+}
+
+.testimonial__figure {
+  --testimonial-slide-distance: clamp(0.75rem, 1vw, 1.25rem);
+
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+
+  @include respond-to("md") {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    width: 90%;
+  }
+}
+
+.testimonial__figure.is-leaving {
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 220ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial__figure.is-entering {
+  animation: testimonial-text-enter 980ms cubic-bezier(0.24, 0.72, 0.32, 1) both;
+}
+
+@keyframes testimonial-text-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--testimonial-slide-distance), 0, 0);
+  }
+
+  55% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.testimonial__quote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.testimonial__text {
+  font-family: $font-display;
+  font-weight: $font-weight-regular;
+  font-size: clamp(1.875rem, 1.175rem + 1.45vw, 3.5rem);
+  line-height: $line-height-tight;
+  color: $color-brown-900;
+}
+
+.testimonial__attribution {
+  font-size: var(--step-0);
+  line-height: $line-height-normal;
+}
+
+.testimonial__name {
+  margin: 0;
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+}
+
+.testimonial__role {
+  margin: 0;
+  color: $color-brown-900;
+}
+
+.testimonial__portrait {
+  position: relative;
+  isolation: isolate;
+  width: min(65%, 12rem);
+  aspect-ratio: 1 / 1.414;
+  margin: 0;
+  overflow: hidden;
+  justify-self: end;
+  background: $color-slate-500;
+  border-radius: $radius-lg;
+
+  @include respond-to("md") {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    width: 100%;
+  }
+}
+
+.testimonial__portrait-image {
+  --testimonial-image-parallax-offset: 0px;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 48% 50%;
+  opacity: 1;
+  transform: translate3d(0, var(--testimonial-image-parallax-offset), 0) scale(1);
+  transform-origin: center;
+}
+
+.testimonial__portrait-image[data-parallax-media] {
+  --testimonial-image-parallax-buffer: 0px;
+  --testimonial-image-parallax-buffer-negative: 0px;
+
+  position: absolute;
+  inset-block: var(--testimonial-image-parallax-buffer-negative);
+  inset-inline: 0;
+  height: calc(100% + var(--testimonial-image-parallax-buffer) + var(--testimonial-image-parallax-buffer));
+  will-change: opacity, transform;
+}
+
+.testimonial__portrait-image--current {
+  z-index: 1;
+}
+
+.testimonial__portrait-image--next {
+  z-index: 2;
+  opacity: 0;
+  transform: translate3d(0, var(--testimonial-image-parallax-offset), 0) scale(1.12);
+}
+
+.testimonial__portrait-image--next.is-entering {
+  animation: testimonial-image-enter 980ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes testimonial-image-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--testimonial-image-parallax-offset), 0) scale(1.12);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, var(--testimonial-image-parallax-offset), 0) scale(1);
+  }
+}
+
+.testimonial__controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2xs;
+  margin-block-start: calc(#{$spacing-md} - #{$spacing-xl});
+
+  @include respond-to("md") {
+    margin-block-start: 0;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: end;
+  }
+}
+
+.testimonial__control {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-brown-900;
+  background: $color-sand-stone;
+  border: 0;
+  border-radius: $radius-sm;
+  transition:
+    background-color $transition-base,
+    opacity $transition-base;
+}
+
+.testimonial__control:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.testimonial__control:not(:disabled):hover {
+  background: $color-zest;
+}
+
+.testimonial__control-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.testimonial__control--next .testimonial__control-icon {
+  transform: rotate(180deg);
+}
+
+.testimonial__page {
+  margin: 0 0 0 $spacing-sm;
+  font-size: var(--step--1);
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  color: $color-brown-900;
+}
+
+@include reduced-motion {
+  .testimonial__figure,
+  .testimonial__figure.is-entering,
+  .testimonial__figure.is-leaving,
+  .testimonial__portrait-image {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .testimonial__portrait-image--next,
+  .testimonial__portrait-image--next.is-entering {
+    opacity: 0;
+    transform: none;
+    animation: none;
+  }
+}

@@ -1,0 +1,372 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.card__title {
+  font-size: var(--step-2);
+}
+
+.card__title-link {
+  color: $color-brown-900;
+  text-decoration: none;
+}
+
+.card__title-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.card__title-link:hover {
+  color: $color-brown-700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.card__excerpt {
+  color: $color-text-muted;
+  font-size: var(--step--1);
+}
+
+.card__date {
+  font-size: var(--step--1);
+  color: $color-text-muted;
+}
+
+.card__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: $spacing-sm;
+  padding-top: $spacing-sm;
+  border-top: 1px solid $color-border;
+  margin-top: auto;
+}
+
+.card__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-pill;
+  background: $color-sweet-grass;
+  color: $color-brown-900;
+}
+
+.card__save {
+  position: absolute;
+  top: $spacing-sm;
+  right: $spacing-sm;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-text-muted;
+  border-radius: $radius-pill;
+  z-index: 2;
+}
+
+.card__save:hover {
+  color: $color-emergency;
+  background: $color-sweet-grass;
+}
+
+// ----- Resource card link -----
+.card--resource {
+  min-height: 100%;
+  padding: $spacing-md;
+  gap: $spacing-sm;
+  color: $color-brown-900;
+  background: $color-slate-500;
+  border: 0;
+  border-radius: $radius-2xl;
+  transition: background-color $transition-base;
+}
+
+.card--resource:hover,
+.card--resource:focus-within {
+  background: $color-sweet-grass;
+}
+
+.card--resource .card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $spacing-sm;
+}
+
+.card--resource .card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-3xs;
+}
+
+.card--resource .card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-3xs;
+  min-height: 2rem;
+  padding: $spacing-3xs $spacing-2xs;
+  font-size: var(--step--1);
+  font-weight: $font-weight-medium;
+  line-height: $line-height-snug;
+  color: $color-brown-900;
+  background: $color-sand-stone;
+  border-radius: $radius-sm;
+}
+
+.card--resource .card__badge--pinned {
+  color: $color-white;
+  background: $color-slate-700;
+}
+
+.card--resource .card__badge-icon {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.card--resource .card__badge--pinned .card__badge-icon {
+  filter: brightness(0) invert(1);
+}
+
+.card--resource .card__save {
+  position: relative;
+  top: auto;
+  right: auto;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  color: $color-brown-900;
+  border-radius: $radius-sm;
+}
+
+.card--resource .card__save:hover {
+  color: $color-brown-900;
+  background: $color-sand-stone;
+}
+
+.card--resource .card__save-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.card--resource .card__content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: $spacing-sm;
+  align-items: start;
+}
+
+.card--resource.card--with-media .card__content {
+  grid-template-columns: minmax(0, 1fr) clamp(5rem, 28%, 6.75rem);
+}
+
+.card--resource .card__copy {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.card--resource .card__title {
+  font-size: var(--step-2);
+  line-height: $line-height-snug;
+}
+
+.card--resource .card__title-link:hover {
+  color: $color-brown-900;
+  text-decoration: none;
+}
+
+.card--resource .card__title-link:focus-visible {
+  outline: 0;
+}
+
+.card--resource .card__title-link:focus-visible::before {
+  border-radius: $radius-2xl;
+  outline: 3px solid $color-focus;
+  outline-offset: -3px;
+}
+
+.card--resource .card__excerpt {
+  color: $color-brown-900;
+  line-height: $line-height-snug;
+}
+
+.card--resource .card__media {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  margin: 0;
+  overflow: hidden;
+  background: $color-sand-stone;
+  border-radius: $radius-lg;
+}
+
+.card--resource .card__image {
+  --card-image-scale: 1;
+  --card-media-parallax-offset: 0px;
+
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 35%;
+  transform: translate3d(0, var(--card-media-parallax-offset), 0) scale(var(--card-image-scale));
+  transition: transform $transition-base;
+}
+
+.card--resource .card__image[data-parallax-media] {
+  --card-media-parallax-buffer: 0px;
+  --card-media-parallax-buffer-negative: 0px;
+
+  position: absolute;
+  inset-block: var(--card-media-parallax-buffer-negative);
+  inset-inline: 0;
+  height: calc(100% + var(--card-media-parallax-buffer) + var(--card-media-parallax-buffer));
+  will-change: transform;
+}
+
+.card--resource:hover .card__image,
+.card--resource:focus-within .card__image {
+  --card-image-scale: 1.04;
+}
+
+.card--resource .tag {
+  color: $color-brown-900;
+  background: $color-sand-stone;
+}
+
+.card--resource .card__meta {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.card--resource .card__date {
+  color: $color-brown-900;
+}
+
+.card--resource .card__arrow {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: $radius-sm;
+  background: $color-sand-stone;
+  transition: background-color $transition-base;
+}
+
+.card--resource:hover .card__arrow,
+.card--resource:focus-within .card__arrow {
+  background: $color-zest;
+}
+
+.card--resource .card__arrow-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+  transform: rotate(180deg);
+}
+
+// ----- News card (with media) -----
+.card--news {
+  padding: $spacing-sm;
+  gap: $spacing-sm;
+  color: $color-brown-900;
+  background: $color-white;
+  border-color: $color-brown-900;
+  border-radius: $radius-2xl;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base;
+}
+
+.card--news:hover,
+.card--news:focus-within {
+  background: $color-sand-stone;
+  border-color: transparent;
+}
+
+.card--news .card__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  margin: 0;
+  overflow: hidden;
+  background: $color-slate-500;
+  border-radius: $radius-xl;
+}
+
+.card--news .card__media-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform $transition-slow;
+}
+
+.card--news:hover .card__media-image,
+.card--news:focus-within .card__media-image {
+  transform: scale(1.02);
+}
+
+.card--news .card__badge {
+  position: absolute;
+  top: $spacing-sm;
+  left: $spacing-sm;
+  padding: $spacing-3xs $spacing-2xs;
+  font-size: var(--step--2);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: $color-zest;
+  border-radius: $radius-sm;
+}
+
+.card--news .card__body {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: 0;
+  flex: 1 1 auto;
+}
+
+.card--news .card__title {
+  font-size: var(--step-1);
+  line-height: $line-height-snug;
+}
+
+.card--news .card__title-link:hover {
+  color: $color-brown-900;
+  text-decoration: none;
+}
+
+.card--news .card__date,
+.card--news .card__excerpt {
+  color: $color-brown-900;
+}
+
+.card--news .card__actions {
+  margin-top: auto;
+  padding-top: $spacing-sm;
+}
+
+.card--news .button {
+  position: relative;
+  z-index: 1;
+  color: $color-brown-900;
+  border-color: $color-brown-900;
+}
+
+.card--news .button:hover,
+.card--news .button:focus-visible {
+  color: $color-brown-900;
+  background: $color-zest;
+  border-color: $color-zest;
+}

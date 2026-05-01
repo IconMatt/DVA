@@ -1,0 +1,141 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.site-header {
+  background: $color-sweet-grass;
+  position: relative;
+  z-index: 20;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-sm;
+  padding-block: clamp(0.875rem, 2.2vw, 5.25rem);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-header__logo {
+  display: block;
+
+  // 2.5rem → 3rem across 360–1440px
+  height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+  width: auto;
+}
+
+.site-nav {
+  display: none;
+
+  @include respond-to("lg") {
+    display: block;
+    margin-inline-start: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
+  }
+}
+
+.site-nav__list {
+  display: flex;
+  gap: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
+}
+
+.site-nav__link {
+  display: inline-block;
+  padding-block: $spacing-2xs;
+  font-size: var(--step-0);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  text-decoration: none;
+}
+
+.site-nav__link:hover {
+  color: $color-brown-700;
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.site-header__utility {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2xs;
+  margin-inline-start: auto;
+  flex-wrap: wrap;
+}
+
+// Pill — shared shape for search, bookmark, 24/7, exit.
+.site-header__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-2xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: transparent;
+  border: 1px solid $color-brown-900;
+  border-radius: $radius-pill;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base;
+}
+
+.site-header__pill-icon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.site-header__pill--exit .site-header__pill-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.site-header__pill:hover {
+  background: $color-brown-900;
+  color: $color-text-inverse;
+}
+
+.site-header__pill:hover .site-header__pill-icon {
+  filter: brightness(0) invert(1);
+}
+
+// Filled dark variant — 24/7 support.
+.site-header__pill--help {
+  background: $color-brown-900;
+  color: $color-text-inverse;
+}
+
+.site-header__pill--help:hover {
+  background: $color-brown-700;
+  border-color: $color-brown-700;
+  color: $color-text-inverse;
+}
+
+// Quick exit — fixed to viewport top-right, sandstone fill, no border.
+.site-header__pill--exit {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  max-height: 45px;
+  padding-block: 0;
+  background: $color-sand-stone;
+  border-color: transparent;
+  border-radius: 0 0 0 $radius-xs;
+  box-shadow: $shadow-sm;
+}
+
+.site-header__pill--exit:hover {
+  background: $color-sweet-grass;
+  color: $color-brown-900;
+}
+
+.site-header__pill--exit:hover .site-header__pill-icon {
+  filter: none;
+}

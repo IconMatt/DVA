@@ -1,0 +1,111 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.feature-promo {
+  background: $color-sweet-grass;
+  padding-block: $spacing-sm;
+}
+
+.feature-promo__inner {
+  padding-inline: $spacing-sm;
+  display: grid;
+  gap: $spacing-sm;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+
+  @include respond-to("md") {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.feature-promo__body {
+  @include bleed-content;
+
+  order: 2;
+  padding-block: $spacing-md;
+  background: $color-sand-stone;
+  border-radius: $radius-hero;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  // Add the square treatment back at lg while keeping md flexible.
+  @include respond-to("md") {
+    order: initial;
+    padding-block: $spacing-lg;
+  }
+
+  @include respond-to("lg") {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.feature-promo__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  background: $color-zest;
+  border-radius: $radius-md;
+}
+
+.feature-promo__icon img {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+}
+
+.feature-promo__eyebrow {
+  @include eyebrow;
+}
+
+.feature-promo__title {
+  color: $color-brown-900;
+  font-size: var(--step-5);
+  line-height: $line-height-snug;
+}
+
+// Push body copy + actions to the bottom of the panel.
+.feature-promo__text {
+  margin-top: auto;
+  color: $color-brown-900;
+  max-width: 44ch;
+  font-size: var(--step-1);
+}
+
+.feature-promo__actions {
+  margin-top: $spacing-xs;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2xs;
+}
+
+.feature-promo__media {
+  order: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: $radius-hero;
+  background: $color-brown-900;
+  min-height: 18rem;
+
+  @include respond-to("md") {
+    order: initial;
+    min-height: 0;
+  }
+
+  @include respond-to("lg") {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.feature-promo__media-img {
+  position: absolute;
+
+  // Extend the image so parallax translation never reveals an edge.
+  inset: -25% 0;
+  width: 100%;
+  height: 150%;
+  object-fit: cover;
+  display: block;
+}

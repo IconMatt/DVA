@@ -1,0 +1,11 @@
+@use "../abstracts/tokens" as *;
+
+// Home page rhythm — minimal, relies on components' internal padding.
+.page--home .site-main > * + * {
+  // Component-level padding handles vertical rhythm; no extra margin here.
+}
+
+.page--home .resource-listing__page,
+.page--home .news-listing__page {
+  display: none;
+}

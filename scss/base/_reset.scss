@@ -1,0 +1,108 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+// Fluid scaling from the `xl` breakpoint upward.
+// Root font-size grows from 16px at 1440px to 24px at 2560px, capped at 24px.
+// Everything rem-based (type, spacing, radius) scales with it.
+@include respond-to("xl") {
+  html {
+    font-size: clamp(1rem, 0.7143vw + 0.3571rem, 1.5rem);
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: $color-bg-page;
+  color: $color-text;
+  font-family: $font-body;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: $color-link;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: $color-link-hover;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+// Global reduced-motion guard: strip long transitions/animations.
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: $spacing-sm;
+  padding: $spacing-2xs $spacing-sm;
+  background: $color-brown-900;
+  color: $color-text-inverse;
+  border-radius: 0 0 $radius-sm $radius-sm;
+  transform: translateY(-110%);
+  transition: transform $transition-base;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}

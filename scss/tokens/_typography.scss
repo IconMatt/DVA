@@ -1,0 +1,11 @@
+// Fluid type scale
+:root {
+  --step--2: clamp(0.6921rem, 0.6768rem + 0.0678vw, 0.7378rem);
+  --step--1: clamp(0.8028rem, 0.7753rem + 0.1224vw, 0.8854rem);
+  --step-0: clamp(0.9861rem, 0.9398rem + 0.2058vw, 1.125rem);
+  --step-1: clamp(1.0802rem, 1.0153rem + 0.2885vw, 1.275rem);
+  --step-2: clamp(1.2531rem, 1.1608rem + 0.4102vw, 1.53rem);
+  --step-3: clamp(1.4536rem, 1.3261rem + 0.5665vw, 1.836rem);
+  --step-4: clamp(1.6862rem, 1.5138rem + 0.766vw, 2.2032rem);
+  --step-5: clamp(1.9559rem, 1.7266rem + 1.0191vw, 2.6438rem);
+}

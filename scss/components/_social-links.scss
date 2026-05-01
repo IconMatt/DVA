@@ -1,0 +1,32 @@
+@use "../abstracts/tokens" as *;
+
+.social-links {
+  display: flex;
+  gap: $spacing-xs;
+  margin-top: $spacing-lg;
+}
+
+.social-links__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+  height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+  border-radius: $radius-xs;
+  color: $color-brown-900;
+  background: $color-zest;
+  transition:
+    background-color $transition-base,
+    color $transition-base;
+}
+
+.social-links__link:hover {
+  background: $color-sand-stone;
+  color: $color-brown-900;
+}
+
+.social-links__icon {
+  display: block;
+  width: clamp(1.125rem, 1.0417rem + 0.3704vw, 1.375rem);
+  height: clamp(1.125rem, 1.0417rem + 0.3704vw, 1.375rem);
+}

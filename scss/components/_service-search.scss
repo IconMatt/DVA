@@ -1,0 +1,182 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.service-search-band {
+  padding-block: $spacing-sm;
+}
+
+.service-search {
+  @include bleed-wrap;
+
+  background: $color-sweet-grass;
+  border-radius: $radius-hero;
+  overflow: clip;
+}
+
+.service-search__inner {
+  @include bleed-content;
+
+  padding-block: $spacing-xl;
+}
+
+.service-search__title {
+  margin-bottom: $spacing-md;
+}
+
+.service-search__form {
+  display: grid;
+  gap: $spacing-sm;
+  grid-template-columns: 1fr;
+
+  @include respond-to("md") {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: stretch;
+  }
+}
+
+.service-search__field {
+  min-width: 0;
+}
+
+// Bordered input container — holds icon + floating-label input.
+.service-search__input-wrap {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-2xs $spacing-sm;
+  min-height: 3.5rem;
+  height: 100%;
+  background: $color-white;
+  border: 1px solid $color-brown-900;
+
+  // Fluid radius — scales 10px → 14px across viewports.
+  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
+  cursor: text;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+
+  &:focus-within {
+    border-color: $color-brown-900;
+
+    // Soft brown ring — keeps focus distinct from the resting state
+    // (both share the same border colour).
+    box-shadow: 0 0 0 3px rgb(75 57 40 / 15%);
+    outline: 3px solid transparent; // keeps layout stable; real focus ring on the input
+  }
+}
+
+.service-search__input-icon {
+  flex: none;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  // Full opacity — icons should read as dark brown, matching the border.
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Positioning context for the floating label.
+.service-search__input-body {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+// Floating label — resting state: centred in the field, full size (acts as placeholder).
+// Active/filled state: floats to the top at a smaller size.
+.service-search__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--step-0);
+  font-weight: $font-weight-regular;
+  color: $color-text-muted;
+  line-height: 1.2;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    top $transition-fast,
+    transform $transition-fast,
+    font-size $transition-fast;
+}
+
+// Floated state — when the input is focused OR already has a value.
+.service-search__input:focus + .service-search__label,
+.service-search__input:not(:placeholder-shown) + .service-search__label {
+  top: 0;
+  transform: translateY(0);
+  font-size: var(--step--2);
+  font-weight: $font-weight-semibold;
+}
+
+.service-search__input {
+  display: block;
+  width: 100%;
+  padding: 0;
+
+  // Pushes the cursor/text below the floated label in the active state.
+  padding-top: 1.15rem;
+  min-height: 0;
+  font-size: var(--step-0);
+  color: $color-text;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  &::placeholder {
+    color: $color-slate-700;
+  }
+
+  // In the resting state, hide the browser placeholder —
+  // the label sitting centred serves as the visual hint instead.
+  &:not(:focus)::placeholder {
+    color: transparent;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  // Remove browser-native search chrome (clear button, etc.).
+  &[type="search"]::-webkit-search-decoration,
+  &[type="search"]::-webkit-search-cancel-button,
+  &[type="search"]::-webkit-search-results-button,
+  &[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+}
+
+.service-search__submit {
+  min-height: 3.5rem;
+  font-size: var(--step-0);
+  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
+
+  @include respond-to("md") {
+    align-self: stretch;
+  }
+}
+
+.service-search__helpers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm $spacing-lg;
+  margin-top: $spacing-sm;
+  font-size: var(--step--1);
+  color: $color-text-muted;
+}
+
+.service-search__helper a {
+  color: $color-link;
+  font-weight: $font-weight-semibold;
+}

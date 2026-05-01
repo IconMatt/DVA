@@ -1,0 +1,51 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Wire text-wrap once, here, so components never re-declare it.
+// Progressive enhancement — no fallback required.
+h1, h2, h3, h4 {
+  font-family: $font-body;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+  color: $color-brown-900;
+  text-wrap: balance;
+}
+
+p, li, dd {
+  text-wrap: pretty;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-2);
+  line-height: $line-height-snug;
+}
+
+h4 {
+  font-size: var(--step-1);
+  line-height: $line-height-snug;
+}
+
+h5 {
+  font-size: var(--step-0);
+  line-height: $line-height-snug;
+}
+
+// Serif variant: add .headings-serif to <body> or any section wrapper
+// to switch h1–h3 to Halant. h4 stays in Figtree.
+.headings-serif h1,
+.headings-serif h2,
+.headings-serif h3 {
+  font-family: $font-display;
+}
+
+p {
+  max-width: 70ch;
+}

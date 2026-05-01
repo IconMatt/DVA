@@ -1,0 +1,34 @@
+// Fluid space scale
+:root {
+  --space-3xs: clamp(0.2328rem, 0.2219rem + 0.0486vw, 0.2656rem);
+  --space-2xs: clamp(0.4656rem, 0.4438rem + 0.0972vw, 0.5313rem);
+  --space-xs: clamp(0.6984rem, 0.6656rem + 0.1458vw, 0.7969rem);
+  --space-s: clamp(0.9313rem, 0.8875rem + 0.1944vw, 1.0625rem);
+  --space-m: clamp(1.3969rem, 1.3313rem + 0.2917vw, 1.5938rem);
+  --space-l: clamp(1.8625rem, 1.775rem + 0.3889vw, 2.125rem);
+  --space-xl: clamp(2.7938rem, 2.6625rem + 0.5833vw, 3.1875rem);
+  --space-2xl: clamp(3.725rem, 3.55rem + 0.7778vw, 4.25rem);
+  --space-3xl: clamp(5.5875rem, 5.325rem + 1.1667vw, 6.375rem);
+
+  /* Pairs */
+  --space-3xs-2xs: clamp(0.2328rem, 0.1333rem + 0.4421vw, 0.5313rem);
+  --space-2xs-xs: clamp(0.4656rem, 0.3552rem + 0.4907vw, 0.7969rem);
+  --space-xs-s: clamp(0.6984rem, 0.5771rem + 0.5394vw, 1.0625rem);
+  --space-s-m: clamp(0.9313rem, 0.7104rem + 0.9815vw, 1.5938rem);
+  --space-m-l: clamp(1.3969rem, 1.1542rem + 1.0787vw, 2.125rem);
+  --space-l-xl: clamp(1.8625rem, 1.4208rem + 1.963vw, 3.1875rem);
+  --space-xl-2xl: clamp(2.7938rem, 2.3083rem + 2.1574vw, 4.25rem);
+  --space-2xl-3xl: clamp(3.725rem, 2.8417rem + 3.9259vw, 6.375rem);
+  --space-s-l: clamp(0.9313rem, 0.5333rem + 1.7685vw, 2.125rem);
+}
+
+// Semantic aliases
+$spacing-3xs: var(--space-3xs) !default;
+$spacing-2xs: var(--space-2xs) !default;
+$spacing-xs: var(--space-xs) !default;
+$spacing-sm: var(--space-s) !default;
+$spacing-md: var(--space-m) !default;
+$spacing-lg: var(--space-l) !default;
+$spacing-xl: var(--space-xl) !default;
+$spacing-2xl: var(--space-2xl) !default;
+$spacing-3xl: var(--space-3xl) !default;

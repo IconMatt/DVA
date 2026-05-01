@@ -1,0 +1,32 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.cta-tray {
+  background: $color-sand-stone;
+  border-top: 1px solid $color-border;
+}
+
+.cta-tray__inner {
+  padding-block: $spacing-xl $spacing-2xl;
+}
+
+.cta-tray__title {
+  margin: 0 0 $spacing-md;
+  font-family: $font-display;
+  font-size: var(--step-4);
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+  color: $color-brown-900;
+}
+
+.cta-tray .quick-links--tray {
+  grid-template-columns: 1fr;
+
+  @include respond-to("md") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to("lg") {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

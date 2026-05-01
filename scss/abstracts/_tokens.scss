@@ -1,0 +1,149 @@
+@forward "../tokens/radius";
+@forward "../tokens/spacing";
+
+// Design tokens — single source of truth for colour, spacing, type, etc.
+// No hex/rgb/hsl values may live outside this file.
+
+// ---------- Raw palette ----------
+// Primary palette supplied by brand.
+// Text — "Umber" family.
+$color-brown-900: #4b3928;     // Umber (text)
+$color-brown-700: #7d6e5f;     // Umber 75% — hover / mid ink
+$color-brown-500: #a59c93;     // Umber 50% — muted body text
+
+// Primary surfaces.
+$color-sand-stone: #f9f6ea;    // Sandstone — page canvas
+$color-sweet-grass: #ebead6;   // Sweetgrass — warm muted panel
+$color-sweet-grass-dark: #e2e0cb; // Sweetgrass 125% — stronger panel
+$color-white: #fff;
+
+// Secondary — "Slate" family.
+$color-slate-300: #e0e7ea;     // Slate 50% — soft tint
+$color-slate-500: #c1cbcf;     // Slate — borders, gradient tones
+$color-slate-700: #68777d;     // Slate 125% — stronger border / muted ink
+
+// Accent.
+$color-zest: #dad777;          // Zest — accent + focus
+$color-zest-dark: #b8b457;     // derived — hover for zest
+
+$color-border-warm: #e4deca;   // derived — soft warm hairline
+
+// Translucent overlays (for dark surfaces).
+$overlay-white-02: rgb(255 255 255 / 2%);
+$overlay-white-04: rgb(255 255 255 / 4%);
+$overlay-white-06: rgb(255 255 255 / 6%);
+$overlay-white-08: rgb(255 255 255 / 8%);
+$overlay-white-10: rgb(255 255 255 / 10%);
+$overlay-white-14: rgb(255 255 255 / 14%);
+$overlay-white-16: rgb(255 255 255 / 16%);
+$overlay-white-18: rgb(255 255 255 / 18%);
+$overlay-white-22: rgb(255 255 255 / 22%);
+$overlay-white-25: rgb(255 255 255 / 25%);
+$overlay-white-30: rgb(255 255 255 / 30%);
+$overlay-white-35: rgb(255 255 255 / 35%);
+$overlay-white-45: rgb(255 255 255 / 45%);
+$overlay-white-82: rgb(255 255 255 / 88%);
+$overlay-white-92: rgb(255 255 255 / 92%);
+$overlay-black-18: rgb(0 0 0 / 18%);
+$overlay-black-30: rgb(0 0 0 / 30%);
+$overlay-gray-10: rgb(187 187 187 / 10%);
+$overlay-gray-18: rgb(187 187 187 / 18%);
+$overlay-gray-55: rgb(187 187 187 / 55%);
+$overlay-sand-stone-30: rgb(249 246 234 / 30%);
+$overlay-brown-92: rgb(75 57 40 / 94%);
+$overlay-brown-60: rgb(75 57 40 / 60%);
+$overlay-brown-40: rgb(75 57 40 / 40%);
+$overlay-brown-20: rgb(75 57 40 / 20%);
+$overlay-shadow-sm: rgb(75 57 40 / 8%);
+$overlay-shadow-md: rgb(75 57 40 / 10%);
+$overlay-shadow-lg: rgb(75 57 40 / 14%);
+
+// ---------- Semantic roles ----------
+$color-text: $color-brown-900;
+$color-text-muted: $color-brown-500;
+$color-text-inverse: $color-white;
+$color-link: $color-brown-900;
+$color-link-hover: $color-brown-700;
+$color-border: $color-border-warm;
+$color-border-strong: $color-slate-700;
+$color-bg-page: $color-white;
+$color-bg-muted: $color-sand-stone;
+$color-bg-dark: $color-brown-900;
+$color-bg-card: $color-white;
+$color-accent: $color-zest;
+$color-accent-hover: $color-zest-dark;
+$color-focus: $color-zest;
+
+// No red in palette — urgent CTAs rely on label, icon, and solid brown.
+$color-emergency: $color-brown-900;
+$color-emergency-dark: $color-brown-700;
+
+// ---------- Typography ----------
+$font-display: "Halant", "Georgia", "Times New Roman", serif;
+$font-body: "Figtree", "Helvetica Neue", arial, sans-serif;
+$font-size-2xs: var(--step--2);
+$font-size-xs: var(--step--1);
+$font-size-sm: var(--step--1);
+$font-size-base: var(--step-0);
+$font-size-md: var(--step-1);
+$font-size-lg: var(--step-1);
+$font-size-xl: var(--step-2);
+$font-size-2xl: var(--step-3);
+$font-size-3xl: var(--step-4);
+$font-size-4xl: var(--step-5);
+$font-size-5xl: calc(var(--step-5) * 1.25);
+$line-height-tight: 1.15;
+$line-height-snug: 1.3;
+$line-height-normal: 1.5;
+$line-height-loose: 1.7;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// ---------- Spacing ----------
+// Legacy aliases kept for compatibility; new component work should prefer
+// `$spacing-*` from `scss/tokens/_spacing.scss`.
+$space-3xs: var(--space-3xs);
+$space-2xs: var(--space-2xs);
+$space-xs: var(--space-xs);
+$space-sm: var(--space-s);
+$space-md: var(--space-m);
+$space-lg: var(--space-l);
+$space-xl: var(--space-xl);
+$space-2xl: var(--space-2xl);
+$space-3xl: var(--space-3xl);
+$space-4xl: calc(var(--space-3xl) * 1.25);
+
+// ---------- Shadows ----------
+$shadow-sm: 0 1px 2px $overlay-shadow-sm;
+$shadow-md: 0 4px 12px $overlay-shadow-md;
+$shadow-lg: 0 12px 32px $overlay-shadow-lg;
+
+// ---------- Layout ----------
+// Full-bleed container: no max-width — content always fills the viewport.
+// Gutter scales fluidly from 1.5rem on mobile to 10rem on ultra-wide.
+$container-padding: clamp(1.5rem, 4vw, 10rem);
+
+// ---------- Breakpoints ----------
+// Scale shifted up — modern site built for large displays.
+$bp-sm: 560px;    // large mobile
+$bp-md: 840px;    // tablet
+$bp-lg: 1120px;   // small laptop
+$bp-xl: 1440px;   // desktop
+$bp-2xl: 1680px;  // large desktop
+$bp-wide: 1920px; // ultra-wide — triggers fluid (clamp) scaling
+
+$breakpoints: (
+  "sm": $bp-sm,
+  "md": $bp-md,
+  "lg": $bp-lg,
+  "xl": $bp-xl,
+  "2xl": $bp-2xl,
+  "wide": $bp-wide
+);
+
+// ---------- Motion ----------
+$transition-fast: 120ms ease;
+$transition-base: 200ms ease;
+$transition-slow: 320ms ease;

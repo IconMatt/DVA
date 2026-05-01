@@ -1,0 +1,108 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.hero-band {
+  background: $color-sweet-grass;
+  padding-block-end: $spacing-sm;
+}
+
+.hero {
+  --hero-image: url("../assets/images/m Hero image.png");
+  --hero-image-y: 40%;
+  --hero-parallax-offset: 0px;
+  --hero-parallax-buffer: clamp(4rem, 10vw, 9rem);
+
+  position: relative;
+
+  // overflow: hidden (not clip) — hidden creates a BFC which forces the
+  // browser compositor to clip the GPU-promoted ::before layer flush with
+  // the hero edge. overflow: clip skips the BFC, so the composited layer
+  // can bleed a sub-pixel strip at the right edge during resize repaints.
+  overflow: hidden;
+  color: $color-text-inverse;
+  background: linear-gradient(120deg, $color-brown-700, $color-brown-900);
+  isolation: isolate;
+
+  @include bleed-wrap;
+
+  border-radius: $radius-hero;
+  display: flex;
+  flex-direction: column;
+
+  @include respond-to("md") {
+    --hero-image: url("../assets/images/Hero image.png");
+    --hero-image-y: 36%;
+  }
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero::before {
+  // 2px horizontal overbleed — prevents sub-pixel gaps at fractional hero widths.
+  inset: calc(-1 * var(--hero-parallax-buffer)) -2px;
+  z-index: 0;
+  background: var(--hero-image) center var(--hero-image-y) / cover no-repeat;
+  transform: translate3d(0, var(--hero-parallax-offset), 0);
+  will-change: transform;
+}
+
+.hero::after {
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to right, $overlay-black-30 33%, transparent);
+}
+
+.hero__inner {
+  @include bleed-content;
+
+  position: relative;
+  z-index: 2;
+  padding-block: #{$container-padding} calc(#{$container-padding} - 0.75rem);
+
+  // Fill the hero and push quick-links to the bottom; content stays at top.
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+
+  @include respond-to("md") {
+    padding-block-end: calc(#{$container-padding} - 0.9rem);
+  }
+}
+
+.hero__content {
+  max-width: 48rem;
+}
+
+.hero__title {
+  font-weight: $font-weight-regular;
+  color: $color-text-inverse;
+  font-size: clamp(2.625rem, 2.3125rem + 1.4vw, 3.5625rem);
+  margin-block-start: clamp(0.75rem, 1.25vw, 1.375rem);
+  padding-block-end: clamp(1.5rem, 4vw, 4rem);
+}
+
+.hero__summary {
+  margin-top: var(--space-s);
+  max-width: 44rem;
+  font-size: var(--step-1);
+  color: $overlay-white-82;
+}
+
+.hero__quick-links {
+  margin-top: var(--space-xl);
+}
+
+.hero__quick-links-label {
+  margin-bottom: var(--space-s);
+  font-size: var(--step-1);
+  font-weight: $font-weight-semibold;
+  color: $color-text-inverse;
+  text-wrap: balance;
+}

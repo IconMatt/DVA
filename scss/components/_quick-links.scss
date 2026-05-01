@@ -1,0 +1,221 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.quick-links {
+  display: grid;
+  gap: var(--space-s);
+  grid-template-columns: 1fr;
+
+  @include respond-to("md") {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.hero__quick-links[data-animate],
+.quick-links__item[data-animate] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+.quick-link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto 1fr;
+  gap: var(--space-2xs) var(--space-s);
+  padding: var(--space-m);
+  height: 100%;
+  min-height: clamp(6rem, 5.3333rem + 2.963vw, 8rem);
+  background: $color-zest;
+  color: $color-brown-900;
+  text-decoration: none;
+  border-radius: $radius-2xl;
+  border: 1px solid $color-zest;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base,
+    box-shadow $transition-base,
+    transform $transition-base;
+
+  @include respond-to("md") {
+    border-radius: $radius-quick-link;
+  }
+}
+
+.quick-link:hover {
+  background: $color-zest-dark;
+  border-color: $color-zest-dark;
+  color: $color-brown-900;
+}
+
+.quick-link__title {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: var(--step-1);
+  font-weight: $font-weight-regular;
+  line-height: $line-height-snug;
+}
+
+.quick-link__text {
+  grid-column: 1;
+  grid-row: 2;
+  font-size: var(--step--1);
+  color: $color-brown-700;
+}
+
+.quick-link__arrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  place-self: start end;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
+  height: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
+  border-radius: $radius-sm;
+  background: var(--icon-bg, #{$color-sweet-grass});
+  color: $color-brown-900;
+  font-size: var(--step--1);
+}
+
+.quick-link__arrow img {
+  // 1rem → 1.25rem across 360–1440px
+  width: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
+  height: clamp(1rem, 0.9167rem + 0.3704vw, 1.25rem);
+}
+
+.quick-links--hero .quick-link__arrow img[src*="Search.svg"],
+.quick-links--hero .quick-link__arrow img[src*="Folder.svg"],
+.quick-links--hero .quick-link--emergency .quick-link__arrow img {
+  width: clamp(1.2rem, 1.1rem + 0.4444vw, 1.5rem);
+  height: clamp(1.2rem, 1.1rem + 0.4444vw, 1.5rem);
+}
+
+// All three hero quick-links share the same style.
+.quick-link--emergency {
+  background: $color-slate-500;
+  border-color: $color-slate-500;
+  color: $color-brown-900;
+}
+
+.quick-link--emergency:hover {
+  background: $color-sand-stone;
+  border-color: $color-sand-stone;
+  color: $color-brown-900;
+}
+
+// Blurred tint variant — softens the hero image behind the card without
+// the heavier glass treatment.
+.quick-link--glass {
+  position: relative;
+  overflow: hidden;
+  background-color: $overlay-gray-18;
+  background-clip: padding-box;
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid $overlay-white-30;
+  color: $color-text-inverse;
+}
+
+.quick-link--glass > * {
+  position: relative;
+  z-index: 1;
+}
+
+.quick-link--glass:hover {
+  background-color: $overlay-white-16;
+  border-color: $overlay-white-35;
+  color: $color-text-inverse;
+}
+
+.quick-links--hero .quick-links__item:nth-child(-n + 2) .quick-link--glass:hover {
+  background-color: $color-sand-stone;
+  border-color: $color-sand-stone;
+  color: $color-brown-900;
+}
+
+.quick-link--glass .quick-link__text {
+  color: $overlay-white-92;
+}
+
+.quick-links--hero .quick-link--emergency .quick-link__text {
+  color: $color-brown-900;
+}
+
+.quick-links--hero .quick-links__item:nth-child(-n + 2) .quick-link--glass:hover .quick-link__text {
+  color: $color-brown-900;
+}
+
+.quick-link--glass {
+  --icon-bg: #{$color-zest};
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .quick-link--glass {
+    background: $overlay-gray-55;
+  }
+}
+
+// Tray variant (light background)
+.quick-links--tray {
+  gap: $spacing-sm;
+}
+
+.quick-links--tray .quick-link {
+  --icon-bg: #{$color-zest};
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  background: $color-white;
+  color: $color-brown-900;
+  border-color: transparent;
+  min-height: clamp(4.75rem, 4.5rem + 1.1111vw, 5.5rem);
+  padding: $spacing-sm;
+  border-radius: $radius-lg;
+}
+
+.quick-links--tray .quick-link:hover {
+  --icon-bg: #{$color-sand-stone};
+
+  background: $color-zest;
+  border-color: $color-zest;
+  color: $color-brown-900;
+}
+
+.quick-links--tray .quick-link__title {
+  font-size: var(--step-0);
+  font-weight: $font-weight-medium;
+}
+
+.quick-links--tray .quick-link__arrow {
+  align-self: center;
+  flex-shrink: 0;
+}
+
+.quick-links--tray .quick-link__arrow img {
+  width: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
+  height: clamp(1.25rem, 1.125rem + 0.5556vw, 1.5rem);
+}
+
+.quick-links--tray .quick-link--emergency {
+  --icon-bg: #{$color-white};
+
+  background: $color-slate-500;
+  color: $color-brown-900;
+  border-color: $color-slate-500;
+}
+
+.quick-links--tray .quick-link--emergency:hover {
+  --icon-bg: #{$color-zest};
+
+  background: $color-white;
+  border-color: $color-border;
+  color: $color-brown-900;
+}
+
+.quick-links--hero .quick-link--emergency:hover .quick-link__arrow {
+  background: $color-zest;
+  color: $color-brown-900;
+}
