@@ -51,7 +51,7 @@
         </nav>
 
         <div class="site-header__utility">
-          <button class="site-header__pill" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
             <img
               class="site-header__pill-icon"
               src="assets/images/icons/Property 1=Search.svg"
@@ -61,7 +61,7 @@
             />
             <span>Search</span>
           </button>
-          <button class="site-header__pill" type="button" aria-label="Saved items">
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
             <img
               class="site-header__pill-icon"
               src="assets/images/icons/Property 1=Star.svg"
@@ -74,6 +74,10 @@
           <a class="site-header__pill site-header__pill--help" href="#">
             <span>24/7 support</span>
           </a>
+          <button class="site-header__pill site-header__pill--menu" type="button" data-menu-trigger aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+            <span>Menu</span>
+            <span class="site-header__menu-icon" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
     </header>
@@ -169,6 +173,35 @@
               Find a service
             </button>
           </form>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+      <div class="mobile-nav__inner">
+
+        <nav class="mobile-nav__nav" aria-label="Primary">
+          <ul class="mobile-nav__list">
+            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Find a service</a></li>
+            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Wellbeing resources</a></li>
+            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">About</a></li>
+            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="mobile-nav__footer">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger-mobile aria-expanded="false" aria-controls="search-overlay">
+            <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+            <span>Search</span>
+          </button>
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Star.svg" alt="" width="18" height="18" />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
         </div>
 
       </div>
@@ -1744,27 +1777,66 @@
           }
         }
 
+        // Mobile nav
+        var mobileNav = document.getElementById('mobile-nav');
+        var menuTrigger = document.querySelector('[data-menu-trigger]');
+
+        function openMobileNav() {
+          mobileNav.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          menuTrigger.setAttribute('aria-expanded', 'true');
+          menuTrigger.setAttribute('aria-label', 'Close navigation');
+        }
+
+        function closeMobileNav() {
+          mobileNav.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          menuTrigger.setAttribute('aria-expanded', 'false');
+          menuTrigger.setAttribute('aria-label', 'Open navigation');
+        }
+
+        if (mobileNav && menuTrigger) {
+          menuTrigger.addEventListener('click', function () {
+            if (mobileNav.hasAttribute('hidden')) {
+              openMobileNav();
+            } else {
+              closeMobileNav();
+            }
+          });
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !mobileNav.hasAttribute('hidden')) {
+              closeMobileNav();
+            }
+          });
+        }
+
         // Search overlay
         var searchOverlay = document.getElementById('search-overlay');
         var searchTrigger = document.querySelector('[data-search-trigger]');
+        var searchTriggerMobile = document.querySelector('[data-search-trigger-mobile]');
         var overlayCloseBtn = searchOverlay && searchOverlay.querySelector('.search-overlay__close');
+        var lastSearchTrigger = searchTrigger;
 
-        function openSearchOverlay() {
+        function openSearchOverlay(trigger) {
+          lastSearchTrigger = trigger || searchTrigger;
           searchOverlay.removeAttribute('hidden');
           document.body.style.overflow = 'hidden';
-          searchTrigger.setAttribute('aria-expanded', 'true');
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'true');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'true');
           if (overlayCloseBtn) overlayCloseBtn.focus();
         }
 
         function closeSearchOverlay() {
           searchOverlay.setAttribute('hidden', '');
           document.body.style.overflow = '';
-          searchTrigger.setAttribute('aria-expanded', 'false');
-          searchTrigger.focus();
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'false');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'false');
+          if (lastSearchTrigger) lastSearchTrigger.focus();
         }
 
         if (searchOverlay && searchTrigger) {
-          searchTrigger.addEventListener('click', openSearchOverlay);
+          searchTrigger.addEventListener('click', function () { openSearchOverlay(searchTrigger); });
+          if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', function () { openSearchOverlay(searchTriggerMobile); });
           if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
           searchOverlay.addEventListener('click', function (e) {
             if (e.target === searchOverlay) closeSearchOverlay();

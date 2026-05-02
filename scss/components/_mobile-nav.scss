@@ -1,0 +1,103 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Hamburger — hidden once desktop nav is visible.
+.site-header__pill--menu {
+  @include respond-to("lg") {
+    display: none;
+  }
+}
+
+// Search, saved items, and 24/7 pills — hidden on mobile (shown in mobile nav footer instead).
+.site-header__pill--search,
+.site-header__pill--bookmark,
+.site-header__pill--help {
+  @media (max-width: #{$bp-lg - 1px}) {
+    display: none;
+  }
+}
+
+// Override: pills in the mobile nav footer are always visible.
+.mobile-nav__footer .site-header__pill {
+  display: inline-flex;
+}
+
+// ---------- Overlay ----------
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: $color-sweet-grass;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: mobile-nav-in 260ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.mobile-nav[hidden] {
+  display: none !important;
+}
+
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// ---------- Layout ----------
+.mobile-nav__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: clamp(0.875rem, 2.2vw, 5.25rem) $container-padding $spacing-xl;
+  padding-block-start: 8rem;
+  gap: $spacing-xl;
+}
+
+// ---------- Nav links ----------
+.mobile-nav__nav {
+  flex: 1;
+}
+
+.mobile-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.mobile-nav__link {
+  display: block;
+  font-family: $font-display;
+  font-size: var(--step-4);
+  font-weight: $font-weight-regular;
+  line-height: $line-height-snug;
+  color: $color-brown-900;
+  text-decoration: none;
+  transition: color $transition-base;
+}
+
+.mobile-nav__link:hover {
+  color: $color-brown-700;
+}
+
+// ---------- Footer utility ----------
+.mobile-nav__footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: $spacing-2xs;
+  padding-block-start: $spacing-lg;
+  border-top: 1px solid $color-border;
+}
+
+
+@include reduced-motion {
+  .mobile-nav {
+    animation: none;
+  }
+}

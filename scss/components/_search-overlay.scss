@@ -44,9 +44,11 @@
   flex-direction: column;
   gap: $spacing-md;
   padding-block: $spacing-md;
+  padding-block-start: 3rem;
   max-width: 48rem;
 
   @include respond-to("md") {
+    padding-block-start: $spacing-lg;
     background: $color-white;
     border-radius: $radius-hero;
     padding: $spacing-lg;
