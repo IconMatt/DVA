@@ -124,25 +124,25 @@
 }
 
 // ---------- Submit button ----------
-// Inactive (no field interaction): zest yellow.
+// Inactive (no field interaction): muted warm tone.
 // Active (field focused or has value): dark brown.
 .search-overlay__submit {
   align-self: flex-start;
   font-size: var(--step-0);
-  background: $color-zest;
-  border-color: $color-zest;
-  color: $color-brown-900;
+  background: $color-brown-500;
+  border-color: $color-brown-500;
+  color: $color-white;
   transition:
     background-color $transition-base,
     border-color $transition-base,
     color $transition-base;
 }
 
-// Hover on inactive — warm muted tone
+// Hover on inactive — zest yellow accent
 .search-overlay__submit:not(.is-active):hover {
-  background: $color-brown-500;
-  border-color: $color-brown-500;
-  color: $color-white;
+  background: $color-zest;
+  border-color: $color-zest;
+  color: $color-brown-900;
 }
 
 // Active state — field has been engaged
@@ -157,14 +157,14 @@
   border-color: $color-brown-700;
 }
 
-// Icon colour follows text: white when bg is dark, dark when on yellow.
+// Icon: white on dark/muted bg (inactive + active), dark on yellow hover.
 .search-overlay__submit-icon {
+  filter: brightness(0) invert(1);
   transition: filter $transition-base;
 }
 
-.search-overlay__submit:not(.is-active):hover .search-overlay__submit-icon,
-.search-overlay__submit.is-active .search-overlay__submit-icon {
-  filter: brightness(0) invert(1);
+.search-overlay__submit:not(.is-active):hover .search-overlay__submit-icon {
+  filter: none;
 }
 
 @include reduced-motion {
