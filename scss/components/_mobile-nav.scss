@@ -8,11 +8,17 @@
   }
 }
 
-// Search, saved items, and 24/7 pills — hidden on mobile (shown in mobile nav footer instead).
-.site-header__pill--search,
-.site-header__pill--bookmark,
+// 24/7 support — hidden only below sm; appears alongside Menu from sm upward.
 .site-header__pill--help {
-  @media (max-width: #{$bp-lg - 1px}) {
+  @media (max-width: #{$bp-sm - 1px}) {
+    display: none;
+  }
+}
+
+// Search and saved items — hidden below md; join the row from md upward.
+.site-header__pill--search,
+.site-header__pill--bookmark {
+  @media (max-width: #{$bp-md - 1px}) {
     display: none;
   }
 }
@@ -95,6 +101,50 @@
   border-top: 1px solid $color-border;
 }
 
+
+// ---------- Close button ----------
+.mobile-nav__header {
+  position: absolute;
+  top: var(--space-2xs);
+  right: $container-padding;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav__close {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-2xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: transparent;
+  border: 1px solid $color-brown-900;
+  border-radius: $radius-pill;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base;
+
+  img {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+
+  &:hover {
+    background: $color-brown-900;
+    color: $color-text-inverse;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
 
 @include reduced-motion {
   .mobile-nav {

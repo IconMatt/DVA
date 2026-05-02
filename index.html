@@ -181,6 +181,12 @@
     <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
       <div class="mobile-nav__inner">
 
+        <div class="mobile-nav__header">
+          <button class="mobile-nav__close" type="button" aria-label="Close navigation">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
         <nav class="mobile-nav__nav" aria-label="Primary">
           <ul class="mobile-nav__list">
             <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Find a service</a></li>
@@ -452,7 +458,6 @@
                           alt=""
                           width="22"
                           height="22"
-                          aria-hidden="true"
                         />
                         Pinned
                       </span>
@@ -981,7 +986,7 @@
               type="button"
               aria-label="Previous testimonial"
               data-testimonial-previous
-              disabled
+              hidden
             >
               <img
                 class="testimonial__control-icon"
@@ -996,7 +1001,6 @@
               type="button"
               aria-label="Next testimonial"
               data-testimonial-next
-              disabled
             >
               <img
                 class="testimonial__control-icon"
@@ -1064,7 +1068,7 @@
             <ul class="card-grid card-grid--news-carousel" data-news-carousel-track>
               <li class="card-grid__item" data-animate data-news-carousel-item>
                 <article class="card card--news">
-                  <figure class="card__media" aria-hidden="true">
+                  <figure class="card__media">
                     <img
                       class="card__media-image"
                       src="assets/images/site/Support image 5.png"
@@ -1101,7 +1105,7 @@
 
               <li class="card-grid__item" data-animate data-news-carousel-item>
                 <article class="card card--news">
-                  <figure class="card__media" aria-hidden="true">
+                  <figure class="card__media">
                     <img
                       class="card__media-image"
                       src="assets/images/site/Support image 4.png"
@@ -1138,7 +1142,7 @@
 
               <li class="card-grid__item" data-animate data-news-carousel-item>
                 <article class="card card--news">
-                  <figure class="card__media" aria-hidden="true">
+                  <figure class="card__media">
                     <img
                       class="card__media-image"
                       src="assets/images/site/Support image 6.png"
@@ -1220,7 +1224,7 @@
 
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner container">
-        <div class="site-footer__logos" aria-label="Australian Government and Veteran and Family Wellbeing Agency">
+        <div class="site-footer__logos">
           <img
             class="site-footer__logo site-footer__logo--government"
             src="assets/images/austalian government logo.svg"
@@ -1243,23 +1247,25 @@
             Veteran and Family Wellbeing Agency acknowledges the Traditional
             Custodians of Country throughout Australia.
           </p>
-          <ul class="social-links" aria-label="Social media">
-            <li class="social-links__item">
-              <a class="social-links__link" href="#" aria-label="Instagram">
-                <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
-              </a>
-            </li>
-            <li class="social-links__item">
-              <a class="social-links__link" href="#" aria-label="Facebook">
-                <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
-              </a>
-            </li>
-            <li class="social-links__item">
-              <a class="social-links__link" href="#" aria-label="YouTube">
-                <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
-              </a>
-            </li>
-          </ul>
+          <nav aria-label="Social media">
+            <ul class="social-links">
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Instagram">
+                  <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Facebook">
+                  <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="YouTube">
+                  <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <nav class="site-footer__nav" aria-label="Footer">
@@ -1299,6 +1305,26 @@
     <script>
       (function () {
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        var trapFocus = function (container, e) {
+          var focusable = Array.prototype.slice.call(
+            container.querySelectorAll('a[href], button:not([disabled]):not([hidden]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+          );
+          if (focusable.length < 2) return;
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        };
 
         // Staggered entrance animations
         var animated = document.querySelectorAll('[data-animate]');
@@ -1358,8 +1384,10 @@
           var testimonialImageSettle = 980;
 
           var setTestimonialControls = function () {
-            testimonialPrevious.disabled = testimonialIsChanging || activeTestimonialIndex === 0;
-            testimonialNext.disabled = testimonialIsChanging || activeTestimonialIndex === testimonials.length - 1;
+            testimonialPrevious.hidden = activeTestimonialIndex === 0;
+            testimonialNext.hidden = activeTestimonialIndex === testimonials.length - 1;
+            testimonialPrevious.disabled = testimonialIsChanging;
+            testimonialNext.disabled = testimonialIsChanging;
           };
 
           var setTestimonialImage = function (image, item) {
@@ -1786,6 +1814,8 @@
           document.body.style.overflow = 'hidden';
           menuTrigger.setAttribute('aria-expanded', 'true');
           menuTrigger.setAttribute('aria-label', 'Close navigation');
+          var firstFocusable = mobileNav.querySelector('button:not([disabled]):not([hidden]), a[href]');
+          if (firstFocusable) firstFocusable.focus();
         }
 
         function closeMobileNav() {
@@ -1793,9 +1823,14 @@
           document.body.style.overflow = '';
           menuTrigger.setAttribute('aria-expanded', 'false');
           menuTrigger.setAttribute('aria-label', 'Open navigation');
+          menuTrigger.focus();
         }
 
         if (mobileNav && menuTrigger) {
+          var mobileNavClose = mobileNav.querySelector('.mobile-nav__close');
+          if (mobileNavClose) {
+            mobileNavClose.addEventListener('click', closeMobileNav);
+          }
           menuTrigger.addEventListener('click', function () {
             if (mobileNav.hasAttribute('hidden')) {
               openMobileNav();
@@ -1804,8 +1839,12 @@
             }
           });
           document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && !mobileNav.hasAttribute('hidden')) {
-              closeMobileNav();
+            if (!mobileNav.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeMobileNav();
+              } else if (e.key === 'Tab') {
+                trapFocus(mobileNav, e);
+              }
             }
           });
         }
@@ -1842,8 +1881,12 @@
             if (e.target === searchOverlay) closeSearchOverlay();
           });
           document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && !searchOverlay.hasAttribute('hidden')) {
-              closeSearchOverlay();
+            if (!searchOverlay.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeSearchOverlay();
+              } else if (e.key === 'Tab') {
+                trapFocus(searchOverlay, e);
+              }
             }
           });
 
