@@ -220,8 +220,8 @@
 }
 
 .quick-links--hero .quick-link--emergency .quick-link__arrow {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
+  height: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
 }
 
 .quick-links--hero .quick-link--emergency .quick-link__arrow img,
