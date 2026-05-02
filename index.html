@@ -1763,6 +1763,9 @@
         if (searchOverlay && searchTrigger) {
           searchTrigger.addEventListener('click', openSearchOverlay);
           if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
+          searchOverlay.addEventListener('click', function (e) {
+            if (e.target === searchOverlay) closeSearchOverlay();
+          });
           document.addEventListener('keydown', function (e) {
             if (e.key === 'Escape' && !searchOverlay.hasAttribute('hidden')) {
               closeSearchOverlay();
