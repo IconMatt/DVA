@@ -72,17 +72,14 @@
   width: 2.5rem;
   height: 2.5rem;
   background: transparent;
-  border: 1px solid $color-border;
+  border: 0;
   border-radius: $radius-sm;
   cursor: pointer;
-  transition:
-    background-color $transition-base,
-    border-color $transition-base;
+  transition: background-color $transition-base;
 }
 
 .search-overlay__close:hover {
   background: $color-sweet-grass;
-  border-color: $color-brown-900;
 }
 
 .search-overlay__divider {
