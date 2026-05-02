@@ -140,13 +140,6 @@
     color $transition-base;
 }
 
-// Hover on inactive — zest yellow accent
-.search-overlay__submit:not(.is-active):hover {
-  background: $color-zest;
-  border-color: $color-zest;
-  color: $color-brown-900;
-}
-
 // Active state — field has been engaged
 .search-overlay__submit.is-active {
   background: $color-brown-900;
@@ -155,17 +148,18 @@
 }
 
 .search-overlay__submit.is-active:hover {
-  background: $color-brown-700;
-  border-color: $color-brown-700;
+  background: $color-zest;
+  border-color: $color-zest;
+  color: $color-brown-900;
 }
 
-// Icon: white on dark/muted bg (inactive + active), dark on yellow hover.
+// Icon: white on dark/muted bg; dark on zest hover.
 .search-overlay__submit-icon {
   filter: brightness(0) invert(1);
   transition: filter $transition-base;
 }
 
-.search-overlay__submit:not(.is-active):hover .search-overlay__submit-icon {
+.search-overlay__submit.is-active:hover .search-overlay__submit-icon {
   filter: none;
 }
 
