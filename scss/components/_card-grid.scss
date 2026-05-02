@@ -24,6 +24,11 @@
   grid-template-columns: none;
   padding-inline-end: $spacing-sm;
 
+  @include respond-to("sm") {
+    grid-auto-columns: 43vw;
+    padding-inline-end: $container-padding;
+  }
+
   @include respond-to("md") {
     grid-auto-columns: minmax(19rem, 48%);
     padding-inline-end: $container-padding;
