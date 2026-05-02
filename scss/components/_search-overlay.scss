@@ -15,7 +15,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    padding-block: $spacing-2xl;
+    padding-block: $spacing-xl;
     padding-inline: $spacing-lg;
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
@@ -37,16 +37,15 @@
 .search-overlay__inner {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xl;
-  padding-block: $spacing-xl;
+  gap: $spacing-md;
+  padding-block: $spacing-md;
   max-width: 48rem;
 
   @include respond-to("md") {
     background: $color-white;
     border-radius: $radius-hero;
-    padding: $spacing-2xl;
+    padding: $spacing-lg;
     width: 100%;
-    // Prevent flex child from shrinking below its content when backdrop is tall
     flex-shrink: 0;
   }
 }
@@ -92,6 +91,15 @@
   border-top: 1px solid $color-border;
 }
 
+// First divider (below header) breaks out of the inner padding to run full width.
+.search-overlay__divider--header {
+  margin-inline: calc(-1 * #{$container-padding});
+
+  @include respond-to("md") {
+    margin-inline: calc(-1 * #{$spacing-lg});
+  }
+}
+
 .search-overlay__section {
   display: flex;
   flex-direction: column;
@@ -100,23 +108,62 @@
 
 .search-overlay__section-title {
   margin: 0;
-  font-size: var(--step-1);
-  font-weight: $font-weight-semibold;
+  font-family: $font-display;
+  font-size: var(--step-4);
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
   color: $color-brown-900;
 }
 
 // Single-column stacked layout — overrides service-search's responsive grid.
+.search-overlay__form,
 .search-overlay__service-form {
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
 }
 
+// ---------- Submit button ----------
+// Inactive (no field interaction): zest yellow.
+// Active (field focused or has value): dark brown.
 .search-overlay__submit {
   align-self: flex-start;
+  font-size: var(--step-0);
+  background: $color-zest;
+  border-color: $color-zest;
+  color: $color-brown-900;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base,
+    color $transition-base;
 }
 
+// Hover on inactive — warm muted tone
+.search-overlay__submit:not(.is-active):hover {
+  background: $color-brown-500;
+  border-color: $color-brown-500;
+  color: $color-white;
+}
+
+// Active state — field has been engaged
+.search-overlay__submit.is-active {
+  background: $color-brown-900;
+  border-color: $color-brown-900;
+  color: $color-white;
+}
+
+.search-overlay__submit.is-active:hover {
+  background: $color-brown-700;
+  border-color: $color-brown-700;
+}
+
+// Icon colour follows text: white when bg is dark, dark when on yellow.
 .search-overlay__submit-icon {
+  transition: filter $transition-base;
+}
+
+.search-overlay__submit:not(.is-active):hover .search-overlay__submit-icon,
+.search-overlay__submit.is-active .search-overlay__submit-icon {
   filter: brightness(0) invert(1);
 }
 

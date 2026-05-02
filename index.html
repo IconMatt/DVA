@@ -88,7 +88,7 @@
           </button>
         </div>
 
-        <hr class="search-overlay__divider" />
+        <hr class="search-overlay__divider search-overlay__divider--header" />
 
         <div class="search-overlay__section">
           <h3 class="search-overlay__section-title">Sitewide search</h3>
@@ -112,6 +112,10 @@
                 </div>
               </div>
             </div>
+            <button class="button search-overlay__submit" type="submit">
+              <img class="search-overlay__submit-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="16" height="16" />
+              Search
+            </button>
           </form>
         </div>
 
@@ -160,7 +164,7 @@
               </div>
             </div>
 
-            <button class="button button--primary search-overlay__submit" type="submit">
+            <button class="button search-overlay__submit" type="submit">
               <img class="search-overlay__submit-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="16" height="16" />
               Find a service
             </button>
@@ -1749,8 +1753,7 @@
           searchOverlay.removeAttribute('hidden');
           document.body.style.overflow = 'hidden';
           searchTrigger.setAttribute('aria-expanded', 'true');
-          var firstInput = searchOverlay.querySelector('input');
-          if (firstInput) firstInput.focus();
+          if (overlayCloseBtn) overlayCloseBtn.focus();
         }
 
         function closeSearchOverlay() {
@@ -1770,6 +1773,25 @@
             if (e.key === 'Escape' && !searchOverlay.hasAttribute('hidden')) {
               closeSearchOverlay();
             }
+          });
+
+          // Button activation: inactive (zest) until a field in that form is focused or has a value.
+          searchOverlay.querySelectorAll('form').forEach(function (form) {
+            var submitBtn = form.querySelector('.search-overlay__submit');
+            if (!submitBtn) return;
+            var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+            var formFocused = false;
+
+            function syncButton() {
+              var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+              submitBtn.classList.toggle('is-active', formFocused || hasValue);
+            }
+
+            inputs.forEach(function (inp) {
+              inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+              inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+              inp.addEventListener('input', syncButton);
+            });
           });
         }
       })();
