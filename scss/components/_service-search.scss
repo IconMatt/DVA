@@ -17,6 +17,11 @@
   @include bleed-content;
 
   padding-block: $spacing-xl;
+  padding-inline: $spacing-lg;
+
+  @include respond-to("md") {
+    padding-inline: calc(#{$container-padding} - 0.9rem);
+  }
 }
 
 .service-search__title {
