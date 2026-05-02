@@ -51,7 +51,7 @@
         </nav>
 
         <div class="site-header__utility">
-          <button class="site-header__pill" type="button">
+          <button class="site-header__pill" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
             <img
               class="site-header__pill-icon"
               src="assets/images/icons/Property 1=Search.svg"
@@ -77,6 +77,98 @@
         </div>
       </div>
     </header>
+
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search options" hidden>
+      <div class="search-overlay__inner container">
+
+        <div class="search-overlay__header">
+          <h2 class="search-overlay__title">Search Options</h2>
+          <button class="search-overlay__close" type="button" aria-label="Close search">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
+        <hr class="search-overlay__divider" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Sitewide search</h3>
+          <form class="search-overlay__form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-site-search"
+                    name="q"
+                    type="search"
+                    placeholder="Search site content…"
+                  />
+                  <label class="service-search__label" for="overlay-site-search">
+                    Search site content
+                  </label>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <hr class="search-overlay__divider" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Search for a service</h3>
+          <form class="search-overlay__service-form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-keyword"
+                    name="q"
+                    type="search"
+                    placeholder="Service, topic or provider…"
+                  />
+                  <label class="service-search__label" for="overlay-service-keyword">
+                    Search by service, topic or provider
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/location.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-location"
+                    name="location"
+                    type="text"
+                    placeholder="E.g. Richmond VIC or 3141"
+                  />
+                  <label class="service-search__label" for="overlay-service-location">
+                    Suburb or postcode (optional)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button button--primary search-overlay__submit" type="submit">
+              <img class="search-overlay__submit-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="16" height="16" />
+              Find a service
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
 
     <main id="main" class="site-main">
       <div class="hero-band">
@@ -1646,6 +1738,36 @@
             window.addEventListener('resize', update, { passive: true });
             update();
           }
+        }
+
+        // Search overlay
+        var searchOverlay = document.getElementById('search-overlay');
+        var searchTrigger = document.querySelector('[data-search-trigger]');
+        var overlayCloseBtn = searchOverlay && searchOverlay.querySelector('.search-overlay__close');
+
+        function openSearchOverlay() {
+          searchOverlay.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          searchTrigger.setAttribute('aria-expanded', 'true');
+          var firstInput = searchOverlay.querySelector('input');
+          if (firstInput) firstInput.focus();
+        }
+
+        function closeSearchOverlay() {
+          searchOverlay.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          searchTrigger.setAttribute('aria-expanded', 'false');
+          searchTrigger.focus();
+        }
+
+        if (searchOverlay && searchTrigger) {
+          searchTrigger.addEventListener('click', openSearchOverlay);
+          if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !searchOverlay.hasAttribute('hidden')) {
+              closeSearchOverlay();
+            }
+          });
         }
       })();
     </script>
