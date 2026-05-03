@@ -101,7 +101,7 @@
 }
 
 .site-header__pill:hover {
-  background: $color-brown-900;
+  background: $color-slate-700;
   color: $color-text-inverse;
 }
 
@@ -116,8 +116,8 @@
 }
 
 .site-header__pill--help:hover {
-  background: $color-brown-700;
-  border-color: $color-brown-700;
+  background: $color-slate-700;
+  border-color: $color-slate-700;
   color: $color-text-inverse;
 }
 
@@ -136,12 +136,19 @@
 }
 
 .site-header__pill--exit:hover {
-  background: $color-sweet-grass;
-  color: $color-brown-900;
+  background: $color-slate-700;
+  border-color: $color-slate-700;
+  color: $color-text-inverse;
 }
 
 .site-header__pill--exit:hover .site-header__pill-icon {
-  filter: none;
+  filter: brightness(0) invert(1);
+}
+
+// Menu pill — always outline, never filled (even when only pill visible at mobile).
+.site-header__pill--menu {
+  background: transparent;
+  color: $color-brown-900;
 }
 
 // ---------- Menu icon: + rotates to × ----------
