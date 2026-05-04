@@ -1896,25 +1896,29 @@
             }
           });
 
-          // Button activation: inactive (zest) until a field in that form is focused or has a value.
-          searchOverlay.querySelectorAll('form').forEach(function (form) {
-            var submitBtn = form.querySelector('.search-overlay__submit');
-            if (!submitBtn) return;
-            var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
-            var formFocused = false;
+          searchOverlay.querySelectorAll('form').forEach(wireSubmitActivation);
+        }
 
-            function syncButton() {
-              var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
-              submitBtn.classList.toggle('is-active', formFocused || hasValue);
-            }
+        // Button activation: inactive until a field in the form is focused or has a value.
+        function wireSubmitActivation(form) {
+          var submitBtn = form.querySelector('.search-overlay__submit');
+          if (!submitBtn) return;
+          var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+          var formFocused = false;
 
-            inputs.forEach(function (inp) {
-              inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
-              inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
-              inp.addEventListener('input', syncButton);
-            });
+          function syncButton() {
+            var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+            submitBtn.classList.toggle('is-active', formFocused || hasValue);
+          }
+
+          inputs.forEach(function (inp) {
+            inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+            inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+            inp.addEventListener('input', syncButton);
           });
         }
+
+        document.querySelectorAll('.service-search__form').forEach(wireSubmitActivation);
       })();
     </script>
   </body>
