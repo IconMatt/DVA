@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="../" />
     <title>Veteran and Family Wellbeing Agency</title>
     <meta
       name="description"
@@ -117,7 +118,6 @@
               </div>
             </div>
             <button class="button search-overlay__submit" type="submit">
-              <img class="search-overlay__submit-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="16" height="16" />
               Search
             </button>
           </form>
@@ -169,7 +169,6 @@
             </div>
 
             <button class="button search-overlay__submit" type="submit">
-              <img class="search-overlay__submit-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="16" height="16" />
               Find a service
             </button>
           </form>
@@ -311,7 +310,7 @@
               </div>
             </div>
 
-            <button class="button button--primary service-search__submit" type="submit">
+            <button class="button search-overlay__submit service-search__submit" type="submit">
               Search
             </button>
           </form>
@@ -542,20 +541,20 @@
                   </button>
                 </header>
                 <div class="card__content">
+                  <h3 class="card__title">
+                    <a class="card__title-link" href="#">Medicare for veterans</a>
+                  </h3>
                   <div class="card__copy">
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">Medicare for veterans</a>
-                    </h3>
                     <p class="card__excerpt">
                       Guidance on setting up Medicare and understanding its benefits
                       for you and your family.
                     </p>
+                    <ul class="tag-list">
+                      <li class="tag-list__item"><span class="tag">Veterans</span></li>
+                      <li class="tag-list__item"><span class="tag">Health</span></li>
+                    </ul>
                   </div>
                 </div>
-                <ul class="tag-list">
-                  <li class="tag-list__item"><span class="tag">Veterans</span></li>
-                  <li class="tag-list__item"><span class="tag">Health</span></li>
-                </ul>
                 <footer class="card__meta">
                   <p class="card__date">Updated 10 Mar 2026</p>
                   <span class="card__arrow" aria-hidden="true">
@@ -718,20 +717,20 @@
                   </button>
                 </header>
                 <div class="card__content">
+                  <h3 class="card__title">
+                    <a class="card__title-link" href="#">Financial wellbeing checklist</a>
+                  </h3>
                   <div class="card__copy">
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">Financial wellbeing checklist</a>
-                    </h3>
                     <p class="card__excerpt">
                       A short checklist to help plan bills, entitlements, savings
                       and everyday money decisions.
                     </p>
+                    <ul class="tag-list">
+                      <li class="tag-list__item"><span class="tag">Finances</span></li>
+                      <li class="tag-list__item"><span class="tag">Planning</span></li>
+                    </ul>
                   </div>
                 </div>
-                <ul class="tag-list">
-                  <li class="tag-list__item"><span class="tag">Finances</span></li>
-                  <li class="tag-list__item"><span class="tag">Planning</span></li>
-                </ul>
                 <footer class="card__meta">
                   <p class="card__date">Updated 10 Mar 2026</p>
                   <span class="card__arrow" aria-hidden="true">
@@ -826,20 +825,20 @@
                   </button>
                 </header>
                 <div class="card__content">
+                  <h3 class="card__title">
+                    <a class="card__title-link" href="#">Family wellbeing planning guide</a>
+                  </h3>
                   <div class="card__copy">
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">Family wellbeing planning guide</a>
-                    </h3>
                     <p class="card__excerpt">
                       Conversation prompts and resources to help families plan
                       support together.
                     </p>
+                    <ul class="tag-list">
+                      <li class="tag-list__item"><span class="tag">Families</span></li>
+                      <li class="tag-list__item"><span class="tag">Wellbeing</span></li>
+                    </ul>
                   </div>
                 </div>
-                <ul class="tag-list">
-                  <li class="tag-list__item"><span class="tag">Families</span></li>
-                  <li class="tag-list__item"><span class="tag">Wellbeing</span></li>
-                </ul>
                 <footer class="card__meta">
                   <p class="card__date">Updated 10 Mar 2026</p>
                   <span class="card__arrow" aria-hidden="true">
@@ -915,6 +914,7 @@
                 </footer>
               </article>
             </li>
+            <li class="card-grid__spacer" aria-hidden="true"></li>
           </ul>
           </div>
         </div>
@@ -1176,6 +1176,7 @@
                   </div>
                 </article>
               </li>
+              <li class="card-grid__spacer" aria-hidden="true"></li>
             </ul>
           </div>
         </div>
@@ -1288,17 +1289,13 @@
           />
           <span>Back to top</span>
         </a>
-      </div>
-
-      <div class="site-footer__legal">
-        <div class="site-footer__legal-inner container">
-          <p class="site-footer__copyright">&copy; 2026 Copyright</p>
-          <ul class="site-footer__legal-list">
-            <li><a class="site-footer__link" href="#">Privacy</a></li>
-            <li><a class="site-footer__link" href="#">Terms and Conditions</a></li>
-            <li><a class="site-footer__link" href="#">Accessibility</a></li>
-          </ul>
-        </div>
+        <hr class="site-footer__rule" aria-hidden="true" />
+        <p class="site-footer__copyright">&copy; 2026 Copyright</p>
+        <ul class="site-footer__legal-list">
+          <li><a class="site-footer__link" href="#">Privacy</a></li>
+          <li><a class="site-footer__link" href="#">Terms and Conditions</a></li>
+          <li><a class="site-footer__link" href="#">Accessibility</a></li>
+        </ul>
       </div>
     </footer>
 
@@ -1523,7 +1520,13 @@
               return 0;
             }
 
-            return Math.max(0, Math.min(items.length - 1, Math.round(viewport.scrollLeft / step)));
+            var maxIndex = Math.max(0, items.length - getVisibleItems());
+
+            if (viewport.scrollLeft + 1 >= viewport.scrollWidth - viewport.clientWidth) {
+              return maxIndex;
+            }
+
+            return Math.max(0, Math.min(maxIndex, Math.round(viewport.scrollLeft / step)));
           };
 
           var updateCarousel = function () {
@@ -1557,9 +1560,12 @@
             var visibleItems = getVisibleItems();
             var maxIndex = Math.max(0, items.length - visibleItems);
             var target = Math.max(0, Math.min(maxIndex, index));
+            var left = target === maxIndex
+              ? viewport.scrollWidth - viewport.clientWidth
+              : target * step;
 
             viewport.scrollTo({
-              left: target * step,
+              left: left,
               behavior: reduced ? 'auto' : 'smooth'
             });
           };

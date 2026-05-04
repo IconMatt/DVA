@@ -165,7 +165,6 @@
 .service-search__submit {
   min-height: 3.5rem;
   font-size: var(--step-0);
-  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
 
   @include respond-to("md") {
     align-self: stretch;
