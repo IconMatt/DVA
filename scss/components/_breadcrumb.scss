@@ -1,0 +1,53 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.breadcrumb {
+  margin-block-end: $spacing-sm;
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+  line-height: $line-height-snug;
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  color: $color-text;
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "›";
+  margin-inline: $spacing-2xs;
+  color: $color-text;
+  speak: none;
+}
+
+.breadcrumb__link {
+  color: $color-text;
+
+  @include link-underline-animate;
+}
+
+.breadcrumb__item--current {
+  font-weight: $font-weight-semibold;
+}
+
+// Mobile: show only the last two items.
+@media (max-width: #{$bp-md - 1px}) {
+  .breadcrumb__item:nth-last-child(n+3) {
+    display: none;
+  }
+
+  // The new first-visible item must not render a separator.
+  .breadcrumb__item:nth-last-child(2)::before {
+    content: none;
+  }
+}

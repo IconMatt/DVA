@@ -1,0 +1,71 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Mobile-only toggle: switches between cards and map when the layout
+// collapses to a single column. Hidden on md+ where both columns are visible.
+// Wraps the list/map toggle and the Sort pill so they share a single row.
+.results-controls {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-block-end: $spacing-sm;
+
+  // At md+ this becomes the right-hand cell of the .results-section grid,
+  // sharing row 1 with .active-filters — no trailing margin needed.
+  @include respond-to("md") {
+    align-self: center;
+    margin-block-end: 0;
+  }
+}
+
+.results-view-toggle {
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+  padding: $spacing-3xs;
+  background: $color-sand-stone;
+  border-radius: $radius-pill;
+
+  @include respond-to("md") {
+    display: none;
+  }
+}
+
+// Sort sits at the right end of the controls row at every breakpoint.
+.results-controls .results-toolbar__sort {
+  margin-inline-start: auto;
+}
+
+.results-view-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: $spacing-2xs;
+  padding: $spacing-2xs $spacing-sm;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: transparent;
+  border: 0;
+  border-radius: $radius-pill;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base;
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &.is-active {
+    background: $color-brown-900;
+    color: $color-text-inverse;
+  }
+}
+
+.results-view-toggle__icon {
+  display: block;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+}

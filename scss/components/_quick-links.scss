@@ -62,7 +62,7 @@
 .quick-link__title {
   grid-column: 1;
   grid-row: 1;
-  font-size: $font-size-xl;
+  font-size: clamp(1.2005rem, 1.1121rem + 0.393vw, 1.4657rem);
   font-weight: $font-weight-regular;
   line-height: $line-height-snug;
 }
@@ -70,7 +70,7 @@
 .quick-link__text {
   grid-column: 1;
   grid-row: 2;
-  font-size: $font-size-base;
+  font-size: clamp(0.9302rem, 0.8867rem + 0.1942vw, 1.0613rem);
   line-height: $line-height-snug;
   color: $color-brown-700;
 }
@@ -155,6 +155,57 @@
   .quick-link--glass {
     background: $overlay-gray-55;
   }
+}
+
+// Results-top variant — two cards across, sit at the top of the cards
+// column on the services-directory.
+.quick-links--results-top {
+  grid-template-columns: 1fr;
+
+  @include respond-to("sm") {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  // While the layout is two-column but the cards column is still narrow
+  // (md → just under lg), stack the quick-links so they don't crush. Two-up
+  // returns at lg+ where the column has more room.
+  @media (min-width: #{$bp-md}) and (max-width: #{$bp-lg - 1px}) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quick-links--results-top .quick-link {
+  border-radius: $radius-2xl;
+}
+
+.quick-links--results-top .quick-link__text {
+  color: $color-brown-900;
+}
+
+// Slate emergency card pairs with a white icon container in this context.
+.quick-links--results-top .quick-link--emergency {
+  --icon-bg: #{$color-white};
+}
+
+// On hover, mirror the home hero treatment — sand-stone surface with the
+// emergency arrow flipping to zest.
+.quick-links--results-top .quick-link--emergency:hover {
+  --icon-bg: #{$color-zest};
+}
+
+// Referral — warm cream surface with the default zest icon container.
+.quick-link--referral {
+  --icon-bg: #{$color-zest};
+
+  background: $color-sweet-grass;
+  border-color: $color-sweet-grass;
+  color: $color-brown-900;
+}
+
+.quick-link--referral:hover {
+  background: $color-sand-stone;
+  border-color: $color-sand-stone;
+  color: $color-brown-900;
 }
 
 // Tray variant (light background)

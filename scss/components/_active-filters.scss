@@ -1,0 +1,101 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.active-filters {
+  @include bleed-content;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-2xs;
+  padding-block: $spacing-sm $spacing-md;
+
+  // On the md+ shared row with the sort pill, vertically center the bar
+  // against the taller pill so the count and "Sort by" label sit on the
+  // same baseline.
+  @include respond-to("md") {
+    align-self: center;
+  }
+}
+
+
+// Default chip — mirrors `.tag` (shape, size, font) so applied-filter tokens
+// read as the same vocabulary as the tags in the cards below.
+.active-filters__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-3xs;
+  padding: $spacing-3xs $spacing-2xs;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: $font-weight-medium;
+  line-height: $line-height-snug;
+  color: $color-brown-900;
+  background: $color-sweet-grass;
+  border: 0;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base;
+
+  &:hover {
+    background: $color-sweet-grass-dark;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.active-filters__count {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+}
+
+.active-filters__chip-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+.active-filters__chip--clear {
+  background: transparent;
+  padding-inline: $spacing-2xs;
+
+  &:hover {
+    background: transparent;
+    color: $color-brown-700;
+    text-decoration: underline;
+  }
+}
+
+// Add-filter CTA — mirrors `.site-header__pill` (the header Search button) so
+// padding, font weight, and hover treatment match across the page.
+.active-filters__chip--add {
+  padding: $spacing-2xs $spacing-xs;
+  font-size: var(--step-0);
+  font-weight: $font-weight-semibold;
+  background: transparent;
+  border: 1px solid $color-brown-900;
+  border-radius: $radius-pill;
+
+  &:hover {
+    background: $color-slate-700;
+    border-color: $color-slate-700;
+    color: $color-text-inverse;
+  }
+}
+
+.active-filters__chip-add-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  flex: none;
+}

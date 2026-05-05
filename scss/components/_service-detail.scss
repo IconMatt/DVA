@@ -1,0 +1,208 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.service-detail__subtitle {
+  margin: 0;
+  color: $color-brown-700;
+  font-size: var(--step-1);
+}
+
+// Status pill mirrors .service-card__status — zest fill for open,
+// slate-300 for closed. Sits above the H1 in the band.
+.service-detail__status {
+  align-self: flex-start;
+  margin: 0 0 $spacing-2xs;
+  padding: $spacing-3xs $spacing-2xs;
+  font-size: var(--step--2);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: $color-zest;
+  border-radius: $radius-sm;
+  line-height: $line-height-snug;
+  width: fit-content;
+}
+
+.service-detail__status--closed {
+  background: $color-slate-300;
+}
+
+// Save action sits at the bottom-right of the band, scoped to the
+// service-detail page so the directory's .service-search__inner stays
+// untouched. Mobile keeps it inline (right-aligned) under the subtitle
+// to avoid overlapping the stacked text on narrow widths.
+.page--service-detail .service-search__inner {
+  position: relative;
+}
+
+.service-detail__save {
+  // display: flex (not block) preserves the .button's inline icon+label
+  // layout; margin-auto still right-aligns since flex is block-level.
+  display: flex;
+  width: fit-content;
+  margin-inline-start: auto;
+  margin-block-start: $spacing-sm;
+  padding-inline-start: $spacing-sm;
+
+  @include respond-to("md") {
+    position: absolute;
+    inset-block-end: calc(#{$container-padding} - 0.9rem);
+    inset-inline-end: calc(#{$container-padding} - 0.9rem);
+    margin: 0;
+  }
+}
+
+// Wrapper now holds only the H1; kept so the breadcrumb-to-title gap
+// stays scoped to this page and doesn't leak to .service-search__title
+// on the directory.
+.service-detail__head {
+  margin-block-start: $spacing-md;
+}
+
+.service-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2xs;
+  margin-block-end: $spacing-sm;
+  color: $color-brown-900;
+  font-size: var(--step--1);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.service-detail__back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+}
+
+// The cream card containing About / Contact / Address / Opening hours.
+.service-detail__card {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  padding: var(--space-l);
+  background: $color-sand-stone;
+  border-radius: $radius-2xl;
+}
+
+.service-detail__section {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  & + & {
+    padding-block-start: $spacing-md;
+    border-block-start: 1px solid $color-border;
+  }
+
+  > h2 {
+    margin: 0;
+    font-size: var(--step-2);
+    font-weight: $font-weight-medium;
+    color: $color-brown-900;
+  }
+}
+
+.service-detail__description {
+  margin: 0;
+  color: $color-brown-900;
+  line-height: $line-height-normal;
+}
+
+.service-detail__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-3xs $spacing-2xs;
+}
+
+// Mirror .service-card__tags — the default .tag fill blends into the
+// sand-stone card background; sweet-grass-dark keeps the chips distinct.
+.service-detail__tags .tag {
+  background: $color-sweet-grass-dark;
+  color: $color-brown-900;
+}
+
+.service-detail__contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xs;
+}
+
+.service-detail__contact-item {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2xs;
+  color: $color-brown-900;
+}
+
+.service-detail__contact-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: none;
+  color: $color-brown-900;
+
+  img,
+  svg {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.service-detail__contact-link {
+  color: $color-brown-900;
+
+  &:hover {
+    color: $color-brown-700;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+.service-detail__address {
+  margin: 0;
+  color: $color-brown-900;
+  line-height: $line-height-snug;
+}
+
+.service-detail__hours-table {
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  color: $color-brown-900;
+
+  th,
+  td {
+    padding: $spacing-3xs $spacing-md $spacing-3xs 0;
+    text-align: start;
+    vertical-align: top;
+    line-height: $line-height-snug;
+  }
+
+  th {
+    font-weight: $font-weight-semibold;
+    white-space: nowrap;
+    width: 10rem;
+  }
+
+  td {
+    font-weight: $font-weight-regular;
+  }
+}

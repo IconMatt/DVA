@@ -1,0 +1,77 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $spacing-2xs;
+  padding-block: $spacing-lg;
+}
+
+// Range summary ("1–10 of 26 results") — sits inline directly after the
+// next-arrow, separated by the row's gap.
+.pagination__summary {
+  margin: 0;
+  margin-inline-start: $spacing-xs;
+  font-size: var(--step--1);
+  color: $color-brown-900;
+}
+
+.pagination__page,
+.pagination__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  font: inherit;
+  font-size: var(--step-0);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  background: $color-sand-stone;
+  border: 0;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base, opacity $transition-base;
+}
+
+.pagination__page:not(.is-active):not(:disabled):hover,
+.pagination__nav:not(:disabled):hover {
+  background: $color-zest;
+}
+
+.pagination__page:focus-visible,
+.pagination__nav:focus-visible {
+  @include focus-ring;
+}
+
+.pagination__page.is-active {
+  background: $color-brown-900;
+  color: $color-text-inverse;
+  cursor: default;
+}
+
+.pagination__nav:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.pagination__nav-icon {
+  display: block;
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.pagination__nav--next .pagination__nav-icon {
+  transform: rotate(180deg);
+}
+
+// Below md: collapse to prev/next arrows + summary only. The summary tells
+// the user where they are; arrows step through pages without crowding the row.
+@media (max-width: #{$bp-md - 1px}) {
+  .pagination__page {
+    display: none;
+  }
+}

@@ -9,3 +9,9 @@
 .page--home .news-listing__page {
   display: none;
 }
+
+// Home reads as a continuous sweet-grass field from the header through the
+// hero band; other pages keep the white header from the component default.
+.page--home .site-header {
+  background: $color-sweet-grass;
+}

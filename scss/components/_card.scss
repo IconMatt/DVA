@@ -34,7 +34,7 @@
 
 .card__excerpt {
   color: $color-text-muted;
-  font-size: $font-size-base;
+  font-size: clamp(0.9302rem, 0.8867rem + 0.1942vw, 1.0613rem);
   line-height: $line-height-snug;
 }
 
@@ -197,8 +197,8 @@
 }
 
 .card--resource .card__title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-medium;
+  font-size: clamp(1.2005rem, 1.1121rem + 0.393vw, 1.4657rem);
+  font-weight: $font-weight-regular;
   line-height: $line-height-snug;
 }
 
@@ -357,8 +357,8 @@
 }
 
 .card--news .card__title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-medium;
+  font-size: clamp(1.2005rem, 1.1121rem + 0.393vw, 1.4657rem);
+  font-weight: $font-weight-regular;
   line-height: $line-height-snug;
 }
 

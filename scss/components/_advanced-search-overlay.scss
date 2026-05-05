@@ -1,0 +1,279 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Modal scaffold — mirrors .search-overlay so the two dialogs feel like
+// siblings (shared backdrop, blur, entrance animation).
+.advanced-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: $color-white;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  animation: advanced-search-overlay-in 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  @include respond-to("md") {
+    background: $overlay-brown-60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl $spacing-lg;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+// Ensure [hidden] wins over the display:flex set in the md media query.
+.advanced-search-overlay[hidden] {
+  display: none !important;
+}
+
+@keyframes advanced-search-overlay-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.375rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Inner panel — header / scrolling body / footer split via grid so the
+// header and footer remain pinned while the section list scrolls.
+.advanced-search-overlay__inner {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  background: $color-white;
+  flex-shrink: 0;
+
+  @include respond-to("md") {
+    height: auto;
+    max-height: 100%;
+    max-width: 56rem;
+    border-radius: $radius-hero;
+    overflow: hidden;
+  }
+}
+
+.advanced-search-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-md;
+  padding: $spacing-md $container-padding;
+  border-bottom: 1px solid $color-border;
+  background: $color-white;
+
+  @include respond-to("md") {
+    padding: $spacing-md $spacing-lg;
+  }
+}
+
+.advanced-search-overlay__title {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+}
+
+.advanced-search-overlay__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 0;
+  border-radius: $radius-sm;
+  cursor: pointer;
+  transition: background-color $transition-base;
+
+  &:hover {
+    background: $color-sweet-grass;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+}
+
+// Scrollable body — the only region that scrolls inside the modal.
+.advanced-search-overlay__sections {
+  overflow-y: auto;
+  padding: $spacing-md $container-padding $spacing-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  @include respond-to("md") {
+    padding: $spacing-md $spacing-lg $spacing-lg;
+  }
+}
+
+// Group divider — "Type of service", "Who it's for", "Access and eligibility".
+.advanced-search-overlay__subheader {
+  margin-block: $spacing-md $spacing-2xs;
+
+  &:first-child {
+    margin-block-start: 0;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: $font-body;
+    font-size: var(--step-3);
+    font-weight: $font-weight-medium;
+    line-height: $line-height-tight;
+    color: $color-brown-900;
+  }
+}
+
+// Each <details> accordion is a contained sweet-grass card. Stack spacing
+// comes from the parent's gap; no border dividers.
+.advanced-search-overlay__section {
+  background: $color-sweet-grass;
+  border-radius: $radius-xl;
+  padding: $spacing-md $spacing-lg;
+
+  > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+    font-size: var(--step-0);
+    font-weight: $font-weight-regular;
+    color: $color-brown-900;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      @include focus-ring;
+      border-radius: $radius-sm;
+    }
+  }
+}
+
+.advanced-search-overlay__section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-2xs;
+}
+
+// Chevron — rotates when the parent <details> is open.
+.advanced-search-overlay__section-chevron {
+  flex: none;
+  transition: transform $transition-base;
+}
+
+// Chevron is "down" while collapsing — JS sets .is-aso-collapsing when the
+// body is animating shut so the chevron rotates back in step with the
+// height transition rather than lagging until the animation finishes.
+.advanced-search-overlay__section[open]:not(.is-aso-collapsing) > summary > .advanced-search-overlay__section-chevron {
+  transform: rotate(180deg);
+}
+
+// Option list — wraps pill buttons.
+.advanced-search-overlay__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-2xs;
+  padding-block: $spacing-sm 0;
+}
+
+// Rounded-box button used for every option. Sits on a sweet-grass card, so
+// the rest state is white for contrast; aria-pressed=true = solid dark fill.
+.advanced-search-overlay__option {
+  display: inline-flex;
+  align-items: center;
+  gap: $spacing-3xs;
+  padding: $spacing-2xs $spacing-sm;
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: $font-weight-medium;
+  line-height: $line-height-snug;
+  color: $color-brown-900;
+  background: $color-white;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: background-color $transition-base, color $transition-base,
+    border-color $transition-base;
+
+  &:hover {
+    background: $color-sand-stone;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
+  }
+
+  &[aria-pressed="true"] {
+    background: $color-brown-900;
+    color: $color-text-inverse;
+    border-color: $color-brown-900;
+  }
+
+  &[aria-pressed="true"]:hover {
+    background: $color-brown-700;
+    border-color: $color-brown-700;
+  }
+}
+
+// Sticky footer — selection state on the left, Show results pinned right.
+.advanced-search-overlay__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  padding: $spacing-md $container-padding;
+  border-top: 1px solid $color-border;
+  background: $color-white;
+
+  @include respond-to("md") {
+    padding: $spacing-md $spacing-lg;
+  }
+}
+
+// Selected-state strip — count label + chips. Reuses .active-filters__chip
+// (and __chip--clear) so the chip vocabulary matches the bar above the
+// results. display: contents on the chip container lets the chips flow
+// into the parent flex row alongside the count label.
+.advanced-search-overlay__state {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $spacing-2xs;
+}
+
+.advanced-search-overlay__count {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+}
+
+.advanced-search-overlay__chips {
+  display: contents;
+}
+
+@include reduced-motion {
+  .advanced-search-overlay {
+    animation: none;
+  }
+
+  .advanced-search-overlay__section-chevron {
+    transition: none;
+  }
+}

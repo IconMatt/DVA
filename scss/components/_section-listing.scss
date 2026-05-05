@@ -3,17 +3,29 @@
 
 // Shared layout for listing-style sections (resources, news).
 .resource-listing,
-.news-listing {
+.news-listing,
+.service-listing {
   background: $color-bg-page;
 }
 
+// .service-listing on service-detail sits directly beneath a .results-section
+// using the bleed-wrap pattern. Match that outer alignment so the heading and
+// first card line up with the urgent-help / referral cards above.
+.service-listing {
+  @include bleed-wrap;
+
+  margin-block-start: $spacing-xl;
+}
+
 .resource-listing__inner,
-.news-listing__inner {
+.news-listing__inner,
+.service-listing__inner {
   padding-block: $spacing-xl;
 }
 
 .resource-listing__header,
-.news-listing__header {
+.news-listing__header,
+.service-listing__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +35,8 @@
 }
 
 .resource-listing__link,
-.news-listing__link {
+.news-listing__link,
+.service-listing__link {
   display: inline-flex;
   align-items: center;
   padding: $spacing-3xs $spacing-sm;
@@ -37,12 +50,14 @@
 }
 
 .resource-listing__link:hover,
-.news-listing__link:hover {
+.news-listing__link:hover,
+.service-listing__link:hover {
   background: $color-sweet-grass;
 }
 
 .resource-listing__header-actions,
-.news-listing__header-actions {
+.news-listing__header-actions,
+.service-listing__header-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,23 +74,31 @@
 }
 
 .resource-listing__controls,
-.news-listing__controls {
+.news-listing__controls,
+.service-listing__controls {
   display: flex;
   align-items: center;
   gap: $spacing-2xs;
 }
 
 .resource-listing__page,
-.news-listing__page {
-  margin: 0 $spacing-2xs 0 0;
+.news-listing__page,
+.service-listing__page {
+  // Reserve enough room for the widest expected count ("10-10 of 10")
+  // so the surrounding "All …" link doesn't jump as the user pages.
+  min-width: 5.5rem;
+  margin: 0;
   font-size: var(--step--1);
   font-weight: $font-weight-semibold;
   line-height: $line-height-normal;
   color: $color-brown-900;
+  text-align: end;
+  font-variant-numeric: tabular-nums;
 }
 
 .resource-listing__control,
-.news-listing__control {
+.news-listing__control,
+.service-listing__control {
   width: 2.5rem;
   height: 2.5rem;
   display: inline-flex;
@@ -91,34 +114,40 @@
 }
 
 .resource-listing__control[hidden],
-.news-listing__control[hidden] {
+.news-listing__control[hidden],
+.service-listing__control[hidden] {
   display: none;
 }
 
 .resource-listing__control:disabled,
-.news-listing__control:disabled {
+.news-listing__control:disabled,
+.service-listing__control:disabled {
   cursor: not-allowed;
   opacity: 0.48;
 }
 
 .resource-listing__control:not(:disabled):hover,
-.news-listing__control:not(:disabled):hover {
+.news-listing__control:not(:disabled):hover,
+.service-listing__control:not(:disabled):hover {
   background: $color-zest;
 }
 
 .resource-listing__control-icon,
-.news-listing__control-icon {
+.news-listing__control-icon,
+.service-listing__control-icon {
   width: 1.375rem;
   height: 1.375rem;
 }
 
 .resource-listing__control--next .resource-listing__control-icon,
-.news-listing__control--next .news-listing__control-icon {
+.news-listing__control--next .news-listing__control-icon,
+.service-listing__control--next .service-listing__control-icon {
   transform: rotate(180deg);
 }
 
 .resource-listing__viewport,
-.news-listing__viewport {
+.news-listing__viewport,
+.service-listing__viewport {
   margin-inline: calc(#{$container-padding} * -1);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
@@ -130,11 +159,13 @@
 }
 
 .resource-listing__viewport:focus-visible,
-.news-listing__viewport:focus-visible {
+.news-listing__viewport:focus-visible,
+.service-listing__viewport:focus-visible {
   @include focus-ring;
 }
 
 .resource-listing__viewport::-webkit-scrollbar,
-.news-listing__viewport::-webkit-scrollbar {
+.news-listing__viewport::-webkit-scrollbar,
+.service-listing__viewport::-webkit-scrollbar {
   display: none;
 }

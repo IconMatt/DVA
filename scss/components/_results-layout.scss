@@ -1,0 +1,127 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Wrapper mirrors the .service-search bleed pattern: the cards + map
+// extend out to the band's outer edges, while the toolbar above keeps
+// breadcrumb-aligned padding via bleed-content.
+.results-section {
+  @include bleed-wrap;
+
+  // At md+, the active-filters bar (col 1) and the sort pill (col 2) share
+  // a single row above the results grid; .results-layout and .pagination
+  // span both columns underneath.
+  @include respond-to("md") {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: $spacing-sm;
+  }
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: $spacing-sm;
+
+  // Two columns kick in at the same breakpoint where the search form fields
+  // stop stacking, so the results layout tracks the form's responsive shape.
+  @include respond-to("md") {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.results-section > .pagination {
+  @include respond-to("md") {
+    grid-column: 1 / -1;
+  }
+}
+
+.results-layout__main {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.results-layout__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  min-width: 0;
+}
+
+.results-layout__map {
+  // Mobile: inline block; bg shows briefly while tiles load.
+  min-height: 18rem;
+  background: $color-slate-500;
+  border-radius: $radius-2xl;
+  overflow: hidden;
+  // Form a stacking context so Leaflet's internal pane z-indexes
+  // (tile/marker/popup, up to ~700) cannot escape and float over modals.
+  isolation: isolate;
+
+  @include respond-to("md") {
+    position: sticky;
+    top: $spacing-md;
+    align-self: start;
+    height: calc(100dvh - #{$spacing-md} * 2);
+    min-height: 0;
+  }
+}
+
+// Below md: the user picks one column at a time via .results-view-toggle.
+// Above md: data-view is ignored — both columns render side-by-side.
+@media (max-width: #{$bp-md - 1px}) {
+  .results-layout[data-view="list"] .results-layout__map {
+    display: none;
+  }
+
+  .results-layout[data-view="map"] .results-layout__main {
+    display: none;
+  }
+
+  // Map fills the viewport so it's actually usable; pagination sits below
+  // (outside the grid) and is reachable by scrolling.
+  .results-layout[data-view="map"] .results-layout__map {
+    height: calc(100dvh - 12rem);
+    min-height: 0;
+  }
+}
+
+// Custom Leaflet pin (small brown circle).
+.results-map-pin {
+  width: 18px;
+  height: 18px;
+  background: $color-brown-900;
+  border: 2px solid $color-white;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px $overlay-brown-40;
+  cursor: pointer;
+}
+
+// Custom marker cluster (zest circle with count).
+.results-map-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: $color-zest;
+  color: $color-brown-900;
+  border: 2px solid $color-white;
+  border-radius: 50%;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  box-shadow: 0 1px 4px $overlay-brown-40;
+  cursor: pointer;
+}
+
+// Brief highlight when a marker click scrolls a card into view.
+.service-card.is-highlighted {
+  outline: 3px solid $color-zest;
+  outline-offset: 2px;
+  transition: outline-color $transition-base;
+}

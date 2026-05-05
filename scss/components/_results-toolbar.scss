@@ -1,0 +1,54 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+.results-toolbar {
+  @include bleed-content;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: $spacing-sm;
+  padding-block: $spacing-md;
+}
+
+// Sort pill — wraps a native <select> so the OS picker still drives it.
+.results-toolbar__sort {
+  position: relative;
+  cursor: pointer;
+}
+
+.results-toolbar__sort-label {
+  cursor: pointer;
+}
+
+.results-toolbar__sort-select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: transparent;
+  background: transparent;
+  appearance: none;
+  cursor: pointer;
+  opacity: 0;
+}
+
+// Wrap the whole pill in the focus ring when the underlying select is keyboard-focused.
+.results-toolbar__sort:has(.results-toolbar__sort-select:focus-visible) {
+  @include focus-ring;
+}
+
+.results-toolbar__sort-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 0.75rem;
+  height: 0.75rem;
+  pointer-events: none;
+  color: currentColor;
+}

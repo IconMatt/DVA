@@ -2,9 +2,48 @@
 @use "../abstracts/mixins" as *;
 
 .site-header {
-  background: $color-sweet-grass;
-  position: relative;
+  // Frosted glass — semi-transparent white over a backdrop blur. The blur
+  // engages whenever any coloured surface (hero, map, etc.) sits beneath the
+  // header as the page scrolls.
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  position: sticky;
+  top: 0;
   z-index: 100;
+
+  // Slide handled by JS toggling .is-hidden on scroll-down and removing it
+  // on scroll-up. background-color animates between the at-top fill and the
+  // frosted glass fill on home.
+  transition: transform 0.28s ease, background-color 0.28s ease;
+  will-change: transform;
+
+  &.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+// Home only — at the top of the page the header sits on a solid Sweetgrass
+// fill so it blends into the hero band. As soon as the user starts scrolling,
+// the .is-scrolled class flips it to the frosted-white glass treatment.
+.page--home .site-header {
+  background: $color-sweet-grass;
+  backdrop-filter: none;
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -webkit-backdrop-filter: none;
+}
+
+.page--home .site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
 .site-header__inner {
@@ -15,7 +54,7 @@
   padding-block: clamp(0.875rem, 2.2vw, 5.25rem);
 
   @media (max-width: #{$bp-lg - 1px}) {
-    padding-block-start: 3rem;
+    padding-block-start: 2.25rem;
   }
 }
 
@@ -53,13 +92,13 @@
   font-size: var(--step-0);
   font-weight: $font-weight-semibold;
   color: $color-brown-900;
-  text-decoration: none;
-}
 
-.site-nav__link:hover {
-  color: $color-brown-700;
-  text-decoration: underline;
-  text-underline-offset: 0.3em;
+  @include link-underline-animate;
+
+  &:hover,
+  &:focus-visible {
+    color: $color-brown-700;
+  }
 }
 
 .site-header__utility {
@@ -90,8 +129,10 @@
 
 .site-header__pill-icon {
   display: block;
-  width: 1rem;
-  height: 1rem;
+  // 1.25rem reads stronger than 1rem at button scale; still shorter than the
+  // pill's text line-box, so this doesn't grow the pill itself.
+  width: 1.25rem;
+  height: 1.25rem;
   flex: none;
 }
 

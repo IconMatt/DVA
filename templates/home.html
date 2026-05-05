@@ -18,6 +18,17 @@
     <link rel="stylesheet" href="css/main.css" />
   </head>
   <body id="top" class="page page--home">
+    <!--
+      ================================================================
+      Drupal handoff notes
+      Each component below is annotated with paragraph type, fields,
+      preprocess, and Twig template that should own its data on lift to
+      GovCMS. See /docs/drupal-handoff.md, /docs/drupal-mapping-pattern.md,
+      and /docs/field-naming.md (BEM-prefixed machine names).
+      At handoff, convert these HTML comments to Twig {# … #} so they
+      don't render to the page source.
+      ================================================================
+    -->
     <a class="skip-link" href="#main">Skip to main content</a>
     <a class="site-header__pill site-header__pill--exit" href="https://www.bom.gov.au/">
       <span>Quick exit</span>
@@ -30,6 +41,21 @@
       />
     </a>
 
+    <!--
+      Drupal handoff — Site header (theme region, not a paragraph)
+      Region:     header (THEMENAME.info.yml)
+      Blocks:     Site branding, Main menu, custom "Header utility" block
+                  (search trigger + saved-items + 24/7 + menu trigger pills)
+      Fields:     none — content comes from Drupal's branding settings + Main menu.
+      Preprocess: THEMENAME_preprocess_block__system_branding_block — strip alt
+                  from logo (sr-text on the brand link is the label).
+      Twig:       page.html.twig renders {{ page.header }}; the utility block
+                  has its own block.html.twig override that emits the four
+                  .site-header__pill controls.
+      Risks:      .site-header__pill is currently borrowed by .service-card
+                  and .results-toolbar — promote to a real .pill atom before
+                  SDC migration so the dependency is explicit.
+    -->
     <header class="site-header" role="banner">
       <div class="site-header__inner container">
         <a class="site-header__brand" href="/" aria-label="Veteran and Family Wellbeing Agency home">
@@ -65,7 +91,7 @@
           <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
             <img
               class="site-header__pill-icon"
-              src="assets/images/icons/Property 1=Star.svg"
+              src="assets/images/icons/Star.svg"
               alt=""
               width="18"
               height="18"
@@ -83,6 +109,21 @@
       </div>
     </header>
 
+    <!--
+      Drupal handoff — Search overlay (custom block, region: hidden)
+      Block:      search_overlay (custom block type, single instance)
+      Fields:     field_overlay_site_search_label    (text, default "Sitewide search")
+                  field_overlay_service_search_label (text, default "Search for a service")
+      Preprocess: THEMENAME_preprocess_block__search_overlay — pass the two
+                  search-form render arrays (Search API or core Search) into
+                  the block as {{ form_site }} / {{ form_service }}.
+      Twig:       block--search-overlay.html.twig owns the dialog markup;
+                  drop the two forms into the existing .search-overlay__section
+                  wrappers without restructuring the DOM.
+      Risks:      <div role="dialog" aria-modal> is hand-rolled with a custom
+                  focus trap. Native <dialog> is the long-term path; keep the
+                  role+aria for now to match the static prototype.
+    -->
     <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search options" hidden>
       <div class="search-overlay__inner container">
 
@@ -177,6 +218,20 @@
       </div>
     </div>
 
+    <!--
+      Drupal handoff — Mobile navigation (custom block, region: hidden)
+      Block:      mobile_nav (single instance, mirrors Main menu)
+      Fields:     none — menu items come from the Main menu.
+      Preprocess: THEMENAME_preprocess_block__mobile_nav — load the main menu
+                  via menu.link_tree, render the utility pills (search trigger,
+                  saved-items count, 24/7 support).
+      Twig:       block--mobile-nav.html.twig. Markup must mirror the desktop
+                  nav exactly — both should read the same Main menu, never
+                  fork the menu data.
+      Risks:      Focus trap and ESC handler are presentational (inline JS).
+                  Keep the DOM identical between pages or extract to a shared
+                  JS module.
+    -->
     <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
       <div class="mobile-nav__inner">
 
@@ -201,7 +256,7 @@
             <span>Search</span>
           </button>
           <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
-            <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Star.svg" alt="" width="18" height="18" />
+            <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
             <span>0</span>
           </button>
           <a class="site-header__pill site-header__pill--help" href="#">
@@ -213,6 +268,25 @@
     </div>
 
     <main id="main" class="site-main">
+      <!--
+        Drupal handoff — Hero (paragraph: hero)
+        Fields:
+          field_hero_title              (text, plain)            required
+          field_hero_quick_links_label  (text)                   optional eyebrow
+          field_hero_quick_links        (paragraph reference, multiple → quick_link)
+        Preprocess:
+          THEMENAME_preprocess_paragraph__hero — null-check the quick-links
+          list; no class building required (variants live on each quick-link).
+        Twig:
+          paragraph--hero.html.twig mirrors the markup below.
+          data-parallax-bg / data-animate hooks stay on the static elements,
+          not data-driven from the paragraph fields.
+        Risks:
+          - Parallax background uses getBoundingClientRect (LESSONS.md);
+            do not introduce offsetParent-based math.
+          - Hero must use overflow: hidden, never overflow: clip
+            (rounded panel + GPU layer compositing — LESSONS.md).
+      -->
       <div class="hero-band">
       <section class="hero" aria-labelledby="hero-title" data-parallax-bg data-parallax-speed="0.08">
         <div class="hero__inner container">
@@ -264,6 +338,25 @@
       </section>
       </div>
 
+      <!--
+        Drupal handoff — Service-search form (custom block, reusable)
+        Block:      service_search (placed in homepage region; also placed
+                    on the Services Directory route via block visibility)
+        Fields:     field_service_search_title (text, default "Find a service")
+        Form:       Provided by the Search API view "service_directory" — the
+                    exposed-filter form (keyword + location autocomplete).
+        Preprocess: THEMENAME_preprocess_block__service_search — render the
+                    exposed-filter form; expose helpers prompt as a separate
+                    var; pass an is_listing flag (from current_route_match)
+                    so the block can swap H2 for H1 + breadcrumb on the
+                    listing route.
+        Twig:       block--service-search.html.twig. On the homepage this
+                    is an H2; on the Services Directory page it becomes the
+                    H1 with breadcrumb and active-filters above the results.
+        Risks:      Submit button uses .search-overlay__submit as a JS hook —
+                    refactor to a data- attribute before Twig handoff so
+                    styling and JS hook decouple.
+      -->
       <div class="service-search-band">
       <section class="service-search" id="find-a-service" aria-labelledby="service-search-title">
         <div class="service-search__inner container">
@@ -316,17 +409,38 @@
           </form>
 
           <p class="service-search__helpers">
-            <span class="service-search__helper">
-              Not sure where to start? <a href="#">Find the right service</a>
-            </span>
-            <span class="service-search__helper">
-              Need support from the Agency? <a href="#">Request support or a referral</a>
+            <span class="service-search__helpers-prompt">Not sure where to start?</span>
+            <span class="service-search__helpers-actions">
+              <a href="#">Answer a few questions</a>
+              <a href="#">Assistance and referrals</a>
             </span>
           </p>
         </div>
       </section>
       </div>
 
+      <!--
+        Drupal handoff — Mission statement (paragraph: mission_statement)
+        Fields:
+          field_mission_eyebrow    (text)                       optional
+          field_mission_title      (text long, formatted)       required
+          field_mission_cta_text   (text)                       optional
+          field_mission_cta_link   (link)                       optional
+        Preprocess:
+          THEMENAME_preprocess_paragraph__mission_statement — split the title
+          into segments and inject .mission-statement__inline-media spans at
+          configurable slot positions (3 today). Pass the rotating image set
+          via #attached drupalSettings.missionMedia so the JS picks it up
+          rather than hard-coding URLs in inline JS.
+        Twig:
+          paragraph--mission-statement.html.twig outputs eyebrow, formatted
+          title (with inline-media spans already in place), and the CTA link.
+        Risks:
+          - The 3 inline-media spans must be content-derived, not hard-coded
+            in Twig — editors will reword the title.
+          - Reduced-motion: the rotation interval is gated in JS; do not
+            introduce CSS animations for the swap.
+      -->
       <section class="mission-statement" aria-labelledby="mission-title">
         <div class="mission-statement__inner container">
           <p class="mission-statement__eyebrow" data-animate>Veteran and Family Wellbeing Agency</p>
@@ -363,6 +477,27 @@
         </div>
       </section>
 
+      <!--
+        Drupal handoff — Feature promo (paragraph: feature_promo)
+        Fields:
+          field_promo_eyebrow      (text)
+          field_promo_title        (text)                 required
+          field_promo_text         (text long)
+          field_promo_icon         (svg media reference)  optional
+          field_promo_image        (image)                required for right column
+          field_promo_cta_text     (text)
+          field_promo_cta_link     (link)
+        Preprocess:
+          Build CTA label as a t() string. Expose image with srcset/sizes
+          matching the static markup (935w today; image style should output
+          935w/1400w/2000w on lift — single-resolution images look soft
+          above the wide breakpoint per LESSONS.md).
+        Twig:
+          paragraph--feature-promo.html.twig — straight mirror of the markup.
+        Risks:
+          - Image needs srcset + sizes (LESSONS.md).
+          - Parallax data-attributes are presentational; don't expose as fields.
+      -->
       <section class="feature-promo" aria-labelledby="feature-promo-title">
         <div class="feature-promo__inner container">
           <div class="feature-promo__body" data-animate>
@@ -396,6 +531,28 @@
         </div>
       </section>
 
+      <!--
+        Drupal handoff — Resource listing (paragraph: resource_listing)
+        Fields:
+          field_listing_title       (text, default "Latest resources")
+          field_listing_link_text   (text, default "All resources")
+          field_listing_link        (link)
+          field_listing_items       (entity reference, multiple → node: resource)
+                                    OR view reference for auto-population
+                                    (latest 8, pinned first).
+        Preprocess:
+          Render each referenced resource node with view mode "card_resource".
+          Pass through data-resource-carousel-* hooks unchanged.
+        Twig:
+          paragraph--resource-listing.html.twig owns the section, header,
+          controls, and viewport. Each item renders via the resource card
+          template (see "Resource card" handoff below).
+        Risks:
+          - Carousel JS is presentational. The paragraph emits a <ul>; the
+            script handles paging. No item count needs to reach PHP.
+          - card-grid__spacer trailing <li> is intentional padding for the
+            scroll snap; emit it from the paragraph template, not per item.
+      -->
       <section class="resource-listing" aria-labelledby="resources-title" data-resource-carousel>
         <div class="resource-listing__inner container">
           <header class="resource-listing__header" data-animate>
@@ -446,6 +603,36 @@
             data-resource-carousel-viewport
           >
             <ul class="card-grid card-grid--resources" data-resource-carousel-track>
+              <!--
+                Drupal handoff — Resource card (node: resource, view mode: card_resource)
+                Fields:
+                  field_card_title    (text + link, on the node title)
+                  field_card_excerpt  (text long)
+                  field_card_badge    (text)        Brochure / Article / Factsheet / …
+                  field_card_image    (image, optional — drives card--with-media)
+                  field_card_date     (date)
+                  field_card_pinned   (boolean)
+                  field_card_tags     (entity reference, taxonomy: resource_tag)
+                Preprocess:
+                  THEMENAME_preprocess_node__resource__card_resource —
+                  - modifier_class: 'card--with-media' if field_card_image set,
+                    plus 'card--resource' as the base.
+                  - Format date as t('Updated @date', {'@date': date|date('j M Y')}).
+                  - Build aria-label for save button: t('Save resource: @title').
+                  - Pinned badge gates on field_card_pinned (boolean).
+                Twig:
+                  node--resource--card-resource.html.twig — header (badges +
+                  save button), body (title link, excerpt, tags, optional figure),
+                  footer (date + arrow).
+                Variants:
+                  field_card_image presence drives card--with-media. No separate
+                  paragraph type, no separate view mode.
+                Risks:
+                  - card__image (here) vs card__media-image (news cards) BEM
+                    inconsistency — align before SDC migration.
+                  - Parallax image needs srcset (LESSONS.md) — use a responsive
+                    image style, not a single render.
+              -->
               <li class="card-grid__item" data-animate data-resource-carousel-item>
                 <article class="card card--resource card--with-media">
                   <header class="card__header">
@@ -469,7 +656,7 @@
                     >
                       <img
                         class="card__save-icon"
-                        src="assets/images/icons/Property 1=Star.svg"
+                        src="assets/images/icons/Star.svg"
                         alt=""
                         width="22"
                         height="22"
@@ -532,7 +719,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Medicare for veterans">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -583,7 +770,7 @@
                   >
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -647,7 +834,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Housing support after service">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -708,7 +895,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Financial wellbeing checklist">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -755,7 +942,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Finding work and study options">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -816,7 +1003,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Family wellbeing planning guide">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -863,7 +1050,7 @@
                   <button class="card__save" type="button" aria-label="Save resource: Staying connected with local services">
                     <img
                       class="card__save-icon"
-                      src="assets/images/icons/Property 1=Star.svg"
+                      src="assets/images/icons/Star.svg"
                       alt=""
                       width="22"
                       height="22"
@@ -920,6 +1107,29 @@
         </div>
       </section>
 
+      <!--
+        Drupal handoff — Testimonial carousel (paragraph: testimonial_carousel)
+        Fields (parent paragraph):
+          field_testimonial_items   (paragraph reference, multiple → testimonial)
+        Fields (testimonial paragraph):
+          field_testimonial_quote   (text long)        required
+          field_testimonial_name    (text)
+          field_testimonial_role    (text)             e.g. Ex-Serving Member
+          field_testimonial_image   (image)            square portrait
+        Preprocess:
+          THEMENAME_preprocess_paragraph__testimonial_carousel — pass items
+          as drupalSettings.testimonials so the JS can swap content
+          client-side without a server round-trip.
+        Twig:
+          paragraph--testimonial-carousel.html.twig renders the visible figure
+          once (item 0) plus the controls. The two <img> elements
+          (current + next) are required for the cross-fade.
+        Risks:
+          - Enter animation must keep .is-entering for the full keyframe
+            duration (LESSONS.md). Do not strip the class on the next rAF.
+          - Parallax on the portrait uses 'testimonial' mode in the inline JS.
+            Keep buffer-ratio data-attrs in sync with .testimonial scss.
+      -->
       <section class="testimonial" aria-labelledby="testimonial-title">
         <h2 class="testimonial__title visually-hidden" id="testimonial-title">
           What people say about our support
@@ -1015,6 +1225,34 @@
         </div>
       </section>
 
+      <!--
+        Drupal handoff — News listing (paragraph: news_listing)
+        Fields:
+          field_listing_title       (text, default "Latest news")
+          field_listing_link_text   (text, default "All news")
+          field_listing_link        (link)
+          field_listing_items       (entity reference, multiple → node: news_article)
+        Preprocess:
+          Render each referenced article with view mode "card_news".
+        Twig:
+          paragraph--news-listing.html.twig — same shell as resource-listing
+          with .news-listing class names. Consider a shared listing template
+          parameterised by {% set listing_block = 'news-listing' %}.
+        News card (node: news_article, view mode: card_news):
+          field_card_image    (image, required)
+          field_card_badge    (text)        Health / Support / Events / …
+          field_card_date     (date)
+          field_card_title    (link, on the node title)
+          field_card_excerpt  (text long)
+          field_card_cta_text (text, default "Read more")
+          field_card_cta_link (link)
+        Risks:
+          - .card__media-image here vs .card__image on resource cards —
+            align naming before SDC.
+          - The .card__badge is rendered inside <figure>; figure semantics
+            are wrong for a captionless image with a content badge — flag
+            for review before SDC (drop figure or move badge out).
+      -->
       <section class="news-listing" aria-labelledby="news-title" data-news-carousel>
         <div class="news-listing__inner container">
           <header class="news-listing__header" data-animate>
@@ -1182,6 +1420,32 @@
         </div>
       </section>
 
+      <!--
+        Drupal handoff — CTA tray (block: cta_tray, reusable across pages)
+        Block:        cta_tray (custom block, region: content_bottom)
+        Fields:
+          field_cta_title           (text, default "Not sure where to start?")
+          field_cta_links           (paragraph reference, multiple → quick_link)
+        Quick-link paragraph fields (shared by hero, cta-tray, results-top):
+          field_quicklink_title     (text)              required
+          field_quicklink_text      (text)              optional — present on
+                                                        hero & results-top,
+                                                        empty in tray variant
+          field_quicklink_link      (link)              required
+          field_quicklink_icon      (icon reference)    optional
+          field_quicklink_variant   (list_string)       glass | emergency |
+                                                        referral | (default)
+        Preprocess:
+          THEMENAME_preprocess_paragraph__quick_link — build modifier_class
+          from field_quicklink_variant; expose icon URL with empty alt.
+        Twig:
+          block--cta-tray.html.twig wraps .quick-links--tray <ul>.
+          paragraph--quick-link.html.twig renders each <li>.
+        Risks:
+          - quick_link is shared across three placements. Single paragraph
+            type with the variant field — do not fork (field-naming.md
+            rule 4: variants are a single list_string).
+      -->
       <section class="cta-tray" aria-labelledby="cta-tray-title">
         <div class="cta-tray__inner container">
           <h2 class="cta-tray__title" id="cta-tray-title" data-animate>Not sure where to start?</h2>
@@ -1223,6 +1487,26 @@
       </section>
     </main>
 
+    <!--
+      Drupal handoff — Site footer (theme region)
+      Region:     footer (THEMENAME.info.yml)
+      Blocks:     Footer logos (custom), Acknowledgement of Country (custom),
+                  Social links (Menu: social), Footer menu (Menu: footer),
+                  Back-to-top (theme include), Copyright + legal (custom).
+      Fields:     Acknowledgement and copyright are config-driven block
+                  fields. Footer menu items live in Drupal's menu UI.
+      Preprocess: THEMENAME_preprocess_region__footer — none required if
+                  blocks own their own preprocess.
+      Twig:       region--footer.html.twig composes the blocks in the order
+                  shown below. Keep the .site-footer__logo-divider span as
+                  static markup, not a block.
+      Risks:      - Acknowledgement of Country must always render — make it
+                    a required block, not menu content.
+                  - Government logo alt is meaningful ("Australian
+                    Government") — preserve in the block's alt-text field.
+                  - Back-to-top default behaviour matters when JS is off
+                    (anchor link to #top). Don't drop the href.
+    -->
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner container">
         <div class="site-footer__logos">
@@ -1895,26 +2179,83 @@
               }
             }
           });
+        }
 
-          // Button activation: inactive (zest) until a field in that form is focused or has a value.
-          searchOverlay.querySelectorAll('form').forEach(function (form) {
-            var submitBtn = form.querySelector('.search-overlay__submit');
-            if (!submitBtn) return;
-            var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
-            var formFocused = false;
+        // Button activation: inactive (zest) until a field in that form is focused or has a value.
+        // Applies to overlay search forms and the homepage service-search form.
+        var activatableForms = document.querySelectorAll('.search-overlay form, .service-search__form');
+        activatableForms.forEach(function (form) {
+          var submitBtn = form.querySelector('.search-overlay__submit');
+          if (!submitBtn) return;
+          var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+          var formFocused = false;
 
-            function syncButton() {
-              var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
-              submitBtn.classList.toggle('is-active', formFocused || hasValue);
-            }
+          function syncButton() {
+            var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+            submitBtn.classList.toggle('is-active', formFocused || hasValue);
+          }
 
-            inputs.forEach(function (inp) {
-              inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
-              inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
-              inp.addEventListener('input', syncButton);
-            });
+          inputs.forEach(function (inp) {
+            inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+            inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+            inp.addEventListener('input', syncButton);
+          });
+        });
+
+        var backToTop = document.querySelector('.site-footer__back-to-top');
+        if (backToTop) {
+          backToTop.addEventListener('click', function (e) {
+            if (reduced) return;
+            e.preventDefault();
+            var startY = window.scrollY || window.pageYOffset;
+            if (startY === 0) return;
+            var duration = 1400;
+            var startTime = null;
+            var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
+            var step = function (now) {
+              if (startTime === null) startTime = now;
+              var elapsed = now - startTime;
+              var t = Math.min(1, elapsed / duration);
+              window.scrollTo({ top: startY * (1 - easeOutCubic(t)), behavior: 'instant' });
+              if (t < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
           });
         }
+
+        // Hide the sticky header on scroll-down, reveal it on scroll-up.
+        // rAF-throttled per docs/animation.md. Above the threshold we always
+        // keep the header visible so the top-of-page reveal stays normal.
+        // Scoped in its own IIFE so its rAF flag doesn't collide with the
+        // parallax handler's `ticking` variable in the outer function scope.
+        (function () {
+          var siteHeader = document.querySelector('.site-header');
+          if (!siteHeader) return;
+          var lastY = window.scrollY || 0;
+          var threshold = 80;
+          var headerTicking = false;
+          window.addEventListener('scroll', function () {
+            if (headerTicking) return;
+            window.requestAnimationFrame(function () {
+              var y = window.scrollY || 0;
+              // .is-scrolled — flips home's at-top Sweetgrass fill to the
+              // frosted glass treatment as soon as the page leaves rest.
+              if (y > 0) siteHeader.classList.add('is-scrolled');
+              else siteHeader.classList.remove('is-scrolled');
+
+              if (y < threshold) {
+                siteHeader.classList.remove('is-hidden');
+              } else if (y > lastY) {
+                siteHeader.classList.add('is-hidden');
+              } else if (y < lastY) {
+                siteHeader.classList.remove('is-hidden');
+              }
+              lastY = y;
+              headerTicking = false;
+            });
+            headerTicking = true;
+          }, { passive: true });
+        })();
       })();
     </script>
   </body>
