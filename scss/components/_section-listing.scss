@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $spacing-sm;
+  gap: $spacing-2xs;
   width: 100%;
   margin-inline-start: 0;
   flex-wrap: wrap;
@@ -84,9 +84,10 @@
 .resource-listing__page,
 .news-listing__page,
 .service-listing__page {
-  // Reserve enough room for the widest expected count ("10-10 of 10")
-  // so the surrounding "All …" link doesn't jump as the user pages.
-  min-width: 5.5rem;
+  // Reserve enough room for the widest expected count so the surrounding
+  // link doesn't jump as the user pages. tabular-nums keeps digits the
+  // same width across "1-2", "3-4", etc.
+  min-width: 4rem;
   margin: 0;
   font-size: var(--step--1);
   font-weight: $font-weight-semibold;

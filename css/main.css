@@ -2317,10 +2317,8 @@ main > .service-search-band:first-child {
 
 .service-detail__save {
   display: flex;
-  width: fit-content;
   margin-inline-start: auto;
   margin-block-start: var(--space-s);
-  padding-inline-start: var(--space-s);
 }
 @media (min-width: 840px) {
   .service-detail__save {
@@ -3259,7 +3257,7 @@ main > .service-search-band:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-s);
+  gap: var(--space-2xs);
   width: 100%;
   margin-inline-start: 0;
   flex-wrap: wrap;
@@ -3285,7 +3283,7 @@ main > .service-search-band:first-child {
 .resource-listing__page,
 .news-listing__page,
 .service-listing__page {
-  min-width: 5.5rem;
+  min-width: 4rem;
   margin: 0;
   font-size: var(--step--1);
   font-weight: 600;

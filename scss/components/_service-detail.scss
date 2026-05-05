@@ -35,13 +35,11 @@
 }
 
 .service-detail__save {
-  // display: flex (not block) preserves the .button's inline icon+label
-  // layout; margin-auto still right-aligns since flex is block-level.
+  // The pill is inline-flex by default; switch to block-level flex so
+  // margin-auto right-aligns it on mobile under the subtitle.
   display: flex;
-  width: fit-content;
   margin-inline-start: auto;
   margin-block-start: $spacing-sm;
-  padding-inline-start: $spacing-sm;
 
   @include respond-to("md") {
     position: absolute;
