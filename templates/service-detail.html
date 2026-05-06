@@ -1447,8 +1447,10 @@ Support can be provided for people affected by natural disasters such as bushfir
 
         <div class="site-footer__brand">
           <p class="site-footer__acknowledgement">
-            Veteran and Family Wellbeing Agency acknowledges the Traditional
-            Custodians of Country throughout Australia.
+            The Veteran and Family Wellbeing Agency acknowledges the Traditional
+            Custodians of the lands we live on. We honour the contributions of
+            all Aboriginal and Torres Strait Islander people that have served,
+            whose contributions have helped to shape our nation.
           </p>
           <nav aria-label="Social media">
             <ul class="social-links">
@@ -1934,10 +1936,11 @@ Support can be provided for people affected by natural disasters such as bushfir
               attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            var pinIcon = L.divIcon({
+            var pinIcon = L.icon({
+              iconUrl: 'assets/images/icons/pin-default.svg',
               className: 'results-map-pin',
-              iconSize: [18, 18],
-              iconAnchor: [9, 9]
+              iconSize: [32, 32],
+              iconAnchor: [16, 30]
             });
 
             L.marker([lat, lng], { icon: pinIcon, title: title, alt: title }).addTo(map);

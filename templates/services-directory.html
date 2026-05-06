@@ -2185,8 +2185,10 @@
 
         <div class="site-footer__brand">
           <p class="site-footer__acknowledgement">
-            Veteran and Family Wellbeing Agency acknowledges the Traditional
-            Custodians of Country throughout Australia.
+            The Veteran and Family Wellbeing Agency acknowledges the Traditional
+            Custodians of the lands we live on. We honour the contributions of
+            all Aboriginal and Torres Strait Islander people that have served,
+            whose contributions have helped to shape our nation.
           </p>
           <nav aria-label="Social media">
             <ul class="social-links">
@@ -2663,11 +2665,18 @@
         if (mapEl && window.L) {
           var cards = Array.prototype.slice.call(document.querySelectorAll('.service-card[data-lat][data-lng]'));
           var points = cards.map(function (card) {
+            var addressIcon = card.querySelector('.service-card__detail-icon img[src*="location"]');
+            var addressEl = addressIcon ? addressIcon.closest('.service-card__detail-main') : null;
+            var addressText = addressEl ? addressEl.lastElementChild.textContent.trim() : '';
+            var detailLink = card.querySelector('.service-card__cta');
+            var detailUrl = detailLink ? detailLink.getAttribute('href') : '#';
             return {
               id: card.getAttribute('data-service-id'),
               lat: parseFloat(card.getAttribute('data-lat')),
               lng: parseFloat(card.getAttribute('data-lng')),
               title: (card.querySelector('.service-card__title') || {}).textContent || '',
+              address: addressText,
+              url: detailUrl,
               card: card
             };
           }).filter(function (p) { return !isNaN(p.lat) && !isNaN(p.lng); });
@@ -2678,11 +2687,77 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           }).addTo(map);
 
-          var pinIcon = L.divIcon({
+          var pinIcon = L.icon({
+            iconUrl: 'assets/images/icons/pin-default.svg',
             className: 'results-map-pin',
-            iconSize: [18, 18],
-            iconAnchor: [9, 9]
+            iconSize: [32, 32],
+            iconAnchor: [16, 30]
           });
+
+          var pinIconActive = L.icon({
+            iconUrl: 'assets/images/icons/pin-active.svg',
+            className: 'results-map-pin results-map-pin--active',
+            iconSize: [32, 32],
+            iconAnchor: [16, 30]
+          });
+
+          // Bottom-left popup (Leaflet control). Populated on pin click,
+          // closed via the X button. Active marker swaps to pin-active.svg
+          // and resets when the popup closes or another pin is clicked.
+          var popupEl = null;
+          var activeMarker = null;
+          var activeCard = null;
+          var popupControl = L.control({ position: 'bottomleft' });
+          popupControl.onAdd = function () {
+            var div = L.DomUtil.create('aside', 'map-pin-detail');
+            div.hidden = true;
+            div.setAttribute('aria-live', 'polite');
+            div.innerHTML = [
+              '<button class="map-pin-detail__close" type="button" aria-label="Close service details">',
+              '  <img src="assets/images/icons/Property 1=Close.svg" alt="" width="14" height="14" />',
+              '</button>',
+              '<h3 class="map-pin-detail__title"></h3>',
+              '<p class="map-pin-detail__address"></p>',
+              '<a class="site-header__pill map-pin-detail__cta" href="#">',
+              '  <span>View service details</span>',
+              '  <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />',
+              '</a>'
+            ].join('');
+            L.DomEvent.disableClickPropagation(div);
+            popupEl = div;
+            div.querySelector('.map-pin-detail__close').addEventListener('click', hidePopup);
+            return div;
+          };
+
+          function hidePopup() {
+            if (activeMarker) {
+              activeMarker.setIcon(pinIcon);
+              activeMarker = null;
+            }
+            if (activeCard) {
+              activeCard.classList.remove('is-active');
+              activeCard = null;
+            }
+            if (popupEl) popupEl.hidden = true;
+          }
+
+          function showPopup(point, marker) {
+            if (activeMarker && activeMarker !== marker) {
+              activeMarker.setIcon(pinIcon);
+            }
+            if (activeCard && activeCard !== point.card) {
+              activeCard.classList.remove('is-active');
+            }
+            activeMarker = marker;
+            activeCard = point.card;
+            marker.setIcon(pinIconActive);
+            point.card.classList.add('is-active');
+            if (!popupEl) return;
+            popupEl.querySelector('.map-pin-detail__title').textContent = point.title;
+            popupEl.querySelector('.map-pin-detail__address').textContent = point.address;
+            popupEl.querySelector('.map-pin-detail__cta').setAttribute('href', point.url);
+            popupEl.hidden = false;
+          }
 
           var clusterGroup = L.markerClusterGroup({
             showCoverageOnHover: false,
@@ -2700,6 +2775,7 @@
           points.forEach(function (p) {
             var marker = L.marker([p.lat, p.lng], { icon: pinIcon, title: p.title, alt: p.title });
             marker.on('click', function () {
+              showPopup(p, marker);
               p.card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
               p.card.classList.add('is-highlighted');
               window.setTimeout(function () { p.card.classList.remove('is-highlighted'); }, 1600);
@@ -2708,6 +2784,7 @@
           });
 
           map.addLayer(clusterGroup);
+          popupControl.addTo(map);
 
           // Default to the Melbourne search region. Fitting bounds across
           // every marker would zoom out to span distant results (e.g. Sydney)
@@ -2757,11 +2834,11 @@
           });
         }
 
-        // Hide the sticky header on scroll-down, reveal it on scroll-up.
-        // rAF-throttled per docs/animation.md. Above the threshold we always
-        // keep the header visible so the top-of-page reveal stays normal.
-        // Scoped in its own IIFE so its rAF flag doesn't collide with other
-        // scroll listeners that share the outer function scope.
+        // Hide the sticky header on scroll-down. Directory listing
+        // intentionally skips the reveal-on-scroll-up — once the user has
+        // scrolled past the search/filter region, the header stays hidden
+        // until they return to the top of the page (visible again below
+        // the threshold).
         (function () {
           var siteHeader = document.querySelector('.site-header');
           if (!siteHeader) return;
@@ -2776,8 +2853,6 @@
                 siteHeader.classList.remove('is-hidden');
               } else if (y > lastY) {
                 siteHeader.classList.add('is-hidden');
-              } else if (y < lastY) {
-                siteHeader.classList.remove('is-hidden');
               }
               lastY = y;
               headerTicking = false;
