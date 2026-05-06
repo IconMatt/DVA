@@ -54,6 +54,13 @@
 }
 
 .results-layout__map {
+  // Declare position up front so Leaflet's _initLayout sees an
+  // allowed value (absolute|relative|fixed|sticky) at init time and
+  // does NOT inline `position: relative` on the container. Without
+  // this, the inline override survives breakpoint changes and beats
+  // the `position: sticky` rule below at md+.
+  position: relative;
+
   // Mobile: inline block; bg shows briefly while tiles load.
   min-height: 18rem;
   background: $color-slate-500;

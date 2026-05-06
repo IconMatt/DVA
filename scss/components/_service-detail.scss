@@ -1,10 +1,13 @@
 @use "../abstracts/tokens" as *;
 @use "../abstracts/mixins" as *;
 
-.service-detail__subtitle {
+.service-detail__subtitle-tags {
+  list-style: none;
   margin: 0;
-  color: $color-brown-700;
-  font-size: var(--step-1);
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-3xs $spacing-2xs;
 }
 
 // Status pill mirrors .service-card__status — zest fill for open,
@@ -67,9 +70,16 @@
   align-items: center;
   gap: $spacing-2xs;
   margin-block-end: $spacing-sm;
+  // Match the inline padding on .service-search__inner above so the
+  // back link's left edge aligns with the breadcrumb / H1 / subtitle.
+  margin-inline-start: $spacing-lg;
   color: $color-brown-900;
   font-size: var(--step--1);
   text-decoration: none;
+
+  @include respond-to("md") {
+    margin-inline-start: calc(#{$container-padding} - 0.9rem);
+  }
 
   &:hover {
     text-decoration: underline;
@@ -94,9 +104,16 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
-  padding: var(--space-l);
+  // Mirror .service-search__inner padding so the card's content
+  // sits at the same horizontal rhythm as the breadcrumb band above.
+  padding-block: $spacing-lg;
+  padding-inline: $spacing-lg;
   background: $color-sand-stone;
   border-radius: $radius-2xl;
+
+  @include respond-to("md") {
+    padding-inline: calc(#{$container-padding} - 0.9rem);
+  }
 }
 
 .service-detail__section {
