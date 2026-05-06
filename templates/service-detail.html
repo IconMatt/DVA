@@ -1922,6 +1922,23 @@ Support can be provided for people affected by natural disasters such as bushfir
             });
 
             L.marker([lat, lng], { icon: pinIcon, title: title, alt: title }).addTo(map);
+
+            // Recompute Leaflet's container size when CSS resizes it
+            // (responsive breakpoints, devtools docking, etc.). Without
+            // this the map keeps the dimensions captured at init time
+            // and only repaints correctly after a full reload.
+            if ('ResizeObserver' in window) {
+              var mapResizeTicking = false;
+              var mapResizeObserver = new ResizeObserver(function () {
+                if (mapResizeTicking) return;
+                mapResizeTicking = true;
+                window.requestAnimationFrame(function () {
+                  map.invalidateSize();
+                  mapResizeTicking = false;
+                });
+              });
+              mapResizeObserver.observe(mapEl);
+            }
           }
         }
 

@@ -2718,6 +2718,23 @@
             map.setView([-37.8136, 144.9631], 10);
           }
 
+          // Recompute Leaflet's container size when CSS resizes it
+          // (responsive breakpoints, devtools docking, etc.). Without
+          // this the map keeps the dimensions captured at init time
+          // and only repaints correctly after a full reload.
+          if ('ResizeObserver' in window) {
+            var mapResizeTicking = false;
+            var mapResizeObserver = new ResizeObserver(function () {
+              if (mapResizeTicking) return;
+              mapResizeTicking = true;
+              window.requestAnimationFrame(function () {
+                map.invalidateSize();
+                mapResizeTicking = false;
+              });
+            });
+            mapResizeObserver.observe(mapEl);
+          }
+
           // List/Map view toggle (single-column breakpoints only).
           var layout = document.querySelector('.results-layout');
           var toggleBtns = document.querySelectorAll('.results-view-toggle__btn');
