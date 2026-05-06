@@ -54,7 +54,11 @@
 .hero::after {
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to right, $overlay-black-30 33%, transparent);
+
+  // Left-anchored scrim — title region (max-width: 60%) needs reliable contrast
+  // over a varying photograph. Hold the dark stop through the title column,
+  // then fade to transparent so the right side of the photo stays bright.
+  background: linear-gradient(to right, $overlay-black-30 0%, $overlay-black-30 50%, transparent 100%);
 }
 
 .hero__inner {

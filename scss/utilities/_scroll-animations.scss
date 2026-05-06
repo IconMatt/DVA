@@ -31,7 +31,9 @@
     transition: none;
   }
 
-  [data-parallax] {
+  [data-parallax],
+  [data-parallax-bg],
+  [data-parallax-media] {
     transform: none !important;
     will-change: auto;
   }

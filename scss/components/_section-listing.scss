@@ -177,9 +177,17 @@
 // rather than sitting flush against the bleed-wrap edge.
 .service-listing__viewport {
   margin-inline-start: 0;
-  margin-inline-end: -0.9rem;
+
+  // Cancel the bleed-wrap inset so cards can peek off the right edge.
+  // Must track bleed-wrap's responsive value (0.75rem below md, 0.9rem from md)
+  // or the viewport over-cancels at small widths and forces page overflow.
+  margin-inline-end: -0.75rem;
   padding-inline-start: var(--space-m);
   scroll-padding-inline: var(--space-m) 0;
+
+  @include respond-to("md") {
+    margin-inline-end: -0.9rem;
+  }
 }
 
 .resource-listing__viewport:focus-visible,

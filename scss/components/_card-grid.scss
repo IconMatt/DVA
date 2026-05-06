@@ -3,7 +3,7 @@
 
 .card-grid {
   display: grid;
-  gap: $spacing-md;
+  gap: $spacing-sm;
   grid-template-columns: 1fr;
 }
 
@@ -40,19 +40,19 @@
   }
 
   @include respond-to("md") {
-    width: max(19rem, calc((100vw - #{$container-padding} - #{$spacing-md}) / 2.15));
+    width: max(19rem, calc((100vw - #{$container-padding} - #{$spacing-sm}) / 2.15));
   }
 
   @include respond-to("lg") {
     width: max(
       26rem,
-      calc((100vw - #{$container-padding} - (#{$spacing-md} * 2)) / 3.15)
+      calc((100vw - #{$container-padding} - (#{$spacing-sm} * 2)) / 3.15)
     );
   }
 }
 
 .card-grid__spacer {
-  width: calc(#{$container-padding} - #{$spacing-md});
+  width: calc(#{$container-padding} - #{$spacing-sm});
   scroll-snap-align: end;
   pointer-events: none;
 }

@@ -80,6 +80,11 @@
   // 2.5rem → 3rem across 360–1440px
   height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
   width: auto;
+
+  // Below sm: shrink so the brand and Menu pill fit on a single row at 320px.
+  @include respond-below("sm") {
+    height: 2rem;
+  }
 }
 
 .site-nav {
@@ -174,16 +179,18 @@
 }
 
 // Quick exit — fixed to viewport top-right, sandstone fill, no border.
+// Tab shape: viewport-adjacent corners flat, bottom-left rounded so the pill
+// reads as deliberately attached to the corner. min-height meets WCAG 2.5.8.
 .site-header__pill--exit {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 200;
-  max-height: 45px;
+  min-height: 24px;
   padding-block: 0;
   background: $color-sand-stone;
   border-color: transparent;
-  border-radius: 0 0 0 $radius-xs;
+  border-radius: 0 0 0 $radius-md;
   box-shadow: $shadow-sm;
 }
 

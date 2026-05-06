@@ -467,6 +467,11 @@ p {
   height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
   width: auto;
 }
+@media (max-width: 559px) {
+  .site-header__logo {
+    height: 2rem;
+  }
+}
 
 .site-nav {
   display: none;
@@ -571,11 +576,11 @@ p {
   top: 0;
   right: 0;
   z-index: 200;
-  max-height: 45px;
+  min-height: 24px;
   padding-block: 0;
   background: #f9f6ea;
   border-color: transparent;
-  border-radius: 0 0 0 var(--radius-xs);
+  border-radius: 0 0 0 var(--radius-md);
   box-shadow: 0 1px 2px rgba(75, 57, 40, 0.08);
 }
 
@@ -1226,7 +1231,7 @@ p {
 .hero::after {
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 33%, transparent);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.3) 50%, transparent 100%);
 }
 
 .hero__inner {
@@ -1688,8 +1693,9 @@ main > .service-search-band:first-child {
 .service-search__input:not(:focus)::placeholder {
   color: transparent;
 }
-.service-search__input:focus {
-  outline: none;
+.service-search__input:focus-visible {
+  outline: 3px solid #dad777;
+  outline-offset: 2px;
 }
 .service-search__input[type=search]::-webkit-search-decoration, .service-search__input[type=search]::-webkit-search-cancel-button, .service-search__input[type=search]::-webkit-search-results-button, .service-search__input[type=search]::-webkit-search-results-decoration {
   display: none;
@@ -2797,7 +2803,7 @@ main > .service-search-band:first-child {
 
 .card-grid {
   display: grid;
-  gap: var(--space-m);
+  gap: var(--space-s);
   grid-template-columns: 1fr;
 }
 
@@ -2841,19 +2847,19 @@ main > .service-search-band:first-child {
   .card-grid--resources .card-grid__item,
   .card-grid--news-carousel .card-grid__item,
   .card-grid--services .card-grid__item {
-    width: max(19rem, (100vw - clamp(1.5rem, 4vw, 10rem) - var(--space-m)) / 2.15);
+    width: max(19rem, (100vw - clamp(1.5rem, 4vw, 10rem) - var(--space-s)) / 2.15);
   }
 }
 @media (min-width: 1120px) {
   .card-grid--resources .card-grid__item,
   .card-grid--news-carousel .card-grid__item,
   .card-grid--services .card-grid__item {
-    width: max(26rem, (100vw - clamp(1.5rem, 4vw, 10rem) - var(--space-m) * 2) / 3.15);
+    width: max(26rem, (100vw - clamp(1.5rem, 4vw, 10rem) - var(--space-s) * 2) / 3.15);
   }
 }
 
 .card-grid__spacer {
-  width: calc(clamp(1.5rem, 4vw, 10rem) - var(--space-m));
+  width: calc(clamp(1.5rem, 4vw, 10rem) - var(--space-s));
   scroll-snap-align: end;
   pointer-events: none;
 }
@@ -3409,9 +3415,14 @@ main > .service-search-band:first-child {
 
 .service-listing__viewport {
   margin-inline-start: 0;
-  margin-inline-end: -0.9rem;
+  margin-inline-end: -0.75rem;
   padding-inline-start: var(--space-m);
   scroll-padding-inline: var(--space-m) 0;
+}
+@media (min-width: 840px) {
+  .service-listing__viewport {
+    margin-inline-end: -0.9rem;
+  }
 }
 
 .resource-listing__viewport:focus-visible,
@@ -3948,7 +3959,9 @@ main > .service-search-band:first-child {
     transform: none;
     transition: none;
   }
-  [data-parallax] {
+  [data-parallax],
+  [data-parallax-bg],
+  [data-parallax-media] {
     transform: none !important;
     will-change: auto;
   }

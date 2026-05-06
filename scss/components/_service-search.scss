@@ -170,8 +170,8 @@ main > .service-search-band:first-child {
     color: transparent;
   }
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
+    @include focus-ring;
   }
 
   // Remove browser-native search chrome (clear button, etc.).
