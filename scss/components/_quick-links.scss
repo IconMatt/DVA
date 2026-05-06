@@ -169,7 +169,7 @@
   // While the layout is two-column but the cards column is still narrow
   // (md → just under lg), stack the quick-links so they don't crush. Two-up
   // returns at lg+ where the column has more room.
-  @media (min-width: #{$bp-md}) and (max-width: #{$bp-lg - 1px}) {
+  @include respond-between("md", "lg") {
     grid-template-columns: 1fr;
   }
 }

@@ -41,7 +41,7 @@
 }
 
 // Mobile: show only the last two items.
-@media (max-width: #{$bp-md - 1px}) {
+@include respond-below("md") {
   .breadcrumb__item:nth-last-child(n+3) {
     display: none;
   }

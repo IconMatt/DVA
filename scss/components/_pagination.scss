@@ -70,7 +70,7 @@
 
 // Below md: collapse to prev/next arrows + summary only. The summary tells
 // the user where they are; arrows step through pages without crowding the row.
-@media (max-width: #{$bp-md - 1px}) {
+@include respond-below("md") {
   .pagination__page {
     display: none;
   }

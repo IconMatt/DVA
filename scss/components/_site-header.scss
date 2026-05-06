@@ -63,7 +63,7 @@
   gap: $spacing-sm;
   padding-block: clamp(0.875rem, 2.2vw, 5.25rem);
 
-  @media (max-width: #{$bp-lg - 1px}) {
+  @include respond-below("lg") {
     padding-block-start: 2.25rem;
   }
 }

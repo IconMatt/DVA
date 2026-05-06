@@ -48,6 +48,8 @@ main > .service-search-band:first-child {
 }
 
 .service-search__form {
+  --animate-delay: 100ms;
+
   display: grid;
   gap: $spacing-sm;
   grid-template-columns: 1fr;

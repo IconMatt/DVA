@@ -1,15 +1,35 @@
 @use "sass:map";
 @use "tokens" as *;
 
-// Responsive: min-width only (mobile-first).
-@mixin respond-to($name) {
+// Responsive helpers. Default convention is mobile-first (`respond-to`);
+// `respond-below` and `respond-between` exist for the cases where above-the-
+// breakpoint defaults plus a narrow override read more cleanly than an
+// inverted mobile-first rewrite.
+
+@function bp($name) {
   $value: map.get($breakpoints, $name);
 
   @if not $value {
     @error "Unknown breakpoint `#{$name}`. Expected one of: #{map.keys($breakpoints)}.";
   }
 
-  @media (min-width: $value) {
+  @return $value;
+}
+
+@mixin respond-to($name) {
+  @media (min-width: bp($name)) {
+    @content;
+  }
+}
+
+@mixin respond-below($name) {
+  @media (max-width: #{bp($name) - 1px}) {
+    @content;
+  }
+}
+
+@mixin respond-between($from, $to) {
+  @media (min-width: bp($from)) and (max-width: #{bp($to) - 1px}) {
     @content;
   }
 }

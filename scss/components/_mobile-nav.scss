@@ -10,7 +10,7 @@
 
 // 24/7 support — hidden only below sm; appears alongside Menu from sm upward.
 .site-header__pill--help {
-  @media (max-width: #{$bp-sm - 1px}) {
+  @include respond-below("sm") {
     display: none;
   }
 }
@@ -18,7 +18,7 @@
 // Search and saved items — hidden below md; join the row from md upward.
 .site-header__pill--search,
 .site-header__pill--bookmark {
-  @media (max-width: #{$bp-md - 1px}) {
+  @include respond-below("md") {
     display: none;
   }
 }

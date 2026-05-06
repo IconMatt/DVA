@@ -84,6 +84,8 @@
 }
 
 .feature-promo__media {
+  --animate-delay: 150ms;
+
   order: 1;
   position: relative;
   overflow: hidden;

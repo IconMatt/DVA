@@ -20,6 +20,8 @@
 }
 
 .mission-statement__title {
+  --animate-delay: 100ms;
+
   font-family: $font-display;
   font-weight: $font-weight-regular;
 
@@ -80,6 +82,8 @@
 }
 
 .mission-statement__actions {
+  --animate-delay: 200ms;
+
   margin-top: $spacing-lg;
   margin-inline: auto;
   max-width: none;

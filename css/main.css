@@ -1275,6 +1275,7 @@ p {
 }
 
 .hero__quick-links {
+  --animate-delay: 200ms;
   margin-top: var(--space-xl);
 }
 
@@ -1588,6 +1589,7 @@ main > .service-search-band:first-child {
 }
 
 .service-search__form {
+  --animate-delay: 100ms;
   display: grid;
   gap: var(--space-s);
   grid-template-columns: 1fr;
@@ -2608,6 +2610,7 @@ main > .service-search-band:first-child {
 }
 
 .mission-statement__title {
+  --animate-delay: 100ms;
   font-family: "Halant", "Georgia", "Times New Roman", serif;
   font-weight: 400;
   font-size: clamp(1.8125rem, 1.375rem + 1.9444vw, 3.125rem);
@@ -2664,6 +2667,7 @@ main > .service-search-band:first-child {
 }
 
 .mission-statement__actions {
+  --animate-delay: 200ms;
   margin-top: var(--space-l);
   margin-inline: auto;
   max-width: none;
@@ -2762,6 +2766,7 @@ main > .service-search-band:first-child {
 }
 
 .feature-promo__media {
+  --animate-delay: 150ms;
   order: 1;
   position: relative;
   overflow: hidden;

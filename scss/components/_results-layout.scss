@@ -81,7 +81,7 @@
 
 // Below md: the user picks one column at a time via .results-view-toggle.
 // Above md: data-view is ignored — both columns render side-by-side.
-@media (max-width: #{$bp-md - 1px}) {
+@include respond-below("md") {
   .results-layout[data-view="list"] .results-layout__map {
     display: none;
   }

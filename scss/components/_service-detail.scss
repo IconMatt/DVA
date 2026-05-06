@@ -241,7 +241,7 @@
 // the map ahead of the urgent-help / referral CTAs. Scoped to
 // .page--service-detail so the directory layout (which has cards in
 // the main column instead of one detail card) is unaffected.
-@media (max-width: $bp-md - 1px) {
+@include respond-below("md") {
   .page--service-detail .results-layout__main {
     display: contents;
   }
