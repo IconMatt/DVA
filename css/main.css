@@ -395,7 +395,7 @@ p {
 }
 
 .breadcrumb__item--current {
-  font-weight: 600;
+  font-weight: inherit;
 }
 
 @media (max-width: 839px) {
@@ -1556,6 +1556,10 @@ main > .service-search-band:first-child {
   overflow: clip;
 }
 
+.page--service-detail .service-search {
+  background: #f9f6ea;
+}
+
 .service-search__inner {
   padding-inline: calc(clamp(1.5rem, 4vw, 10rem) - 0.75rem);
 }
@@ -2302,6 +2306,11 @@ main > .service-search-band:first-child {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-3xs) var(--space-2xs);
+}
+
+.service-detail__subtitle-tags .tag {
+  background: #e2e0cb;
+  color: #4b3928;
 }
 
 .service-detail__status {
@@ -3391,6 +3400,13 @@ main > .service-search-band:first-child {
   scroll-padding-inline: clamp(1.5rem, 4vw, 10rem) 0;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
+}
+
+.service-listing__viewport {
+  margin-inline-start: 0;
+  margin-inline-end: -0.9rem;
+  padding-inline-start: var(--space-m);
+  scroll-padding-inline: var(--space-m) 0;
 }
 
 .resource-listing__viewport:focus-visible,

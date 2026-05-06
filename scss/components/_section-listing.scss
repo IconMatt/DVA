@@ -167,6 +167,21 @@
   scrollbar-width: none;
 }
 
+// .service-listing's inner has no .container padding (so the heading
+// aligns with the bleed-wrap edge above it). The shared
+// `margin-inline: -container-padding` would push the viewport past
+// the section's outer edge and create a horizontal page scroll, so
+// override here: keep the right-side bleed (cards can peek off the
+// right) but pin the left to the section's edge with a start padding
+// so the first card aligns with the .service-listing__header text
+// rather than sitting flush against the bleed-wrap edge.
+.service-listing__viewport {
+  margin-inline-start: 0;
+  margin-inline-end: -0.9rem;
+  padding-inline-start: var(--space-m);
+  scroll-padding-inline: var(--space-m) 0;
+}
+
 .resource-listing__viewport:focus-visible,
 .news-listing__viewport:focus-visible,
 .service-listing__viewport:focus-visible {

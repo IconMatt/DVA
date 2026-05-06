@@ -19,6 +19,12 @@ main > .service-search-band:first-child {
   overflow: clip;
 }
 
+// Service-detail uses the sand-stone fill so the breadcrumb band reads
+// as a header for the cream content card directly below it.
+.page--service-detail .service-search {
+  background: $color-sand-stone;
+}
+
 .service-search__inner {
   @include bleed-content;
 

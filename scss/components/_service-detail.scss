@@ -10,6 +10,13 @@
   gap: $spacing-3xs $spacing-2xs;
 }
 
+// Mirror the .service-detail__tags / .service-card__tags override so
+// the chips read distinctly against the sand-stone breadcrumb band.
+.service-detail__subtitle-tags .tag {
+  background: $color-sweet-grass-dark;
+  color: $color-brown-900;
+}
+
 // Status pill mirrors .service-card__status — zest fill for open,
 // slate-300 for closed. Sits above the H1 in the band.
 .service-detail__status {
