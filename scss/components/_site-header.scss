@@ -46,6 +46,16 @@
   -webkit-backdrop-filter: blur(14px) saturate(140%);
 }
 
+// While the mobile nav is open, the header sits flush against the sliding
+// .mobile-nav panel below — match its sweet-grass fill (and drop the blur)
+// so the seam disappears. :has() inspects the menu trigger's aria-expanded.
+.site-header:has([data-menu-trigger][aria-expanded="true"]) {
+  background: $color-sweet-grass;
+  backdrop-filter: none;
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -webkit-backdrop-filter: none;
+}
+
 .site-header__inner {
   display: flex;
   flex-wrap: wrap;

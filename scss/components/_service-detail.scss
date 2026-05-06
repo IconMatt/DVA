@@ -35,10 +35,9 @@
 }
 
 .service-detail__save {
-  // The pill is inline-flex by default; switch to block-level flex so
-  // margin-auto right-aligns it on mobile under the subtitle.
+  // Mobile: sits left-aligned under the subtitle as a normal pill.
+  // md+: pinned to the bottom-right corner of the band as an overlay.
   display: flex;
-  margin-inline-start: auto;
   margin-block-start: $spacing-sm;
 
   @include respond-to("md") {
@@ -54,6 +53,13 @@
 // on the directory.
 .service-detail__head {
   margin-block-start: $spacing-md;
+}
+
+// Restore the H1 to its base size (var(--step-5)) on the service-detail
+// page. .service-search__title holds back to h2 size on the directory
+// where the H1 doubles as the listing label; here it's the page title.
+.service-detail__head .service-search__title {
+  font-size: var(--step-5);
 }
 
 .service-detail__back {
@@ -202,5 +208,25 @@
 
   td {
     font-weight: $font-weight-regular;
+  }
+}
+
+// Mobile stacking order: detail card → map → quick-links.
+// display: contents flattens .results-layout__main so its children
+// participate directly in the .results-layout grid; order then bumps
+// the map ahead of the urgent-help / referral CTAs. Scoped to
+// .page--service-detail so the directory layout (which has cards in
+// the main column instead of one detail card) is unaffected.
+@media (max-width: $bp-md - 1px) {
+  .page--service-detail .results-layout__main {
+    display: contents;
+  }
+
+  .page--service-detail .results-layout__map {
+    order: 1;
+  }
+
+  .page--service-detail .quick-links--results-top {
+    order: 2;
   }
 }
