@@ -45,35 +45,31 @@
   align-items: center;
   justify-content: space-between;
   gap: $spacing-md;
-  padding-block: $spacing-md;
-  font-weight: $font-weight-bold;
+  padding-block: $spacing-sm;
+  padding-inline: $spacing-xs;
+  font-weight: $font-weight-semibold;
   color: $color-brown-900;
   cursor: pointer;
   list-style: none;
+  transition: background-color $transition-base;
 
   &::-webkit-details-marker {
     display: none;
   }
 
-  // Match the prose link focus treatment for keyboard users.
+  &:hover {
+    background: $color-sand-stone;
+  }
+
+  // Keyboard focus: keep the standard focus-ring; no underline now that
+  // hover renders a sand-stone wash.
   &:focus-visible {
     @include focus-ring;
     outline-offset: 2px;
   }
-
-  // Hover/focus trigger lives on the summary (whole row is the target);
-  // the underline visual is applied to the label so it doesn't run under
-  // the chevron. Single-gradient size since .accordion__label uses
-  // link-underline-animate (no static line at rest).
-  &:hover .accordion__label,
-  &:focus-visible .accordion__label {
-    background-size: 100% 3px;
-  }
 }
 
 .accordion__label {
-  @include link-underline-animate;
-
   font-size: var(--step-0);
   line-height: $line-height-snug;
 }
@@ -91,7 +87,10 @@
 }
 
 .accordion__body {
+  // Match the summary's horizontal padding so the body copy aligns with
+  // the label on the left and respects the chevron's right edge.
   padding-block-end: $spacing-md;
+  padding-inline: $spacing-xs;
   font-size: var(--step-0);
   line-height: $line-height-normal;
   color: $color-brown-900;
