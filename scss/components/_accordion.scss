@@ -63,15 +63,16 @@
 
   // Hover/focus trigger lives on the summary (whole row is the target);
   // the underline visual is applied to the label so it doesn't run under
-  // the chevron.
+  // the chevron. Single-gradient size since .accordion__label uses
+  // link-underline-animate (no static line at rest).
   &:hover .accordion__label,
   &:focus-visible .accordion__label {
-    background-size: 100% 3px, 0 1px;
+    background-size: 100% 3px;
   }
 }
 
 .accordion__label {
-  @include link-underline-grow;
+  @include link-underline-animate;
 
   font-size: var(--step-0);
   line-height: $line-height-snug;

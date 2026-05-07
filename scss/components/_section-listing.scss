@@ -55,12 +55,21 @@
   border: 1px solid $color-border-strong;
   border-radius: $radius-pill;
   text-decoration: none;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base,
+    color $transition-base;
 }
 
+// Solid dark hover, mirrors the .site-header__pill base hover state
+// (slate-700 fill + inverse text). Same treatment across all listing
+// carousel "All …" links.
 .resource-listing__link:hover,
 .news-listing__link:hover,
 .service-listing__link:hover {
-  background: $color-sweet-grass;
+  background: $color-slate-700;
+  border-color: $color-slate-700;
+  color: $color-text-inverse;
 }
 
 .resource-listing__header-actions,
