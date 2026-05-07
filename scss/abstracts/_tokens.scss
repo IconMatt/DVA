@@ -127,6 +127,7 @@ $container-padding: clamp(1.5rem, 4vw, 10rem);
 
 // ---------- Breakpoints ----------
 // Scale shifted up — modern site built for large displays.
+$bp-xs: 360px;    // narrow mobile (320–359 sliver: iPhone SE 1, Galaxy Fold cover)
 $bp-sm: 560px;    // large mobile
 $bp-md: 840px;    // tablet
 $bp-lg: 1120px;   // small laptop
@@ -135,6 +136,7 @@ $bp-2xl: 1680px;  // large desktop
 $bp-wide: 1920px; // ultra-wide — triggers fluid (clamp) scaling
 
 $breakpoints: (
+  "xs": $bp-xs,
   "sm": $bp-sm,
   "md": $bp-md,
   "lg": $bp-lg,

@@ -50,7 +50,7 @@
 // Standard focus ring, keyboard-only.
 @mixin focus-ring {
   outline: 3px solid $color-focus;
-  outline-offset: 2px;
+  outline-offset: 1px;
 }
 
 // Page container — always 100% width, fluid gutter.
@@ -86,6 +86,9 @@
   font-weight: $font-weight-regular;
   color: $color-brown-900;
   letter-spacing: 0.02em;
+  // Eyebrow text reads as body, not a heading — pretty wrapping avoids
+  // single-word orphans on narrow lines (matches the p/li/dd base rule).
+  text-wrap: pretty;
 }
 
 // Reduced-motion guard.
@@ -108,7 +111,32 @@
 
   &:hover,
   &:focus-visible {
-    background-size: 100% 1px;
+    background-size: 100% 3px;
+  }
+
+  @include reduced-motion {
+    transition: none;
+  }
+}
+
+// Companion to link-underline-animate for places that need a static underline
+// at rest. Both static and animated lines use background-image so they share
+// the same y-position (no jump during the swap). The static line shrinks from
+// the right while the animated line grows in from the left — a left-to-right
+// "wipe" instead of a fade-and-redraw.
+@mixin link-underline-grow {
+  text-decoration: none;
+  background-image:
+    linear-gradient(currentColor, currentColor), // animated (grows from left)
+    linear-gradient(currentColor, currentColor); // static  (shrinks to right)
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: background-size $transition-base, color $transition-base;
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 3px, 0 1px;
   }
 
   @include reduced-motion {

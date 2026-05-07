@@ -2,7 +2,7 @@
 @use "../abstracts/mixins" as *;
 
 .breadcrumb {
-  margin-block-end: $spacing-sm;
+  margin-block-end: $spacing-md;
 }
 
 .breadcrumb__list {

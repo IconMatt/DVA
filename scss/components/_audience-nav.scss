@@ -1,0 +1,89 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Audience nav — secondary navigation that filters the page by audience
+// segment (Serving member, Transitioning, Ex-serving, Families, etc.).
+// Sits directly below .site-header. Floats as a rounded slate band — same
+// outer-margin (bleed-wrap) and corner-radius treatment used on the resource
+// cards, so it reads as part of the card vocabulary, not a flush header bar.
+.audience-nav {
+  @include bleed-wrap;
+
+  margin-block-end: $spacing-sm;
+  background: $color-slate-500;
+  border-radius: $radius-xl;
+  overflow: clip;
+}
+
+.audience-nav__inner {
+  padding-block: $spacing-sm;
+  // Override .container's horizontal padding — items are centered by the
+  // flex layout, no need for the page-grid inset inside the rounded band.
+  padding-inline: 0;
+}
+
+.audience-nav__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  // Match the .site-nav__list fluid gap so the two navs share the same
+  // visual rhythm vertically stacked.
+  gap: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Below lg: items would otherwise wrap onto multiple rows. Switch to a
+// horizontal scroller — single row, no-wrap, scroll-snap on each item.
+// Start padding matches bleed-content (container-padding minus bleed-wrap
+// margin) so the first item lands on the page-grid edge, same as other
+// scrollers (card-grid--resources, card-grid--news-carousel).
+// Scrollbar hidden; users swipe / drag / keyboard-arrow through.
+@include respond-below("lg") {
+  .audience-nav__list {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-inline: $container-padding;
+    // scroll-padding matches padding-inline so the first item's
+    // snap-align: start lands at the visible padding's inner edge — keeps
+    // the start padding visible instead of scrolling past it.
+    scroll-padding-inline: $container-padding;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .audience-nav__item {
+    scroll-snap-align: start;
+  }
+}
+
+.audience-nav__item {
+  display: inline-flex;
+}
+
+.audience-nav__link {
+  @include link-underline-animate;
+
+  display: inline-block;
+  padding-block: $spacing-3xs;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  color: $color-brown-900;
+  white-space: nowrap;
+}
+
+// Current audience — static 1px underline at the same y-position as the
+// hover-animated underline above (background-position: 0 100%), so the
+// active item reads as the resting state of the same indicator rather than
+// a separate kind of mark.
+.audience-nav__link--current,
+.audience-nav__link[aria-current="page"] {
+  background-size: 100% 1px;
+}

@@ -18,6 +18,34 @@
   }
 }
 
+// Inside .results-section--header-split the bar widens its column-gap so
+// the trigger pill and count don't read as crammed when applied chips are
+// also inline. Row-gap stays tight ($spacing-2xs) for the wrap case.
+.results-section--header-split .active-filters {
+  column-gap: $spacing-sm;
+  // Bigger row-gap for the wrap case — when the count + chips drop to row 2,
+  // they need real breathing room from the trigger pill above (the tight
+  // $spacing-2xs base reads as crammed at this scale).
+  row-gap: $spacing-md;
+}
+
+// Detail group: holds the count + applied chips as a single wrap unit. When
+// it fits inline alongside the trigger pill it sits on row 1; when it
+// doesn't, the whole group drops to row 2 so the trigger and the sort pill
+// (in the outer .results-section column) keep row 1 to themselves.
+.active-filters__detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: $spacing-sm;
+  row-gap: $spacing-2xs;
+  // flex-basis: auto = content width; flex-shrink: 0 = don't compress.
+  // Together these mean the group claims its full content width during the
+  // parent's wrap calculation, so it wraps as one unit instead of leaving
+  // the count behind on row 1.
+  flex: 0 0 auto;
+}
+
 
 // Default chip — mirrors `.tag` (shape, size, font) so applied-filter tokens
 // read as the same vocabulary as the tags in the cards below.
@@ -31,14 +59,18 @@
   font-weight: $font-weight-medium;
   line-height: $line-height-snug;
   color: $color-brown-900;
-  background: $color-sweet-grass;
+  // background-color (not the shorthand) so modifier classes can layer a
+  // background-image (e.g. .--clear's link-grow gradient) without it being
+  // wiped on hover.
+  background-color: $color-sweet-grass;
   border: 0;
   border-radius: $radius-sm;
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color $transition-base, color $transition-base;
 
   &:hover {
-    background: $color-sweet-grass-dark;
+    background-color: $color-sweet-grass-dark;
   }
 
   &:focus-visible {
@@ -49,8 +81,29 @@
 .active-filters__count {
   margin: 0;
   font-size: var(--step--1);
-  font-weight: $font-weight-semibold;
+  font-weight: $font-weight-medium;
   color: $color-brown-900;
+}
+
+// Two count placements live in the resource-library toolbar markup so the
+// label can swap sides at the breakpoint where the right-column layout
+// would otherwise overlap the trigger pill.
+//   --inline: sits with the chips inside .active-filters__detail.
+//             Visible at narrow widths (below sm).
+//   --right:  sits with the sort pill inside .results-controls.
+//             Visible at sm+.
+// Only one is rendered at a time (display: none on the inactive one), so
+// the aria-live region is never duplicated to assistive tech.
+.active-filters__count--inline {
+  @include respond-to("sm") {
+    display: none;
+  }
+}
+
+.active-filters__count--right {
+  @include respond-below("sm") {
+    display: none;
+  }
 }
 
 .active-filters__chip-close {
@@ -61,23 +114,39 @@
   line-height: 1;
 }
 
+// "Clear all" reads as a link, not a chip — pulls the chip atom out of its
+// pill chrome (no background, no padding) and applies the project link-grow
+// underline so it shares hover behaviour with body-copy links.
 .active-filters__chip--clear {
-  background: transparent;
-  padding-inline: $spacing-2xs;
+  @include link-underline-grow;
 
-  &:hover {
-    background: transparent;
-    color: $color-brown-700;
-    text-decoration: underline;
+  padding: 0;
+  // background-color (not the shorthand) so we don't wipe the gradient
+  // background-image set by link-underline-grow.
+  background-color: transparent;
+  // Strip the chip's pill chrome so focus rings / hover treatments don't
+  // hint at a button shape underneath the link.
+  border-radius: 0;
+  font-weight: $font-weight-regular;
+  color: $color-link;
+
+  // Override the base .active-filters__chip:hover background-color so the
+  // chip pill chrome stays absent — hover changes link colour only, the
+  // underline wipe comes from the link-underline-grow mixin's :hover rule.
+  &:hover,
+  &:focus-visible {
+    background-color: transparent;
+    color: $color-link-hover;
   }
 }
 
 // Add-filter CTA — mirrors `.site-header__pill` (the header Search button) so
-// padding, font weight, and hover treatment match across the page.
+// padding, font weight, line-height, and hover treatment match across the page.
 .active-filters__chip--add {
-  padding: $spacing-2xs $spacing-xs;
-  font-size: var(--step-0);
+  padding: $spacing-3xs $spacing-xs;
+  font-size: var(--step--1);
   font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
   background: transparent;
   border: 1px solid $color-brown-900;
   border-radius: $radius-pill;
@@ -98,4 +167,37 @@
   font-size: 1.15rem;
   line-height: 1;
   flex: none;
+}
+
+// Filter-trigger pill — opens a topics / facets panel. Outlined to match the
+// rest of the outline-pill family (.site-header__pill, --add) so the toolbar
+// reads as one consistent vocabulary; the doc-search icon on the right makes
+// the "browse topics" affordance explicit.
+.active-filters__chip--filter-trigger {
+  padding: $spacing-3xs $spacing-xs;
+  font-size: var(--step--1);
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-normal;
+  color: $color-brown-900;
+  background: transparent;
+  border: 1px solid $color-brown-900;
+  border-radius: $radius-pill;
+
+  &:hover {
+    background: $color-slate-700;
+    border-color: $color-slate-700;
+    color: $color-text-inverse;
+
+    .active-filters__chip-filter-icon {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+.active-filters__chip-filter-icon {
+  display: block;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  transition: filter $transition-base;
 }

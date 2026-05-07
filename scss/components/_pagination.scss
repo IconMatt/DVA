@@ -5,13 +5,14 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: $spacing-2xs;
   padding-block: $spacing-lg;
 }
 
 // Range summary ("1–10 of 26 results") — sits inline directly after the
-// next-arrow, separated by the row's gap.
+// next-arrow, separated by a small gap. The pagination's justify-content:
+// center centres the whole group (buttons + summary) on its row.
 .pagination__summary {
   margin: 0;
   margin-inline-start: $spacing-xs;

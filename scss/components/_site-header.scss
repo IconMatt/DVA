@@ -81,9 +81,10 @@
   height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
   width: auto;
 
-  // Below sm: shrink so the brand and Menu pill fit on a single row at 320px.
-  @include respond-below("sm") {
-    height: 2rem;
+  // 320–359px sliver: scale 2rem → 2.5rem so the brand fits next to the Menu
+  // pill at the narrowest viewports. At 360px the main clamp resumes at 2.5rem.
+  @include respond-below("xs") {
+    height: clamp(2rem, 0.5rem + 7.5vw, 2.5rem);
   }
 }
 
@@ -129,7 +130,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-3xs);
-  padding: var(--space-2xs) var(--space-xs);
+  padding: var(--space-3xs) var(--space-xs);
   font-size: var(--step--1);
   font-weight: $font-weight-semibold;
   color: $color-brown-900;

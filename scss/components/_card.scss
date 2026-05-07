@@ -297,6 +297,33 @@
   transform: rotate(180deg);
 }
 
+// External-link variant — used when the resource lives on another site
+// (a partner video, downloadable PDF on an external host, etc.). Replaces
+// the "Published <date>" footer line with an underlined "Go to external
+// resource" label, and swaps the arrow icon for the External link asset
+// (which must NOT be rotated, unlike the default left-arrow asset).
+//
+// Underline uses the link-underline-grow mixin so the static and animated
+// lines share the same y-position (no jump on hover) — left-to-right wipe
+// effect, 2px line. Trigger states are scoped to the whole card so hovering
+// anywhere on the card animates the footer underline.
+.card--resource.card--external .card__external-link {
+  @include link-underline-grow;
+
+  margin: 0;
+  font-size: $font-size-sm;
+  color: $color-brown-900;
+}
+
+.card--resource.card--external:hover .card__external-link,
+.card--resource.card--external:focus-within .card__external-link {
+  background-size: 100% 3px, 0 1px;
+}
+
+.card--resource.card--external .card__arrow-icon {
+  transform: none;
+}
+
 // ----- News card (with media) -----
 .card--news {
   padding: $spacing-sm;

@@ -36,6 +36,50 @@
   }
 }
 
+// Header-split variant — used on resource-library. Sort pill is pinned to the
+// right at every viewport; the .active-filters bar in column 1 wraps its
+// children naturally, so applied chips sit inline with the count when there's
+// room and only spill onto a second visual row when they don't fit.
+// Distinct from the base .results-section, which only goes 2-col at md+.
+.results-section--header-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: $spacing-sm;
+  // Vertical rhythm lives on the parent so both columns (active-filters and
+  // results-controls) share the same start/end edges. The base .active-filters
+  // padding-block is zeroed below so its trigger pill aligns with the Latest
+  // pill in the second column instead of sitting 15px lower.
+  padding-block: $spacing-sm $spacing-md;
+}
+
+.results-section--header-split > .active-filters {
+  padding-block: 0;
+}
+
+// Thin band wrapper for the resource-library card grid + pagination.
+// bleed-wrap gives the same outer margin as .results-section; bleed-content
+// then pads the inside so the cards line up with the toolbar's chips/text
+// above (which sits on the page-grid edge via .active-filters' bleed-content).
+// Doesn't trigger the 2-col grid behavior that .results-section turns on at md+.
+.resource-results-band {
+  @include bleed-wrap;
+  @include bleed-content;
+}
+
+// Match the Latest pill's right edge to the search submit's right edge above.
+// .active-filters already has bleed-content padding to land on the page grid;
+// .results-controls inherits no such padding so Latest would otherwise extend
+// to the outer bleed-wrap edge. Mirror the bleed-content end-padding so the
+// two right edges line up.
+.results-section--header-split > .results-controls {
+  padding-inline-end: calc(#{$container-padding} - 0.75rem);
+
+  @include respond-to("md") {
+    padding-inline-end: calc(#{$container-padding} - 0.9rem);
+  }
+}
+
 .results-layout__main {
   display: flex;
   flex-direction: column;

@@ -47,6 +47,18 @@ main > .service-search-band:first-child {
   margin-bottom: $spacing-md;
 }
 
+// Lead / eyebrow text between H1 and the form. Used on listing pages whose
+// hero needs an explanatory line (e.g. resource-library) — services-directory
+// drops straight from H1 to the search form so this is opt-in. Uses the
+// shared eyebrow mixin (step-0 + regular + slight letter-spacing) so it
+// reads as a quiet caption against the H1.
+.service-search__lead {
+  @include eyebrow;
+
+  margin-block: 0 $spacing-md;
+  line-height: $line-height-normal;
+}
+
 .service-search__form {
   --animate-delay: 100ms;
 
@@ -57,6 +69,17 @@ main > .service-search-band:first-child {
   @include respond-to("md") {
     grid-template-columns: 1fr 1fr auto;
     align-items: stretch;
+  }
+}
+
+// Single-field variant — keyword input + submit, no location.
+// Used on resource-library where the search has one field, not two.
+// Capped so a single input doesn't read as a banner-wide bar at desktop.
+.service-search__form--single {
+  max-width: 40rem;
+
+  @include respond-to("md") {
+    grid-template-columns: 1fr auto;
   }
 }
 
@@ -83,9 +106,10 @@ main > .service-search-band:first-child {
   &:focus-within {
     border-color: $color-brown-900;
 
-    // Soft brown ring — keeps focus distinct from the resting state
-    // (both share the same border colour).
-    box-shadow: 0 0 0 3px rgb(75 57 40 / 15%);
+    // Zest outer glow — picks up the project focus colour
+    // ($color-focus = $color-zest) so the focus ring reads as part of the
+    // same vocabulary used elsewhere (button :focus-ring, etc.).
+    box-shadow: 0 0 0 3px $color-zest;
     outline: 3px solid transparent; // keeps layout stable; real focus ring on the input
   }
 }
@@ -170,8 +194,11 @@ main > .service-search-band:first-child {
     color: transparent;
   }
 
+  // Focus state is rendered on the wrap via :focus-within (border-color +
+  // box-shadow ring). Suppress the input's own outline so we don't show two
+  // focus rings stacked on top of each other.
   &:focus-visible {
-    @include focus-ring;
+    outline: none;
   }
 
   // Remove browser-native search chrome (clear button, etc.).
@@ -186,7 +213,6 @@ main > .service-search-band:first-child {
 .service-search__submit {
   justify-self: start;
   align-self: center;
-  font-size: var(--step-0);
 }
 
 .service-search__helpers {
@@ -213,30 +239,11 @@ main > .service-search-band:first-child {
 }
 
 .service-search__helpers a {
+  @include link-underline-grow;
+
   color: $color-link;
   font-weight: $font-weight-regular;
   // Keep the link as one atomic chunk — when the row runs out of horizontal
   // space the link wraps to its own line instead of breaking mid-phrase.
   white-space: nowrap;
-
-  // Static underline at rest (from base `a` rule). On hover the static line
-  // fades out and the animated line grows in, with a lighter colour.
-  background-image: linear-gradient(currentColor, currentColor);
-  background-position: 0 100%;
-  background-repeat: no-repeat;
-  background-size: 0 1px;
-  transition:
-    background-size $transition-base,
-    color $transition-base,
-    text-decoration-color $transition-base;
-
-  &:hover,
-  &:focus-visible {
-    text-decoration-color: transparent;
-    background-size: 100% 1px;
-  }
-
-  @include reduced-motion {
-    transition: none;
-  }
 }

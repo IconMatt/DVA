@@ -130,9 +130,9 @@
 // ---------- Submit button ----------
 // Inactive (no field interaction): muted warm tone.
 // Active (field focused or has value): dark brown.
+// Sizing inherited from .button — matches the outline-pill family.
 .search-overlay__submit {
   align-self: flex-start;
-  font-size: var(--step-0);
   background: $color-brown-500;
   border-color: $color-brown-500;
   color: $color-white;

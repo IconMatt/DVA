@@ -1,17 +1,19 @@
 @use "../abstracts/tokens" as *;
 @use "../abstracts/mixins" as *;
 
+// Sized to match the outline-pill family (.site-header__pill,
+// .active-filters__chip--add) so primary form submits read as part of the
+// same vocabulary — only the fill colour distinguishes them.
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: $spacing-2xs;
-  padding: $spacing-2xs $spacing-md;
-  min-height: 44px;
+  padding: $spacing-3xs $spacing-xs;
   font-family: $font-body;
   font-size: var(--step--1);
   font-weight: $font-weight-semibold;
-  line-height: $line-height-snug;
+  line-height: $line-height-normal;
   text-decoration: none;
   border-radius: $radius-pill;
   border: 1px solid transparent;
