@@ -1,0 +1,272 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// =============================================================================
+// Page content section — reusable prose wrapper
+// -----------------------------------------------------------------------------
+// .page-content       outer band with vertical breathing room. Sits between
+//                     the page header and the results / further sections.
+// .page-content__section
+//                     centred prose column. Per /docs/wysiwyg-output.md this
+//                     is the wrapper a Drupal CKEditor body field renders into;
+//                     all rich-text element styles live here so editors get a
+//                     safe sandbox without leaking into other components.
+//
+// Drupal handoff:
+//   Paragraph type: content_section (or rendered as a body field on a node)
+//   Fields:         field_content_body (text long, formatted)
+//   Preprocess:     THEMENAME_preprocess_paragraph__content_section —
+//                   expose body, optional heading_override.
+//   Twig:           paragraph--content-section.html.twig wraps the body
+//                   field in this BEM structure unchanged.
+// =============================================================================
+
+.page-content {
+  padding-block: $spacing-2xl;
+}
+
+.page-content__section {
+  // Centred reading column. Clamp scales the max width between mobile-friendly
+  // (~576px) and the design-mock target (~896px ≈ 8 of 12 columns at desktop).
+  max-width: clamp(36rem, 50vw + 8rem, 56rem);
+  margin-inline: auto;
+
+  // Reset first/last margins so the wrapper doesn't introduce phantom gaps
+  // (matches the wysiwyg-output.md checklist).
+  > :first-child {
+    margin-block-start: 0;
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+
+  // -- Headings ---------------------------------------------------------------
+  // Heading sizes inherit from base/_typography.scss. Generous top-margin
+  // (xl, not lg) creates a clear break between sections of body copy.
+  h2, h3, h4, h5, h6 {
+    margin-block-start: $spacing-xl;
+    margin-block-end: $spacing-sm;
+  }
+
+  // -- Paragraphs and lists ---------------------------------------------------
+  // Same scoping rationale as lists below — only bare prose <p> gets the
+  // body rhythm. Component paragraphs (with classes like .article-share__label)
+  // keep their own margins.
+  p:not([class]) {
+    margin-block: 0 $spacing-sm;
+  }
+
+  // Restore list markers ONLY for bare <ul>/<ol> (i.e. lists that come from
+  // a CKEditor body field). Component lists carrying a class — .social-links,
+  // .downloads__list, .accordion__body lists, etc. — keep their own
+  // treatment from their component partials.
+  ul:not([class]),
+  ol:not([class]) {
+    margin-block: 0 $spacing-sm;
+    padding-inline-start: $spacing-lg;
+  }
+
+  ul:not([class]) {
+    list-style: disc;
+  }
+
+  ol:not([class]) {
+    list-style: decimal;
+  }
+
+  ul:not([class]) ul:not([class]) {
+    list-style: circle;
+    margin-block: $spacing-2xs 0;
+  }
+
+  ul:not([class]) ul:not([class]) ul:not([class]) {
+    list-style: square;
+  }
+
+  ol:not([class]) ol:not([class]) {
+    list-style: lower-alpha;
+    margin-block: $spacing-2xs 0;
+  }
+
+  ul:not([class]) > li + li,
+  ol:not([class]) > li + li {
+    margin-block-start: $spacing-2xs;
+  }
+
+  ul:not([class]) > li::marker,
+  ol:not([class]) > li::marker {
+    color: $color-brown-700;
+  }
+
+  // -- Inline -----------------------------------------------------------------
+  // Same :not([class]) scoping as paragraphs and lists — only bare CKEditor
+  // links get the prose underline treatment. Component anchors carrying a
+  // class (.social-links__link, .downloads__link, etc.) keep their own
+  // treatment from their component partials.
+  a:not([class]) {
+    @include link-underline-grow;
+
+    color: $color-link;
+    background-image:
+      linear-gradient($color-zest, $color-zest),
+      linear-gradient(currentColor, currentColor);
+
+    &:focus-visible {
+      @include focus-ring;
+    }
+  }
+
+  strong {
+    font-weight: $font-weight-bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  // -- Code -------------------------------------------------------------------
+  // Inline code chip on a sand-stone wash so it reads as a distinct token
+  // without dominating the line.
+  code {
+    padding: 0.1em 0.35em;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    background: $color-sand-stone;
+    border-radius: $radius-sm;
+  }
+
+  // Code block. Inline padding/background drop on the inner <code> so the
+  // wash extends edge-to-edge of the <pre>, not just the chip.
+  pre {
+    margin-block: 0 $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background: $color-sand-stone;
+    border-radius: $radius-md;
+    overflow-x: auto;
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: var(--step--1);
+    line-height: $line-height-snug;
+
+    code {
+      padding: 0;
+      background: transparent;
+      border-radius: 0;
+      font-size: inherit;
+    }
+  }
+
+  // -- Block quotes -----------------------------------------------------------
+  // Halant serif treatment with curly quote marks (open from blockquote
+  // ::before, close from the last <p>::after so the cite line stays clean).
+  // Slight letter-spacing tightening reads more polished at the larger
+  // serif size.
+  blockquote {
+    position: relative;
+    margin-block: $spacing-2xl;
+    margin-inline: 0;
+    font-family: $font-display;
+    font-size: clamp(1.4rem, 1.0rem + 1.2vw, 2.25rem);
+    line-height: $line-height-snug;
+    letter-spacing: -0.015em;
+    color: $color-brown-900;
+
+    > p {
+      margin-block: 0;
+    }
+
+    // Hanging punctuation — opening quote pulled out of inline flow with
+    // absolute positioning so the body text aligns flush with the prose
+    // column edge. Inline-block + negative margin would leave a whitespace
+    // gap from HTML source indentation; absolute sidesteps that entirely.
+    &::before {
+      content: "\201C";
+      position: absolute;
+      inset-inline-start: -0.6em;
+      inset-block-start: 0;
+      line-height: inherit;
+    }
+
+    > p:last-of-type::after {
+      content: "\201D";
+    }
+
+    cite {
+      display: block;
+      margin-block-start: $spacing-md;
+      font-family: $font-body;
+      font-size: var(--step-0);
+      font-style: normal;
+      color: $color-brown-900;
+      line-height: $line-height-snug;
+    }
+  }
+
+  // -- Tables -----------------------------------------------------------------
+  // Wrap with overflow-x on the .page-content__section if you need to
+  // accommodate wider tables; the table itself stays simple.
+  table {
+    width: 100%;
+    margin-block: 0 $spacing-md;
+    border-collapse: collapse;
+    font-size: var(--step--1);
+  }
+
+  th,
+  td {
+    padding: $spacing-2xs $spacing-sm;
+    border-bottom: 1px solid $color-border;
+    text-align: start;
+    vertical-align: top;
+  }
+
+  // First column hugs the prose column edge — no inline-start padding so
+  // the cell content (Region / Sydney metro / Newcastle / Regional NSW)
+  // aligns with the headings and body text above and below.
+  th:first-child,
+  td:first-child {
+    padding-inline-start: 0;
+  }
+
+  thead th {
+    border-bottom-color: $color-border-strong;
+    color: $color-brown-900;
+    font-weight: $font-weight-bold;
+  }
+
+  // -- Figures ----------------------------------------------------------------
+  figure {
+    margin-block: $spacing-lg;
+    margin-inline: 0;
+  }
+
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: $radius-md;
+  }
+
+  figcaption {
+    margin-block-start: $spacing-2xs;
+    font-size: var(--step--1);
+    color: $color-brown-700;
+  }
+
+  // Bare images (not wrapped in <figure>) still keep the size + radius rules.
+  > img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-block: $spacing-md;
+    border-radius: $radius-md;
+  }
+
+  // -- Horizontal rule --------------------------------------------------------
+  hr {
+    margin-block: $spacing-xl;
+    border: 0;
+    border-top: 1px solid $color-brown-900;
+    opacity: 0.15;
+  }
+}

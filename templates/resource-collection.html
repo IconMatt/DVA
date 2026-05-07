@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <base href="../" />
-    <title>Resource library — Veteran and Family Wellbeing Agency</title>
+    <title>Wellbeing Resource Collection — Veteran and Family Wellbeing Agency</title>
     <meta
       name="description"
       content="Wellbeing support services and information for veterans, families, carers, and supporters."
@@ -17,7 +17,7 @@
     />
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body id="top" class="page page--resource-library">
+  <body id="top" class="page page--resource-collection">
     <!--
       ================================================================
       Drupal handoff notes
@@ -337,21 +337,20 @@
                     aria-current must be in the markup.
       -->
       <div class="service-search-band">
+      <div class="service-search-collection">
       <section class="service-search" id="wellbeing-resources" aria-labelledby="wellbeing-resources-title">
         <div class="service-search__inner container">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol class="breadcrumb__list">
               <li class="breadcrumb__item"><a class="breadcrumb__link" href="/">Home</a></li>
-              <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Wellbeing Resources</a></li>
-              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">All</li>
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Wellbeing resources</a></li>
+              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">Transitioning from the ADF</li>
             </ol>
           </nav>
 
-          <h1 class="service-search__title" id="wellbeing-resources-title" data-animate>Wellbeing Resources</h1>
+          <p class="service-search__eyebrow" data-animate>Wellbeing Resource Collection</p>
 
-          <h5 class="service-search__lead" data-animate>
-            Browse articles, guides and practical information across the key areas of wellbeing.
-          </h5>
+          <h1 class="service-search__title" id="wellbeing-resources-title" data-animate>Transitioning from the ADF</h1>
 
           <form class="service-search__form service-search__form--single" role="search" action="#" method="get" data-animate>
             <div class="service-search__field">
@@ -380,7 +379,289 @@
           </form>
         </div>
       </section>
+      <figure class="service-search__media" data-animate>
+        <img
+          src="assets/images/transition.png"
+          alt=""
+          data-parallax-media
+          data-parallax-mode="translate"
+          data-parallax-buffer-ratio="0.08"
+          data-parallax-speed="0.06"
+          data-parallax-limit="30"
+        />
+      </figure>
       </div>
+      </div>
+
+      <!--
+        Drupal handoff — Page content section (rich-text body)
+        Block:      "Body" / content paragraph (paragraph type: content_section
+                    or rendered directly off node body field).
+        Fields:     field_content_body (text long, formatted)
+        Preprocess: THEMENAME_preprocess_paragraph__content_section —
+                    expose body and any optional heading override.
+        Twig:       paragraph--content-section.html.twig — wrap the body
+                    field in .page-content__section unchanged so all
+                    CKEditor element styles flow from the prose wrapper
+                    (see /docs/wysiwyg-output.md).
+        Risks:      Don't add per-page overrides — extend
+                    /scss/pages/_content.scss instead so other content
+                    pages (about, contact, individual resource articles)
+                    pick up the same prose system for free.
+      -->
+      <section class="page-content">
+        <div class="page-content__section container" data-animate>
+          <h2>Heading content</h2>
+          <p>
+            Transitioning from the ADF can be both exciting and challenging.
+            A strong support network helps you navigate change and stay
+            connected. This guide covers <strong>practical steps</strong>,
+            <em>shared experiences</em>, and where to <a href="#">find help
+            locally</a>.
+          </p>
+          <p>
+            Tap the <code>Save</code> button at the top of the page to keep
+            this article in your bookmarks for later.
+          </p>
+
+          <h3>What you can do next</h3>
+          <p>
+            Small, consistent actions matter more than big plans. Pick one
+            of the following and start this week.
+          </p>
+          <ul>
+            <li>Reach out to a peer support program in your area</li>
+            <li>Stay connected with mates from your unit</li>
+            <li>
+              Book a wellbeing check-in with your GP
+              <ul>
+                <li>Mention your service history</li>
+                <li>Ask about a Mental Health Treatment Plan</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>Recommended schedule</h3>
+          <ol>
+            <li>Identify two people you can call without notice.</li>
+            <li>Set a recurring monthly catch-up.</li>
+            <li>Review what's working after three months.</li>
+          </ol>
+
+          <blockquote>
+            <p>The biggest shift wasn't the gear or the title — it was learning to ask for help before I needed it.</p>
+            <cite><b>John Smith</b><br />Ex-Serving Member</cite>
+          </blockquote>
+
+          <h3>Local support coverage</h3>
+          <p>The table below shows wait times reported across regions.</p>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Region</th>
+                <th scope="col">Service type</th>
+                <th scope="col">Avg wait</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Sydney metro</td>
+                <td>Peer support</td>
+                <td>2 weeks</td>
+              </tr>
+              <tr>
+                <td>Newcastle</td>
+                <td>Counselling</td>
+                <td>3 weeks</td>
+              </tr>
+              <tr>
+                <td>Regional NSW</td>
+                <td>Telehealth</td>
+                <td>1 week</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <figure>
+            <img src="assets/images/Resource article.png" alt="Two veterans speaking at a community gathering." />
+            <figcaption>A community catch-up after a regional ADF transition workshop.</figcaption>
+          </figure>
+
+          <h3>Quick reference</h3>
+          <p>
+            If you'd rather see the raw checklist data structure, here's the
+            shape:
+          </p>
+          <pre><code>{
+  "audience": "transitioning",
+  "actions": [
+    "call",
+    "schedule",
+    "review"
+  ],
+  "cadence": "monthly"
+}</code></pre>
+
+          <hr />
+
+          <p>
+            For 24/7 support, contact Open Arms on <strong>1800 011 046</strong>
+            or visit <a href="#">openarms.gov.au</a>.
+          </p>
+
+          <!--
+            Drupal handoff — Accordion (paragraph: accordion_group)
+            Each row is a paragraph: accordion_item
+            Fields per item:
+              field_accordion_label  (text)
+              field_accordion_body   (text long, formatted)
+            Preprocess: THEMENAME_preprocess_paragraph__accordion_group /
+                        accordion_item — expose label + rendered body.
+            Twig:        paragraph--accordion-group.html.twig wraps the
+                         <ul.accordion>; each item renders one <details>.
+            Risks:       Initial-open state (field_accordion_open) is
+                         optional — default closed. Don't open the first
+                         item by default unless the editor opts in.
+          -->
+          <h3>How can we help</h3>
+          <div class="accordion" data-animate>
+            <details class="accordion__item">
+              <summary class="accordion__summary">
+                <span class="accordion__label">General enquiries regarding DVA (not feedback)</span>
+                <svg class="accordion__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="accordion__body">
+                <p>
+                  For all general enquiries about DVA support, claims, and entitlements, call <strong>1800 555 254</strong>
+                  or visit <a href="#">dva.gov.au/contact</a>.
+                </p>
+              </div>
+            </details>
+
+            <details class="accordion__item">
+              <summary class="accordion__summary">
+                <span class="accordion__label">For Open Arms Feedback</span>
+                <svg class="accordion__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="accordion__body">
+                <p>
+                  Share feedback about an Open Arms counselling experience by emailing
+                  <a href="#">openarms.feedback@dva.gov.au</a>. Feedback helps us improve our service.
+                </p>
+              </div>
+            </details>
+
+            <details class="accordion__item">
+              <summary class="accordion__summary">
+                <span class="accordion__label">Fraud</span>
+                <svg class="accordion__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="accordion__body">
+                <p>
+                  Report suspected fraud relating to DVA payments or services to the fraud hotline on
+                  <strong>1800 422 015</strong>. All reports are treated in confidence.
+                </p>
+              </div>
+            </details>
+
+            <details class="accordion__item">
+              <summary class="accordion__summary">
+                <span class="accordion__label">Privacy</span>
+                <svg class="accordion__chevron" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+              <div class="accordion__body">
+                <p>
+                  Information you provide is handled in accordance with the Privacy Act 1988. Read our
+                  full <a href="#">privacy policy</a> for details on how your data is collected and used.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <!--
+            Drupal handoff — Downloads (paragraph: downloads_group)
+            Each row is a paragraph: downloads_item with a file field.
+            Fields per item:
+              field_download_label  (text, default to file name)
+              field_download_file   (file)
+            Preprocess: derive extension + formatted size from file entity;
+                        expose label, url, meta string ("PDF / 300k").
+            Twig:        paragraph--downloads-{group,item}.html.twig.
+          -->
+          <h3>Downloads</h3>
+          <div class="downloads" data-animate>
+            <ul class="downloads__list">
+              <li class="downloads__item">
+                <a class="downloads__link" href="#">
+                  <span class="downloads__name">Name of the file to download.pdf</span>
+                  <span class="downloads__end">
+                    <span class="downloads__meta">PDF / 300k</span>
+                    <svg class="downloads__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+              <li class="downloads__item">
+                <a class="downloads__link" href="#">
+                  <span class="downloads__name">Name of the file to download.pdf</span>
+                  <span class="downloads__end">
+                    <span class="downloads__meta">PDF / 300k</span>
+                    <svg class="downloads__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                      <path d="M12 4v12m0 0l-5-5m5 5l5-5M4 20h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!--
+            Drupal handoff — Article share row (presentational; rendered by
+            node--resource.html.twig at the end of the body region).
+            Block:      No block — rendered inline at the end of the body
+                        wrapper. Copy-link button is JS-only (writes the
+                        canonical URL to clipboard); share-via links use
+                        the standard share intent URLs prefilled with the
+                        canonical URL + node title.
+          -->
+          <div class="article-share" data-animate>
+            <button class="site-header__pill" type="button" data-copy-link>
+              <span>Copy link</span>
+              <img class="site-header__pill-icon" src="assets/images/icons/link.svg" alt="" width="18" height="18" />
+            </button>
+
+            <div class="article-share__via">
+              <p class="article-share__label">Share via:</p>
+              <ul class="social-links">
+                <li class="social-links__item">
+                  <a class="social-links__link" href="#" aria-label="Share on Facebook">
+                    <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+                  </a>
+                </li>
+                <li class="social-links__item">
+                  <a class="social-links__link" href="#" aria-label="Share on Instagram">
+                    <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
+                  </a>
+                </li>
+                <li class="social-links__item">
+                  <a class="social-links__link" href="#" aria-label="Share on YouTube">
+                    <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <!--
         Drupal handoff — Resource results section (Search API view block)

@@ -157,6 +157,13 @@
   height: 0.75rem;
 }
 
+// Icon-led pills — slight negative pull trims the SVG's built-in viewBox
+// whitespace so the icon doesn't visually float away from the left edge.
+.site-header__pill--search .site-header__pill-icon,
+.site-header__pill--bookmark .site-header__pill-icon {
+  margin-inline-start: -3px;
+}
+
 .site-header__pill:hover {
   background: $color-slate-700;
   border-color: $color-slate-700;

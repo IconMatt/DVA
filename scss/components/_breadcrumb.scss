@@ -2,7 +2,13 @@
 @use "../abstracts/mixins" as *;
 
 .breadcrumb {
-  margin-block-end: $spacing-md;
+  // Matches .service-search__inner padding-block so the gap below the
+  // breadcrumb reads as the same vertical rhythm as the panel's edge inset.
+  margin-block-end: $spacing-lg;
+
+  @include respond-to("md") {
+    margin-block-end: calc(#{$container-padding} - 0.9rem);
+  }
 }
 
 .breadcrumb__list {
@@ -50,4 +56,11 @@
   .breadcrumb__item:nth-last-child(2)::before {
     content: none;
   }
+}
+
+// Resource article: drop the current-page crumb — the H1 already labels
+// the page, so showing it twice in the same panel is noise. Page-scoped so
+// directory / detail pages keep their full trail.
+.page--resource-article .breadcrumb__item--current {
+  display: none;
 }

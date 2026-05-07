@@ -45,9 +45,13 @@
 @use "components/cta-tray";
 @use "components/social-links";
 @use "components/site-footer";
+@use "components/accordion";
+@use "components/downloads";
+@use "components/article-share";
 
 // Utilities
 @use "utilities/scroll-animations";
 
 // Pages
 @use "pages/home";
+@use "pages/content";
