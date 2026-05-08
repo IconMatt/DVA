@@ -8,6 +8,12 @@
   justify-content: center;
   gap: $spacing-2xs;
   padding-block: $spacing-lg;
+
+  // Tighten the gap above the pagination on mobile — at narrow widths
+  // the listing cards above already give plenty of vertical separation.
+  @include respond-below("md") {
+    padding-block-start: $spacing-sm;
+  }
 }
 
 // Range summary ("1–10 of 26 results") — sits inline directly after the

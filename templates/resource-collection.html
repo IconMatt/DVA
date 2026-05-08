@@ -411,7 +411,38 @@
       -->
       <section class="page-content">
         <div class="page-content__section container" data-animate>
-          <h2>Heading content</h2>
+          <!--
+            Drupal handoff — Editor-added quick-links above WYSIWYG body
+            Block:      Repeated paragraph type: quick_link nested in the
+                        page-content host. Editor adds 0…N items.
+            Fields per item:
+              field_quick_link_title  (text)
+              field_quick_link_text   (text long, single line)
+              field_quick_link_url    (link)
+            Styling:    All editor-added items render with the
+                        --referral variant (zest fill). The --emergency
+                        variant lives only on service-detail's
+                        results-top placement; do not expose it here.
+            Risks:      Optional — render the <ul> wrapper only when the
+                        editor adds at least one quick_link paragraph.
+                        Single example below shows the canonical shape;
+                        delete it when wiring real content.
+          -->
+          <ul class="quick-links quick-links--results-top">
+            <li class="quick-links__item">
+              <a class="quick-link quick-link--referral" href="#">
+                <span class="quick-link__title">Custom quick link</span>
+                <span class="quick-link__text">
+                  This is a optional quick link and description
+                </span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <h2>This is a WYSIWYG content section and styling options</h2>
           <p>
             Transitioning from the ADF can be both exciting and challenging.
             A strong support network helps you navigate change and stay

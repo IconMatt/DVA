@@ -41,12 +41,32 @@
     margin-block-end: 0;
   }
 
+  // -- Editor-added quick-links -----------------------------------------------
+  // Within the prose column, quick-links stack full-width — they're one
+  // editor-added paragraph each, not a paired hero like service-detail's
+  // results-top. Override the sm+ two-column rule from _quick-links.scss.
+  .quick-links--results-top {
+    grid-template-columns: 1fr;
+  }
+
+  // Tight content fit — drop the home/results-top forced min-height and
+  // let the second grid row auto-size so there's no empty space below
+  // the description.
+  .quick-link {
+    min-height: 0;
+    grid-template-rows: auto auto;
+  }
+
   // -- Headings ---------------------------------------------------------------
   // Heading sizes inherit from base/_typography.scss. Generous top-margin
   // (xl, not lg) creates a clear break between sections of body copy.
+  // Override the base balance treatment with pretty: in long-form prose,
+  // pretty's orphan/widow avoidance reads better than balance's even-line
+  // distribution.
   h2, h3, h4, h5, h6 {
     margin-block-start: $spacing-xl;
     margin-block-end: $spacing-sm;
+    text-wrap: pretty;
   }
 
   // -- Paragraphs and lists ---------------------------------------------------

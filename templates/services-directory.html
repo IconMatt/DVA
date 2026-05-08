@@ -913,7 +913,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      880km away
+                      880km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1022,7 +1022,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      1km away
+                      1km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1150,7 +1150,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      3km away
+                      3km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1289,7 +1289,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      7km away
+                      7km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1398,7 +1398,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      0.5km away
+                      0.5km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1522,7 +1522,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      0.5km away
+                      0.5km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1627,7 +1627,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      9km away
+                      9km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1735,7 +1735,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      12km away
+                      12km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1830,7 +1830,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      0.5km away
+                      0.5km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -1953,7 +1953,7 @@
                           <path d="M14 2L7 9M14 2l-4 12-2.5-5.5L2 6l12-4z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                       </span>
-                      8km away
+                      8km
                     </span>
                   </li>
                   <li class="service-card__detail">
@@ -2751,7 +2751,14 @@
             activeMarker = marker;
             activeCard = point.card;
             marker.setIcon(pinIconActive);
-            point.card.classList.add('is-active');
+            // Skip the card-active style on mobile map view — the listing
+            // column is hidden, so the highlight is invisible and only
+            // appears as a flash when the user later switches back to list.
+            var layoutEl = document.querySelector('.results-layout');
+            var isMapView = layoutEl && layoutEl.getAttribute('data-view') === 'map';
+            if (!isMapView) {
+              point.card.classList.add('is-active');
+            }
             if (!popupEl) return;
             popupEl.querySelector('.map-pin-detail__title').textContent = point.title;
             popupEl.querySelector('.map-pin-detail__address').textContent = point.address;
@@ -2772,10 +2779,32 @@
             }
           });
 
+          var resultsLayout = document.querySelector('.results-layout');
+          var resultsFilters = document.querySelector('.active-filters');
+
           points.forEach(function (p) {
             var marker = L.marker([p.lat, p.lng], { icon: pinIcon, title: p.title, alt: p.title });
             marker.on('click', function () {
               showPopup(p, marker);
+              // Pan the map to centre the clicked pin so it lands at a
+              // consistent "sticky" position regardless of where the user
+              // clicked it on the visible map.
+              map.panTo(marker.getLatLng(), { animate: !reduced, duration: 0.4 });
+
+              // Mobile map view: the listing column is hidden, so scrolling
+              // to / highlighting the matching card has no visible effect
+              // and adds noise. Scroll to the filters / "N services found"
+              // band instead so the user can see context above the map.
+              var isMapView = resultsLayout && resultsLayout.getAttribute('data-view') === 'map';
+              if (isMapView) {
+                if (resultsFilters) {
+                  resultsFilters.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+                }
+                return;
+              }
+
+              // List view (mobile list mode + all desktop layouts):
+              // bring the matching card into view and flash it.
               p.card.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
               p.card.classList.add('is-highlighted');
               window.setTimeout(function () { p.card.classList.remove('is-highlighted'); }, 1600);
