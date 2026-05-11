@@ -1,11 +1,15 @@
 .site-header {
   /* Frosted glass — semi-transparent white over a backdrop blur. The blur */
   /* engages whenever any coloured surface (hero, map, etc.) sits beneath the */
-  /* header as the page scrolls. */
+  /* header as the page scrolls.
+     Wrapped in a custom property so the minifier can't strip the space
+     between filter functions (Lightning CSS / Tailwind v4 `--minify`
+     was emitting `blur(14px)saturate(140%)` — no separator, invalid). */
+  --site-header-backdrop: blur(14px) saturate(140%);
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: var(--site-header-backdrop);
+  backdrop-filter: var(--site-header-backdrop);
 
   position: sticky;
   top: 0;
@@ -31,16 +35,16 @@
 /* the .is-scrolled class flips it to the frosted-white glass treatment. */
 .page--home .site-header {
   background: var(--color-sweet-grass);
-  backdrop-filter: none;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .page--home .site-header.is-scrolled {
   background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
   /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: var(--site-header-backdrop);
+  backdrop-filter: var(--site-header-backdrop);
 }
 
 /* While the mobile nav is open, the header sits flush against the sliding */
@@ -48,9 +52,9 @@
 /* so the seam disappears. :has() inspects the menu trigger's aria-expanded. */
 .site-header:has([data-menu-trigger][aria-expanded="true"]) {
   background: var(--color-sweet-grass);
-  backdrop-filter: none;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .site-header__inner {

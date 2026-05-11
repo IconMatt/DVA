@@ -109,12 +109,18 @@
 /* the heavier glass treatment. */
 .quick-link--glass {
   --icon-bg: var(--color-zest);
+  /* Custom property wraps the filter list so the minifier can't strip
+     the space between filter functions (Lightning CSS / Tailwind v4
+     `--minify` emits `blur(18px)saturate(150%)` — invalid syntax). */
+  --quick-link-glass-backdrop: blur(18px) saturate(150%);
 
   position: relative;
   overflow: hidden;
   background-color: var(--overlay-gray-18);
   background-clip: padding-box;
-  backdrop-filter: blur(18px) saturate(150%);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: var(--quick-link-glass-backdrop);
+  backdrop-filter: var(--quick-link-glass-backdrop);
   border: 1px solid var(--overlay-white-30);
   color: var(--color-ink-inverse);
 }

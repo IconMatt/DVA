@@ -15,8 +15,8 @@
     align-items: center;
     justify-content: center;
     padding: var(--space-xl) var(--space-l);
-    backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
   }
 }
 
