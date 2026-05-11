@@ -348,11 +348,6 @@
   .gap-s-l {
     gap: var(--spacing-s-l);
   }
-  .truncate {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
   .rounded {
     border-radius: 0.25rem;
   }
@@ -464,10 +459,6 @@
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  .ease-in-out {
-    --tw-ease: var(--ease-in-out);
-    transition-timing-function: var(--ease-in-out);
   }
   .md\:grid-cols-2 {
     @media (width >= 840px) {
@@ -1814,6 +1805,247 @@ p {
     transition: none;
   }
 }
+.wellbeing-topics-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-white);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  animation: wellbeing-topics-overlay-in 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  @media (min-width: 840px) {
+    background: var(--overlay-brown-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-l);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+.wellbeing-topics-overlay[hidden] {
+  display: none !important;
+}
+@keyframes wellbeing-topics-overlay-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.375rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.wellbeing-topics-overlay__inner {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  flex-shrink: 0;
+  @media (min-width: 840px) {
+    height: auto;
+    max-height: 100%;
+    max-width: 64rem;
+    border-radius: var(--radius-hero);
+    overflow: hidden;
+  }
+}
+.wellbeing-topics-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--container-padding);
+  border-bottom: 1px solid var(--color-border-default);
+  background: var(--color-white);
+  @media (min-width: 840px) {
+    padding: var(--space-m) var(--space-l);
+  }
+}
+.wellbeing-topics-overlay__title {
+  margin: 0;
+  font-size: var(--step-2);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+.wellbeing-topics-overlay__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--color-brown-900);
+  transition: background-color var(--transition-base);
+  &:hover {
+    background: var(--color-sweet-grass);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 1px;
+  }
+}
+.wellbeing-topics-overlay__body {
+  overflow-y: auto;
+  padding: var(--space-l) var(--container-padding);
+  @media (min-width: 840px) {
+    padding: var(--space-l);
+  }
+}
+.wellbeing-topics-overlay__grid {
+  display: grid;
+  gap: var(--space-s);
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-m);
+  }
+}
+.wellbeing-topics-overlay__topic {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas: "label icon" "count icon";
+  align-items: center;
+  gap: var(--space-3xs) var(--space-m);
+  padding: var(--space-xs);
+  text-align: start;
+  background: var(--color-sand-stone);
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  color: var(--color-brown-900);
+  cursor: pointer;
+  font: inherit;
+  transition: background-color var(--transition-base), border-color var(--transition-base), color var(--transition-base);
+  &:hover {
+    background: var(--color-sweet-grass);
+  }
+  &:hover .wellbeing-topics-overlay__topic-icon {
+    background: var(--color-zest);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 1px;
+  }
+  &[aria-pressed="true"] {
+    background: var(--color-brown-900);
+    border-color: var(--color-brown-900);
+    color: var(--color-ink-inverse);
+  }
+  &[aria-pressed="true"] .wellbeing-topics-overlay__topic-label, &[aria-pressed="true"] .wellbeing-topics-overlay__topic-count {
+    color: var(--color-ink-inverse);
+  }
+  &[aria-pressed="true"] .wellbeing-topics-overlay__topic-icon {
+    background: var(--color-zest);
+  }
+  &[aria-pressed="true"]:hover {
+    background: var(--color-brown-900);
+    border-color: var(--color-brown-900);
+  }
+  &[aria-pressed="true"]:hover .wellbeing-topics-overlay__topic-icon {
+    background: var(--color-zest);
+  }
+}
+.wellbeing-topics-overlay__topic-icon {
+  align-self: start;
+}
+.wellbeing-topics-overlay__topic-label {
+  grid-area: label;
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  text-wrap: pretty;
+}
+.wellbeing-topics-overlay__topic-count {
+  grid-area: count;
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--color-brown-900);
+}
+.wellbeing-topics-overlay__topic-icon {
+  grid-area: icon;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-brown-900);
+  flex: none;
+  transition: background-color var(--transition-base);
+}
+.wellbeing-topics-overlay__topic-icon img {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+.wellbeing-topics-overlay__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-m) var(--container-padding);
+  border-top: 1px solid var(--color-border-default);
+  background: var(--color-white);
+  @media (min-width: 840px) {
+    padding: var(--space-m) var(--space-l);
+  }
+}
+.wellbeing-topics-overlay__state {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+.wellbeing-topics-overlay__count {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+.wellbeing-topics-overlay__chips {
+  display: contents;
+}
+.wellbeing-topics-overlay__submit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-2xs) var(--space-m);
+  font: inherit;
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-ink-inverse);
+  background: var(--color-brown-900);
+  border: 0;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+  &:hover {
+    background: var(--color-brown-700);
+  }
+  &:focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wellbeing-topics-overlay {
+    animation: none;
+  }
+}
 .hero-band {
   background: var(--color-sweet-grass);
   padding-block-end: var(--space-s);
@@ -2139,6 +2371,9 @@ main > .service-search-band:first-child {
 .service-search__title {
   font-size: var(--step-4);
   margin-bottom: var(--space-m);
+}
+.page--resource-library .service-search__title {
+  font-size: var(--step-5);
 }
 .service-search__lead {
   font-size: var(--step-0);
@@ -4684,10 +4919,6 @@ main > .service-search-band:first-child {
   syntax: "*";
   inherits: false;
 }
-@property --tw-ease {
-  syntax: "*";
-  inherits: false;
-}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -4725,7 +4956,6 @@ main > .service-search-band:first-child {
       --tw-drop-shadow-color: initial;
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
-      --tw-ease: initial;
     }
   }
 }

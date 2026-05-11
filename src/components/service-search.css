@@ -45,6 +45,13 @@ main > .service-search-band:first-child {
   margin-bottom: var(--space-m);
 }
 
+/* Restore the base h1 size on the resource library landing — it's a
+   content/listing page, not a search-led hero like services-directory,
+   so its H1 reads at the true step-5 from base/_typography.scss. */
+.page--resource-library .service-search__title {
+  font-size: var(--step-5);
+}
+
 /* Lead / eyebrow text between H1 and the form. Used on listing pages whose */
 /* hero needs an explanatory line (e.g. resource-library) — services-directory */
 /* drops straight from H1 to the search form so this is opt-in. Uses the */

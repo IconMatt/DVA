@@ -253,6 +253,143 @@
     </div>
 
     <!--
+      Drupal handoff — Wellbeing topics overlay (facet block: wellbeing_topics)
+      Block:      Search API facet block "wellbeing_topics" rendered through a
+                  custom dialog template (block--wellbeing-topics-overlay.html.twig).
+      Fields:     none on the block; topic terms come from the Wellbeing topic
+                  taxonomy. Resource counts (e.g. "7 Resources") come from the
+                  facet results, not editorial fields.
+      Preprocess: THEMENAME_preprocess_block__wellbeing_topics — expose
+                  topics[] (label, count, term_id, icon_name) for the template.
+                  Icon names map to one of the inline SVGs below; if the
+                  designer ships SVG assets, swap to <img src="…"> with the
+                  icon-name file at assets/images/icons/wellbeing/{icon}.svg.
+      Twig:       block--wellbeing-topics-overlay.html.twig mirrors this
+                  markup; loop over topics[] to emit the 9 cards.
+      Risks:      Single-select facet behaviour (one topic at a time) is the
+                  prototype contract. If the content model later allows
+                  multi-select, change aria-pressed to aria-checked +
+                  role="checkbox" and update the submit logic.
+    -->
+    <div
+      class="wellbeing-topics-overlay"
+      id="wellbeing-topics-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="wellbeing-topics-title"
+      hidden
+    >
+      <div class="wellbeing-topics-overlay__inner">
+        <header class="wellbeing-topics-overlay__header">
+          <h2 class="wellbeing-topics-overlay__title" id="wellbeing-topics-title">
+            Wellbeing topics
+          </h2>
+          <button
+            class="wellbeing-topics-overlay__close"
+            type="button"
+            aria-label="Close wellbeing topics"
+            data-wellbeing-topics-close
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="wellbeing-topics-overlay__body">
+          <div class="wellbeing-topics-overlay__grid">
+
+            <!-- Topic icons come from assets/images/icon-domains/.
+                 Filename matches the topic label (1:1 mapping). -->
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="health-support">
+              <span class="wellbeing-topics-overlay__topic-label">Health support</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/health.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="justice-safety">
+              <span class="wellbeing-topics-overlay__topic-label">Justice and Safety</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/Justice.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="home-housing">
+              <span class="wellbeing-topics-overlay__topic-label">Home and Housing</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/housing.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="financial-wellbeing">
+              <span class="wellbeing-topics-overlay__topic-label">Financial Wellbeing</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/financial.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="employment">
+              <span class="wellbeing-topics-overlay__topic-label">Employment and Meaningful Activity</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/employment.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="family-caring">
+              <span class="wellbeing-topics-overlay__topic-label">Family, Children and Caring</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/family.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="social-support">
+              <span class="wellbeing-topics-overlay__topic-label">Social Support and Community Connection</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/connection.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="culture-identity">
+              <span class="wellbeing-topics-overlay__topic-label">Culture, Identity and Meaning</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/meaning-spirituality.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+            <button class="wellbeing-topics-overlay__topic" type="button" aria-pressed="false" data-wellbeing-topic="recognition-respect">
+              <span class="wellbeing-topics-overlay__topic-label">Recognition and Respect</span>
+              <p class="wellbeing-topics-overlay__topic-count">7 Resources</p>
+              <span class="wellbeing-topics-overlay__topic-icon" aria-hidden="true">
+                <img src="assets/images/icon-domains/recognition.svg" alt="" width="22" height="22" />
+              </span>
+            </button>
+
+          </div>
+        </div>
+
+        <footer class="wellbeing-topics-overlay__footer">
+          <div class="wellbeing-topics-overlay__state" data-wellbeing-topics-state>
+            <p class="wellbeing-topics-overlay__count" aria-live="polite" data-wellbeing-topics-count>No filters selected</p>
+            <div class="wellbeing-topics-overlay__chips" data-wellbeing-topics-chips></div>
+          </div>
+          <button class="wellbeing-topics-overlay__submit" type="button" data-wellbeing-topics-show>
+            Show results
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <!--
       Drupal handoff — Mobile navigation (custom block, region: hidden)
       Block:      mobile_nav (single instance, mirrors Main menu)
       Fields:     none — menu items come from the Main menu.
@@ -1343,6 +1480,179 @@
             });
             headerTicking = true;
           }, { passive: true });
+        })();
+
+        // ============================================================
+        // Wellbeing topics overlay — multi-select, chips strip in
+        // footer matches .advanced-search-overlay vocabulary.
+        // ============================================================
+        (function () {
+          var overlay = document.getElementById('wellbeing-topics-panel');
+          if (!overlay) return;
+
+          var trigger = document.querySelector('[aria-controls="wellbeing-topics-panel"]');
+          var closeBtn = overlay.querySelector('[data-wellbeing-topics-close]');
+          var showBtn = overlay.querySelector('[data-wellbeing-topics-show]');
+          var countEl = overlay.querySelector('[data-wellbeing-topics-count]');
+          var chipsEl = overlay.querySelector('[data-wellbeing-topics-chips]');
+          var topics = Array.prototype.slice.call(
+            overlay.querySelectorAll('.wellbeing-topics-overlay__topic')
+          );
+
+          // Tag every topic with a stable index so chips can target it by id.
+          topics.forEach(function (btn, i) {
+            btn.setAttribute('data-wto-index', String(i));
+          });
+
+          // Active-filters bar (above the results). Its __detail block
+          // holds the count + topic chips + a "Clear all" chip. We rewrite
+          // the topic-chip portion on Show results, preserving the count
+          // line and the trailing --clear chip.
+          var activeFilters = document.querySelector('.active-filters');
+          var activeDetail = activeFilters && activeFilters.querySelector('.active-filters__detail');
+          var activeClear = activeDetail && activeDetail.querySelector('.active-filters__chip--clear');
+
+          function openOverlay() {
+            overlay.removeAttribute('hidden');
+            document.body.style.overflow = 'hidden';
+            if (trigger) trigger.setAttribute('aria-expanded', 'true');
+            if (closeBtn) closeBtn.focus();
+          }
+
+          function closeOverlay() {
+            overlay.setAttribute('hidden', '');
+            document.body.style.overflow = '';
+            if (trigger) {
+              trigger.setAttribute('aria-expanded', 'false');
+              trigger.focus();
+            }
+          }
+
+          function topicLabel(btn) {
+            var el = btn.querySelector('.wellbeing-topics-overlay__topic-label');
+            return el ? el.textContent.trim() : '';
+          }
+
+          function selectedTopics() {
+            return topics.filter(function (b) {
+              return b.getAttribute('aria-pressed') === 'true';
+            });
+          }
+
+          // Render the footer chip strip + count text.
+          function syncOverlayState() {
+            if (!countEl || !chipsEl) return;
+            var selected = selectedTopics();
+            countEl.textContent = selected.length === 0
+              ? 'No filters selected'
+              : selected.length + ' selected';
+            chipsEl.innerHTML = '';
+            selected.forEach(function (btn) {
+              var label = topicLabel(btn);
+              var chip = document.createElement('button');
+              chip.type = 'button';
+              chip.className = 'active-filters__chip';
+              chip.setAttribute('data-wto-chip-index', btn.getAttribute('data-wto-index'));
+              chip.setAttribute('aria-label', 'Remove ' + label + ' filter');
+              chip.innerHTML = label + ' <span class="active-filters__chip-close" aria-hidden="true">×</span>';
+              chipsEl.appendChild(chip);
+            });
+            if (selected.length > 0) {
+              var clearChip = document.createElement('button');
+              clearChip.type = 'button';
+              clearChip.className = 'active-filters__chip active-filters__chip--clear';
+              clearChip.setAttribute('data-wto-clear', '');
+              clearChip.textContent = 'Clear all';
+              chipsEl.appendChild(clearChip);
+            }
+          }
+
+          // Multi-select: clicking a topic toggles its own aria-pressed.
+          topics.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+              var on = btn.getAttribute('aria-pressed') === 'true';
+              btn.setAttribute('aria-pressed', on ? 'false' : 'true');
+              syncOverlayState();
+            });
+          });
+
+          // Chip click in the footer strip → toggle that topic off, or
+          // clear-all chip → unset everything.
+          if (chipsEl) {
+            chipsEl.addEventListener('click', function (e) {
+              var target = e.target.closest('button');
+              if (!target || !chipsEl.contains(target)) return;
+              if (target.hasAttribute('data-wto-clear')) {
+                topics.forEach(function (b) {
+                  b.setAttribute('aria-pressed', 'false');
+                });
+              } else {
+                var idx = target.getAttribute('data-wto-chip-index');
+                if (idx != null && topics[+idx]) {
+                  topics[+idx].setAttribute('aria-pressed', 'false');
+                }
+              }
+              syncOverlayState();
+            });
+          }
+
+          if (trigger) {
+            trigger.addEventListener('click', openOverlay);
+          }
+          if (closeBtn) {
+            closeBtn.addEventListener('click', closeOverlay);
+          }
+
+          // Click backdrop (not panel) to close.
+          overlay.addEventListener('click', function (e) {
+            if (e.target === overlay) closeOverlay();
+          });
+
+          // ESC closes when the overlay is open.
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && !overlay.hasAttribute('hidden')) {
+              closeOverlay();
+            }
+          });
+
+          // Show results: close + propagate the chip set to the
+          // .active-filters bar above the results. Replaces the static
+          // demo chip(s) between the count line and the --clear chip.
+          if (showBtn) {
+            showBtn.addEventListener('click', function () {
+              if (activeDetail) {
+                // Remove any existing topic chips (everything that is a
+                // chip but not the --clear chip and not the count line).
+                Array.prototype.slice.call(
+                  activeDetail.querySelectorAll('.active-filters__chip:not(.active-filters__chip--clear):not(.active-filters__chip--filter-trigger)')
+                ).forEach(function (c) { c.remove(); });
+
+                // Re-insert one chip per selected topic, before --clear.
+                selectedTopics().forEach(function (btn) {
+                  var label = topicLabel(btn);
+                  var chip = document.createElement('button');
+                  chip.type = 'button';
+                  chip.className = 'active-filters__chip';
+                  chip.setAttribute('aria-label', 'Remove ' + label + ' filter');
+                  chip.innerHTML = label + ' <span class="active-filters__chip-close" aria-hidden="true">×</span>';
+                  if (activeClear) {
+                    activeDetail.insertBefore(chip, activeClear);
+                  } else {
+                    activeDetail.appendChild(chip);
+                  }
+                });
+
+                // Hide --clear chip when no filters are active.
+                if (activeClear) {
+                  activeClear.style.display = selectedTopics().length === 0 ? 'none' : '';
+                }
+              }
+              closeOverlay();
+            });
+          }
+
+          // Initial sync (handles any aria-pressed="true" defaults in markup).
+          syncOverlayState();
         })();
       })();
     </script>
