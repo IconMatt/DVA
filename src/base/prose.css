@@ -17,9 +17,21 @@
    `.container { max-width: none }` from src/utilities/container.css,
    which neutralises Tailwind v4's built-in container caps but would
    otherwise also kill this clamp. In practice .page-content__section
-   always co-occurs with .container in markup. */
+   always co-occurs with .container in markup.
+
+   Below `md` the layout collapses to single column; drop the inherited
+   `.container` padding-inline (~1.5rem at narrow viewports) to 0.75rem
+   so the prose aligns with the surrounding hero / article-actions
+   bleed-wrap edge instead of sitting ~12px more inset than them. */
 .page-content__section.container {
   max-width: clamp(36rem, 50vw + 8rem, 56rem);
+  padding-inline: 0.75rem;
+}
+
+@media (min-width: 840px) {
+  .page-content__section.container {
+    padding-inline: var(--container-padding);
+  }
 }
 
 .page-content__section > :first-child { margin-block-start: 0; }
