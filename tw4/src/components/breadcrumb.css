@@ -1,0 +1,70 @@
+.breadcrumb {
+  /* Matches .service-search__inner padding-block so the gap below the */
+  /* breadcrumb reads as the same vertical rhythm as the panel's edge inset. */
+  margin-block-end: var(--space-l);
+
+  @media (min-width: 840px) {
+    margin-block-end: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+  line-height: var(--line-height-snug);
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-ink);
+}
+
+.breadcrumb__item + .breadcrumb__item::before {
+  content: "›";
+  margin-inline: var(--space-2xs);
+  color: var(--color-ink);
+  speak: none;
+}
+
+.breadcrumb__link {
+  color: var(--color-ink);
+
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size var(--transition-base), color var(--transition-base);
+  &:hover, &:focus-visible { background-size: 100% 3px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+}
+
+.breadcrumb__item--current {
+  font-weight: inherit;
+}
+
+/* Mobile: show only the last two items. */
+@media (max-width: 839px) {
+  .breadcrumb__item:nth-last-child(n+3) {
+    display: none;
+  }
+
+  /* The new first-visible item must not render a separator. */
+  .breadcrumb__item:nth-last-child(2)::before {
+    content: none;
+  }
+}
+
+/* Resource article: drop the current-page crumb — the H1 already labels */
+/* the page, so showing it twice in the same panel is noise. Page-scoped so */
+/* directory / detail pages keep their full trail. */
+.page--resource-article .breadcrumb__item--current {
+  display: none;
+}

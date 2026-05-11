@@ -1,0 +1,174 @@
+/* Wrapper mirrors the .service-search bleed pattern: the cards + map */
+/* extend out to the band's outer edges, while the toolbar above keeps */
+/* breadcrumb-aligned padding via bleed-content. */
+.results-section {
+  margin-inline: 0.75rem;
+  @media (min-width: 840px) { margin-inline: 0.9rem; }
+
+  /* At md+, the active-filters bar (col 1) and the sort pill (col 2) share */
+  /* a single row above the results grid; .results-layout and .pagination */
+  /* span both columns underneath. */
+  @media (min-width: 840px) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-s);
+  }
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-s);
+
+  /* Two columns kick in at the same breakpoint where the search form fields */
+  /* stop stacking, so the results layout tracks the form's responsive shape. */
+  @media (min-width: 840px) {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.results-section > .pagination {
+  @media (min-width: 840px) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Header-split variant — used on resource-library. Sort pill is pinned to the */
+/* right at every viewport; the .active-filters bar in column 1 wraps its */
+/* children naturally, so applied chips sit inline with the count when there's */
+/* room and only spill onto a second visual row when they don't fit. */
+/* Distinct from the base .results-section, which only goes 2-col at md+. */
+.results-section--header-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: var(--space-s);
+  /* Vertical rhythm lives on the parent so both columns (active-filters and */
+  /* results-controls) share the same start/end edges. The base .active-filters */
+  /* padding-block is zeroed below so its trigger pill aligns with the Latest */
+  /* pill in the second column instead of sitting 15px lower. */
+  padding-block: var(--space-s) var(--space-m);
+}
+
+.results-section--header-split > .active-filters {
+  padding-block: 0;
+}
+
+/* Thin band wrapper for the resource-library card grid + pagination. */
+/* bleed-wrap gives the same outer margin as .results-section; bleed-content */
+/* then pads the inside so the cards line up with the toolbar's chips/text */
+/* above (which sits on the page-grid edge via .active-filters' bleed-content). */
+/* Doesn't trigger the 2-col grid behavior that .results-section turns on at md+. */
+.resource-results-band {
+  margin-inline: 0.75rem;
+  @media (min-width: 840px) { margin-inline: 0.9rem; }
+  padding-inline: calc(var(--container-padding) - 0.75rem);
+  @media (min-width: 840px) { padding-inline: calc(var(--container-padding) - 0.9rem); }
+}
+
+/* Match the Latest pill's right edge to the search submit's right edge above. */
+/* .active-filters already has bleed-content padding to land on the page grid; */
+/* .results-controls inherits no such padding so Latest would otherwise extend */
+/* to the outer bleed-wrap edge. Mirror the bleed-content end-padding so the */
+/* two right edges line up. */
+.results-section--header-split > .results-controls {
+  padding-inline-end: calc(var(--container-padding) - 0.75rem);
+
+  @media (min-width: 840px) {
+    padding-inline-end: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+.results-layout__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  min-width: 0;
+}
+
+.results-layout__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  min-width: 0;
+}
+
+.results-layout__map {
+  /* Declare position up front so Leaflet's _initLayout sees an */
+  /* allowed value (absolute|relative|fixed|sticky) at init time and */
+  /* does NOT inline `position: relative` on the container. Without */
+  /* this, the inline override survives breakpoint changes and beats */
+  /* the `position: sticky` rule below at md+. */
+  position: relative;
+
+  /* Mobile: inline block; bg shows briefly while tiles load. */
+  min-height: 18rem;
+  background: var(--color-slate-500);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  /* Form a stacking context so Leaflet's internal pane z-indexes */
+  /* (tile/marker/popup, up to ~700) cannot escape and float over modals. */
+  isolation: isolate;
+
+  @media (min-width: 840px) {
+    position: sticky;
+    top: var(--space-m);
+    align-self: start;
+    height: calc(100dvh - var(--space-m) * 2);
+    min-height: 0;
+  }
+}
+
+/* Below md: the user picks one column at a time via .results-view-toggle. */
+/* Above md: data-view is ignored — both columns render side-by-side. */
+@media (max-width: 839px) {
+  .results-layout[data-view="list"] .results-layout__map {
+    display: none;
+  }
+
+  .results-layout[data-view="map"] .results-layout__main {
+    display: none;
+  }
+
+  /* Map fills the viewport so it's actually usable; pagination sits below */
+  /* (outside the grid) and is reachable by scrolling. */
+  .results-layout[data-view="map"] .results-layout__map {
+    height: calc(100dvh - 12rem);
+    min-height: 0;
+  }
+}
+
+/* Custom Leaflet pin — visual is the SVG asset */
+/* (assets/images/icons/pin-default.svg via L.icon iconUrl). */
+/* Class kept as a hook for future hover / focus-visible treatment. */
+.results-map-pin {
+  cursor: pointer;
+}
+
+/* Custom marker cluster (zest circle with count). */
+.results-map-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-zest);
+  color: var(--color-brown-900);
+  border: 2px solid var(--color-brown-900);
+  border-radius: 50%;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  box-shadow: 0 1px 4px var(--overlay-brown-40);
+  cursor: pointer;
+}
+
+/* Brief highlight when a marker click scrolls a card into view. */
+.service-card.is-highlighted {
+  outline: 3px solid var(--color-zest);
+  outline-offset: 2px;
+  transition: outline-color var(--transition-base);
+}

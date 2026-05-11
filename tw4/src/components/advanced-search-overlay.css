@@ -1,0 +1,276 @@
+/* Modal scaffold — mirrors .search-overlay so the two dialogs feel like */
+/* siblings (shared backdrop, blur, entrance animation). */
+.advanced-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--color-white);
+  overflow: hidden;
+  overscroll-behavior: contain;
+  animation: advanced-search-overlay-in 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+
+  @media (min-width: 840px) {
+    background: var(--overlay-brown-60);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-xl) var(--space-l);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+}
+
+/* Ensure [hidden] wins over the display:flex set in the md media query. */
+.advanced-search-overlay[hidden] {
+  display: none !important;
+}
+
+@keyframes advanced-search-overlay-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.375rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Inner panel — header / scrolling body / footer split via grid so the */
+/* header and footer remain pinned while the section list scrolls. */
+.advanced-search-overlay__inner {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100%;
+  background: var(--color-white);
+  flex-shrink: 0;
+
+  @media (min-width: 840px) {
+    height: auto;
+    max-height: 100%;
+    max-width: 56rem;
+    border-radius: var(--radius-hero);
+    overflow: hidden;
+  }
+}
+
+.advanced-search-overlay__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding: var(--space-m) var(--container-padding);
+  border-bottom: 1px solid var(--color-border-default);
+  background: var(--color-white);
+
+  @media (min-width: 840px) {
+    padding: var(--space-m) var(--space-l);
+  }
+}
+
+.advanced-search-overlay__title {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.advanced-search-overlay__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-base);
+
+  &:hover {
+    background: var(--color-sweet-grass);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+  }
+}
+
+/* Scrollable body — the only region that scrolls inside the modal. */
+.advanced-search-overlay__sections {
+  overflow-y: auto;
+  padding: var(--space-m) var(--container-padding) var(--space-l);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+
+  @media (min-width: 840px) {
+    padding: var(--space-m) var(--space-l) var(--space-l);
+  }
+}
+
+/* Group divider — "Type of service", "Who it's for", "Access and eligibility". */
+.advanced-search-overlay__subheader {
+  margin-block: var(--space-m) var(--space-2xs);
+
+  &:first-child {
+    margin-block-start: 0;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--step-3);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    color: var(--color-brown-900);
+  }
+}
+
+/* Each <details> accordion is a contained sweet-grass card. Stack spacing */
+/* comes from the parent's gap; no border dividers. */
+.advanced-search-overlay__section {
+  background: var(--color-sweet-grass);
+  border-radius: var(--radius-xl);
+  padding: var(--space-m) var(--space-l);
+
+  > summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    font-size: var(--step-0);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-brown-900);
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--color-focus); outline-offset: 1px;
+      border-radius: var(--radius-sm);
+    }
+  }
+}
+
+.advanced-search-overlay__section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+/* Chevron — rotates when the parent <details> is open. */
+.advanced-search-overlay__section-chevron {
+  flex: none;
+  transition: transform var(--transition-base);
+}
+
+/* Chevron is "down" while collapsing — JS sets .is-aso-collapsing when the */
+/* body is animating shut so the chevron rotates back in step with the */
+/* height transition rather than lagging until the animation finishes. */
+.advanced-search-overlay__section[open]:not(.is-aso-collapsing) > summary > .advanced-search-overlay__section-chevron {
+  transform: rotate(180deg);
+}
+
+/* Option list — wraps pill buttons. */
+.advanced-search-overlay__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  padding-block: var(--space-s) 0;
+}
+
+/* Rounded-box button used for every option. Sits on a sweet-grass card, so */
+/* the rest state is white for contrast; aria-pressed=true = solid dark fill. */
+.advanced-search-overlay__option {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-2xs) var(--space-s);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  background: var(--color-white);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base),
+    border-color var(--transition-base);
+
+  &:hover {
+    background: var(--color-sand-stone);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+  }
+
+  &[aria-pressed="true"] {
+    background: var(--color-brown-900);
+    color: var(--color-ink-inverse);
+    border-color: var(--color-brown-900);
+  }
+
+  &[aria-pressed="true"]:hover {
+    background: var(--color-brown-700);
+    border-color: var(--color-brown-700);
+  }
+}
+
+/* Sticky footer — selection state on the left, Show results pinned right. */
+.advanced-search-overlay__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-m) var(--container-padding);
+  border-top: 1px solid var(--color-border-default);
+  background: var(--color-white);
+
+  @media (min-width: 840px) {
+    padding: var(--space-m) var(--space-l);
+  }
+}
+
+/* Selected-state strip — count label + chips. Reuses .active-filters__chip */
+/* (and __chip--clear) so the chip vocabulary matches the bar above the */
+/* results. display: contents on the chip container lets the chips flow */
+/* into the parent flex row alongside the count label. */
+.advanced-search-overlay__state {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.advanced-search-overlay__count {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.advanced-search-overlay__chips {
+  display: contents;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .advanced-search-overlay {
+    animation: none;
+  }
+
+  .advanced-search-overlay__section-chevron {
+    transition: none;
+  }
+}

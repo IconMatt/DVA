@@ -1,0 +1,145 @@
+/* ============================================================================= */
+/* Accordion — disclosure list using native <details>/<summary> */
+/* ----------------------------------------------------------------------------- */
+/* .accordion             outer wrapper. Hairline above and below the stack. */
+/* .accordion__item       one <details> per row. */
+/* .accordion__summary    clickable row — label on the left, chevron on the */
+/* right. Native marker is suppressed. */
+/* .accordion__label      row title. */
+/* .accordion__chevron    inline SVG. Rotates 180° on [open]. */
+/* .accordion__body       content panel — shown when [open]. Uses the same */
+/* prose typography as .page-content__section so */
+/* body content reads consistently inside it. */
+
+/* Drupal handoff: */
+/* Paragraph types: accordion_group → accordion_item (multiple) */
+/* Fields:          field_accordion_label (text), field_accordion_body */
+/* (text long, formatted) */
+/* Preprocess:      THEMENAME_preprocess_paragraph__accordion_group / */
+/* THEMENAME_preprocess_paragraph__accordion_item */
+/* Twig:            paragraph--accordion-group.html.twig + */
+/* paragraph--accordion-item.html.twig */
+/* ============================================================================= */
+
+.accordion {
+  border-block-start: 1px solid var(--color-border-default);
+  border-block-end: 1px solid var(--color-border-default);
+}
+
+.accordion__item {
+  /* No border on the last item — the wrapper's bottom border closes the */
+  /* stack so consecutive hairlines never double up. */
+  border-block-end: 1px solid var(--color-border-default);
+
+  &:last-child {
+    border-block-end: 0;
+  }
+}
+
+/* Suppress the default disclosure triangle across browsers. */
+.accordion__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  padding-block: var(--space-s);
+  padding-inline: var(--space-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  cursor: pointer;
+  list-style: none;
+  transition: background-color var(--transition-base);
+
+  &::-webkit-details-marker {
+    display: none;
+  }
+
+  &:hover {
+    background: var(--color-sand-stone);
+  }
+
+  /* Keyboard focus: keep the standard focus-ring; no underline now that */
+  /* hover renders a sand-stone wash. */
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+    outline-offset: 2px;
+  }
+}
+
+.accordion__label {
+  font-size: var(--step-0);
+  line-height: var(--line-height-snug);
+}
+
+.accordion__chevron {
+  flex: none;
+  width: 0.75rem;
+  height: 0.5rem;
+  color: currentColor;
+  transition: transform var(--transition-base);
+}
+
+.accordion__item[open] .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.accordion__body {
+  /* Match the summary's horizontal padding so the body copy aligns with */
+  /* the label on the left and respects the chevron's right edge. */
+  padding-block-end: var(--space-m);
+  padding-inline: var(--space-xs);
+  font-size: var(--step-0);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-900);
+
+  > :first-child {
+    margin-block-start: 0;
+  }
+
+  > :last-child {
+    margin-block-end: 0;
+  }
+
+  p {
+    margin-block: 0 var(--space-s);
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+}
+
+/* Animate open/close. Uses ::details-content + interpolate-size — modern */
+/* browsers (Chrome 131+, Firefox 134+, Safari 18.2+) get a smooth height */
+/* transition; older browsers fall through to the default snap, no breakage. */
+/* content-visibility with allow-discrete keeps the panel in the layout */
+/* during the close transition so block-size has something to animate from. */
+@supports (interpolate-size: allow-keywords) and selector(::details-content) {
+  .accordion {
+    interpolate-size: allow-keywords;
+  }
+
+  .accordion__item::details-content {
+    block-size: 0;
+    overflow-y: clip;
+    transition:
+      block-size var(--transition-base),
+      content-visibility var(--transition-base) allow-discrete;
+  }
+
+  .accordion__item[open]::details-content {
+    block-size: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion__chevron {
+    transition: none;
+  }
+
+  .accordion__item::details-content {
+    transition: none;
+  }
+}

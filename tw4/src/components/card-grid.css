@@ -1,0 +1,60 @@
+.card-grid {
+  display: grid;
+  gap: var(--space-s);
+  grid-template-columns: 1fr;
+}
+
+.card-grid--three {
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1120px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card-grid--resources,
+.card-grid--news-carousel,
+.card-grid--services {
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  grid-template-columns: none;
+}
+
+.card-grid__item {
+  display: flex;
+}
+
+.card-grid--resources .card-grid__item,
+.card-grid--news-carousel .card-grid__item,
+.card-grid--services .card-grid__item {
+  scroll-snap-align: start;
+  width: 80vw;
+
+  @media (min-width: 560px) {
+    width: 43vw;
+  }
+
+  @media (min-width: 840px) {
+    width: max(19rem, calc((100vw - var(--container-padding) - var(--space-s)) / 2.15));
+  }
+
+  @media (min-width: 1120px) {
+    width: max(
+      26rem,
+      calc((100vw - var(--container-padding) - (var(--space-s) * 2)) / 3.15)
+    );
+  }
+}
+
+.card-grid__spacer {
+  width: calc(var(--container-padding) - var(--space-s));
+  scroll-snap-align: end;
+  pointer-events: none;
+}
+
+.card-grid__item > .card,
+.card-grid__item > .service-card {
+  width: 100%;
+}

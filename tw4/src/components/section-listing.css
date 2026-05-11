@@ -1,0 +1,210 @@
+/* Shared layout for listing-style sections (resources, news). */
+.resource-listing,
+.news-listing,
+.service-listing {
+  background: var(--color-bg-page);
+}
+
+/* .service-listing on service-detail sits directly beneath a .results-section */
+/* using the bleed-wrap pattern. Match that outer alignment so the heading and */
+/* first card line up with the urgent-help / referral cards above. */
+.service-listing {
+  margin-inline: 0.75rem;
+  @media (min-width: 840px) { margin-inline: 0.9rem; }
+
+  margin-block-start: var(--space-xl);
+}
+
+/* Inset the header so the title and All-services link align with the */
+/* service-card's interior content rather than the carousel's bleed */
+/* edge. The cards inside the viewport still bleed because the viewport */
+/* uses negative margin + scroll-padding. */
+.service-listing__header {
+  padding-inline-start: var(--space-m);
+}
+
+.resource-listing__inner,
+.news-listing__inner,
+.service-listing__inner {
+  padding-block: var(--space-xl);
+}
+
+.resource-listing__header,
+.news-listing__header,
+.service-listing__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-s);
+  margin-bottom: var(--space-l);
+  flex-wrap: wrap;
+}
+
+.resource-listing__link,
+.news-listing__link,
+.service-listing__link {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-3xs) var(--space-s);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  background: var(--color-white);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+}
+
+/* Solid dark hover, mirrors the .site-header__pill base hover state */
+/* (slate-700 fill + inverse text). Same treatment across all listing */
+/* carousel "All …" links. */
+.resource-listing__link:hover,
+.news-listing__link:hover,
+.service-listing__link:hover {
+  background: var(--color-slate-700);
+  border-color: var(--color-slate-700);
+  color: var(--color-ink-inverse);
+}
+
+.resource-listing__header-actions,
+.news-listing__header-actions,
+.service-listing__header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2xs);
+  width: 100%;
+  margin-inline-start: 0;
+  flex-wrap: wrap;
+
+  @media (min-width: 840px) {
+    justify-content: flex-start;
+    width: auto;
+    margin-inline-start: auto;
+  }
+}
+
+.resource-listing__controls,
+.news-listing__controls,
+.service-listing__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+.resource-listing__page,
+.news-listing__page,
+.service-listing__page {
+  /* Reserve enough room for the widest expected count so the surrounding */
+  /* link doesn't jump as the user pages. tabular-nums keeps digits the */
+  /* same width across "1-2", "3-4", etc. */
+  min-width: 4rem;
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-900);
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.resource-listing__control,
+.news-listing__control,
+.service-listing__control {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brown-900);
+  background: var(--color-sand-stone);
+  border: 0;
+  border-radius: var(--radius-sm);
+  transition:
+    background-color var(--transition-base),
+  opacity var(--transition-base);
+}
+
+.resource-listing__control[hidden],
+.news-listing__control[hidden],
+.service-listing__control[hidden] {
+  display: none;
+}
+
+.resource-listing__control:disabled,
+.news-listing__control:disabled,
+.service-listing__control:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.resource-listing__control:not(:disabled):hover,
+.news-listing__control:not(:disabled):hover,
+.service-listing__control:not(:disabled):hover {
+  background: var(--color-zest);
+}
+
+.resource-listing__control-icon,
+.news-listing__control-icon,
+.service-listing__control-icon {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.resource-listing__control--next .resource-listing__control-icon,
+.news-listing__control--next .news-listing__control-icon,
+.service-listing__control--next .service-listing__control-icon {
+  transform: rotate(180deg);
+}
+
+.resource-listing__viewport,
+.news-listing__viewport,
+.service-listing__viewport {
+  margin-inline: calc(var(--container-padding) * -1);
+  overflow: auto hidden;
+  overscroll-behavior-inline: contain;
+  padding-block-end: var(--space-2xs);
+  padding-inline-start: var(--container-padding);
+  scroll-padding-inline: var(--container-padding) 0;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+/* .service-listing's inner has no .container padding (so the heading */
+/* aligns with the bleed-wrap edge above it). The shared */
+/* `margin-inline: -container-padding` would push the viewport past */
+/* the section's outer edge and create a horizontal page scroll, so */
+/* override here: keep the right-side bleed (cards can peek off the */
+/* right) but pin the left to the section's edge with a start padding */
+/* so the first card aligns with the .service-listing__header text */
+/* rather than sitting flush against the bleed-wrap edge. */
+.service-listing__viewport {
+  margin-inline-start: 0;
+
+  /* Cancel the bleed-wrap inset so cards can peek off the right edge. */
+  /* Must track bleed-wrap's responsive value (0.75rem below md, 0.9rem from md) */
+  /* or the viewport over-cancels at small widths and forces page overflow. */
+  margin-inline-end: -0.75rem;
+  padding-inline-start: var(--space-m);
+  scroll-padding-inline: var(--space-m) 0;
+
+  @media (min-width: 840px) {
+    margin-inline-end: -0.9rem;
+  }
+}
+
+.resource-listing__viewport:focus-visible,
+.news-listing__viewport:focus-visible,
+.service-listing__viewport:focus-visible {
+  outline: 3px solid var(--color-focus); outline-offset: 1px;
+}
+
+.resource-listing__viewport::-webkit-scrollbar,
+.news-listing__viewport::-webkit-scrollbar,
+.service-listing__viewport::-webkit-scrollbar {
+  display: none;
+}

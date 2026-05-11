@@ -1,0 +1,84 @@
+/* Colour tokens — single source of truth. No hex/rgb/hsl values may live
+   outside this file. Mirrors scss/abstracts/_tokens.scss. */
+
+@theme {
+  /* Raw palette — Umber (text/ink) */
+  --color-brown-900: #4b3928;
+  --color-brown-700: #7d6e5f;
+  --color-brown-500: #a59c93;
+
+  /* Surfaces */
+  --color-sand-stone: #f9f6ea;
+  --color-sweet-grass: #ebead6;
+  --color-sweet-grass-dark: #e2e0cb;
+  --color-white: #fff;
+
+  /* Slate — borders, secondary tones */
+  --color-slate-300: #e0e7ea;
+  --color-slate-500: #c1cbcf;
+  --color-slate-700: #68777d;
+
+  /* Accent */
+  --color-zest: #dad777;
+  --color-zest-dark: #b8b457;
+
+  --color-border-warm: #e4deca;
+
+  /* Semantic roles — generate utilities like bg-ink, text-ink-muted, border-warm-strong */
+  --color-ink: var(--color-brown-900);
+  --color-ink-muted: var(--color-brown-500);
+  --color-ink-inverse: var(--color-white);
+  --color-link: var(--color-brown-900);
+  --color-link-hover: var(--color-brown-700);
+  --color-border-default: var(--color-border-warm);
+  --color-border-strong: var(--color-slate-700);
+  --color-bg-page: var(--color-white);
+  --color-bg-muted: var(--color-sand-stone);
+  --color-bg-dark: var(--color-brown-900);
+  --color-bg-card: var(--color-white);
+  --color-accent: var(--color-zest);
+  --color-accent-hover: var(--color-zest-dark);
+  --color-focus: var(--color-zest);
+
+  /* No red in palette — urgent CTAs use brown + label/icon emphasis */
+  --color-emergency: var(--color-brown-900);
+  --color-emergency-dark: var(--color-brown-700);
+
+  /* Shadows (generates shadow-sm/md/lg utilities) */
+  --shadow-sm: 0 1px 2px rgb(75 57 40 / 8%);
+  --shadow-md: 0 4px 12px rgb(75 57 40 / 10%);
+  --shadow-lg: 0 12px 32px rgb(75 57 40 / 14%);
+}
+
+/* Translucent overlays — preserved as named tokens for legacy component CSS.
+   New code should prefer Tailwind v4 slash-opacity (e.g. bg-brown-900/40). */
+:root {
+  --overlay-white-02: rgb(255 255 255 / 2%);
+  --overlay-white-04: rgb(255 255 255 / 4%);
+  --overlay-white-06: rgb(255 255 255 / 6%);
+  --overlay-white-08: rgb(255 255 255 / 8%);
+  --overlay-white-10: rgb(255 255 255 / 10%);
+  --overlay-white-14: rgb(255 255 255 / 14%);
+  --overlay-white-16: rgb(255 255 255 / 16%);
+  --overlay-white-18: rgb(255 255 255 / 18%);
+  --overlay-white-22: rgb(255 255 255 / 22%);
+  --overlay-white-25: rgb(255 255 255 / 25%);
+  --overlay-white-30: rgb(255 255 255 / 30%);
+  --overlay-white-35: rgb(255 255 255 / 35%);
+  --overlay-white-45: rgb(255 255 255 / 45%);
+  --overlay-white-82: rgb(255 255 255 / 88%);
+  --overlay-white-92: rgb(255 255 255 / 92%);
+  --overlay-black-18: rgb(0 0 0 / 18%);
+  --overlay-black-30: rgb(0 0 0 / 30%);
+  --overlay-gray-10: rgb(187 187 187 / 10%);
+  --overlay-gray-18: rgb(187 187 187 / 18%);
+  --overlay-gray-55: rgb(187 187 187 / 55%);
+  --overlay-sand-stone-30: rgb(249 246 234 / 30%);
+  --overlay-brown-92: rgb(75 57 40 / 94%);
+  --overlay-brown-60: rgb(75 57 40 / 60%);
+  --overlay-brown-40: rgb(75 57 40 / 40%);
+  --overlay-brown-20: rgb(75 57 40 / 20%);
+  --overlay-shadow-sm: rgb(75 57 40 / 8%);
+  --overlay-shadow-md: rgb(75 57 40 / 10%);
+  --overlay-shadow-lg: rgb(75 57 40 / 14%);
+}

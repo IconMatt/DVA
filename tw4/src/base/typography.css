@@ -1,0 +1,44 @@
+/* Heading defaults + serif opt-in. Port of scss/base/_typography.scss. */
+
+h1, h2, h3, h4 {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  color: var(--color-brown-900);
+  font-kerning: normal;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+p, li, dd {
+  text-wrap: pretty;
+}
+
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-4); }
+h3 { font-size: var(--step-2); line-height: var(--line-height-snug); }
+h4 { font-size: var(--step-1); line-height: var(--line-height-snug); }
+h5 { font-size: var(--step-0); line-height: var(--line-height-snug); }
+
+h5, h6,
+.headings-serif h1,
+.headings-serif h2,
+.headings-serif h3,
+.mission-statement__title,
+.cta-tray__title,
+.testimonial__text {
+  font-kerning: normal;
+  letter-spacing: 0;
+  text-rendering: optimizelegibility;
+}
+
+/* Add .headings-serif to <body> or any wrapper to switch h1–h3 to Halant. */
+.headings-serif h1,
+.headings-serif h2,
+.headings-serif h3 {
+  font-family: var(--font-display);
+}
+
+p {
+  max-width: 70ch;
+}

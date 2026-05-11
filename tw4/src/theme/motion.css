@@ -1,0 +1,15 @@
+/* Motion tokens — match scss/abstracts/_tokens.scss $transition-*. */
+
+@theme {
+  --ease-base: ease;
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+}
+
+/* Composite transition shorthands used by component CSS. */
+:root {
+  --transition-fast: 120ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 320ms ease;
+}

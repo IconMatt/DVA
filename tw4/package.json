@@ -1,0 +1,14 @@
+{
+  "name": "dva-wellbeing-tw4",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tailwind v4 alternate of vetwell-design.",
+  "scripts": {
+    "dev": "tailwindcss -i ./src/main.css -o ./css/main.css --watch",
+    "build": "tailwindcss -i ./src/main.css -o ./css/main.css --minify",
+    "verify": "npm run build"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0"
+  }
+}
