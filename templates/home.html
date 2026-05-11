@@ -1196,7 +1196,7 @@
               type="button"
               aria-label="Previous testimonial"
               data-testimonial-previous
-              hidden
+              disabled
             >
               <img
                 class="testimonial__control-icon"
@@ -1667,10 +1667,14 @@
           var testimonialImageSettle = 980;
 
           var setTestimonialControls = function () {
-            testimonialPrevious.hidden = activeTestimonialIndex === 0;
-            testimonialNext.hidden = activeTestimonialIndex === testimonials.length - 1;
-            testimonialPrevious.disabled = testimonialIsChanging;
-            testimonialNext.disabled = testimonialIsChanging;
+            // Both arrows are always visible; the inactive one renders in the
+            // .testimonial__control:disabled state (opacity 0.48) instead of
+            // being hidden — matches the design spec.
+            testimonialPrevious.disabled =
+              activeTestimonialIndex === 0 || testimonialIsChanging;
+            testimonialNext.disabled =
+              activeTestimonialIndex === testimonials.length - 1 ||
+              testimonialIsChanging;
           };
 
           var setTestimonialImage = function (image, item) {
