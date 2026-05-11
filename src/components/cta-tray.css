@@ -1,0 +1,28 @@
+.cta-tray {
+  background: var(--color-sand-stone);
+}
+
+.cta-tray__inner {
+  padding-block: var(--space-xl) var(--space-2xl);
+}
+
+.cta-tray__title {
+  margin: 0 0 var(--space-m);
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  color: var(--color-brown-900);
+}
+
+.cta-tray .quick-links--tray {
+  grid-template-columns: 1fr;
+
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1120px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

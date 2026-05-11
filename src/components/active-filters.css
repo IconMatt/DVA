@@ -1,0 +1,208 @@
+.active-filters {
+  padding-inline: calc(var(--container-padding) - 0.75rem);
+  @media (min-width: 840px) { padding-inline: calc(var(--container-padding) - 0.9rem); }
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding-block: var(--space-s) var(--space-m);
+
+  /* On the md+ shared row with the sort pill, vertically center the bar */
+  /* against the taller pill so the count and "Sort by" label sit on the */
+  /* same baseline. */
+  @media (min-width: 840px) {
+    align-self: center;
+  }
+}
+
+/* Inside .results-section--header-split the bar widens its column-gap so */
+/* the trigger pill and count don't read as crammed when applied chips are */
+/* also inline. Row-gap stays tight (var(--space-2xs)) for the wrap case. */
+.results-section--header-split .active-filters {
+  column-gap: var(--space-s);
+  /* Bigger row-gap for the wrap case — when the count + chips drop to row 2, */
+  /* they need real breathing room from the trigger pill above (the tight */
+  /* var(--space-2xs) base reads as crammed at this scale). */
+  row-gap: var(--space-m);
+}
+
+/* Detail group: holds the count + applied chips as a single wrap unit. When */
+/* it fits inline alongside the trigger pill it sits on row 1; when it */
+/* doesn't, the whole group drops to row 2 so the trigger and the sort pill */
+/* (in the outer .results-section column) keep row 1 to themselves. */
+.active-filters__detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-s);
+  row-gap: var(--space-2xs);
+  /* flex-basis: auto = content width; flex-shrink: 0 = don't compress. */
+  /* Together these mean the group claims its full content width during the */
+  /* parent's wrap calculation, so it wraps as one unit instead of leaving */
+  /* the count behind on row 1. */
+  flex: 0 0 auto;
+}
+
+
+/* Default chip — mirrors `.tag` (shape, size, font) so applied-filter tokens */
+/* read as the same vocabulary as the tags in the cards below. */
+.active-filters__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-3xs) var(--space-2xs);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  /* background-color (not the shorthand) so modifier classes can layer a */
+  /* background-image (e.g. .--clear's link-grow gradient) without it being */
+  /* wiped on hover. */
+  background-color: var(--color-sweet-grass);
+  border: 0;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+
+  &:hover {
+    background-color: var(--color-sweet-grass-dark);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+  }
+}
+
+.active-filters__count {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brown-900);
+}
+
+/* Two count placements live in the resource-library toolbar markup so the */
+/* label can swap sides at the breakpoint where the right-column layout */
+/* would otherwise overlap the trigger pill. */
+/* --inline: sits with the chips inside .active-filters__detail. */
+/* Visible at narrow widths (below sm). */
+/* --right:  sits with the sort pill inside .results-controls. */
+/* Visible at sm+. */
+/* Only one is rendered at a time (display: none on the inactive one), so */
+/* the aria-live region is never duplicated to assistive tech. */
+.active-filters__count--inline {
+  @media (min-width: 560px) {
+    display: none;
+  }
+}
+
+.active-filters__count--right {
+  @media (max-width: 559px) {
+    display: none;
+  }
+}
+
+.active-filters__chip-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35em;
+  line-height: 1;
+}
+
+/* "Clear all" reads as a link, not a chip — pulls the chip atom out of its */
+/* pill chrome (no background, no padding) and applies the project link-grow */
+/* underline so it shares hover behaviour with body-copy links. */
+.active-filters__chip--clear {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor), linear-gradient(currentColor, currentColor);
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: background-size var(--transition-base), color var(--transition-base);
+  &:hover, &:focus-visible { background-size: 100% 3px, 0 1px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+
+  padding: 0;
+  /* background-color (not the shorthand) so we don't wipe the gradient */
+  /* background-image set by link-underline-grow. */
+  background-color: transparent;
+  /* Strip the chip's pill chrome so focus rings / hover treatments don't */
+  /* hint at a button shape underneath the link. */
+  border-radius: 0;
+  font-weight: var(--font-weight-regular);
+  color: var(--color-link);
+
+  /* Override the base .active-filters__chip:hover background-color so the */
+  /* chip pill chrome stays absent — hover changes link colour only, the */
+  /* underline wipe comes from the link-underline-grow mixin's :hover rule. */
+  &:hover,
+  &:focus-visible {
+    background-color: transparent;
+    color: var(--color-link-hover);
+  }
+}
+
+/* Add-filter CTA — mirrors `.site-header__pill` (the header Search button) so */
+/* padding, font weight, line-height, and hover treatment match across the page. */
+.active-filters__chip--add {
+  padding: var(--space-3xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  background: transparent;
+  border: 1px solid var(--color-brown-900);
+  border-radius: var(--radius-pill);
+
+  &:hover {
+    background: var(--color-slate-700);
+    border-color: var(--color-slate-700);
+    color: var(--color-ink-inverse);
+  }
+}
+
+.active-filters__chip-add-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  flex: none;
+}
+
+/* Filter-trigger pill — opens a topics / facets panel. Outlined to match the */
+/* rest of the outline-pill family (.site-header__pill, --add) so the toolbar */
+/* reads as one consistent vocabulary; the doc-search icon on the right makes */
+/* the "browse topics" affordance explicit. */
+.active-filters__chip--filter-trigger {
+  padding: var(--space-3xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-900);
+  background: transparent;
+  border: 1px solid var(--color-brown-900);
+  border-radius: var(--radius-pill);
+
+  &:hover {
+    background: var(--color-slate-700);
+    border-color: var(--color-slate-700);
+    color: var(--color-ink-inverse);
+
+    .active-filters__chip-filter-icon {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+
+.active-filters__chip-filter-icon {
+  display: block;
+  width: 1.125rem;
+  height: 1.125rem;
+  flex: none;
+  transition: filter var(--transition-base);
+}

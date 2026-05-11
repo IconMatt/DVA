@@ -1,0 +1,57 @@
+/* Fluid spacing — clamp values copied verbatim from
+   scss/tokens/_spacing.scss. Singles + pairs. */
+
+@theme {
+  /* Singles — generates m-3xs, p-l, gap-2xl, etc. */
+  --spacing-3xs: clamp(0.2328rem, 0.2219rem + 0.0486vw, 0.2656rem);
+  --spacing-2xs: clamp(0.4656rem, 0.4438rem + 0.0972vw, 0.5313rem);
+  --spacing-xs: clamp(0.6984rem, 0.6656rem + 0.1458vw, 0.7969rem);
+  --spacing-s: clamp(0.9313rem, 0.8875rem + 0.1944vw, 1.0625rem);
+  --spacing-m: clamp(1.3969rem, 1.3313rem + 0.2917vw, 1.5938rem);
+  --spacing-l: clamp(1.8625rem, 1.775rem + 0.3889vw, 2.125rem);
+  --spacing-xl: clamp(2.7938rem, 2.6625rem + 0.5833vw, 3.1875rem);
+  --spacing-2xl: clamp(3.725rem, 3.55rem + 0.7778vw, 4.25rem);
+  --spacing-3xl: clamp(5.5875rem, 5.325rem + 1.1667vw, 6.375rem);
+
+  /* Pairs — for rhythmic transitions (gap-s-l etc.) */
+  --spacing-3xs-2xs: clamp(0.2328rem, 0.1333rem + 0.4421vw, 0.5313rem);
+  --spacing-2xs-xs: clamp(0.4656rem, 0.3552rem + 0.4907vw, 0.7969rem);
+  --spacing-xs-s: clamp(0.6984rem, 0.5771rem + 0.5394vw, 1.0625rem);
+  --spacing-s-m: clamp(0.9313rem, 0.7104rem + 0.9815vw, 1.5938rem);
+  --spacing-m-l: clamp(1.3969rem, 1.1542rem + 1.0787vw, 2.125rem);
+  --spacing-l-xl: clamp(1.8625rem, 1.4208rem + 1.963vw, 3.1875rem);
+  --spacing-xl-2xl: clamp(2.7938rem, 2.3083rem + 2.1574vw, 4.25rem);
+  --spacing-2xl-3xl: clamp(3.725rem, 2.8417rem + 3.9259vw, 6.375rem);
+  --spacing-s-l: clamp(0.9313rem, 0.5333rem + 1.7685vw, 2.125rem);
+}
+
+/* Legacy --space-* names — referenced directly in component CSS and inline
+   JS that sets CSS custom properties. Kept as mirrors. */
+:root {
+  --space-3xs: var(--spacing-3xs);
+  --space-2xs: var(--spacing-2xs);
+  --space-xs: var(--spacing-xs);
+  --space-s: var(--spacing-s);
+  --space-m: var(--spacing-m);
+  --space-l: var(--spacing-l);
+  --space-xl: var(--spacing-xl);
+  --space-2xl: var(--spacing-2xl);
+  --space-3xl: var(--spacing-3xl);
+  --space-4xl: calc(var(--spacing-3xl) * 1.25);
+
+  --space-3xs-2xs: var(--spacing-3xs-2xs);
+  --space-2xs-xs: var(--spacing-2xs-xs);
+  --space-xs-s: var(--spacing-xs-s);
+  --space-s-m: var(--spacing-s-m);
+  --space-m-l: var(--spacing-m-l);
+  --space-l-xl: var(--spacing-l-xl);
+  --space-xl-2xl: var(--spacing-xl-2xl);
+  --space-2xl-3xl: var(--spacing-2xl-3xl);
+  --space-s-l: var(--spacing-s-l);
+
+  /* Layout */
+  --container-padding: clamp(1.5rem, 4vw, 10rem);
+  --grid-max-width: 104.125rem;
+  --grid-gutter: clamp(0.9313rem, 0.5333rem + 1.7685vw, 2.125rem);
+  --grid-columns: 12;
+}

@@ -1,0 +1,115 @@
+.hero-band {
+  background: var(--color-sweet-grass);
+  padding-block-end: var(--space-s);
+}
+
+.hero {
+  --hero-image: url("../assets/images/m Hero image.png");
+  --hero-image-y: 40%;
+  --hero-parallax-offset: 0px;
+  --hero-parallax-buffer: clamp(4rem, 10vw, 9rem);
+
+  position: relative;
+
+  /* overflow: hidden (not clip) — hidden creates a BFC which forces the */
+  /* browser compositor to clip the GPU-promoted ::before layer flush with */
+  /* the hero edge. overflow: clip skips the BFC, so the composited layer */
+  /* can bleed a sub-pixel strip at the right edge during resize repaints. */
+  overflow: hidden;
+  color: var(--color-ink-inverse);
+  background: linear-gradient(120deg, var(--color-brown-700), var(--color-brown-900));
+  isolation: isolate;
+
+  margin-inline: 0.75rem;
+  @media (min-width: 840px) { margin-inline: 0.9rem; }
+
+  border-radius: var(--radius-hero);
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 840px) {
+    --hero-image: url("../assets/images/Hero image.png");
+    --hero-image-y: 36%;
+  }
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.hero::before {
+  /* 2px horizontal overbleed — prevents sub-pixel gaps at fractional hero widths. */
+  inset: calc(-1 * var(--hero-parallax-buffer)) -2px;
+  z-index: 0;
+  background: var(--hero-image) center var(--hero-image-y) / cover no-repeat;
+  transform: translate3d(0, var(--hero-parallax-offset), 0);
+  will-change: transform;
+}
+
+.hero::after {
+  inset: 0;
+  z-index: 1;
+
+  /* Left-anchored scrim — title region (max-width: 60%) needs reliable contrast */
+  /* over a varying photograph. Hold the dark stop through the title column, */
+  /* then fade to transparent so the right side of the photo stays bright. */
+  background: linear-gradient(to right, var(--overlay-black-30) 0%, var(--overlay-black-30) 50%, transparent 100%);
+}
+
+.hero__inner {
+  padding-inline: calc(var(--container-padding) - 0.75rem);
+  @media (min-width: 840px) { padding-inline: calc(var(--container-padding) - 0.9rem); }
+
+  position: relative;
+  z-index: 2;
+  padding-block: var(--container-padding) calc(var(--container-padding) - 0.75rem);
+
+  /* Fill the hero and push quick-links to the bottom; content stays at top. */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-xl);
+
+  @media (min-width: 840px) {
+    padding-block-end: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+.hero__content {
+  @media (min-width: 560px) {
+    max-width: 60%;
+  }
+}
+
+.hero__title {
+  font-weight: var(--font-weight-regular);
+  color: var(--color-ink-inverse);
+  font-size: clamp(1.875rem, 1.5rem + 1.6667vw, 3.5625rem);
+  margin-block-start: clamp(0.75rem, 1.25vw, 1.375rem);
+  padding-block-end: clamp(2rem, 4vw, 4rem);
+}
+
+.hero__summary {
+  margin-top: var(--space-s);
+  max-width: 44rem;
+  font-size: var(--step-1);
+  color: var(--overlay-white-82);
+}
+
+.hero__quick-links {
+  --animate-delay: 200ms;
+
+  margin-top: var(--space-xl);
+}
+
+.hero__quick-links-label {
+  margin-bottom: var(--space-s);
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-ink-inverse);
+  text-wrap: balance;
+}

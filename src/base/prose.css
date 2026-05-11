@@ -1,0 +1,234 @@
+/* Page content prose wrapper — port of scss/pages/_content.scss.
+   .page-content__section is the wrapper a Drupal CKEditor body field renders
+   into; all rich-text element styles live here so editors get a safe sandbox. */
+
+.page-content {
+  padding-block: var(--space-2xl);
+}
+
+.page-content__section {
+  margin-inline: auto;
+}
+
+/* Centred reading column — clamps between mobile-friendly (~576px) and
+   design-target (~896px ≈ 8 of 12 columns at desktop).
+
+   Compound selector (specificity 0,0,2,0) is required to override
+   `.container { max-width: none }` from src/utilities/container.css,
+   which neutralises Tailwind v4's built-in container caps but would
+   otherwise also kill this clamp. In practice .page-content__section
+   always co-occurs with .container in markup. */
+.page-content__section.container {
+  max-width: clamp(36rem, 50vw + 8rem, 56rem);
+}
+
+.page-content__section > :first-child { margin-block-start: 0; }
+.page-content__section > :last-child { margin-block-end: 0; }
+
+/* Editor-added quick-links — stack full-width inside prose. */
+.page-content__section .quick-links--results-top {
+  grid-template-columns: 1fr;
+}
+.page-content__section .quick-link {
+  min-height: 0;
+  grid-template-rows: auto auto;
+}
+
+/* Headings — generous top margin between sections. */
+.page-content__section h2,
+.page-content__section h3,
+.page-content__section h4,
+.page-content__section h5,
+.page-content__section h6 {
+  margin-block-start: var(--space-xl);
+  margin-block-end: var(--space-s);
+  text-wrap: pretty;
+}
+
+/* Paragraphs and lists — only bare prose (no class) gets body rhythm. */
+.page-content__section p:not([class]) {
+  margin-block: 0 var(--space-s);
+}
+
+.page-content__section ul:not([class]),
+.page-content__section ol:not([class]) {
+  margin-block: 0 var(--space-s);
+  padding-inline-start: var(--space-l);
+}
+
+.page-content__section ul:not([class]) { list-style: disc; }
+.page-content__section ol:not([class]) { list-style: decimal; }
+
+.page-content__section ul:not([class]) ul:not([class]) {
+  list-style: circle;
+  margin-block: var(--space-2xs) 0;
+}
+.page-content__section ul:not([class]) ul:not([class]) ul:not([class]) {
+  list-style: square;
+}
+.page-content__section ol:not([class]) ol:not([class]) {
+  list-style: lower-alpha;
+  margin-block: var(--space-2xs) 0;
+}
+
+.page-content__section ul:not([class]) > li + li,
+.page-content__section ol:not([class]) > li + li {
+  margin-block-start: var(--space-2xs);
+}
+
+.page-content__section ul:not([class]) > li::marker,
+.page-content__section ol:not([class]) > li::marker {
+  color: var(--color-brown-700);
+}
+
+/* Inline links in prose — animated underline grow with zest accent. */
+.page-content__section a:not([class]) {
+  text-decoration: none;
+  background-image:
+    linear-gradient(var(--color-zest), var(--color-zest)),
+    linear-gradient(currentColor, currentColor);
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: background-size var(--transition-base), color var(--transition-base);
+  color: var(--color-link);
+}
+
+.page-content__section a:not([class]):hover,
+.page-content__section a:not([class]):focus-visible {
+  background-size: 100% 3px, 0 1px;
+}
+
+.page-content__section a:not([class]):focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-content__section a:not([class]) { transition: none; }
+}
+
+.page-content__section strong { font-weight: var(--font-weight-bold); }
+.page-content__section em { font-style: italic; }
+
+/* Code */
+.page-content__section code {
+  padding: 0.1em 0.35em;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--color-sand-stone);
+  border-radius: var(--radius-sm);
+}
+
+.page-content__section pre {
+  margin-block: 0 var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-sand-stone);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: var(--step--1);
+  line-height: var(--line-height-snug);
+}
+
+.page-content__section pre code {
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* Block quotes — Halant serif with hanging punctuation. */
+.page-content__section blockquote {
+  position: relative;
+  margin-block: var(--space-2xl);
+  margin-inline: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1rem + 1.2vw, 2.25rem);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.015em;
+  color: var(--color-brown-900);
+}
+
+.page-content__section blockquote > p { margin-block: 0; }
+
+.page-content__section blockquote::before {
+  content: "\201C";
+  position: absolute;
+  inset-inline-start: -0.6em;
+  inset-block-start: 0;
+  line-height: inherit;
+}
+
+.page-content__section blockquote > p:last-of-type::after {
+  content: "\201D";
+}
+
+.page-content__section blockquote cite {
+  display: block;
+  margin-block-start: var(--space-m);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  font-style: normal;
+  color: var(--color-brown-900);
+  line-height: var(--line-height-snug);
+}
+
+/* Tables */
+.page-content__section table {
+  width: 100%;
+  margin-block: 0 var(--space-m);
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.page-content__section th,
+.page-content__section td {
+  padding: var(--space-2xs) var(--space-s);
+  border-bottom: 1px solid var(--color-border-default);
+  text-align: start;
+  vertical-align: top;
+}
+
+.page-content__section th:first-child,
+.page-content__section td:first-child {
+  padding-inline-start: 0;
+}
+
+.page-content__section thead th {
+  border-bottom-color: var(--color-border-strong);
+  color: var(--color-brown-900);
+  font-weight: var(--font-weight-bold);
+}
+
+/* Figures */
+.page-content__section figure {
+  margin-block: var(--space-l);
+  margin-inline: 0;
+}
+.page-content__section figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+}
+.page-content__section figcaption {
+  margin-block-start: var(--space-2xs);
+  font-size: var(--step--1);
+  color: var(--color-brown-700);
+}
+
+.page-content__section > img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-block: var(--space-m);
+  border-radius: var(--radius-md);
+}
+
+.page-content__section hr {
+  margin-block: var(--space-xl);
+  border: 0;
+  border-top: 1px solid var(--color-brown-900);
+  opacity: 0.15;
+}

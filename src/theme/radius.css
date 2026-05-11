@@ -1,0 +1,17 @@
+/* Fluid radii — clamp values copied verbatim from
+   scss/tokens/_radius.scss. */
+
+@theme {
+  --radius-xs: clamp(0.0938rem, 0.0833rem + 0.0463vw, 0.125rem);
+  --radius-sm: clamp(0.1875rem, 0.1667rem + 0.0926vw, 0.25rem);
+  --radius-md: clamp(0.375rem, 0.3333rem + 0.1852vw, 0.5rem);
+  --radius-lg: clamp(0.5625rem, 0.5rem + 0.2778vw, 0.75rem);
+  --radius-xl: clamp(1.125rem, 1rem + 0.5556vw, 1.5rem);
+  --radius-2xl: clamp(1.875rem, 1.6667rem + 0.9259vw, 2.5rem);
+  --radius-pill: 999px;
+
+  /* Semantic — named by role; generate rounded-hero, rounded-card, rounded-quick-link */
+  --radius-hero: clamp(2.75rem, 2.4583rem + 1.2963vw, 3.625rem);
+  --radius-card: clamp(0.9375rem, 0.8333rem + 0.4630vw, 1.25rem);
+  --radius-quick-link: calc(var(--radius-hero) / 2);
+}
