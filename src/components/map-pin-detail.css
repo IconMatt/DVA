@@ -3,7 +3,7 @@
 /* Leaflet's control container — we only style the panel itself. */
 .map-pin-detail {
   position: relative;
-  width: clamp(16rem, 28vw, 22rem);
+  width: clamp(18rem, 32vw, 26rem);
   padding: var(--space-m) var(--space-m) var(--space-s);
   background: var(--color-sweet-grass);
   border-radius: var(--radius-lg);
