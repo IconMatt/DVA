@@ -267,10 +267,10 @@
           </nav>
 
           <h1 class="service-search__title" id="about-landing-title" data-animate>
-            About the Agency
+            Veteran and Family Wellbeing Agency
           </h1>
 
-          <p class="service-search__lead" data-animate>
+          <p class="service-search__lead intro" data-animate>
             The Veteran and Family Wellbeing Agency helps veterans and families
             understand their options, connect with relevant services and navigate
             wellbeing support with more confidence.
@@ -548,6 +548,103 @@
         </div>
       </section>
 
+      <div class="testimonial-band">
+      <section class="testimonial" aria-labelledby="about-testimonial-title">
+        <h2 class="testimonial__title visually-hidden" id="about-testimonial-title">
+          What people say about our support
+        </h2>
+        <div class="testimonial__inner container" data-testimonial-carousel>
+          <figure
+            class="testimonial__figure"
+            aria-live="polite"
+            aria-atomic="true"
+            data-testimonial-figure
+          >
+            <blockquote class="testimonial__quote">
+              <p class="testimonial__text" data-testimonial-text>
+                &ldquo;This support helped me find balance and direction again.
+                I feel more confident, connected, and ready for whatever comes next.&rdquo;
+              </p>
+            </blockquote>
+            <figcaption class="testimonial__attribution">
+              <p class="testimonial__name" data-testimonial-name>John Smith</p>
+              <p class="testimonial__role" data-testimonial-role>Ex-Serving Member</p>
+            </figcaption>
+          </figure>
+
+          <figure class="testimonial__portrait" aria-hidden="true">
+            <img
+              class="testimonial__portrait-image testimonial__portrait-image--current"
+              data-parallax-media
+              data-parallax-mode="testimonial"
+              data-parallax-buffer-ratio="0.10"
+              data-parallax-speed="0.06"
+              data-parallax-limit="28"
+              data-testimonial-image-current
+              src="assets/images/site/Support image 7.png"
+              srcset="assets/images/site/Support image 7.png 2000w"
+              sizes="(min-width: 1120px) 24rem, (min-width: 840px) 20rem, 72vw"
+              alt=""
+              width="2000"
+              height="2000"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              class="testimonial__portrait-image testimonial__portrait-image--next"
+              data-parallax-media
+              data-parallax-mode="testimonial"
+              data-parallax-buffer-ratio="0.10"
+              data-parallax-speed="0.06"
+              data-parallax-limit="28"
+              data-testimonial-image-next
+              src="assets/images/site/Support image 7.png"
+              srcset="assets/images/site/Support image 7.png 2000w"
+              sizes="(min-width: 1120px) 24rem, (min-width: 840px) 20rem, 72vw"
+              alt=""
+              width="2000"
+              height="2000"
+              loading="lazy"
+              decoding="async"
+            />
+          </figure>
+
+          <div class="testimonial__controls" role="group" aria-label="Testimonial navigation">
+            <button
+              class="testimonial__control testimonial__control--previous"
+              type="button"
+              aria-label="Previous testimonial"
+              data-testimonial-previous
+              disabled
+            >
+              <img
+                class="testimonial__control-icon"
+                src="assets/images/icons/Property 1=Left arrow.svg"
+                alt=""
+                width="22"
+                height="22"
+              />
+            </button>
+            <button
+              class="testimonial__control testimonial__control--next"
+              type="button"
+              aria-label="Next testimonial"
+              data-testimonial-next
+            >
+              <img
+                class="testimonial__control-icon"
+                src="assets/images/icons/Property 1=Left arrow.svg"
+                alt=""
+                width="22"
+                height="22"
+              />
+            </button>
+            <p class="testimonial__page" aria-live="polite" data-testimonial-page>Page 1 of 2</p>
+          </div>
+        </div>
+      </section>
+      </div>
+
       <section class="cta-tray" aria-labelledby="cta-tray-title">
         <div class="cta-tray__inner container">
           <h2 class="cta-tray__title" id="cta-tray-title" data-animate>Not sure where to start?</h2>
@@ -735,9 +832,15 @@
                 var movement = Math.max(-limit, Math.min(limit, offset * speed));
                 var buffer = Math.max(limit + 2, rect.height * bufferRatio);
 
-                el.style.setProperty('--card-media-parallax-buffer', buffer + 'px');
-                el.style.setProperty('--card-media-parallax-buffer-negative', '-' + buffer + 'px');
-                el.style.setProperty('--card-media-parallax-offset', movement + 'px');
+                if (el.dataset.parallaxMode === 'testimonial') {
+                  el.style.setProperty('--testimonial-image-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-offset', movement + 'px');
+                } else {
+                  el.style.setProperty('--card-media-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-offset', movement + 'px');
+                }
               });
               parallaxTicking = false;
             };
@@ -750,6 +853,139 @@
             window.addEventListener('resize', updateParallax, { passive: true });
             updateParallax();
           }
+        }
+
+        // Testimonial carousel — cross-fades quote text, portrait image, and
+        // background gradient on next/prev. Mirrors the homepage implementation.
+        var testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
+        if (testimonialCarousel) {
+          var testimonialSection = testimonialCarousel.closest('.testimonial');
+          var testimonialFigure = testimonialCarousel.querySelector('[data-testimonial-figure]');
+          var testimonialText = testimonialCarousel.querySelector('[data-testimonial-text]');
+          var testimonialName = testimonialCarousel.querySelector('[data-testimonial-name]');
+          var testimonialRole = testimonialCarousel.querySelector('[data-testimonial-role]');
+          var testimonialImageCurrent = testimonialCarousel.querySelector('[data-testimonial-image-current]');
+          var testimonialImageNext = testimonialCarousel.querySelector('[data-testimonial-image-next]');
+          var testimonialPrevious = testimonialCarousel.querySelector('[data-testimonial-previous]');
+          var testimonialNext = testimonialCarousel.querySelector('[data-testimonial-next]');
+          var testimonialPage = testimonialCarousel.querySelector('[data-testimonial-page]');
+          var testimonials = [
+            {
+              quote: '“This support helped me find balance and direction again. I feel more confident, connected, and ready for whatever comes next.”',
+              name: 'John Smith',
+              role: 'Ex-Serving Member',
+              image: 'assets/images/site/Support image 7.png'
+            },
+            {
+              quote: '“Having access to these services has helped me immensely to feel supported through transition.”',
+              name: 'Jane Doe',
+              role: 'Ex-Serving Member',
+              image: 'assets/images/site/Support image 5.png'
+            }
+          ];
+          var activeTestimonialIndex = 0;
+          var testimonialIsChanging = false;
+          var testimonialFadeOut = 220;
+          var testimonialSettle = 980;
+          var testimonialImageSettle = 980;
+
+          var setTestimonialControls = function () {
+            testimonialPrevious.disabled =
+              activeTestimonialIndex === 0 || testimonialIsChanging;
+            testimonialNext.disabled =
+              activeTestimonialIndex === testimonials.length - 1 ||
+              testimonialIsChanging;
+          };
+
+          var setTestimonialImage = function (image, item) {
+            image.src = item.image;
+            image.srcset = item.image + ' 2000w';
+          };
+
+          var setTestimonialContent = function (item, index, updateImage) {
+            testimonialText.textContent = item.quote;
+            testimonialName.textContent = item.name;
+            testimonialRole.textContent = item.role;
+            if (updateImage) {
+              setTestimonialImage(testimonialImageCurrent, item);
+              setTestimonialImage(testimonialImageNext, item);
+            }
+            testimonialPage.textContent = 'Page ' + (index + 1) + ' of ' + testimonials.length;
+          };
+
+          var preloadTestimonialImage = function (src) {
+            return new Promise(function (resolve) {
+              var image = new Image();
+              image.onload = resolve;
+              image.onerror = resolve;
+              image.src = src;
+            });
+          };
+
+          var showTestimonial = function (nextIndex) {
+            if (
+              testimonialIsChanging ||
+              nextIndex === activeTestimonialIndex ||
+              nextIndex < 0 ||
+              nextIndex >= testimonials.length
+            ) {
+              return;
+            }
+
+            testimonialIsChanging = true;
+            testimonialCarousel.setAttribute('aria-busy', 'true');
+            setTestimonialControls();
+
+            if (testimonialSection) {
+              testimonialSection.classList.toggle('is-gradient-dark', nextIndex % 2 === 1);
+            }
+
+            preloadTestimonialImage(testimonials[nextIndex].image).then(function () {
+              if (reduced) {
+                activeTestimonialIndex = nextIndex;
+                setTestimonialContent(testimonials[activeTestimonialIndex], activeTestimonialIndex, true);
+                testimonialIsChanging = false;
+                testimonialCarousel.removeAttribute('aria-busy');
+                setTestimonialControls();
+
+                return;
+              }
+
+              testimonialFigure.classList.add('is-leaving');
+
+              window.setTimeout(function () {
+                activeTestimonialIndex = nextIndex;
+                setTestimonialContent(testimonials[activeTestimonialIndex], activeTestimonialIndex, false);
+                setTestimonialImage(testimonialImageNext, testimonials[activeTestimonialIndex]);
+                testimonialFigure.classList.remove('is-leaving', 'is-entering');
+                testimonialImageNext.classList.remove('is-entering');
+
+                void testimonialFigure.offsetWidth;
+                void testimonialImageNext.offsetWidth;
+                testimonialFigure.classList.add('is-entering');
+                testimonialImageNext.classList.add('is-entering');
+
+                window.setTimeout(function () {
+                  setTestimonialImage(testimonialImageCurrent, testimonials[activeTestimonialIndex]);
+                  testimonialFigure.classList.remove('is-entering');
+                  testimonialImageNext.classList.remove('is-entering');
+                  testimonialIsChanging = false;
+                  testimonialCarousel.removeAttribute('aria-busy');
+                  setTestimonialControls();
+                }, Math.max(testimonialSettle, testimonialImageSettle));
+              }, testimonialFadeOut);
+            });
+          };
+
+          testimonialPrevious.addEventListener('click', function () {
+            showTestimonial(activeTestimonialIndex - 1);
+          });
+
+          testimonialNext.addEventListener('click', function () {
+            showTestimonial(activeTestimonialIndex + 1);
+          });
+
+          setTestimonialControls();
         }
 
         // Mobile nav

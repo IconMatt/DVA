@@ -12,6 +12,7 @@
   font-size: var(--step-4);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
   color: var(--color-brown-900);
 }
 
