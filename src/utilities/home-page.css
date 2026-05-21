@@ -1,0 +1,6 @@
+/* Home-page-specific overrides. Port of scss/pages/_home.scss. */
+
+.page--home .resource-listing__page,
+.page--home .news-listing__page {
+  display: none;
+}

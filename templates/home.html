@@ -243,10 +243,38 @@
 
         <nav class="mobile-nav__nav" aria-label="Primary">
           <ul class="mobile-nav__list">
-            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Find a service</a></li>
-            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Wellbeing resources</a></li>
-            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">About</a></li>
-            <li class="mobile-nav__item"><a class="mobile-nav__link" href="#">Contact</a></li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Find a service
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/doc-search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Wellbeing resources
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="about-landing.html">
+                About
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Contact
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
           </ul>
         </nav>
 
@@ -292,7 +320,7 @@
         <div class="hero__inner container">
           <div class="hero__content">
             <h1 class="hero__title" id="hero-title" data-animate>
-              Supporting veterans and families wellbeing
+              Wellbeing support services for veterans and families
             </h1>
           </div>
 
@@ -318,6 +346,17 @@
                   </span>
                   <span class="quick-link__arrow" aria-hidden="true">
                     <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="20" height="20" />
+                  </span>
+                </a>
+              </li>
+              <li class="quick-links__item" data-animate>
+                <a class="quick-link quick-link--glass" href="tel:1800789789">
+                  <span class="quick-link__title">1800 789 789</span>
+                  <span class="quick-link__text">
+                    Available 8am&ndash;5pm (local time zones) Monday&ndash;Friday Australia-wide
+                  </span>
+                  <span class="quick-link__arrow" aria-hidden="true">
+                    <img src="assets/images/icons/phone.svg" alt="" width="20" height="20" />
                   </span>
                 </a>
               </li>
@@ -502,7 +541,7 @@
         <div class="feature-promo__inner container">
           <div class="feature-promo__body" data-animate>
             <span class="feature-promo__icon" aria-hidden="true">
-              <img src="assets/images/icon-device.svg" alt="" width="24" height="24" />
+              <img src="assets/images/icon-domains/health.svg" alt="" width="24" height="24" />
             </span>
             <p class="feature-promo__eyebrow">Transitioning from the ADF</p>
             <h2 class="feature-promo__title" id="feature-promo-title">
@@ -1130,6 +1169,7 @@
           - Parallax on the portrait uses 'testimonial' mode in the inline JS.
             Keep buffer-ratio data-attrs in sync with .testimonial scss.
       -->
+      <div class="testimonial-band">
       <section class="testimonial" aria-labelledby="testimonial-title">
         <h2 class="testimonial__title visually-hidden" id="testimonial-title">
           What people say about our support
@@ -1158,9 +1198,9 @@
               class="testimonial__portrait-image testimonial__portrait-image--current"
               data-parallax-media
               data-parallax-mode="testimonial"
-              data-parallax-buffer-ratio="0.08"
-              data-parallax-speed="0.02"
-              data-parallax-limit="8"
+              data-parallax-buffer-ratio="0.10"
+              data-parallax-speed="0.06"
+              data-parallax-limit="28"
               data-testimonial-image-current
               src="assets/images/site/Support image 7.png"
               srcset="assets/images/site/Support image 7.png 2000w"
@@ -1175,9 +1215,9 @@
               class="testimonial__portrait-image testimonial__portrait-image--next"
               data-parallax-media
               data-parallax-mode="testimonial"
-              data-parallax-buffer-ratio="0.08"
-              data-parallax-speed="0.02"
-              data-parallax-limit="8"
+              data-parallax-buffer-ratio="0.10"
+              data-parallax-speed="0.06"
+              data-parallax-limit="28"
               data-testimonial-image-next
               src="assets/images/site/Support image 7.png"
               srcset="assets/images/site/Support image 7.png 2000w"
@@ -1196,7 +1236,7 @@
               type="button"
               aria-label="Previous testimonial"
               data-testimonial-previous
-              hidden
+              disabled
             >
               <img
                 class="testimonial__control-icon"
@@ -1224,6 +1264,7 @@
           </div>
         </div>
       </section>
+      </div>
 
       <!--
         Drupal handoff — News listing (paragraph: news_listing)
@@ -1637,6 +1678,7 @@
 
         var testimonialCarousel = document.querySelector('[data-testimonial-carousel]');
         if (testimonialCarousel) {
+          var testimonialSection = testimonialCarousel.closest('.testimonial');
           var testimonialFigure = testimonialCarousel.querySelector('[data-testimonial-figure]');
           var testimonialText = testimonialCarousel.querySelector('[data-testimonial-text]');
           var testimonialName = testimonialCarousel.querySelector('[data-testimonial-name]');
@@ -1667,10 +1709,14 @@
           var testimonialImageSettle = 980;
 
           var setTestimonialControls = function () {
-            testimonialPrevious.hidden = activeTestimonialIndex === 0;
-            testimonialNext.hidden = activeTestimonialIndex === testimonials.length - 1;
-            testimonialPrevious.disabled = testimonialIsChanging;
-            testimonialNext.disabled = testimonialIsChanging;
+            // Both arrows are always visible; the inactive one renders in the
+            // .testimonial__control:disabled state (opacity 0.48) instead of
+            // being hidden — matches the design spec.
+            testimonialPrevious.disabled =
+              activeTestimonialIndex === 0 || testimonialIsChanging;
+            testimonialNext.disabled =
+              activeTestimonialIndex === testimonials.length - 1 ||
+              testimonialIsChanging;
           };
 
           var setTestimonialImage = function (image, item) {
@@ -1711,6 +1757,10 @@
             testimonialIsChanging = true;
             testimonialCarousel.setAttribute('aria-busy', 'true');
             setTestimonialControls();
+
+            if (testimonialSection) {
+              testimonialSection.classList.toggle('is-gradient-dark', nextIndex % 2 === 1);
+            }
 
             preloadTestimonialImage(testimonials[nextIndex].image).then(function () {
               if (reduced) {

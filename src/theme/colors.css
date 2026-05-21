@@ -1,0 +1,143 @@
+/* Colour tokens — single source of truth. No hex/rgb/hsl values may live
+   outside this file. Reflects the DVA Website C1 brand palette. */
+
+@theme {
+  /* Primary palette */
+  --color-macadamia: #fffbed;
+  --color-white: #fff;
+  --color-ironbark: #3e3a36;
+  --color-coastal: #c7d5de;
+  --color-sky: #e4eff3;
+  --color-mountain: #667485;
+
+  /* Secondary palette */
+  --color-brush: #e4dece;
+  --color-sand: #f8f1d1;
+
+  /* Accent palette */
+  --color-wattle: #ffeea9;
+
+  /* Ironbark tints — strokes, muted text, divider lines */
+  --color-ironbark-75: #66615b;
+  --color-ironbark-50: #817f7d;
+  --color-ironbark-25: #cfcecd;
+
+  /* Status — UI feedback */
+  --color-error: #b81237;
+  --color-error-bg: #f4dbe1;
+  --color-success: #008a07;
+  --color-success-bg: #bfe2c1;
+  --color-warning: #c95000;
+  --color-warning-bg: #f1d3bf;
+
+  /* Darker status shades for hover / pressed states (derived) */
+  --color-error-dark: #8a0e29;
+  --color-success-dark: #006d05;
+  --color-warning-dark: #9e3f00;
+
+  /* Legacy palette aliases — preserve the 32 component files that read
+     `--color-brown-*`, `--color-sand-stone`, `--color-sweet-grass*`,
+     `--color-slate-*`, `--color-zest*`, `--color-border-warm` directly.
+     New code should prefer the brand-named tokens above. */
+  --color-brown-900: var(--color-ironbark);
+  --color-brown-700: var(--color-ironbark-75);
+  --color-brown-500: var(--color-ironbark-50);
+  --color-brown-300: var(--color-ironbark-25);
+
+  --color-sand-stone: var(--color-macadamia);
+  --color-sweet-grass: var(--color-sand);
+  --color-sweet-grass-dark: var(--color-brush);
+
+  --color-slate-300: var(--color-sky);
+  --color-slate-500: var(--color-coastal);
+  --color-slate-700: var(--color-mountain);
+
+  --color-zest: var(--color-wattle);
+  --color-zest-dark: #e0d295; /* Derived: Wattle darkened ~12% for accent hover */
+
+  --color-border-warm: var(--color-brush);
+
+  /* Semantic roles — generate utilities like bg-ink, text-ink-muted, border-warm-strong */
+  --color-ink: var(--color-ironbark);
+  --color-ink-muted: var(--color-ironbark-50);
+  --color-ink-inverse: var(--color-white);
+  --color-link: var(--color-ironbark);
+  --color-link-hover: var(--color-ironbark-75);
+  --color-border-default: var(--color-brush);
+  --color-border-strong: var(--color-mountain);
+  --color-bg-page: var(--color-macadamia);
+  --color-bg-muted: var(--color-sand);
+  --color-bg-dark: var(--color-ironbark);
+  --color-bg-card: var(--color-white);
+  --color-accent: var(--color-wattle);
+  --color-accent-hover: var(--color-zest-dark);
+  --color-focus: var(--color-wattle);
+
+  /* Urgent CTAs now use the real Error red instead of dark ink */
+  --color-emergency: var(--color-error);
+  --color-emergency-dark: var(--color-error-dark);
+
+  /* Shadows (generates shadow-sm/md/lg utilities) — tinted with Ironbark */
+  --shadow-sm: 0 1px 2px rgb(62 58 54 / 8%);
+  --shadow-md: 0 4px 12px rgb(62 58 54 / 10%);
+  --shadow-lg: 0 12px 32px rgb(62 58 54 / 14%);
+}
+
+/* Mirror the new brand palette into :root so every token is always present
+   in the compiled output, even before any component references it. Tailwind
+   v4 otherwise tree-shakes unreferenced @theme tokens. */
+:root {
+  --color-macadamia: #fffbed;
+  --color-ironbark: #3e3a36;
+  --color-coastal: #c7d5de;
+  --color-sky: #e4eff3;
+  --color-mountain: #667485;
+  --color-brush: #e4dece;
+  --color-sand: #f8f1d1;
+  --color-wattle: #ffeea9;
+  --color-ironbark-75: #66615b;
+  --color-ironbark-50: #817f7d;
+  --color-ironbark-25: #cfcecd;
+  --color-error: #b81237;
+  --color-error-bg: #f4dbe1;
+  --color-error-dark: #8a0e29;
+  --color-success: #008a07;
+  --color-success-bg: #bfe2c1;
+  --color-success-dark: #006d05;
+  --color-warning: #c95000;
+  --color-warning-bg: #f1d3bf;
+  --color-warning-dark: #9e3f00;
+}
+
+/* Translucent overlays — preserved as named tokens for legacy component CSS.
+   New code should prefer Tailwind v4 slash-opacity (e.g. bg-ironbark/40). */
+:root {
+  --overlay-white-02: rgb(255 255 255 / 2%);
+  --overlay-white-04: rgb(255 255 255 / 4%);
+  --overlay-white-06: rgb(255 255 255 / 6%);
+  --overlay-white-08: rgb(255 255 255 / 8%);
+  --overlay-white-10: rgb(255 255 255 / 10%);
+  --overlay-white-14: rgb(255 255 255 / 14%);
+  --overlay-white-16: rgb(255 255 255 / 16%);
+  --overlay-white-18: rgb(255 255 255 / 18%);
+  --overlay-white-22: rgb(255 255 255 / 22%);
+  --overlay-white-25: rgb(255 255 255 / 25%);
+  --overlay-white-30: rgb(255 255 255 / 30%);
+  --overlay-white-35: rgb(255 255 255 / 35%);
+  --overlay-white-45: rgb(255 255 255 / 45%);
+  --overlay-white-82: rgb(255 255 255 / 88%);
+  --overlay-white-92: rgb(255 255 255 / 92%);
+  --overlay-black-18: rgb(0 0 0 / 18%);
+  --overlay-black-30: rgb(0 0 0 / 30%);
+  --overlay-gray-10: rgb(187 187 187 / 10%);
+  --overlay-gray-18: rgb(187 187 187 / 18%);
+  --overlay-gray-55: rgb(187 187 187 / 55%);
+  --overlay-sand-stone-30: rgb(255 251 237 / 30%); /* Macadamia */
+  --overlay-brown-92: rgb(62 58 54 / 94%); /* Ironbark */
+  --overlay-brown-60: rgb(62 58 54 / 60%);
+  --overlay-brown-40: rgb(62 58 54 / 40%);
+  --overlay-brown-20: rgb(62 58 54 / 20%);
+  --overlay-shadow-sm: rgb(62 58 54 / 8%);
+  --overlay-shadow-md: rgb(62 58 54 / 10%);
+  --overlay-shadow-lg: rgb(62 58 54 / 14%);
+}

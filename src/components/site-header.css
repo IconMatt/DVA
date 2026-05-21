@@ -1,0 +1,252 @@
+.site-header {
+  /* Glass header — translucent Macadamia + backdrop blur. Painted via a
+     ::before overlay so the blur and fill don't fight the inner content.
+     Filter list wrapped in a custom property so Tailwind v4's `--minify`
+     (Lightning CSS) doesn't strip whitespace between filter functions or
+     drop the unprefixed pair (see LESSONS). */
+  --site-header-backdrop: blur(14px) saturate(140%);
+
+  background: transparent;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  /* Slide handled by JS toggling .is-hidden on scroll-down and removing it */
+  /* on scroll-up. */
+  transition: transform 0.28s ease;
+  will-change: transform;
+
+  &.is-hidden {
+    transform: translateY(-100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--color-macadamia) 75%, transparent);
+  /* stylelint-disable-next-line property-no-vendor-prefix */
+  -webkit-backdrop-filter: var(--site-header-backdrop);
+  backdrop-filter: var(--site-header-backdrop);
+  pointer-events: none;
+}
+
+/* While the mobile nav is open, the header sits flush against the sliding */
+/* .mobile-nav panel below — drop the glass panel entirely so the seam */
+/* disappears. :has() inspects the menu trigger's aria-expanded. */
+.site-header:has([data-menu-trigger][aria-expanded="true"])::before {
+  display: none;
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-s);
+  padding-block: clamp(0.875rem, 2.2vw, 5.25rem);
+
+  @media (max-width: 1119px) {
+    padding-block-start: 2.25rem;
+  }
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-header__logo {
+  display: block;
+
+  /* 2.5rem → 3rem across 360–1440px */
+  height: clamp(2.5rem, 2.3333rem + 0.7407vw, 3rem);
+  width: auto;
+
+  /* 320–359px sliver: scale 2rem → 2.5rem so the brand fits next to the Menu */
+  /* pill at the narrowest viewports. At 360px the main clamp resumes at 2.5rem. */
+  @media (max-width: 359px) {
+    height: clamp(2rem, 0.5rem + 7.5vw, 2.5rem);
+  }
+}
+
+.site-nav {
+  display: none;
+
+  @media (min-width: 1120px) {
+    display: block;
+    margin-inline-start: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
+  }
+}
+
+.site-nav__list {
+  display: flex;
+  gap: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
+}
+
+.site-nav__link {
+  display: inline-block;
+  padding-block: var(--space-2xs);
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size var(--transition-base), color var(--transition-base);
+  &:hover, &:focus-visible { background-size: 100% 3px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-brown-700);
+  }
+}
+
+.site-header__utility {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-inline-start: auto;
+  flex-wrap: wrap;
+}
+
+/* Pill — shared shape for search, bookmark, 24/7, exit. */
+.site-header__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-3xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  background: transparent;
+  border: 1px solid var(--color-brown-900);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+.site-header__pill-icon {
+  display: block;
+  /* 1.25rem reads stronger than 1rem at button scale; still shorter than the */
+  /* pill's text line-box, so this doesn't grow the pill itself. */
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+}
+
+.site-header__pill--exit .site-header__pill-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+/* Icon-led pills — slight negative pull trims the SVG's built-in viewBox */
+/* whitespace so the icon doesn't visually float away from the left edge. */
+.site-header__pill--search .site-header__pill-icon,
+.site-header__pill--bookmark .site-header__pill-icon {
+  margin-inline-start: -3px;
+}
+
+.site-header__pill:hover {
+  background: var(--color-slate-700);
+  border-color: var(--color-slate-700);
+  color: var(--color-ink-inverse);
+}
+
+.site-header__pill:hover .site-header__pill-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Filled dark variant — 24/7 support. */
+.site-header__pill--help {
+  background: var(--color-brown-900);
+  color: var(--color-ink-inverse);
+}
+
+.site-header__pill--help:hover {
+  background: var(--color-slate-700);
+  border-color: var(--color-slate-700);
+  color: var(--color-ink-inverse);
+}
+
+/* Quick exit — fixed to viewport top-right, sandstone fill, no border. */
+/* Tab shape: viewport-adjacent corners flat, bottom-left rounded so the pill */
+/* reads as deliberately attached to the corner. min-height meets WCAG 2.5.8. */
+.site-header__pill--exit {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 200;
+  min-height: 24px;
+  padding-block: 0;
+  background: var(--color-sand-stone);
+  border-color: transparent;
+  border-radius: 0 0 0 var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.site-header__pill--exit:hover {
+  background: var(--color-slate-700);
+  border-color: var(--color-slate-700);
+  color: var(--color-ink-inverse);
+}
+
+.site-header__pill--exit:hover .site-header__pill-icon {
+  filter: brightness(0) invert(1);
+}
+
+/* Menu pill — always outline, never filled (even when only pill visible at mobile). */
+.site-header__pill--menu {
+  background: transparent;
+  color: var(--color-brown-900);
+}
+
+/* ---------- Menu icon: + rotates to × ---------- */
+.site-header__menu-icon {
+  display: block;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header__menu-icon::before,
+.site-header__menu-icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.site-header__menu-icon::before {
+  width: 100%;
+  height: 2px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+}
+
+.site-header__menu-icon::after {
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.site-header__pill--menu[aria-expanded="true"] .site-header__menu-icon {
+  transform: rotate(45deg);
+}

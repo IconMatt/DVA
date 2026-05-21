@@ -1,0 +1,88 @@
+/* ============================================================================= */
+/* Downloads — vertical list of file rows on a sand-stone wash */
+/* ----------------------------------------------------------------------------- */
+/* .downloads             outer wrapper (gap between rows). */
+/* .downloads__list       <ul>; reset + flex column. */
+/* .downloads__item       <li>; one file per row. */
+/* .downloads__link       full-row anchor — name on the left, meta + icon */
+/* on the right. Whole row is the click target. */
+/* .downloads__name       file name (left). */
+/* .downloads__meta       extension + size (right). */
+/* .downloads__icon       inline SVG download glyph. */
+
+/* Drupal handoff: */
+/* Paragraph type: downloads_group → downloads_item (multiple) */
+/* Fields per item: */
+/* field_download_label  (text) */
+/* field_download_file   (file; provides filename/extension/size) */
+/* Preprocess: extract URL, extension, formatted size; compose meta */
+/* string ("PDF / 300k"). */
+/* Twig:       paragraph--downloads-group.html.twig wraps <ul>; */
+/* paragraph--downloads-item.html.twig renders one <li> + <a>. */
+/* ============================================================================= */
+
+.downloads {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.downloads__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.downloads__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-s) var(--space-m);
+  background: transparent;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-lg);
+  color: var(--color-brown-900);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base);
+
+  &:hover {
+    background: var(--color-brush);
+    border-color: var(--color-brown-900);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+  }
+}
+
+.downloads__name {
+  flex: 1;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--step-0);
+  line-height: var(--line-height-snug);
+}
+
+.downloads__end {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-s);
+  flex: none;
+  color: var(--color-brown-900);
+}
+
+.downloads__meta {
+  font-size: var(--step--1);
+  color: var(--color-brown-700);
+}
+
+.downloads__icon {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}

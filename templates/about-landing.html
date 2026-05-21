@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="../" />
+    <title>About — Veteran and Family Wellbeing Agency</title>
+    <meta
+      name="description"
+      content="About the Veteran and Family Wellbeing Agency — who we are, what we do, and how we support veterans, families, and the wider community."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Halant:wght@400;600&display=swap"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body id="top" class="page page--about-landing">
+    <!--
+      ================================================================
+      About landing page — chrome (header, search overlay, mobile nav,
+      CTA tray, footer) mirrors the other templates. Page body content
+      is intentionally a placeholder so the visual scaffolding can be
+      iterated on; add components inside <main> above the .cta-tray as
+      they're built.
+      ================================================================
+    -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="site-header__pill site-header__pill--exit" href="https://www.bom.gov.au/">
+      <span>Quick exit</span>
+      <img
+        class="site-header__pill-icon"
+        src="assets/images/icons/Property 1=Close.svg"
+        alt=""
+        width="14"
+        height="14"
+      />
+    </a>
+
+    <header class="site-header" role="banner">
+      <div class="site-header__inner container">
+        <a class="site-header__brand" href="/" aria-label="Veteran and Family Wellbeing Agency home">
+          <img
+            class="site-header__logo"
+            src="assets/images/logo.svg"
+            alt=""
+            width="198"
+            height="36"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-nav__list">
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Find a service</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Wellbeing Resources</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="about-landing.html" aria-current="page">About</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-header__utility">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Property 1=Search.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>Search</span>
+          </button>
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Star.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+          <button class="site-header__pill site-header__pill--menu" type="button" data-menu-trigger aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+            <span>Menu</span>
+            <span class="site-header__menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search overlay (sitewide search + service search) -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search options" hidden>
+      <div class="search-overlay__inner container">
+        <div class="search-overlay__header">
+          <h2 class="search-overlay__title">Search Options</h2>
+          <button class="search-overlay__close" type="button" aria-label="Close search">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
+        <hr class="search-overlay__divider search-overlay__divider--header" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Sitewide search</h3>
+          <form class="search-overlay__form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-site-search"
+                    name="q"
+                    type="search"
+                    placeholder="Search site content…"
+                  />
+                  <label class="service-search__label" for="overlay-site-search">
+                    Search site content
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button class="button search-overlay__submit" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <hr class="search-overlay__divider" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Search for a service</h3>
+          <form class="search-overlay__service-form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-keyword"
+                    name="q"
+                    type="search"
+                    placeholder="Service, topic or provider…"
+                  />
+                  <label class="service-search__label" for="overlay-service-keyword">
+                    Search by service, topic or provider
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/location.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-location"
+                    name="location"
+                    type="text"
+                    placeholder="E.g. Richmond VIC or 3141"
+                  />
+                  <label class="service-search__label" for="overlay-service-location">
+                    Suburb or postcode (optional)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button search-overlay__submit" type="submit">
+              Find a service
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+      <div class="mobile-nav__inner">
+        <div class="mobile-nav__header">
+          <button class="mobile-nav__close" type="button" aria-label="Close navigation">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
+        <nav class="mobile-nav__nav" aria-label="Primary">
+          <ul class="mobile-nav__list">
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Find a service
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/doc-search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Wellbeing resources
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="about-landing.html" aria-current="page">
+                About
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Contact
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mobile-nav__footer">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger-mobile aria-expanded="false" aria-controls="search-overlay">
+            <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+            <span>Search</span>
+          </button>
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main" class="site-main">
+      <!--
+        About landing — breadcrumb + H1 + hero image. Reuses the
+        .service-search shell so the inset-card treatment, focus rings,
+        and floating-label rhythm match the other "landing" templates
+        (resource-collection). Replace the hero image src once a final
+        About asset is provided.
+      -->
+      <div class="service-search-band">
+      <div class="service-search-collection">
+      <section class="service-search" id="about-landing" aria-labelledby="about-landing-title">
+        <div class="service-search__inner container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb__list">
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="/">Home</a></li>
+              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">About</li>
+            </ol>
+          </nav>
+
+          <h1 class="service-search__title" id="about-landing-title" data-animate>
+            About the Agency
+          </h1>
+
+          <p class="service-search__lead" data-animate>
+            The Veteran and Family Wellbeing Agency helps veterans and families
+            understand their options, connect with relevant services and navigate
+            wellbeing support with more confidence.
+          </p>
+        </div>
+      </section>
+      <figure class="service-search__media" data-animate>
+        <img
+          src="assets/images/transition.png"
+          alt=""
+          data-parallax-media
+          data-parallax-mode="translate"
+          data-parallax-buffer-ratio="0.08"
+          data-parallax-speed="0.06"
+          data-parallax-limit="30"
+        />
+      </figure>
+      </div>
+      </div>
+
+      <!--
+        About-landing quick-links — 3-column grid of section entry points.
+        Five .quick-link--referral cards + one .quick-link--emergency for
+        urgent support. Uses the base .quick-links grid (3 cols at md+).
+        Wrapped in a .about-grid-band so the row reads as its own block
+        distinct from the breadcrumb panel above and the CTA tray below.
+      -->
+      <div class="about-grid-band">
+      <section class="about-grid" aria-labelledby="about-grid-title">
+        <h2 id="about-grid-title" class="visually-hidden">Explore the Agency</h2>
+        <ul class="quick-links quick-links--about" data-animate-stagger>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--referral" href="#">
+              <span class="quick-link__title">About the Agency</span>
+              <span class="quick-link__text">
+                We help veterans and families find trusted support, practical
+                information and clear next steps during and after service.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--referral" href="#">
+              <span class="quick-link__title">What we help with</span>
+              <span class="quick-link__text">
+                Support that reflects your situation, needs and next steps.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--referral" href="#">
+              <span class="quick-link__title">News and media</span>
+              <span class="quick-link__text">
+                Latest news, media releases, announcements and events.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--referral" href="#">
+              <span class="quick-link__title">Assistance and referrals</span>
+              <span class="quick-link__text">
+                If you would like assistance from the Agency or you would like
+                to make a referral of someone who needs support.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--referral" href="#">
+              <span class="quick-link__title">Feedback form</span>
+              <span class="quick-link__text">
+                If you would like to make a Complaint, Compliment or Suggestion
+                to us about the agency or website. This includes services
+                delivered on our behalf by providers.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+          <li class="quick-links__item" data-animate>
+            <a class="quick-link quick-link--emergency" href="#">
+              <span class="quick-link__title">Get urgent support</span>
+              <span class="quick-link__text">
+                Access 24/7 crisis and urgent support services right away.
+              </span>
+              <span class="quick-link__arrow" aria-hidden="true">
+                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      </div>
+
+      <!--
+        Latest news — same component as home.html (paragraph: news_listing).
+        Static markup for the prototype; carousel controls are disabled
+        because the demo set is exactly three cards.
+      -->
+      <section class="news-listing" aria-labelledby="about-news-title" data-news-carousel>
+        <div class="news-listing__inner container">
+          <header class="news-listing__header" data-animate>
+            <h2 class="news-listing__title" id="about-news-title">Latest news</h2>
+            <div class="news-listing__header-actions">
+              <a class="news-listing__link" href="#">More</a>
+              <div class="news-listing__controls" role="group" aria-label="Latest news navigation">
+                <p class="news-listing__page" aria-live="polite" data-news-carousel-status>
+                  1-3 of 3
+                </p>
+                <button
+                  class="news-listing__control news-listing__control--previous"
+                  type="button"
+                  aria-label="Previous news"
+                  data-news-carousel-previous
+                  disabled
+                >
+                  <img
+                    class="news-listing__control-icon"
+                    src="assets/images/icons/Property 1=Left arrow.svg"
+                    alt=""
+                    width="22"
+                    height="22"
+                  />
+                </button>
+                <button
+                  class="news-listing__control news-listing__control--next"
+                  type="button"
+                  aria-label="Next news"
+                  data-news-carousel-next
+                  disabled
+                >
+                  <img
+                    class="news-listing__control-icon"
+                    src="assets/images/icons/Property 1=Left arrow.svg"
+                    alt=""
+                    width="22"
+                    height="22"
+                  />
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <div
+            class="news-listing__viewport"
+            tabindex="0"
+            aria-label="Latest news"
+            data-news-carousel-viewport
+          >
+            <ul class="card-grid card-grid--news-carousel" data-news-carousel-track>
+              <li class="card-grid__item" data-animate data-news-carousel-item>
+                <article class="card card--news">
+                  <figure class="card__media">
+                    <img
+                      class="card__media-image"
+                      src="assets/images/site/Support image 5.png"
+                      srcset="assets/images/site/Support image 5.png 2000w"
+                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
+                      alt=""
+                      width="2000"
+                      height="2000"
+                      loading="lazy"
+                      decoding="async"
+                      data-parallax-media
+                      data-parallax-mode="translate"
+                      data-parallax-buffer-ratio="0.08"
+                      data-parallax-speed="0.02"
+                      data-parallax-limit="6"
+                    />
+                    <span class="card__badge">Health</span>
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__date">4 March 2026</p>
+                    <h3 class="card__title">
+                      <a class="card__title-link" href="#">How to find balance in life again after service</a>
+                    </h3>
+                    <p class="card__excerpt">
+                      Discover practical strategies to build routine, strengthen
+                      wellbeing, and navigate life after leaving the military.
+                    </p>
+                    <p class="card__actions">
+                      <a class="button button--tertiary" href="#">Read more</a>
+                    </p>
+                  </div>
+                </article>
+              </li>
+
+              <li class="card-grid__item" data-animate data-news-carousel-item>
+                <article class="card card--news">
+                  <figure class="card__media">
+                    <img
+                      class="card__media-image"
+                      src="assets/images/site/Support image 4.png"
+                      srcset="assets/images/site/Support image 4.png 2000w"
+                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
+                      alt=""
+                      width="2000"
+                      height="2000"
+                      loading="lazy"
+                      decoding="async"
+                      data-parallax-media
+                      data-parallax-mode="translate"
+                      data-parallax-buffer-ratio="0.08"
+                      data-parallax-speed="0.02"
+                      data-parallax-limit="6"
+                    />
+                    <span class="card__badge">Support</span>
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__date">12 March 2026</p>
+                    <h3 class="card__title">
+                      <a class="card__title-link" href="#">Building strong veteran and family support in Australia</a>
+                    </h3>
+                    <p class="card__excerpt">
+                      Learn how relationships and local networks improve mental
+                      health and connection.
+                    </p>
+                    <p class="card__actions">
+                      <a class="button button--tertiary" href="#">Read more</a>
+                    </p>
+                  </div>
+                </article>
+              </li>
+
+              <li class="card-grid__item" data-animate data-news-carousel-item>
+                <article class="card card--news">
+                  <figure class="card__media">
+                    <img
+                      class="card__media-image"
+                      src="assets/images/site/Support image 6.png"
+                      srcset="assets/images/site/Support image 6.png 2000w"
+                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
+                      alt=""
+                      width="2000"
+                      height="2000"
+                      loading="lazy"
+                      decoding="async"
+                      data-parallax-media
+                      data-parallax-mode="translate"
+                      data-parallax-buffer-ratio="0.08"
+                      data-parallax-speed="0.02"
+                      data-parallax-limit="6"
+                    />
+                    <span class="card__badge">Events</span>
+                  </figure>
+                  <div class="card__body">
+                    <p class="card__date">26 March 2026</p>
+                    <h3 class="card__title">
+                      <a class="card__title-link" href="#">Exploring purpose and fulfilling activities after service</a>
+                    </h3>
+                    <p class="card__excerpt">
+                      Discover practical ways to explore new goals, engage in
+                      meaningful activities, and reconnect with what matters.
+                    </p>
+                    <p class="card__actions">
+                      <a class="button button--tertiary" href="#">Read more</a>
+                    </p>
+                  </div>
+                </article>
+              </li>
+              <li class="card-grid__spacer" aria-hidden="true"></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-tray" aria-labelledby="cta-tray-title">
+        <div class="cta-tray__inner container">
+          <h2 class="cta-tray__title" id="cta-tray-title" data-animate>Not sure where to start?</h2>
+          <ul class="quick-links quick-links--tray" data-animate-stagger>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#find-a-service">
+                <span class="quick-link__title">Find a service</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Wellbeing resources</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Contact us</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link quick-link--emergency" href="#">
+                <span class="quick-link__title">Get urgent help now</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner container">
+        <div class="site-footer__logos">
+          <img
+            class="site-footer__logo site-footer__logo--government"
+            src="assets/images/austalian government logo.svg"
+            alt="Australian Government"
+            width="134"
+            height="69"
+          />
+          <span class="site-footer__logo-divider" aria-hidden="true"></span>
+          <img
+            class="site-footer__logo site-footer__logo--agency"
+            src="assets/images/logo.svg"
+            alt="Veteran and Family Wellbeing Agency"
+            width="230"
+            height="42"
+          />
+        </div>
+
+        <div class="site-footer__brand">
+          <p class="site-footer__acknowledgement">
+            The Veteran and Family Wellbeing Agency acknowledges the Traditional
+            Custodians of the lands we live on. We honour the contributions of
+            all Aboriginal and Torres Strait Islander people that have served,
+            whose contributions have helped to shape our nation.
+          </p>
+          <nav aria-label="Social media">
+            <ul class="social-links">
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Instagram">
+                  <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Facebook">
+                  <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="YouTube">
+                  <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__list">
+            <li class="site-footer__item site-footer__item--heading"><a class="site-footer__link site-footer__link--heading" href="about-landing.html">About the Agency</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">How we help</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">News</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">Contact and feedback</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">I need urgent help</a></li>
+          </ul>
+        </nav>
+
+        <a class="site-footer__back-to-top" href="#top">
+          <img
+            class="site-footer__back-icon"
+            src="assets/images/icons/Property 1=Left arrow.svg"
+            alt=""
+            width="18"
+            height="18"
+          />
+          <span>Back to top</span>
+        </a>
+        <hr class="site-footer__rule" aria-hidden="true" />
+        <p class="site-footer__copyright">&copy; 2026 Copyright</p>
+        <ul class="site-footer__legal-list">
+          <li><a class="site-footer__link" href="#">Privacy</a></li>
+          <li><a class="site-footer__link" href="#">Terms and Conditions</a></li>
+          <li><a class="site-footer__link" href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        var trapFocus = function (container, e) {
+          var focusable = Array.prototype.slice.call(
+            container.querySelectorAll('a[href], button:not([disabled]):not([hidden]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+          );
+          if (focusable.length < 2) return;
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        };
+
+        // Staggered entrance animations
+        var animated = document.querySelectorAll('[data-animate]');
+        document.querySelectorAll('[data-animate-stagger]').forEach(function (group) {
+          var children = group.querySelectorAll(':scope > [data-animate]');
+          children.forEach(function (el, i) {
+            if (!el.style.getPropertyValue('--animate-delay')) {
+              el.style.setProperty('--animate-delay', (i * 80) + 'ms');
+            }
+          });
+        });
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          animated.forEach(function (el) { el.classList.add('is-visible'); });
+        } else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+          animated.forEach(function (el) { io.observe(el); });
+          document.documentElement.classList.add('js-animations');
+        }
+
+        // Parallax — translate-mode only. ticking flag throttles to one rAF/frame.
+        if (!reduced) {
+          var mediaLayers = document.querySelectorAll('[data-parallax-media]');
+          if (mediaLayers.length) {
+            var parallaxTicking = false;
+            var updateParallax = function () {
+              var vh = window.innerHeight;
+              var viewportCenter = vh / 2;
+              mediaLayers.forEach(function (el) {
+                var speed = parseFloat(el.dataset.parallaxSpeed) || 0.03;
+                var limit = parseFloat(el.dataset.parallaxLimit) || 8;
+                var bufferRatio = parseFloat(el.dataset.parallaxBufferRatio) || 0.08;
+                var rect = el.getBoundingClientRect();
+                var elCenter = rect.top + rect.height / 2;
+                var offset = viewportCenter - elCenter;
+                var movement = Math.max(-limit, Math.min(limit, offset * speed));
+                var buffer = Math.max(limit + 2, rect.height * bufferRatio);
+
+                el.style.setProperty('--card-media-parallax-buffer', buffer + 'px');
+                el.style.setProperty('--card-media-parallax-buffer-negative', '-' + buffer + 'px');
+                el.style.setProperty('--card-media-parallax-offset', movement + 'px');
+              });
+              parallaxTicking = false;
+            };
+            window.addEventListener('scroll', function () {
+              if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+              }
+            }, { passive: true });
+            window.addEventListener('resize', updateParallax, { passive: true });
+            updateParallax();
+          }
+        }
+
+        // Mobile nav
+        var mobileNav = document.getElementById('mobile-nav');
+        var menuTrigger = document.querySelector('[data-menu-trigger]');
+
+        function openMobileNav() {
+          mobileNav.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          menuTrigger.setAttribute('aria-expanded', 'true');
+          menuTrigger.setAttribute('aria-label', 'Close navigation');
+          var firstFocusable = mobileNav.querySelector('button:not([disabled]):not([hidden]), a[href]');
+          if (firstFocusable) firstFocusable.focus();
+        }
+
+        function closeMobileNav() {
+          mobileNav.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          menuTrigger.setAttribute('aria-expanded', 'false');
+          menuTrigger.setAttribute('aria-label', 'Open navigation');
+          menuTrigger.focus();
+        }
+
+        if (mobileNav && menuTrigger) {
+          var mobileNavClose = mobileNav.querySelector('.mobile-nav__close');
+          if (mobileNavClose) {
+            mobileNavClose.addEventListener('click', closeMobileNav);
+          }
+          menuTrigger.addEventListener('click', function () {
+            if (mobileNav.hasAttribute('hidden')) {
+              openMobileNav();
+            } else {
+              closeMobileNav();
+            }
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!mobileNav.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeMobileNav();
+              } else if (e.key === 'Tab') {
+                trapFocus(mobileNav, e);
+              }
+            }
+          });
+        }
+
+        // Search overlay
+        var searchOverlay = document.getElementById('search-overlay');
+        var searchTrigger = document.querySelector('[data-search-trigger]');
+        var searchTriggerMobile = document.querySelector('[data-search-trigger-mobile]');
+        var overlayCloseBtn = searchOverlay && searchOverlay.querySelector('.search-overlay__close');
+        var lastSearchTrigger = searchTrigger;
+
+        function openSearchOverlay(trigger) {
+          lastSearchTrigger = trigger || searchTrigger;
+          searchOverlay.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'true');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'true');
+          if (overlayCloseBtn) overlayCloseBtn.focus();
+        }
+
+        function closeSearchOverlay() {
+          searchOverlay.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'false');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'false');
+          if (lastSearchTrigger) lastSearchTrigger.focus();
+        }
+
+        if (searchOverlay && searchTrigger) {
+          searchTrigger.addEventListener('click', function () { openSearchOverlay(searchTrigger); });
+          if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', function () { openSearchOverlay(searchTriggerMobile); });
+          if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
+          searchOverlay.addEventListener('click', function (e) {
+            if (e.target === searchOverlay) closeSearchOverlay();
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!searchOverlay.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeSearchOverlay();
+              } else if (e.key === 'Tab') {
+                trapFocus(searchOverlay, e);
+              }
+            }
+          });
+        }
+
+        // Button activation: inactive (zest) until a field in that form is focused or has a value.
+        var activatableForms = document.querySelectorAll('.search-overlay form, .service-search__form');
+        activatableForms.forEach(function (form) {
+          var submitBtn = form.querySelector('.search-overlay__submit');
+          if (!submitBtn) return;
+          var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+          var formFocused = false;
+
+          function syncButton() {
+            var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+            submitBtn.classList.toggle('is-active', formFocused || hasValue);
+          }
+
+          inputs.forEach(function (inp) {
+            inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+            inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+            inp.addEventListener('input', syncButton);
+          });
+        });
+
+        var backToTop = document.querySelector('.site-footer__back-to-top');
+        if (backToTop) {
+          backToTop.addEventListener('click', function (e) {
+            if (reduced) return;
+            e.preventDefault();
+            var startY = window.scrollY || window.pageYOffset;
+            if (startY === 0) return;
+            var duration = 1400;
+            var startTime = null;
+            var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
+            var step = function (now) {
+              if (startTime === null) startTime = now;
+              var elapsed = now - startTime;
+              var t = Math.min(1, elapsed / duration);
+              window.scrollTo({ top: startY * (1 - easeOutCubic(t)), behavior: 'instant' });
+              if (t < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+          });
+        }
+
+        // Hide the sticky header on scroll-down, reveal it on scroll-up.
+        (function () {
+          var siteHeader = document.querySelector('.site-header');
+          if (!siteHeader) return;
+          var lastY = window.scrollY || 0;
+          var threshold = 80;
+          var headerTicking = false;
+          window.addEventListener('scroll', function () {
+            if (headerTicking) return;
+            window.requestAnimationFrame(function () {
+              var y = window.scrollY || 0;
+              if (y > 0) siteHeader.classList.add('is-scrolled');
+              else siteHeader.classList.remove('is-scrolled');
+
+              if (y < threshold) {
+                siteHeader.classList.remove('is-hidden');
+              } else if (y > lastY) {
+                siteHeader.classList.add('is-hidden');
+              } else if (y < lastY) {
+                siteHeader.classList.remove('is-hidden');
+              }
+              lastY = y;
+              headerTicking = false;
+            });
+            headerTicking = true;
+          }, { passive: true });
+        })();
+      })();
+    </script>
+  </body>
+</html>

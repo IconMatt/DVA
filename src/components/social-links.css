@@ -1,0 +1,32 @@
+.social-links {
+  display: flex;
+  gap: var(--space-xs);
+  margin-top: var(--space-l);
+}
+
+.social-links__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
+  height: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
+  border-radius: var(--radius-sm);
+  color: var(--color-brown-900);
+  background: var(--color-macadamia);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.social-links__link:hover {
+  background: var(--color-sky);
+  color: var(--color-brown-900);
+}
+
+.social-links__icon {
+  display: block;
+  width: clamp(1.375rem, 1.2917rem + 0.3704vw, 1.625rem);
+  height: clamp(1.375rem, 1.2917rem + 0.3704vw, 1.625rem);
+  transition: filter var(--transition-base);
+}

@@ -7,7 +7,9 @@ This document mirrors the four core Utopia calculator modes in a static-project-
 - `Grid`
 - `Clamp`
 
-The goal is not to recreate every Utopia UI detail. The goal is to preserve the same mental model, formulas, and token outputs in a way that fits this HTML/SCSS build and future Drupal/GovCMS handoff.
+The goal is not to recreate every Utopia UI detail. The goal is to preserve the same mental model, formulas, and token outputs in a way that fits this Tailwind v4 build and future Drupal / GovCMS handoff via Single Directory Components (SDC).
+
+Calculator outputs feed `@theme` blocks in `src/theme/typography.css`, `src/theme/spacing.css`, and (for grids) the `:root` block in the same files. Tailwind v4 reads `@theme` at build time and generates matching utilities (`text-step-0`, `m-s`, `gap-l`, etc.).
 
 ## Shared Model
 
@@ -71,30 +73,43 @@ Negative steps reduce the base size by dividing through the ratio.
 
 ### Default Output Shape
 
+Output target is `src/theme/typography.css`. The Tailwind-native names go in `@theme` (Tailwind generates `text-step-0`, `text-step-1`, … utilities); the legacy `--step-*` mirrors stay in `:root` so existing component CSS keeps resolving.
+
 ```css
+@theme {
+  --text-step--2: clamp(...);
+  --text-step--1: clamp(...);
+  --text-step-0:  clamp(...);
+  --text-step-1:  clamp(...);
+  --text-step-2:  clamp(...);
+  --text-step-3:  clamp(...);
+  --text-step-4:  clamp(...);
+  --text-step-5:  clamp(...);
+}
+
 :root {
-  --step--2: clamp(...);
-  --step--1: clamp(...);
-  --step-0: clamp(...);
-  --step-1: clamp(...);
-  --step-2: clamp(...);
-  --step-3: clamp(...);
-  --step-4: clamp(...);
-  --step-5: clamp(...);
+  --step--2: var(--text-step--2);
+  --step--1: var(--text-step--1);
+  --step-0:  var(--text-step-0);
+  --step-1:  var(--text-step-1);
+  --step-2:  var(--text-step-2);
+  --step-3:  var(--text-step-3);
+  --step-4:  var(--text-step-4);
+  --step-5:  var(--text-step-5);
 }
 ```
 
 ### Project Mapping
 
-This repo can map the generated scale back onto semantic typography tokens instead of exposing raw Utopia names everywhere:
+This repo maps the generated scale onto semantic font-size aliases (in `:root`, not `@theme` — they're internal names, not utility-generating tokens):
 
 ```text
-$font-size-sm   -> var(--step--1)
-$font-size-base -> var(--step-0)
-$font-size-lg   -> var(--step-1)
-$font-size-xl   -> var(--step-2)
-$font-size-2xl  -> var(--step-3)
-$font-size-3xl  -> var(--step-4)
+--font-size-sm   -> var(--step--1)
+--font-size-base -> var(--step-0)
+--font-size-lg   -> var(--step-1)
+--font-size-xl   -> var(--step-2)
+--font-size-2xl  -> var(--step-3)
+--font-size-3xl  -> var(--step-4)
 ```
 
 ## Space
@@ -153,39 +168,42 @@ Any two named sizes can be paired:
 
 ### Default Output Shape
 
+Output target is `src/theme/spacing.css`. Tailwind-native `--spacing-*` names go in `@theme` (generating `m-s`, `p-l`, `gap-2xl`, etc.); the legacy `--space-*` mirrors stay in `:root` for existing component CSS.
+
 ```css
-:root {
-  --space-3xs: clamp(...);
-  --space-2xs: clamp(...);
-  --space-xs: clamp(...);
-  --space-s: clamp(...);
-  --space-m: clamp(...);
-  --space-l: clamp(...);
-  --space-xl: clamp(...);
-  --space-2xl: clamp(...);
-  --space-3xl: clamp(...);
+@theme {
+  --spacing-3xs: clamp(...);
+  --spacing-2xs: clamp(...);
+  --spacing-xs:  clamp(...);
+  --spacing-s:   clamp(...);
+  --spacing-m:   clamp(...);
+  --spacing-l:   clamp(...);
+  --spacing-xl:  clamp(...);
+  --spacing-2xl: clamp(...);
+  --spacing-3xl: clamp(...);
 
-  --space-xs-s: clamp(...);
-  --space-s-m: clamp(...);
-  --space-m-l: clamp(...);
-  --space-s-l: clamp(...);
+  --spacing-xs-s: clamp(...);
+  --spacing-s-m:  clamp(...);
+  --spacing-m-l:  clamp(...);
+  --spacing-s-l:  clamp(...);
 }
-```
 
-### Project Mapping
+:root {
+  --space-3xs: var(--spacing-3xs);
+  --space-2xs: var(--spacing-2xs);
+  --space-xs:  var(--spacing-xs);
+  --space-s:   var(--spacing-s);
+  --space-m:   var(--spacing-m);
+  --space-l:   var(--spacing-l);
+  --space-xl:  var(--spacing-xl);
+  --space-2xl: var(--spacing-2xl);
+  --space-3xl: var(--spacing-3xl);
 
-This repo keeps SCSS spacing aliases on top of the generated tokens:
-
-```text
-$spacing-3xs -> var(--space-3xs)
-$spacing-2xs -> var(--space-2xs)
-$spacing-xs  -> var(--space-xs)
-$spacing-sm  -> var(--space-s)
-$spacing-md  -> var(--space-m)
-$spacing-lg  -> var(--space-l)
-$spacing-xl  -> var(--space-xl)
-$spacing-2xl -> var(--space-2xl)
-$spacing-3xl -> var(--space-3xl)
+  --space-xs-s: var(--spacing-xs-s);
+  --space-s-m:  var(--spacing-s-m);
+  --space-m-l:  var(--spacing-m-l);
+  --space-s-l:  var(--spacing-s-l);
+}
 ```
 
 ## Grid
@@ -217,13 +235,16 @@ That matches the broad behavior of Utopia’s grid calculator, where the outer c
 
 ### Default Output Shape
 
-```css
-:root {
-  --grid-max-width: 77.5rem;
-  --grid-gutter: var(--space-s-l);
-  --grid-columns: 12;
-}
+Grid layout values live in `:root` inside `src/theme/spacing.css` (they're internal layout knobs, not utility-generating tokens). The `.u-container` and `.u-grid` selectors live in `src/utilities/container.css`.
 
+```css
+/* src/theme/spacing.css :root */
+--grid-max-width: 77.5rem;
+--grid-gutter: var(--space-s-l);
+--grid-columns: 12;
+--container-padding: clamp(1.5rem, 4vw, 10rem);
+
+/* src/utilities/container.css */
 .u-container {
   max-width: var(--grid-max-width);
   padding-inline: var(--grid-gutter);
@@ -233,6 +254,7 @@ That matches the broad behavior of Utopia’s grid calculator, where the outer c
 .u-grid {
   display: grid;
   gap: var(--grid-gutter);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 }
 ```
 
@@ -251,6 +273,8 @@ The generic clamp calculator is the escape hatch for any length token that does 
 - relative to: `viewport` or `container`
 
 ### Output Shape
+
+Custom one-off tokens go in `:root` inside the appropriate `src/theme/*.css` file (or in `src/theme/spacing.css` if there's no obvious home). They are not added to `@theme` unless you specifically want a Tailwind utility generated for them.
 
 ```css
 :root {
@@ -311,9 +335,9 @@ The panel parses the live space-scale table to find the space token whose maximu
 The **Generate** section bundles the live CSS outputs from the three calculators into a single `# Foundations setup` prompt that a UX designer can paste directly into Claude Code.
 
 The prompt contains:
-- `_typography.scss` — the fluid type scale CSS custom properties (`--step-*`)
-- `_spacing.scss` — the fluid space scale (`--space-*`) plus semantic SCSS aliases (`$spacing-sm` etc.)
-- `_grid.scss` — the grid tokens; `--grid-max-width` is overridden with the exact Figma-derived container rem value if the Figma grid panel was used
+- `src/theme/typography.css` — the fluid type scale via `@theme` (`--text-step-*`) plus `:root` legacy mirrors (`--step-*`)
+- `src/theme/spacing.css` — the fluid space scale via `@theme` (`--spacing-*`) plus `:root` legacy mirrors (`--space-*`) and the grid `:root` block (`--grid-max-width`, `--grid-gutter`, `--grid-columns`)
+- `src/utilities/container.css` — `.u-container` and `.u-grid` selectors that consume the grid tokens
 - A completion checklist
 
 Brand colours, fonts, corner radius, and shadows are intentionally excluded — those are design decisions made separately and do not belong to the clamp/scale tooling.
@@ -377,7 +401,7 @@ Twig notes:
 
 - Keep the template thin.
 - Keep calculator math in JavaScript, not Twig.
-- Keep output token naming predictable so the result can be pasted into SCSS token files.
+- Keep output token naming predictable so the result can be pasted directly into `src/theme/typography.css` and `src/theme/spacing.css` `@theme` blocks.
 
 Known implementation risks:
 

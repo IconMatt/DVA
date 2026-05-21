@@ -1,0 +1,192 @@
+/* Hamburger — hidden once desktop nav is visible. */
+.site-header__pill--menu {
+  @media (min-width: 1120px) {
+    display: none;
+  }
+}
+
+/* 24/7 support — hidden only below sm; appears alongside Menu from sm upward. */
+.site-header__pill--help {
+  @media (max-width: 559px) {
+    display: none;
+  }
+}
+
+/* Search and saved items — hidden below md; join the row from md upward. */
+.site-header__pill--search,
+.site-header__pill--bookmark {
+  @media (max-width: 839px) {
+    display: none;
+  }
+}
+
+/* Override: pills in the mobile nav footer are always visible. */
+.mobile-nav__footer .site-header__pill {
+  display: inline-flex;
+}
+
+/* ---------- Overlay ---------- */
+.mobile-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: var(--color-macadamia);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  animation: mobile-nav-in 260ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.mobile-nav[hidden] {
+  display: none !important;
+}
+
+@keyframes mobile-nav-in {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Layout ---------- */
+.mobile-nav__inner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: clamp(0.875rem, 2.2vw, 5.25rem) var(--container-padding) var(--space-xl);
+  padding-block-start: 8rem;
+  gap: var(--space-xl);
+}
+
+/* ---------- Nav links ---------- */
+.mobile-nav__nav {
+  flex: 1;
+}
+
+.mobile-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+/* Card-style nav items — match the .quick-links--tray (CTA tray) treatment */
+/* exactly: same flex layout, same asymmetric padding, same title font, with */
+/* the about-landing colour palette (Brush / Sand, Sky icon → White on hover). */
+.mobile-nav__link {
+  --icon-bg: var(--color-sky);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+  /* Mirrors .quick-link:not(:has(.quick-link__text)) — title-only padding. */
+  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-m);
+  font-family: var(--font-body);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  text-decoration: none;
+  background: var(--color-brush);
+  border: 1px solid var(--color-brush);
+  border-radius: var(--radius-lg);
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+    color var(--transition-base);
+
+  @media (min-width: 840px) {
+    font-size: var(--font-size-base);
+  }
+}
+
+.mobile-nav__link:hover {
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+  color: var(--color-brown-900);
+}
+
+.mobile-nav__link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--icon-bg);
+  color: var(--color-brown-900);
+  flex-shrink: 0;
+  transition: background-color var(--transition-base);
+}
+
+.mobile-nav__link-icon img {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+/* ---------- Footer utility ---------- */
+.mobile-nav__footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  padding-block-start: var(--space-l);
+  border-top: 1px solid var(--color-border-default);
+}
+
+
+/* ---------- Close button ---------- */
+.mobile-nav__header {
+  position: absolute;
+  top: var(--space-2xs);
+  right: var(--container-padding);
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav__close {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  padding: var(--space-3xs) var(--space-xs);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  background: transparent;
+  border: 1px solid var(--color-brown-900);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: background-color var(--transition-base), color var(--transition-base);
+
+  img {
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    flex: none;
+  }
+
+  &:hover {
+    background: var(--color-slate-700);
+    border-color: var(--color-slate-700);
+    color: var(--color-ink-inverse);
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--color-focus); outline-offset: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-nav {
+    animation: none;
+  }
+}

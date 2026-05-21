@@ -1,0 +1,424 @@
+.service-search-band {
+  background: var(--color-macadamia);
+  padding-block: var(--space-s);
+}
+
+/* When the band is the first child of <main> (services-directory: sits directly */
+/* under the header), drop the top padding so it reads continuous with the header. */
+main > .service-search-band:first-child {
+  padding-block-start: 0;
+}
+
+.service-search {
+  margin-inline: 0.75rem;
+  @media (min-width: 840px) { margin-inline: 0.9rem; }
+
+  background: var(--color-coastal);
+  border-radius: var(--radius-hero);
+  overflow: clip;
+}
+
+/* Service-detail uses the Coastal fill so the breadcrumb band reads as a */
+/* header above the Brush content card directly below it. */
+.page--service-detail .service-search {
+  background: var(--color-coastal);
+}
+
+/* Resource-collection + about-landing use Brush for the breadcrumb /
+   search panel. */
+.page--resource-collection .service-search,
+.page--about-landing .service-search {
+  background: var(--color-brush);
+}
+
+.service-search__inner {
+  padding-inline: calc(var(--container-padding) - 0.75rem);
+  @media (min-width: 840px) { padding-inline: calc(var(--container-padding) - 0.9rem); }
+
+  /* Symmetric padding — block matches inline so the cream/sand-stone card */
+  /* reads as a balanced panel regardless of which content shape sits in it */
+  /* (breadcrumb + h1 + form on listings, breadcrumb + h1 on details, etc.). */
+  padding-block: var(--space-l);
+  padding-inline: var(--space-l);
+
+  @media (min-width: 840px) {
+    padding-block: calc(var(--container-padding) - 0.9rem);
+    padding-inline: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+.service-search__title {
+  /* Hold to h2 size so the services-directory h1 matches the home h2 usage. */
+  font-size: var(--step-4);
+  margin-bottom: var(--space-m);
+}
+
+/* Restore the base h1 size on the resource library landing — it's a
+   content/listing page, not a search-led hero like services-directory,
+   so its H1 reads at the true step-5 from base/_typography.scss. */
+.page--resource-library .service-search__title {
+  font-size: var(--step-5);
+}
+
+/* Lead / eyebrow text between H1 and the form. Used on listing pages whose */
+/* hero needs an explanatory line (e.g. resource-library) — services-directory */
+/* drops straight from H1 to the search form so this is opt-in. Uses the */
+/* shared eyebrow mixin (step-0 + regular + slight letter-spacing) so it */
+/* reads as a quiet caption against the H1. */
+.service-search__lead {
+  font-size: var(--step-0); font-weight: var(--font-weight-regular); color: var(--color-brown-900); letter-spacing: 0.02em; text-wrap: pretty;
+
+  margin-block: 0 var(--space-m);
+  line-height: var(--line-height-normal);
+}
+
+.service-search__form {
+  --animate-delay: 100ms;
+
+  display: grid;
+  gap: var(--space-s);
+  grid-template-columns: 1fr;
+
+  @media (min-width: 840px) {
+    grid-template-columns: 1fr 1fr auto;
+    align-items: stretch;
+  }
+}
+
+/* Single-field variant — keyword input + submit, no location. */
+/* Used on resource-library where the search has one field, not two. */
+/* Capped so a single input doesn't read as a banner-wide bar at desktop. */
+.service-search__form--single {
+  max-width: 40rem;
+
+  @media (min-width: 840px) {
+    grid-template-columns: 1fr auto;
+  }
+}
+
+.service-search__field {
+  min-width: 0;
+}
+
+/* Bordered input container — holds icon + floating-label input. */
+.service-search__input-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-2xs) var(--space-s);
+  min-height: 3.5rem;
+  height: 100%;
+  background: var(--color-white);
+  border: 1px solid var(--color-brown-900);
+
+  /* Fluid radius — scales 10px → 14px across viewports. */
+  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
+  cursor: text;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+
+  &:focus-within {
+    border-color: var(--color-brown-900);
+
+    /* Zest outer glow — picks up the project focus colour */
+    /* (var(--color-focus) = var(--color-zest)) so the focus ring reads as part of the */
+    /* same vocabulary used elsewhere (button :focus-ring, etc.). */
+    box-shadow: 0 0 0 3px var(--color-zest);
+    outline: 3px solid transparent; /* keeps layout stable; real focus ring on the input */
+  }
+}
+
+.service-search__input-icon {
+  flex: none;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  /* Full opacity — icons should read as dark brown, matching the border. */
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/* Positioning context for the floating label. */
+.service-search__input-body {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+}
+
+/* Floating label — resting state: centred in the field, full size (acts as placeholder). */
+/* Active/filled state: floats to the top at a smaller size. */
+.service-search__label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-regular);
+  color: var(--color-ink-muted);
+  line-height: 1.2;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition:
+    top var(--transition-fast),
+    transform var(--transition-fast),
+    font-size var(--transition-fast);
+}
+
+/* Floated state — when the input is focused OR already has a value. */
+.service-search__input:focus + .service-search__label,
+.service-search__input:not(:placeholder-shown) + .service-search__label {
+  top: 0;
+  transform: translateY(0);
+  font-size: var(--step--2);
+  font-weight: var(--font-weight-semibold);
+}
+
+.service-search__input {
+  display: block;
+  width: 100%;
+  padding: 0;
+
+  /* Pushes the cursor/text below the floated label in the active state. */
+  padding-top: 1.15rem;
+  min-height: 0;
+  font-size: var(--step-0);
+  color: var(--color-ink);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+
+  &::placeholder {
+    color: var(--color-slate-700);
+  }
+
+  /* In the resting state, hide the browser placeholder — */
+  /* the label sitting centred serves as the visual hint instead. */
+  &:not(:focus)::placeholder {
+    color: transparent;
+  }
+
+  /* Focus state is rendered on the wrap via :focus-within (border-color + */
+  /* box-shadow ring). Suppress the input's own outline so we don't show two */
+  /* focus rings stacked on top of each other. */
+  &:focus-visible {
+    outline: none;
+  }
+
+  /* Remove browser-native search chrome (clear button, etc.). */
+  &[type="search"]::-webkit-search-decoration,
+  &[type="search"]::-webkit-search-cancel-button,
+  &[type="search"]::-webkit-search-results-button,
+  &[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+}
+
+.service-search__submit {
+  justify-self: start;
+  align-self: center;
+}
+
+.service-search__helpers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-s);
+  row-gap: var(--space-2xs);
+  margin-top: var(--space-m);
+  font-size: var(--step-0);
+  color: var(--color-brown-900);
+}
+
+.service-search__helpers-prompt {
+  color: var(--color-brown-900);
+  font-weight: var(--font-weight-medium);
+}
+
+.service-search__helpers-actions {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-s);
+  row-gap: var(--space-2xs);
+}
+
+.service-search__helpers a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor), linear-gradient(currentColor, currentColor);
+  background-position: 0 100%, 100% 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 0 1px, 100% 1px;
+  transition: background-size var(--transition-base), color var(--transition-base);
+  &:hover, &:focus-visible { background-size: 100% 3px, 0 1px; }
+  @media (prefers-reduced-motion: reduce) { transition: none; }
+
+  color: var(--color-link);
+  font-weight: var(--font-weight-regular);
+  /* Keep the link as one atomic chunk — when the row runs out of horizontal */
+  /* space the link wraps to its own line instead of breaking mid-phrase. */
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------- */
+/* Resource-collection variant — 2-column header (cream card + photo) */
+/* Scoped to .page--resource-collection so the listing pages keep the existing */
+/* single-panel header. The grid lives on a new .service-search-collection */
+/* wrapper so we can drop the cream card's bleed margin (it would otherwise */
+/* double up against the right-hand figure inside the grid). */
+/* ---------------------------------------------------------------------------- */
+.page--resource-collection,
+.page--resource-article,
+.page--about-landing {
+  .service-search-collection {
+    display: grid;
+    gap: var(--space-s);
+    grid-template-columns: 1fr;
+    margin-inline: 0.75rem;
+
+    @media (min-width: 840px) {
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: var(--space-s);
+      margin-inline: 0.9rem;
+      align-items: stretch;
+    }
+  }
+
+  /* Override .service-search bleed-wrap inside the grid — the grid wrapper */
+  /* owns the inline margin now. */
+  .service-search-collection > .service-search {
+    margin-inline: 0;
+  }
+
+  /* Restore the base h1 size on this page. The component partial holds */
+  /* .service-search__title at step-4 ("h2 size") for listing pages that share */
+  /* home.html's hero rhythm, but a Resource Collection / Article is a content */
+  /* page — its H1 reads at the true h1 step-5 from base/_typography.scss */
+  /* (which now carries the extended large-monitor scaling). */
+  .service-search__title {
+    font-size: var(--step-5);
+    margin-block: var(--space-2xs) 0;
+  }
+
+  .service-search__eyebrow {
+    font-size: var(--step-0); font-weight: var(--font-weight-regular); color: var(--color-brown-900); letter-spacing: 0.02em; text-wrap: pretty;
+
+    margin-block: 0;
+  }
+
+  /* Mobile stack uses a normal gap (matches the breadcrumb mobile rhythm — */
+  /* var(--space-l)). md+ takes the full breathing room so the panel reads as */
+  /* a generous hero with the form anchored well below the H1. */
+  .service-search__form {
+    margin-block-start: var(--space-l);
+
+    @media (min-width: 840px) {
+      /* Composed from existing tokens — sums to ~133px (mobile-md) and */
+      /* ~204px (desktop). No raw px values, no new tokens. */
+      margin-block-start: calc(var(--space-3xl) + var(--space-3xl));
+    }
+  }
+
+  /* Article banner — date + tag list. Same vertical rhythm as the */
+  /* resource-collection form group; lets the article cream card read at */
+  /* the same height as the resource-collection cream card. */
+  .article-banner__updated {
+    margin-block: var(--space-l) 0;
+    color: var(--color-brown-900);
+    font-size: var(--step--1);
+
+    @media (min-width: 840px) {
+      margin-block-start: calc(var(--space-3xl) + var(--space-3xl));
+    }
+  }
+
+  .article-banner__tags {
+    margin-block-start: var(--space-s);
+  }
+
+  /* About-landing lead sits at the bottom of the cream card so the panel */
+  /* reads at the same height as resource-article (H1 at top, content at */
+  /* bottom). Uses the same calc(--space-3xl × 2) gap as the article banner */
+  /* and form so the three templates stay visually consistent. */
+  .service-search__lead {
+    margin-block-start: var(--space-l);
+
+    @media (min-width: 840px) {
+      margin-block-start: calc(var(--space-3xl) + var(--space-3xl));
+    }
+  }
+
+  /* Reuse the .card--resource .tag treatment (sand-stone fill + umber ink) */
+  /* so the chips stand out cleanly against the sweet-grass banner. */
+  .article-banner__tags .tag {
+    color: var(--color-brown-900);
+    background: var(--color-sand-stone);
+  }
+
+  .service-search__media {
+    position: relative;
+    margin: 0;
+    border-radius: var(--radius-hero);
+    overflow: clip;
+    background: var(--color-sweet-grass);
+
+    /* Mobile: figure owns the height (img is absolutely positioned for parallax). */
+    min-height: 16rem;
+
+    @media (min-width: 840px) {
+      /* Desktop: stretch to match the cream card's height via the grid. */
+      min-height: 0;
+    }
+  }
+
+  /* Img is the parallax layer — absolutely positioned with a height buffer */
+  /* so the translate stays inside the figure's rounded mask (LESSONS.md: */
+  /* cropped image parallax needs a height-based bleed buffer). Reuses the */
+  /* --card-media-parallax-* custom properties written by the shared parallax */
+  /* JS in mode="translate". */
+  .service-search__media img {
+    --card-media-parallax-offset: 0px;
+    --card-media-parallax-buffer: 0px;
+    --card-media-parallax-buffer-negative: 0px;
+
+    position: absolute;
+    inset-inline: 0;
+    inset-block: var(--card-media-parallax-buffer-negative);
+    width: 100%;
+    height: calc(100% + var(--card-media-parallax-buffer) + var(--card-media-parallax-buffer));
+    object-fit: cover;
+    transform: translate3d(0, var(--card-media-parallax-offset), 0);
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-search__media img {
+      transform: none;
+    }
+  }
+}
+
+/* Article actions row — back link on the left, save pill on the right. */
+/* Lives outside the cream banner card, sits between banner and content. */
+/* Overrides the service-detail-context margin on .service-detail__back — */
+/* that class is reused here for visual consistency but the article band */
+/* lays it out as a horizontal flex row, not inside a positioned hero. */
+.page--resource-article .article-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-s);
+
+  .service-detail__back {
+    margin: 0;
+  }
+}
