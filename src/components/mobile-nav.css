@@ -20,9 +20,18 @@
   }
 }
 
-/* Override: pills in the mobile nav footer are always visible. */
-.mobile-nav__footer .site-header__pill {
+/* Pills inside the mobile nav are always visible (they're hidden in the */
+/* site header at this viewport — see the .site-header__pill rules above). */
+.mobile-nav .site-header__pill {
   display: inline-flex;
+}
+
+/* When the mobile nav is open, hide every site-header pill except the */
+/* Menu (close) trigger — the Search, Bookmark and 24/7 pills are already */
+/* represented inside the menu, so showing them in the header too is */
+/* duplicate noise. Scoped via :has() so no JS state class is needed. */
+html:has(#mobile-nav:not([hidden])) .site-header .site-header__pill:not(.site-header__pill--menu) {
+  display: none;
 }
 
 /* ---------- Overlay ---------- */
@@ -65,12 +74,20 @@
 /* ---------- Nav links ---------- */
 .mobile-nav__nav {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
 }
 
 .mobile-nav__list {
   display: flex;
   flex-direction: column;
   gap: var(--space-s);
+}
+
+/* Search row — sits directly below the menu list, left-aligned pill. */
+.mobile-nav__search {
+  display: flex;
 }
 
 /* Card-style nav items — match the .quick-links--tray (CTA tray) treatment */
@@ -133,10 +150,9 @@
 .mobile-nav__footer {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
   gap: var(--space-2xs);
-  padding-block-start: var(--space-l);
-  border-top: 1px solid var(--color-border-default);
 }
 
 
