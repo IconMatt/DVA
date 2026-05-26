@@ -194,7 +194,7 @@
   color: var(--color-ink-inverse);
 }
 
-/* Quick exit — fixed to viewport top-right, sandstone fill, no border. */
+/* Quick exit — fixed to viewport top-right, wattle fill, no border. */
 /* Tab shape: viewport-adjacent corners flat, bottom-left rounded so the pill */
 /* reads as deliberately attached to the corner. min-height meets WCAG 2.5.8. */
 .site-header__pill--exit {
@@ -204,7 +204,7 @@
   z-index: 200;
   min-height: 24px;
   padding-block: 0;
-  background: var(--color-sand-stone);
+  background: var(--color-wattle);
   border-color: transparent;
   border-radius: 0 0 0 var(--radius-md);
   box-shadow: var(--shadow-sm);

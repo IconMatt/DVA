@@ -44,7 +44,7 @@
   font-size: var(--step--1);
   font-weight: var(--font-weight-semibold);
   color: var(--color-brown-900);
-  background: transparent;
+  background: var(--color-white);
   border: 0;
   border-radius: var(--radius-pill);
   cursor: pointer;

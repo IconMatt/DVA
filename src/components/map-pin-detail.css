@@ -6,7 +6,8 @@
   width: clamp(18rem, 32vw, 26rem);
   padding: var(--space-m) var(--space-m) var(--space-s);
   background: var(--color-sweet-grass);
-  border-radius: var(--radius-lg);
+  /* Custom fluid value: between --radius-xl (18–24px) and --radius-2xl (30–40px). */
+  border-radius: clamp(1.5rem, 1.3333rem + 0.7407vw, 2rem);
   box-shadow: var(--shadow-md);
   pointer-events: auto;
 }
