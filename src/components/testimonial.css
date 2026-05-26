@@ -1,12 +1,53 @@
+/* Full-width band that places the testimonial on a white row, distinct */
+/* from the surrounding Macadamia page. Vertical gap mirrors the testimonial */
+/* card's horizontal inset so the white frame looks symmetrical. */
+.testimonial-band {
+  background: var(--color-white);
+  padding-block: 0.75rem;
+  @media (min-width: 840px) { padding-block: 0.9rem; }
+}
+
 .testimonial {
+  position: relative;
+  isolation: isolate;
   margin-inline: 0.75rem;
   @media (min-width: 840px) { margin-inline: 0.9rem; }
 
-  margin-block: var(--space-xl);
+  margin-block: 0;
   background: var(--color-sweet-grass);
   border-radius: var(--radius-hero);
   overflow: hidden;
 }
+
+/* Two stacked gradient layers cross-fade when the carousel advances. */
+/* Light is the default (index 0); Dark shows on odd indexes. */
+/* inset: 0 -2px mirrors the hero overbleed guard from LESSONS.md — */
+/* rounded panel + GPU-composited opacity transition can otherwise bleed */
+/* a sub-pixel strip at the edge during resize repaints. */
+.testimonial::before,
+.testimonial::after {
+  content: "";
+  position: absolute;
+  inset: 0 -2px;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity;
+}
+
+.testimonial::before {
+  background-image: url("../assets/images/gradients/Gradient-BGLight.png");
+}
+
+.testimonial::after {
+  background-image: url("../assets/images/gradients/Gradient-BGDark.png");
+  opacity: 0;
+}
+
+.testimonial.is-gradient-dark::before { opacity: 0; }
+.testimonial.is-gradient-dark::after { opacity: 1; }
 
 .testimonial__inner {
   padding-inline: calc(var(--container-padding) - 0.75rem);
@@ -21,7 +62,7 @@
 
   @media (min-width: 840px) {
     padding-block: var(--space-2xl) calc(var(--container-padding) - 0.9rem);
-    grid-template-columns: minmax(0, 1fr) clamp(12rem, 15vw, 16rem);
+    grid-template-columns: minmax(0, 1fr) clamp(14rem, 18vw, 20rem);
     grid-template-rows: minmax(0, 1fr) auto;
     align-items: end;
   }
@@ -84,8 +125,9 @@
 .testimonial__text {
   font-family: var(--font-display);
   font-weight: var(--font-weight-regular);
-  font-size: clamp(1.875rem, 1.175rem + 1.45vw, 3.5rem);
+  font-size: clamp(2rem, 1.25rem + 1.55vw, 3.75rem);
   line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
   color: var(--color-brown-900);
 }
 
@@ -108,13 +150,13 @@
 .testimonial__portrait {
   position: relative;
   isolation: isolate;
-  width: min(45%, 9rem);
+  width: min(55%, 11rem);
   aspect-ratio: 1 / 1.414;
   margin: 0;
   overflow: hidden;
   justify-self: end;
   background: var(--color-slate-500);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
 
   @media (min-width: 840px) {
     grid-column: 2;
@@ -122,6 +164,20 @@
     align-self: end;
     width: 100%;
   }
+}
+
+/* Decorative status dot — small red circle in the top-right of the portrait. */
+.testimonial__portrait::after {
+  content: "";
+  position: absolute;
+  top: var(--space-s);
+  right: var(--space-s);
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--color-error);
+  z-index: 2;
+  pointer-events: none;
 }
 
 .testimonial__portrait-image {
@@ -196,7 +252,7 @@
   align-items: center;
   justify-content: center;
   color: var(--color-brown-900);
-  background: var(--color-sand-stone);
+  background: var(--color-white);
   border: 0;
   border-radius: var(--radius-sm);
   transition:
@@ -210,7 +266,7 @@
 }
 
 .testimonial__control:not(:disabled):hover {
-  background: var(--color-zest);
+  background: var(--color-coastal);
 }
 
 .testimonial__control-icon {
@@ -245,5 +301,10 @@
     opacity: 0;
     transform: none;
     animation: none;
+  }
+
+  .testimonial::before,
+  .testimonial::after {
+    transition: none;
   }
 }
