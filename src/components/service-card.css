@@ -4,7 +4,7 @@
   flex-direction: column;
   gap: var(--space-m);
   padding: var(--space-m);
-  background: var(--color-sand-stone);
+  background: var(--color-brush);
   border-radius: var(--radius-2xl);
   transition: background-color var(--transition-base);
 }
@@ -37,7 +37,7 @@
   font-size: var(--step--2);
   font-weight: var(--font-weight-semibold);
   color: var(--color-brown-900);
-  background: var(--color-zest);
+  background: var(--color-sky);
   border-radius: var(--radius-sm);
   line-height: var(--line-height-snug);
 }
@@ -89,10 +89,9 @@
   gap: var(--space-3xs) var(--space-2xs);
 }
 
-/* Override the default sand-stone tag fill — on a sand-stone card the base */
-/* .tag colour vanishes; sweet-grass-dark keeps the chips distinct. */
+/* Macadamia chips read distinctly on the Brush service-card surface. */
 .service-card__tags .tag {
-  background: var(--color-sweet-grass-dark);
+  background: var(--color-macadamia);
   color: var(--color-brown-900);
 }
 

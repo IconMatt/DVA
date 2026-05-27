@@ -36,3 +36,13 @@
     margin-top: 0;
   }
 }
+
+/* Share icons in this context: Coastal resting, Brush on hover (footer */
+/* social icons stay Macadamia / Sky from social-links.css). */
+.article-share .social-links__link {
+  background: var(--color-coastal);
+}
+
+.article-share .social-links__link:hover {
+  background: var(--color-brush);
+}

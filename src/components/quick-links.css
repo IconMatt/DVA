@@ -69,7 +69,7 @@
   grid-row: 2;
   font-size: clamp(0.9302rem, 0.8867rem + 0.1942vw, 1.0613rem);
   line-height: var(--line-height-snug);
-  color: var(--color-brown-700);
+  color: var(--color-brown-900);
 }
 
 .quick-link__arrow {
@@ -105,10 +105,25 @@
   color: var(--color-brown-900);
 }
 
+/* CTA-tray context — the 3 non-emergency quick-links sit on the Brush */
+/* footer band, so they swap the default Wattle fill for a Macadamia card */
+/* and use Brush on hover. .quick-link--emergency keeps its slate fill. */
+.quick-links--tray .quick-link:not(.quick-link--emergency) {
+  --icon-bg: var(--color-coastal);
+  background: var(--color-macadamia);
+  border-color: var(--color-macadamia);
+}
+
+.quick-links--tray .quick-link:not(.quick-link--emergency):hover {
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+}
+
 /* Blurred tint variant — softens the hero image behind the card without */
 /* the heavier glass treatment. */
 .quick-link--glass {
-  --icon-bg: var(--color-zest);
+  --icon-bg: var(--color-coastal);
   /* Custom property wraps the filter list so the minifier can't strip
      the space between filter functions (Lightning CSS / Tailwind v4
      `--minify` emits `blur(18px)saturate(150%)` — invalid syntax). */
@@ -116,7 +131,7 @@
 
   position: relative;
   overflow: hidden;
-  background-color: var(--overlay-gray-18);
+  background-color: var(--overlay-brown-40);
   background-clip: padding-box;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: var(--quick-link-glass-backdrop);
@@ -131,12 +146,13 @@
 }
 
 .quick-link--glass:hover {
+  --icon-bg: var(--color-white);
   background-color: var(--overlay-white-16);
   border-color: var(--overlay-white-35);
   color: var(--color-ink-inverse);
 }
 
-.quick-links--hero .quick-links__item:nth-child(-n + 2) .quick-link--glass:hover {
+.quick-links--hero .quick-links__item:nth-child(-n + 3) .quick-link--glass:hover {
   background-color: var(--color-sand-stone);
   border-color: var(--color-sand-stone);
   color: var(--color-brown-900);
@@ -150,13 +166,38 @@
   color: var(--color-brown-900);
 }
 
-.quick-links--hero .quick-links__item:nth-child(-n + 2) .quick-link--glass:hover .quick-link__text {
+/* Hero emergency: Wattle resting, Sand on hover (results-top variant */
+/* keeps the base slate-500 fill). Arrow icon: Macadamia → white on hover. */
+.quick-links--hero .quick-link--emergency {
+  --icon-bg: var(--color-macadamia);
+  background: var(--color-wattle);
+  border-color: var(--color-wattle);
+}
+
+.quick-links--hero .quick-link--emergency:hover {
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+}
+
+.quick-links--hero .quick-links__item:nth-child(-n + 3) .quick-link--glass:hover .quick-link__text {
   color: var(--color-brown-900);
 }
 
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .quick-link--glass {
     background: var(--overlay-gray-55);
+  }
+}
+
+/* Hero quick-links now ship four cards — two glass + phone + emergency. */
+/* Stack on mobile, 2 × 2 at md, single row at lg+. */
+.quick-links--hero {
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1120px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -185,29 +226,88 @@
   color: var(--color-brown-900);
 }
 
-/* Slate emergency card pairs with a white icon container in this context. */
+/* Match the home hero emergency treatment — Wattle resting, Sand on hover, */
+/* Macadamia → white arrow container. */
 .quick-links--results-top .quick-link--emergency {
-  --icon-bg: var(--color-white);
+  --icon-bg: var(--color-macadamia);
+  background: var(--color-wattle);
+  border-color: var(--color-wattle);
 }
 
-/* On hover, mirror the home hero treatment — sand-stone surface with the */
-/* emergency arrow flipping to zest. */
 .quick-links--results-top .quick-link--emergency:hover {
-  --icon-bg: var(--color-zest);
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
 }
 
-/* Referral — warm cream surface with the default zest icon container. */
-.quick-link--referral {
-  --icon-bg: var(--color-zest);
+/* About-landing 3-column grid — referral cards + dark Ironbark emergency. */
+/* .about-grid-band is the full-width row that frames the grid; .about-grid */
+/* holds the horizontal bleed margin so the cards line up with the cream */
+/* hero card above. */
+.about-grid-band {
+  background: var(--color-macadamia);
+  padding-block: var(--space-l) var(--space-2xl);
+}
 
-  background: var(--color-sweet-grass);
-  border-color: var(--color-sweet-grass);
+.about-grid {
+  margin-inline: 0.75rem;
+
+  /* Only inset the grid at md+ (3-col) so the first column aligns with the */
+  /* H1 inside the cream hero panel. 1- and 2-col layouts use the full band */
+  /* width so cards don't get crushed by extra side padding. */
+  @media (min-width: 840px) {
+    margin-inline: 0.9rem;
+    padding-inline: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+/* Stack 1-col on mobile, step up to 2-col at sm, 3-col at md+. Equalise */
+/* heights across both rows once the grid is 3-up so all six cards size */
+/* to the tallest card's content. */
+.quick-links--about {
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr 1fr;
+  }
+}
+
+.quick-links--about .quick-link {
+  height: 100%;
+}
+
+/* Match the results-top emergency treatment — Wattle resting, Sand on */
+/* hover, Macadamia → white arrow container. */
+.quick-links--about .quick-link--emergency {
+  --icon-bg: var(--color-macadamia);
+  background: var(--color-wattle);
+  border-color: var(--color-wattle);
+  color: var(--color-brown-900);
+}
+
+.quick-links--about .quick-link--emergency:hover {
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+  color: var(--color-brown-900);
+}
+
+/* Referral — Coastal surface, Macadamia icon container. */
+.quick-link--referral {
+  --icon-bg: var(--color-macadamia);
+
+  background: var(--color-coastal);
+  border-color: var(--color-coastal);
   color: var(--color-brown-900);
 }
 
 .quick-link--referral:hover {
-  background: var(--color-sand-stone);
-  border-color: var(--color-sand-stone);
+  --icon-bg: var(--color-white);
+  background: var(--color-brush);
+  border-color: var(--color-brush);
   color: var(--color-brown-900);
 }
 
@@ -229,6 +329,14 @@
   min-height: 0;
   padding: var(--space-s);
   border-radius: var(--radius-lg);
+}
+
+/* Title-only quick-links (no .quick-link__text — e.g. CTA tray "footer" */
+/* buttons). Tighter top/right/bottom; left kept at --space-m so the title */
+/* aligns with the surrounding content column. Hero/results-top variants */
+/* with a description keep the base --space-m all sides. */
+.quick-link:not(:has(.quick-link__text)) {
+  padding: var(--space-xs) var(--space-xs) var(--space-xs) var(--space-m);
 }
 
 .quick-links--tray .quick-link:hover {
@@ -256,9 +364,9 @@
 .quick-links--tray .quick-link--emergency {
   --icon-bg: var(--color-white);
 
-  background: var(--color-slate-500);
+  background: var(--color-wattle);
   color: var(--color-brown-900);
-  border-color: var(--color-slate-500);
+  border-color: var(--color-wattle);
 }
 
 /* Emergency arrow icon — same 1.375rem as all other quick-link icons. */
@@ -267,12 +375,12 @@
 .quick-links--tray .quick-link--emergency:hover {
   --icon-bg: var(--color-sand-stone);
 
-  background: var(--color-zest);
-  border-color: var(--color-zest);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
   color: var(--color-brown-900);
 }
 
 .quick-links--hero .quick-link--emergency:hover .quick-link__arrow {
-  background: var(--color-zest);
+  /* bg comes from --icon-bg on the parent (white on hover) */
   color: var(--color-brown-900);
 }

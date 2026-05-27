@@ -4,7 +4,3 @@
 .page--home .news-listing__page {
   display: none;
 }
-
-.page--home .site-header {
-  background: var(--color-sweet-grass);
-}

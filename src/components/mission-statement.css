@@ -1,5 +1,5 @@
 .mission-statement {
-  background: transparent;
+  background: var(--color-macadamia);
 }
 
 .mission-statement__inner {

@@ -1,24 +1,19 @@
 .site-header {
-  /* Frosted glass — semi-transparent white over a backdrop blur. The blur */
-  /* engages whenever any coloured surface (hero, map, etc.) sits beneath the */
-  /* header as the page scrolls.
-     Wrapped in a custom property so the minifier can't strip the space
-     between filter functions (Lightning CSS / Tailwind v4 `--minify`
-     was emitting `blur(14px)saturate(140%)` — no separator, invalid). */
+  /* Glass header — translucent Macadamia + backdrop blur. Painted via a
+     ::before overlay so the blur and fill don't fight the inner content.
+     Filter list wrapped in a custom property so Tailwind v4's `--minify`
+     (Lightning CSS) doesn't strip whitespace between filter functions or
+     drop the unprefixed pair (see LESSONS). */
   --site-header-backdrop: blur(14px) saturate(140%);
-  background: rgba(255, 255, 255, 0.72);
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: var(--site-header-backdrop);
-  backdrop-filter: var(--site-header-backdrop);
 
+  background: transparent;
   position: sticky;
   top: 0;
   z-index: 100;
 
   /* Slide handled by JS toggling .is-hidden on scroll-down and removing it */
-  /* on scroll-up. background-color animates between the at-top fill and the */
-  /* frosted glass fill on home. */
-  transition: transform 0.28s ease, background-color 0.28s ease;
+  /* on scroll-up. */
+  transition: transform 0.28s ease;
   will-change: transform;
 
   &.is-hidden {
@@ -30,31 +25,23 @@
   }
 }
 
-/* Home only — at the top of the page the header sits on a solid Sweetgrass */
-/* fill so it blends into the hero band. As soon as the user starts scrolling, */
-/* the .is-scrolled class flips it to the frosted-white glass treatment. */
-.page--home .site-header {
-  background: var(--color-sweet-grass);
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-.page--home .site-header.is-scrolled {
-  background: rgba(255, 255, 255, 0.72);
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: color-mix(in srgb, var(--color-macadamia) 75%, transparent);
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: var(--site-header-backdrop);
   backdrop-filter: var(--site-header-backdrop);
+  pointer-events: none;
 }
 
 /* While the mobile nav is open, the header sits flush against the sliding */
-/* .mobile-nav panel below — match its sweet-grass fill (and drop the blur) */
-/* so the seam disappears. :has() inspects the menu trigger's aria-expanded. */
-.site-header:has([data-menu-trigger][aria-expanded="true"]) {
-  background: var(--color-sweet-grass);
-  /* stylelint-disable-next-line property-no-vendor-prefix */
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+/* .mobile-nav panel below — drop the glass panel entirely so the seam */
+/* disappears. :has() inspects the menu trigger's aria-expanded. */
+.site-header:has([data-menu-trigger][aria-expanded="true"])::before {
+  display: none;
 }
 
 .site-header__inner {

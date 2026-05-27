@@ -6,3 +6,6 @@
 node_modules/
 .claude/
 *.log
+
+# Stale duplicate working tree retained as backup; not part of the repo.
+DVA/

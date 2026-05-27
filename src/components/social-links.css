@@ -12,7 +12,7 @@
   height: clamp(2.125rem, 2rem + 0.5556vw, 2.5rem);
   border-radius: var(--radius-sm);
   color: var(--color-brown-900);
-  background: var(--color-zest);
+  background: var(--color-macadamia);
   text-decoration: none;
   transition:
     background-color var(--transition-base),
@@ -20,12 +20,8 @@
 }
 
 .social-links__link:hover {
-  background: var(--color-brown-900);
-  color: var(--color-white);
-}
-
-.social-links__link:hover .social-links__icon {
-  filter: brightness(0) invert(1);
+  background: var(--color-sky);
+  color: var(--color-brown-900);
 }
 
 .social-links__icon {

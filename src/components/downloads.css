@@ -52,7 +52,7 @@
     border-color var(--transition-base);
 
   &:hover {
-    background: var(--color-sand-stone);
+    background: var(--color-brush);
     border-color: var(--color-brown-900);
   }
 

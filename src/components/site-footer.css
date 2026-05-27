@@ -1,5 +1,5 @@
 .site-footer {
-  background: var(--color-sand-stone);
+  background: var(--color-brush);
   color: var(--color-ink);
 }
 
@@ -7,7 +7,7 @@
   content: '';
   display: block;
   height: 1px;
-  background: var(--color-border-default);
+  background: var(--color-ironbark-50);
   margin-inline: var(--container-padding);
 }
 
@@ -145,7 +145,7 @@
 .site-footer__rule {
   grid-column: 1 / -1;
   border: none;
-  border-top: 1px solid var(--color-border-default);
+  border-top: 1px solid var(--color-ironbark-50);
   margin: 0;
 }
 

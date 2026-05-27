@@ -1,4 +1,5 @@
 .service-search-band {
+  background: var(--color-macadamia);
   padding-block: var(--space-s);
 }
 
@@ -12,15 +13,22 @@ main > .service-search-band:first-child {
   margin-inline: 0.75rem;
   @media (min-width: 840px) { margin-inline: 0.9rem; }
 
-  background: var(--color-sweet-grass);
+  background: var(--color-coastal);
   border-radius: var(--radius-hero);
   overflow: clip;
 }
 
-/* Service-detail uses the sand-stone fill so the breadcrumb band reads */
-/* as a header for the cream content card directly below it. */
+/* Service-detail uses the Coastal fill so the breadcrumb band reads as a */
+/* header above the Brush content card directly below it. */
 .page--service-detail .service-search {
-  background: var(--color-sand-stone);
+  background: var(--color-coastal);
+}
+
+/* Resource-collection + about-landing use Brush for the breadcrumb /
+   search panel. */
+.page--resource-collection .service-search,
+.page--about-landing .service-search {
+  background: var(--color-brush);
 }
 
 .service-search__inner {
@@ -52,16 +60,11 @@ main > .service-search-band:first-child {
   font-size: var(--step-5);
 }
 
-/* Lead / eyebrow text between H1 and the form. Used on listing pages whose */
-/* hero needs an explanatory line (e.g. resource-library) — services-directory */
-/* drops straight from H1 to the search form so this is opt-in. Uses the */
-/* shared eyebrow mixin (step-0 + regular + slight letter-spacing) so it */
-/* reads as a quiet caption against the H1. */
+/* Lead text between H1 and the form. Layout-only — pair with .intro */
+/* (src/base/typography.css) for the typographic role, or leave bare for */
+/* default heading/body sizing on listing pages (e.g. resource-library). */
 .service-search__lead {
-  font-size: var(--step-0); font-weight: var(--font-weight-regular); color: var(--color-brown-900); letter-spacing: 0.02em; text-wrap: pretty;
-
   margin-block: 0 var(--space-m);
-  line-height: var(--line-height-normal);
 }
 
 .service-search__form {
@@ -268,7 +271,8 @@ main > .service-search-band:first-child {
 /* double up against the right-hand figure inside the grid). */
 /* ---------------------------------------------------------------------------- */
 .page--resource-collection,
-.page--resource-article {
+.page--resource-article,
+.page--about-landing {
   .service-search-collection {
     display: grid;
     gap: var(--space-s);
@@ -333,6 +337,18 @@ main > .service-search-band:first-child {
 
   .article-banner__tags {
     margin-block-start: var(--space-s);
+  }
+
+  /* About-landing lead sits at the bottom of the cream card so the panel */
+  /* reads at the same height as resource-article (H1 at top, content at */
+  /* bottom). Uses the same calc(--space-3xl × 2) gap as the article banner */
+  /* and form so the three templates stay visually consistent. */
+  .service-search__lead {
+    margin-block-start: var(--space-l);
+
+    @media (min-width: 840px) {
+      margin-block-start: calc(var(--space-3xl) + var(--space-3xl));
+    }
   }
 
   /* Reuse the .card--resource .tag treatment (sand-stone fill + umber ink) */

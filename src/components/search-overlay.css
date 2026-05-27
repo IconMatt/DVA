@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: var(--color-white);
+  background: var(--color-macadamia);
   overflow-y: auto;
   overscroll-behavior: contain;
   animation: search-overlay-in 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
@@ -46,7 +46,7 @@
 
   @media (min-width: 840px) {
     padding-block-start: var(--space-l);
-    background: var(--color-white);
+    background: var(--color-macadamia);
     border-radius: var(--radius-hero);
     padding: var(--space-l);
     width: 100%;
@@ -109,7 +109,7 @@
 
 .search-overlay__section-title {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: var(--step-4);
   font-weight: var(--font-weight-regular);
   line-height: var(--line-height-tight);
