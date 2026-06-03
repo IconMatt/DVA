@@ -311,6 +311,79 @@
   color: var(--color-brown-900);
 }
 
+/* Resources-landing wellbeing-area tiles use Brush (resting) → Sand
+   (hover) to match the audience cards above them. Page-scoped so the
+   shared .quick-link--referral on other templates keeps its Coastal
+   resting surface. .page--resource-library is also on resource-all, but
+   that page has no referral quick-links, so this only hits this page. */
+.page--resource-library .quick-link--referral {
+  /* Sky icon-box behind the domain icon / hover arrow (overrides the
+     base referral's Macadamia → white). Kept Sky in both states so the
+     box doesn't flip colour on hover. */
+  --icon-bg: var(--color-sky);
+  background: var(--color-brush);
+  border-color: var(--color-brush);
+  /* One step down from the base .quick-link radius (--radius-quick-link
+     at md+); flat selector (0,2,0) wins at every breakpoint. */
+  border-radius: var(--radius-xl);
+}
+
+.page--resource-library .quick-link--referral:hover {
+  /* Icon box lightens from Sky (resting) to white on hover. */
+  --icon-bg: var(--color-white);
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+}
+
+/* Wellbeing-area tiles — on hover, cross-fade the domain icon (the <img>
+   in .quick-link__arrow) out and an arrow in. The arrow is drawn as a
+   ::after background so no per-tile markup change is needed; it slides
+   from 6px left of centre to centre as it fades in. Scoped to the
+   page-level referral tiles (resources-landing only). */
+.page--resource-library .quick-link--referral .quick-link__arrow {
+  position: relative;
+}
+
+.page--resource-library .quick-link--referral .quick-link__arrow img {
+  transition: opacity var(--transition-base);
+}
+
+.page--resource-library .quick-link--referral .quick-link__arrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.375rem;
+  height: 1.375rem;
+  background: center / contain no-repeat url("../assets/images/icons/right-arrow.svg");
+  transform: translate(calc(-50% - 6px), -50%);
+  opacity: 0;
+  transition: opacity var(--transition-base), transform var(--transition-base);
+  pointer-events: none;
+}
+
+.page--resource-library .quick-link--referral:hover .quick-link__arrow img,
+.page--resource-library .quick-link--referral:focus-visible .quick-link__arrow img {
+  opacity: 0;
+}
+
+.page--resource-library .quick-link--referral:hover .quick-link__arrow::after,
+.page--resource-library .quick-link--referral:focus-visible .quick-link__arrow::after {
+  opacity: 1;
+  transform: translate(-50%, -50%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page--resource-library .quick-link--referral .quick-link__arrow img,
+  .page--resource-library .quick-link--referral .quick-link__arrow::after {
+    transition: none;
+  }
+
+  .page--resource-library .quick-link--referral .quick-link__arrow::after {
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* Tray variant (light background) */
 .quick-links--tray {
   gap: var(--space-s);

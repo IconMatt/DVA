@@ -4,3 +4,14 @@
 .page--home .news-listing__page {
   display: none;
 }
+
+/* Resources-landing — grow the prose-link underline ("Other, show all
+   resources") in Coastal instead of the default Zest accent. Re-declares
+   only the gradient colours; the size/position/transition come from the
+   base .page-content__section a:not([class]) rule in prose.css. Compound
+   selector (0,3,1) outranks that base rule (0,2,1). */
+.page--resource-library .page-content__section a:not([class]) {
+  background-image:
+    linear-gradient(var(--color-coastal), var(--color-coastal)),
+    linear-gradient(currentColor, currentColor);
+}

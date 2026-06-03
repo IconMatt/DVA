@@ -14,6 +14,12 @@
   }
 }
 
+/* Resources-landing audience grid uses the base .card-grid--three
+   breakpoints (1-up < md, 2-up md–lg, 3-up ≥ lg): with the fixed
+   6rem thumbnail + long collection titles, going 2-up below md (840)
+   wraps the titles too tightly, so the cards read better stacked single
+   -column on small/tablet-portrait widths. No override needed. */
+
 .card-grid--resources,
 .card-grid--news-carousel,
 .card-grid--services {

@@ -199,6 +199,58 @@
   grid-area: media;
 }
 
+/* Side-media variant — image fills the full card height on the right
+   instead of sitting beside the copy only. Used by the audience-collection
+   cards on resources-landing where the image is the primary visual anchor
+   and the text occupies the full left column.
+
+   flex: 1 on the content grid is essential: .card is a column-flex
+   container, so without flex-grow the content sizes to its natural
+   height (~127px) and the media row never expands to fill the card.
+   With flex:1 the grid stretches to the card's full height, the `auto
+   1fr` rows expand, and the media spanning both rows reaches edge-to-
+   edge — which is what equalises image heights across the grid when
+   the parent UL is auto-rows-fr. */
+.card--resource.card--with-media.card--media-side .card__content {
+  flex: 1;
+  /* Fixed 6rem media column (= the size it rendered at the 3-up desktop
+     breakpoint). A percentage column made the square grow on narrow
+     single-/two-column layouts where each card is wider; pinning it to a
+     rem keeps the thumbnail a consistent size at every breakpoint. */
+  grid-template-columns: minmax(0, 1fr) 6rem;
+  grid-template-areas:
+    "title media"
+    "copy  media";
+}
+
+.card--resource.card--with-media.card--media-side .card__media {
+  /* Square thumbnail: width fills the media column, height derives from
+     the 1/1 aspect-ratio (width-driven, so no circular sizing against
+     the grid row). Pinned to the top-right of the media column; the
+     inner img keeps object-fit: cover so it crops to the square. */
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  align-self: start;
+  justify-self: end;
+}
+
+/* Audience-collection cards use the warm Brush surface (resting) → Sand
+   (hover) instead of the default resource-card slate→sweet-grass. Scoped
+   to .card--media-side, which only the resources-landing audience grid
+   uses, so other resource cards are untouched. Compound selector
+   (0,2,0 / 0,3,0) outranks the base .card--resource rules. */
+.card--resource.card--media-side {
+  background: var(--color-brush);
+  /* One step down the radius scale from the base card's --radius-2xl. */
+  border-radius: var(--radius-xl);
+}
+
+.card--resource.card--media-side:hover,
+.card--resource.card--media-side:focus-within {
+  background: var(--color-sand);
+}
+
 .card--resource .card__copy {
   display: flex;
   flex-direction: column;
