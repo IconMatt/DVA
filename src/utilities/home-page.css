@@ -15,3 +15,14 @@
     linear-gradient(var(--color-coastal), var(--color-coastal)),
     linear-gradient(currentColor, currentColor);
 }
+
+/* Search-results content-type pills (advanced-search style, used without the
+   sweet-grass card): inactive pills sit on Brush and warm to Wattle on hover.
+   :not([aria-pressed="true"]) leaves the active pill's dark fill untouched. */
+.page--search-results .advanced-search-overlay__option:not([aria-pressed="true"]) {
+  background: var(--color-brush);
+}
+
+.page--search-results .advanced-search-overlay__option:not([aria-pressed="true"]):hover {
+  background: var(--color-wattle);
+}

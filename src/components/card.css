@@ -109,6 +109,19 @@
   background: var(--color-sweet-grass);
 }
 
+/* Search-results cards match the resources-landing audience cards:
+   Brush surface (resting) → Sand (hover), instead of the default
+   Coastal → Sweet-grass. Page-scoped so other resource cards are
+   unchanged. (0,2,0)/(0,3,0) outrank the base rules above. */
+.page--search-results .card--resource {
+  background: var(--color-brush);
+}
+
+.page--search-results .card--resource:hover,
+.page--search-results .card--resource:focus-within {
+  background: var(--color-sand);
+}
+
 .card--resource .card__header {
   display: flex;
   align-items: flex-start;

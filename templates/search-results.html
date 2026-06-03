@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <base href="../" />
-    <title>About — Veteran and Family Wellbeing Agency</title>
+    <title>Search results — Veteran and Family Wellbeing Agency</title>
     <meta
       name="description"
-      content="About the Veteran and Family Wellbeing Agency — who we are, what we do, and how we support veterans, families, and the wider community."
+      content="Sitewide search results across wellbeing resources, news and pages. The Services directory is searched separately via Find a service."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,14 +17,20 @@
     />
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body id="top" class="page page--about-landing">
+  <body id="top" class="page page--search-results">
     <!--
       ================================================================
-      About landing page — chrome (header, search overlay, mobile nav,
-      CTA tray, footer) mirrors the other templates. Page body content
-      is intentionally a placeholder so the visual scaffolding can be
-      iterated on; add components inside <main> above the .cta-tray as
-      they're built.
+      Sitewide search results page (Solr / Search API).
+
+      SCOPE: indexes resource-collection pages, news articles, resource
+      articles, and basic/landing pages. It deliberately EXCLUDES the
+      Services directory (service nodes) — those are searched via the
+      "Find a service" directory (templates/services-directory.html).
+
+      Chrome (header, search overlay, mobile nav, CTA tray, footer)
+      mirrors the other templates. Results chrome reuses the existing
+      .active-filters / .results-toolbar / .pagination components from
+      services-directory, and each result is a .card--resource.
       ================================================================
     -->
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -54,8 +60,8 @@
         <nav class="site-nav" aria-label="Primary">
           <ul class="site-nav__list">
             <li class="site-nav__item"><a class="site-nav__link" href="#">Find a service</a></li>
-            <li class="site-nav__item"><a class="site-nav__link" href="#">Wellbeing resources</a></li>
-            <li class="site-nav__item"><a class="site-nav__link" href="about-landing.html" aria-current="page">About</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="resources-landing.html">Wellbeing resources</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="about-landing.html">About</a></li>
             <li class="site-nav__item"><a class="site-nav__link" href="#">Contact</a></li>
           </ul>
         </nav>
@@ -199,7 +205,7 @@
               </a>
             </li>
             <li class="mobile-nav__item">
-              <a class="mobile-nav__link" href="#">
+              <a class="mobile-nav__link" href="resources-landing.html">
                 Wellbeing resources
                 <span class="mobile-nav__link-icon" aria-hidden="true">
                   <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
@@ -207,7 +213,7 @@
               </a>
             </li>
             <li class="mobile-nav__item">
-              <a class="mobile-nav__link" href="about-landing.html" aria-current="page">
+              <a class="mobile-nav__link" href="about-landing.html">
                 About
                 <span class="mobile-nav__link-icon" aria-hidden="true">
                   <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
@@ -246,400 +252,283 @@
 
     <main id="main" class="site-main">
       <!--
-        About landing — breadcrumb + H1 + hero image. Reuses the
-        .service-search shell so the inset-card treatment, focus rings,
-        and floating-label rhythm match the other "landing" templates
-        (resource-collection). Replace the hero image src once a final
-        About asset is provided.
+        Search hero — breadcrumb + H1 + refine-search field + scope note.
+        Reuses the .service-search shell (breadcrumb panel + single-field
+        search) so it reads consistent with the other landing templates.
+
+        Drupal handoff — Search page (Search API + Solr)
+        Route:      /search (View "site_search", Solr backend).
+        Index:      Solr index covers content types: resource_collection,
+                    news_article, resource_article, page (incl. landing
+                    pages). The "service" node type is NOT indexed here — it
+                    has its own Search API index behind /find-service.
+        Form:       keyword-only exposed filter; prefill from the ?search=
+                    query param. The H1 + result summary live in this block.
       -->
       <div class="service-search-band">
-      <div class="service-search-collection">
-      <section class="service-search" id="about-landing" aria-labelledby="about-landing-title">
+      <section class="service-search" id="search-results" aria-labelledby="search-results-title">
         <div class="service-search__inner container">
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <ol class="breadcrumb__list">
               <li class="breadcrumb__item"><a class="breadcrumb__link" href="/">Home</a></li>
-              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">About</li>
+              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">Search results</li>
             </ol>
           </nav>
 
-          <h1 class="service-search__title" id="about-landing-title" data-animate>
-            Veteran and Family Wellbeing Agency
-          </h1>
+          <h1 class="service-search__title" id="search-results-title" data-animate>Search results</h1>
 
-          <p class="service-search__lead intro" data-animate>
-            The Veteran and Family Wellbeing Agency helps veterans and families
-            understand their options, connect with relevant services and navigate
-            wellbeing support with more confidence.
+          <form class="service-search__form service-search__form--single" role="search" action="search-results.html" method="get" data-animate>
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="site-search"
+                    name="search"
+                    type="search"
+                    value="counselling"
+                    placeholder="Search resources, news and pages…"
+                  />
+                  <label class="service-search__label" for="site-search">
+                    Search resources, news and pages
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button class="button search-overlay__submit service-search__submit w-auto" type="submit">
+              Search
+            </button>
+          </form>
+
+          <!--
+            Scope note — search excludes the Services directory; link to the
+            dedicated directory. Uses the .service-search__helpers pattern —
+            the same plain text + animated-underline link as the "Not sure
+            where to start?" helper under the services-directory search.
+            Maps to a small "search_scope_note" block / config text in Drupal.
+          -->
+          <p class="service-search__helpers" data-animate>
+            <span class="service-search__helpers-prompt">These results don’t include the Services directory. <a href="services-directory.html">Find a service</a></span>
           </p>
         </div>
       </section>
-      <figure class="service-search__media" data-animate>
-        <img
-          src="assets/images/transition.png"
-          alt=""
-          data-parallax-media
-          data-parallax-mode="translate"
-          data-parallax-buffer-ratio="0.08"
-          data-parallax-speed="0.06"
-          data-parallax-limit="30"
-        />
-      </figure>
-      </div>
       </div>
 
       <!--
-        About-landing quick-links — 3-column grid of section entry points.
-        Five .quick-link--referral cards + one .quick-link--emergency for
-        urgent support. Uses the base .quick-links grid (3 cols at md+).
-        Wrapped in a .about-grid-band so the row reads as its own block
-        distinct from the breadcrumb panel above and the CTA tray below.
+        Content-type filter — pill buttons reusing the advanced-search
+        overlay's filter style (.advanced-search-overlay__section card +
+        .advanced-search-overlay__option pills): white rest, dark fill when
+        active (aria-pressed). "Wellbeing resources" combines the
+        resource_collection + resource_article types; "Find a service" is
+        intentionally absent.
+
+        Drupal handoff — Content-type facet (Search API facets "content_type")
+        rendered as pill toggles. Map facet values to labels:
+          All → (no facet)         Wellbeing resources → resource_collection
+                                     + resource_article
+          News → news_article      Pages → page (incl. landing pages)
+        At lift these become facet links; the active facet carries
+        aria-pressed="true". Single-select here, so one pill is active.
       -->
-      <div class="about-grid-band">
-      <section class="about-grid" aria-labelledby="about-grid-title">
-        <h2 id="about-grid-title" class="visually-hidden">Explore the Agency</h2>
-        <ul class="quick-links quick-links--about" data-animate-stagger>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--referral" href="#">
-              <span class="quick-link__title">About the Agency</span>
-              <span class="quick-link__text">
-                We help veterans and families find trusted support, practical
-                information and clear next steps during and after service.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+      <div class="container">
+        <!-- Pills only — the .advanced-search-overlay__section card (sweet-grass
+             fill + padding) is intentionally omitted here, so the filter sits
+             flat on the page. The pill buttons keep the advanced-search style. -->
+        <div role="group" aria-label="Filter results by type">
+          <p class="text-step-0 font-medium text-brown-900 mb-s">Filter results</p>
+          <div class="advanced-search-overlay__options">
+            <button class="advanced-search-overlay__option" type="button" aria-pressed="true">All</button>
+            <button class="advanced-search-overlay__option" type="button" aria-pressed="false">Wellbeing resources</button>
+            <button class="advanced-search-overlay__option" type="button" aria-pressed="false">News</button>
+            <button class="advanced-search-overlay__option" type="button" aria-pressed="false">Pages</button>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        Results section — reuses the services-directory results chrome:
+        .active-filters (count + removable query chip) in column 1,
+        .results-controls (sort) in column 2; the result list + pagination
+        follow in a .resource-results-band.
+
+        Drupal handoff — Search results (View "site_search")
+        Count:      View result summary → .active-filters__count.
+        Sort:       Exposed sort (Relevance = Solr score, Authored on,
+                    Title) → .results-toolbar__sort select.
+        Pager:      Views mini-pager → .pagination.
+      -->
+      <div class="results-section results-section--header-split">
+        <div class="active-filters" aria-label="Active filters">
+          <p class="active-filters__count" aria-live="polite">
+            <strong>18</strong> results found
+          </p>
+          <button class="active-filters__chip" type="button" aria-label="Remove search term counselling">
+            “counselling” <span class="active-filters__chip-close" aria-hidden="true">×</span>
+          </button>
+          <button class="active-filters__chip active-filters__chip--clear" type="button">
+            Clear all
+          </button>
+        </div>
+
+        <div class="results-controls">
+          <div class="results-toolbar__sort site-header__pill">
+            <label class="results-toolbar__sort-label" for="results-sort">Sort by</label>
+            <select class="results-toolbar__sort-select" id="results-sort" name="sort">
+              <option value="relevance">Relevance</option>
+              <option value="recent">Recently updated</option>
+              <option value="title">Title (A–Z)</option>
+            </select>
+            <span class="results-toolbar__sort-icon" aria-hidden="true">
+              <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!--
+        Results list + pagination sit in a .resource-results-band (same as
+        resource-all.html): a bleed-wrap band whose inner padding lines the
+        cards up with the toolbar chips/text above.
+
+        Each result = .card--resource with a Type badge, a heading, and a
+        search snippet. Page owns the single <h1> ("Search results"), so
+        each result heading is an <h2> (correct document outline). In Drupal
+        these come from the view row: badge = content-type label, title =
+        node title + canonical URL, snippet = Solr highlighted excerpt
+        (search_api highlight processor) rendered as |raw inside
+        .card__excerpt.
+      -->
+      <div class="resource-results-band">
+        <ul class="card-grid" data-animate-stagger aria-label="Search results">
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Wellbeing resource</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resource-article.html">How to find balance in life again after service</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…practical strategies and <strong>counselling</strong> options that help veterans rebuild routine and wellbeing after leaving the Defence Force…</p>
+                </div>
+              </div>
+            </article>
           </li>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--referral" href="#">
-              <span class="quick-link__title">What we help with</span>
-              <span class="quick-link__text">
-                Support that reflects your situation, needs and next steps.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Wellbeing resource</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resource-collection.html">Support for transitioning from the ADF</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…a curated collection covering mental health, <strong>counselling</strong>, finances and housing for members leaving service…</p>
+                </div>
+              </div>
+            </article>
           </li>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--referral" href="#">
-              <span class="quick-link__title">News and media</span>
-              <span class="quick-link__text">
-                Latest news, media releases, announcements and events.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Wellbeing resource</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resource-article.html">Accessing mental health and counselling support</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…how to find free and subsidised <strong>counselling</strong> through Open Arms and local providers, and what to expect at a first session…</p>
+                </div>
+              </div>
+            </article>
           </li>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--referral" href="#">
-              <span class="quick-link__title">Assistance and referrals</span>
-              <span class="quick-link__text">
-                If you would like assistance from the Agency or you would like
-                to make a referral of someone who needs support.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Page</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resources-landing.html">Wellbeing resources</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…browse wellbeing resources by audience or topic, including <strong>counselling</strong>, family support and financial wellbeing…</p>
+                </div>
+              </div>
+            </article>
           </li>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--referral" href="#">
-              <span class="quick-link__title">Feedback form</span>
-              <span class="quick-link__text">
-                If you would like to make a Complaint, Compliment or Suggestion
-                to us about the agency or website. This includes services
-                delivered on our behalf by providers.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Wellbeing resource</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resource-article.html">Family counselling services explained</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…relationship and family <strong>counselling</strong> options for partners and children of veterans, and how to make a referral…</p>
+                </div>
+              </div>
+            </article>
           </li>
-          <li class="quick-links__item" data-animate>
-            <a class="quick-link quick-link--emergency" href="#">
-              <span class="quick-link__title">Get urgent support</span>
-              <span class="quick-link__text">
-                Access 24/7 crisis and urgent support services right away.
-              </span>
-              <span class="quick-link__arrow" aria-hidden="true">
-                <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
-              </span>
-            </a>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">News</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="resource-article.html">Building strong veteran and family support networks</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…new community programs expand peer <strong>support</strong> and <strong>counselling</strong> access for families across regional Australia…</p>
+                </div>
+              </div>
+            </article>
+          </li>
+
+          <li class="card-grid__item" data-animate>
+            <article class="card card--resource">
+              <header class="card__header">
+                <div class="card__badges"><span class="card__badge">Page</span></div>
+              </header>
+              <div class="card__content">
+                <h2 class="card__title">
+                  <a class="card__title-link" href="about-landing.html">About the Agency</a>
+                </h2>
+                <div class="card__copy">
+                  <p class="card__excerpt">…the Agency connects veterans and families with trusted services, including <strong>counselling</strong> and crisis support…</p>
+                </div>
+              </div>
+            </article>
           </li>
         </ul>
-      </section>
-      </div>
 
-      <!--
-        Latest news — same component as home.html (paragraph: news_listing).
-        Static markup for the prototype; carousel controls are disabled
-        because the demo set is exactly three cards.
-      -->
-      <section class="news-listing" aria-labelledby="about-news-title" data-news-carousel>
-        <div class="news-listing__inner container">
-          <header class="news-listing__header" data-animate>
-            <h2 class="news-listing__title" id="about-news-title">Latest news</h2>
-            <div class="news-listing__header-actions">
-              <a class="news-listing__link" href="#">More</a>
-              <div class="news-listing__controls" role="group" aria-label="Latest news navigation">
-                <p class="news-listing__page" aria-live="polite" data-news-carousel-status>
-                  1-3 of 3
-                </p>
-                <button
-                  class="news-listing__control news-listing__control--previous"
-                  type="button"
-                  aria-label="Previous news"
-                  data-news-carousel-previous
-                  disabled
-                >
-                  <img
-                    class="news-listing__control-icon"
-                    src="assets/images/icons/Property 1=Left arrow.svg"
-                    alt=""
-                    width="22"
-                    height="22"
-                  />
-                </button>
-                <button
-                  class="news-listing__control news-listing__control--next"
-                  type="button"
-                  aria-label="Next news"
-                  data-news-carousel-next
-                  disabled
-                >
-                  <img
-                    class="news-listing__control-icon"
-                    src="assets/images/icons/Property 1=Left arrow.svg"
-                    alt=""
-                    width="22"
-                    height="22"
-                  />
-                </button>
-              </div>
-            </div>
-          </header>
-
-          <div
-            class="news-listing__viewport"
-            tabindex="0"
-            aria-label="Latest news"
-            data-news-carousel-viewport
-          >
-            <ul class="card-grid card-grid--news-carousel" data-news-carousel-track>
-              <li class="card-grid__item" data-animate data-news-carousel-item>
-                <article class="card card--news">
-                  <figure class="card__media">
-                    <img
-                      class="card__media-image"
-                      src="assets/images/site/Support image 5.png"
-                      srcset="assets/images/site/Support image 5.png 2000w"
-                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
-                      alt=""
-                      width="2000"
-                      height="2000"
-                      loading="lazy"
-                      decoding="async"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                    />
-                    <span class="card__badge">Health</span>
-                  </figure>
-                  <div class="card__body">
-                    <p class="card__date">4 March 2026</p>
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">How to find balance in life again after service</a>
-                    </h3>
-                    <p class="card__excerpt">
-                      Discover practical strategies to build routine, strengthen
-                      wellbeing, and navigate life after leaving the military.
-                    </p>
-                    <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="card-grid__item" data-animate data-news-carousel-item>
-                <article class="card card--news">
-                  <figure class="card__media">
-                    <img
-                      class="card__media-image"
-                      src="assets/images/site/Support image 4.png"
-                      srcset="assets/images/site/Support image 4.png 2000w"
-                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
-                      alt=""
-                      width="2000"
-                      height="2000"
-                      loading="lazy"
-                      decoding="async"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                    />
-                    <span class="card__badge">Support</span>
-                  </figure>
-                  <div class="card__body">
-                    <p class="card__date">12 March 2026</p>
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">Building strong veteran and family support in Australia</a>
-                    </h3>
-                    <p class="card__excerpt">
-                      Learn how relationships and local networks improve mental
-                      health and connection.
-                    </p>
-                    <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="card-grid__item" data-animate data-news-carousel-item>
-                <article class="card card--news">
-                  <figure class="card__media">
-                    <img
-                      class="card__media-image"
-                      src="assets/images/site/Support image 6.png"
-                      srcset="assets/images/site/Support image 6.png 2000w"
-                      sizes="(min-width: 1120px) 27rem, (min-width: 840px) 45vw, calc(100vw - 3rem)"
-                      alt=""
-                      width="2000"
-                      height="2000"
-                      loading="lazy"
-                      decoding="async"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                    />
-                    <span class="card__badge">Events</span>
-                  </figure>
-                  <div class="card__body">
-                    <p class="card__date">26 March 2026</p>
-                    <h3 class="card__title">
-                      <a class="card__title-link" href="#">Exploring purpose and fulfilling activities after service</a>
-                    </h3>
-                    <p class="card__excerpt">
-                      Discover practical ways to explore new goals, engage in
-                      meaningful activities, and reconnect with what matters.
-                    </p>
-                    <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
-                    </p>
-                  </div>
-                </article>
-              </li>
-              <li class="card-grid__spacer" aria-hidden="true"></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <div class="testimonial-band">
-      <section class="testimonial" aria-labelledby="about-testimonial-title">
-        <h2 class="testimonial__title visually-hidden" id="about-testimonial-title">
-          What people say about our support
-        </h2>
-        <div class="testimonial__inner container" data-testimonial-carousel>
-          <figure
-            class="testimonial__figure"
-            aria-live="polite"
-            aria-atomic="true"
-            data-testimonial-figure
-          >
-            <blockquote class="testimonial__quote">
-              <p class="testimonial__text" data-testimonial-text>
-                &ldquo;This support helped me find balance and direction again.
-                I feel more confident, connected, and ready for whatever comes next.&rdquo;
-              </p>
-            </blockquote>
-            <figcaption class="testimonial__attribution">
-              <p class="testimonial__name" data-testimonial-name>John Smith</p>
-              <p class="testimonial__role" data-testimonial-role>Ex-Serving Member</p>
-            </figcaption>
-          </figure>
-
-          <figure class="testimonial__portrait" aria-hidden="true">
-            <img
-              class="testimonial__portrait-image testimonial__portrait-image--current"
-              data-parallax-media
-              data-parallax-mode="testimonial"
-              data-parallax-buffer-ratio="0.10"
-              data-parallax-speed="0.06"
-              data-parallax-limit="28"
-              data-testimonial-image-current
-              src="assets/images/site/Support image 7.png"
-              srcset="assets/images/site/Support image 7.png 2000w"
-              sizes="(min-width: 1120px) 24rem, (min-width: 840px) 20rem, 72vw"
-              alt=""
-              width="2000"
-              height="2000"
-              loading="lazy"
-              decoding="async"
-            />
-            <img
-              class="testimonial__portrait-image testimonial__portrait-image--next"
-              data-parallax-media
-              data-parallax-mode="testimonial"
-              data-parallax-buffer-ratio="0.10"
-              data-parallax-speed="0.06"
-              data-parallax-limit="28"
-              data-testimonial-image-next
-              src="assets/images/site/Support image 7.png"
-              srcset="assets/images/site/Support image 7.png 2000w"
-              sizes="(min-width: 1120px) 24rem, (min-width: 840px) 20rem, 72vw"
-              alt=""
-              width="2000"
-              height="2000"
-              loading="lazy"
-              decoding="async"
-            />
-          </figure>
-
-          <div class="testimonial__controls" role="group" aria-label="Testimonial navigation">
-            <button
-              class="testimonial__control testimonial__control--previous"
-              type="button"
-              aria-label="Previous testimonial"
-              data-testimonial-previous
-              disabled
-            >
-              <img
-                class="testimonial__control-icon"
-                src="assets/images/icons/Property 1=Left arrow.svg"
-                alt=""
-                width="22"
-                height="22"
-              />
-            </button>
-            <button
-              class="testimonial__control testimonial__control--next"
-              type="button"
-              aria-label="Next testimonial"
-              data-testimonial-next
-            >
-              <img
-                class="testimonial__control-icon"
-                src="assets/images/icons/Property 1=Left arrow.svg"
-                alt=""
-                width="22"
-                height="22"
-              />
-            </button>
-            <p class="testimonial__page" aria-live="polite" data-testimonial-page>Page 1 of 2</p>
-          </div>
-        </div>
-      </section>
+        <nav class="pagination" aria-label="Pagination">
+          <button class="pagination__nav pagination__nav--previous" type="button" aria-label="Previous page" disabled>
+            <img class="pagination__nav-icon" src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="22" height="22" />
+          </button>
+          <button class="pagination__page is-active" type="button" aria-current="page">1</button>
+          <button class="pagination__page" type="button">2</button>
+          <button class="pagination__nav pagination__nav--next" type="button" aria-label="Next page">
+            <img class="pagination__nav-icon" src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="22" height="22" />
+          </button>
+          <p class="pagination__summary" aria-live="polite">1–10 of 18 results</p>
+        </nav>
       </div>
 
       <section class="cta-tray" aria-labelledby="cta-tray-title">
@@ -648,7 +537,7 @@
           <ul class="quick-links quick-links--tray" data-animate-stagger>
             <li class="quick-links__item" data-animate>
               <a class="quick-link" href="#find-a-service">
-                <span class="quick-link__title">Find a service</span>
+                <span class="quick-link__title text-step-0! font-medium! text-pretty">Find a service</span>
                 <span class="quick-link__arrow" aria-hidden="true">
                   <img src="assets/images/icons/Property 1=Search.svg" alt="" width="22" height="22" />
                 </span>
@@ -656,7 +545,7 @@
             </li>
             <li class="quick-links__item" data-animate>
               <a class="quick-link" href="#">
-                <span class="quick-link__title">Wellbeing resources</span>
+                <span class="quick-link__title text-step-0! font-medium! text-pretty">Wellbeing resources</span>
                 <span class="quick-link__arrow" aria-hidden="true">
                   <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
                 </span>
@@ -664,7 +553,7 @@
             </li>
             <li class="quick-links__item" data-animate>
               <a class="quick-link" href="#">
-                <span class="quick-link__title">Contact us</span>
+                <span class="quick-link__title text-step-0! font-medium! text-pretty">Contact us</span>
                 <span class="quick-link__arrow" aria-hidden="true">
                   <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
                 </span>
@@ -672,7 +561,7 @@
             </li>
             <li class="quick-links__item" data-animate>
               <a class="quick-link quick-link--emergency" href="#">
-                <span class="quick-link__title">Get urgent help now</span>
+                <span class="quick-link__title text-step-0! font-medium! text-pretty">Get urgent help now</span>
                 <span class="quick-link__arrow" aria-hidden="true">
                   <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
                 </span>
@@ -1256,6 +1145,23 @@
             });
             headerTicking = true;
           }, { passive: true });
+        })();
+
+        // Content-type filter pills — single-select toggle (prototype).
+        // In Drupal these are facet links; this just demonstrates the
+        // active-state swap on click.
+        (function () {
+          var group = document.querySelector('[aria-label="Filter results by type"]');
+          if (!group) return;
+          var pills = Array.prototype.slice.call(
+            group.querySelectorAll('.advanced-search-overlay__option')
+          );
+          pills.forEach(function (pill) {
+            pill.addEventListener('click', function () {
+              pills.forEach(function (p) { p.setAttribute('aria-pressed', 'false'); });
+              pill.setAttribute('aria-pressed', 'true');
+            });
+          });
         })();
       })();
     </script>
