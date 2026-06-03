@@ -326,6 +326,27 @@
   /* One step down from the base .quick-link radius (--radius-quick-link
      at md+); flat selector (0,2,0) wins at every breakpoint. */
   border-radius: var(--radius-xl);
+  /* Drop the base .quick-link min-height floor (clamp 6–8rem) so tile
+     height is driven by content + equal-row stretch, not a fixed floor.
+     Padding stays the base uniform space-m on all sides. */
+  min-height: 0;
+}
+
+/* Anchor the resource count to the bottom of the tile — it sits in the
+   1fr second row, so align-self: end drops it to the foot of that row
+   (counts then line up across tiles of differing title length). */
+.page--resource-library .quick-link--referral .quick-link__text {
+  align-self: end;
+}
+
+/* The base .quick-links--about sets grid-template-rows: 1fr 1fr (sized for
+   about-landing's 6-card / 2-row grid). For the 11 wellbeing tiles, reset
+   the explicit template and make every row 1fr via grid-auto-rows so all
+   rows equalise to the tallest — every tile is the same height as the
+   tallest (the one whose title wraps to two lines). */
+.page--resource-library .quick-links--about {
+  grid-template-rows: none;
+  grid-auto-rows: 1fr;
 }
 
 .page--resource-library .quick-link--referral:hover {

@@ -223,6 +223,14 @@
     "copy  media";
 }
 
+/* Anchor the resource count to the bottom of the card. .card__content
+   uses align-items: start, so by default the copy sits just under the
+   title with slack below; align-self: end drops it to the foot of its
+   grid row so counts line up along every card's lower edge. */
+.card--resource.card--with-media.card--media-side .card__copy {
+  align-self: end;
+}
+
 .card--resource.card--with-media.card--media-side .card__media {
   /* Square thumbnail: width fills the media column, height derives from
      the 1/1 aspect-ratio (width-driven, so no circular sizing against
