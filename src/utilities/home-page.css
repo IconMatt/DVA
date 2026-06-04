@@ -26,3 +26,8 @@
 .page--search-results .advanced-search-overlay__option:not([aria-pressed="true"]):hover {
   background: var(--color-wattle);
 }
+
+/* Search-results pagination — left-align the row (base .pagination centres). */
+.page--search-results .pagination {
+  justify-content: flex-start;
+}
