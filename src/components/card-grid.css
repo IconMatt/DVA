@@ -14,11 +14,16 @@
   }
 }
 
-/* Resources-landing audience grid uses the base .card-grid--three
-   breakpoints (1-up < md, 2-up md–lg, 3-up ≥ lg): with the fixed
-   6rem thumbnail + long collection titles, going 2-up below md (840)
-   wraps the titles too tightly, so the cards read better stacked single
-   -column on small/tablet-portrait widths. No override needed. */
+/* Resources-landing audience grid — flow columns by available width
+   instead of fixed breakpoints, so the tablet-portrait range (≈760–840px)
+   gets 2 columns instead of dropping to 1. auto-fit + minmax fits as many
+   ~22rem columns as the row allows: 1-up on phones, 2-up from ~tablet,
+   3-up on desktop. min(22rem, 100%) stops the column overflowing below
+   22rem. Breakpoint-free (no hard-coded px media query). Scoped to
+   .about-grid so the shared carousel grids are unaffected. */
+.about-grid .card-grid--three {
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+}
 
 .card-grid--resources,
 .card-grid--news-carousel,
