@@ -46,7 +46,7 @@
   justify-content: center;
   width: 2.75rem;
   height: 2.75rem;
-  background: var(--color-zest);
+  background: var(--color-sky);
   border-radius: var(--radius-md);
 }
 
@@ -54,6 +54,23 @@
   width: 1.5rem;
   height: 1.5rem;
   display: block;
+}
+
+/* CTA arrow nudges right on hover/focus. transform only — no layout shift,
+   so the button keeps its width. */
+.feature-promo__actions .button img {
+  transition: transform var(--transition-base);
+}
+
+.feature-promo__actions .button:hover img,
+.feature-promo__actions .button:focus-visible img {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-promo__actions .button img {
+    transition: none;
+  }
 }
 
 .feature-promo__eyebrow {

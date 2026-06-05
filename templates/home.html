@@ -550,7 +550,14 @@
               family life and staying connected as you navigate change.
             </p>
             <p class="feature-promo__actions">
-              <a class="button button--secondary" href="#">22 Resources</a>
+              <!-- Primary CTA (brown-900 fill + white text = same colours as the
+                   24/7 support pill / .button--primary). Trailing right-arrow
+                   inverted to white via brightness-0 invert since the SVG has a
+                   hard-coded brown fill. -->
+              <a class="button button--primary" href="#">
+                22 Resources
+                <img class="brightness-0 invert" src="assets/images/icons/right-arrow.svg" alt="" width="18" height="18" aria-hidden="true" />
+              </a>
             </p>
           </div>
           <div class="feature-promo__media" aria-hidden="true" data-animate>
