@@ -1,6 +1,6 @@
 /* Audience nav — secondary navigation that filters the page by audience */
 /* segment (Serving member, Transitioning, Ex-serving, Families, etc.). */
-/* Sits directly below .site-header. Floats as a rounded slate band — same */
+/* Sits directly below .site-header. Floats as a rounded Brush band — same */
 /* outer-margin (bleed-wrap) and corner-radius treatment used on the resource */
 /* cards, so it reads as part of the card vocabulary, not a flush header bar. */
 .audience-nav {
@@ -8,7 +8,7 @@
   @media (min-width: 840px) { margin-inline: 0.9rem; }
 
   margin-block-end: var(--space-s);
-  background: var(--color-slate-500);
+  background: var(--color-brush);
   border-radius: var(--radius-xl);
   overflow: clip;
 }

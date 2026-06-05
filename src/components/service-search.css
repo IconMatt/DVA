@@ -24,9 +24,11 @@ main > .service-search-band:first-child {
   background: var(--color-coastal);
 }
 
-/* Resource-collection + about-landing use Brush for the breadcrumb /
-   search panel. */
+/* Wellbeing-resources family + about-landing use Brush for the breadcrumb /
+   search panel (resource-library = resources-landing + resource-all). */
 .page--resource-collection .service-search,
+.page--resource-library .service-search,
+.page--resource-article .service-search,
 .page--about-landing .service-search {
   background: var(--color-brush);
 }
