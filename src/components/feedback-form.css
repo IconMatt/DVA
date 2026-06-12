@@ -918,6 +918,15 @@ legend.feedback-form__label {
   }
 }
 
+/* Three-up option row (contact methods) — short single-word labels sit
+   side by side from sm up; stacked below so they don't squeeze at narrow
+   widths or 200% zoom. */
+.feedback-form__options--row {
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* Back bottom-left / Continue bottom-right. */
 .feedback-form__actions--spread {
   justify-content: space-between;

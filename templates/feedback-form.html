@@ -783,26 +783,26 @@
                   </div>
                 </div>
 
-                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="contact_method">
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="contact_method" aria-describedby="ff-hint-contact_method">
                   <legend class="feedback-form__label">How should we contact you?</legend>
-                  <p class="feedback-form__field-hint">Select all that apply.</p>
-                  <div class="feedback-form__options feedback-form__options--nested">
+                  <p class="feedback-form__field-hint" id="ff-hint-contact_method">Select all that apply.</p>
+                  <div class="feedback-form__options feedback-form__options--nested feedback-form__options--row">
                     <label class="feedback-form__option feedback-form__option--checkbox">
-                      <input type="checkbox" name="contact_method" value="email" id="ff-contact_method" />
+                      <input type="checkbox" name="contact_method" value="email" id="ff-contact_method" aria-controls="ff-method-panel-email" />
                       <span class="feedback-form__control" aria-hidden="true"></span>
                       <span class="feedback-form__option-body">
                         <span class="feedback-form__option-title">Email</span>
                       </span>
                     </label>
                     <label class="feedback-form__option feedback-form__option--checkbox">
-                      <input type="checkbox" name="contact_method" value="phone" />
+                      <input type="checkbox" name="contact_method" value="phone" aria-controls="ff-method-panel-phone" />
                       <span class="feedback-form__control" aria-hidden="true"></span>
                       <span class="feedback-form__option-body">
                         <span class="feedback-form__option-title">Phone</span>
                       </span>
                     </label>
                     <label class="feedback-form__option feedback-form__option--checkbox">
-                      <input type="checkbox" name="contact_method" value="post" />
+                      <input type="checkbox" name="contact_method" value="post" aria-controls="ff-method-panel-post" />
                       <span class="feedback-form__control" aria-hidden="true"></span>
                       <span class="feedback-form__option-body">
                         <span class="feedback-form__option-title">Post</span>
@@ -812,21 +812,21 @@
                   <p class="feedback-form__error" id="ff-error-contact_method" hidden></p>
                 </fieldset>
 
-                <div class="feedback-form__field" data-ff-method-panel="email" data-ff-field-wrap="email" hidden>
+                <div class="feedback-form__field" id="ff-method-panel-email" data-ff-method-panel="email" data-ff-field-wrap="email" hidden>
                   <label class="feedback-form__label" for="ff-email">Email address</label>
                   <p class="feedback-form__field-hint" id="ff-hint-email">We'll only use this to respond to your feedback.</p>
                   <input class="feedback-form__input" type="email" id="ff-email" name="email" autocomplete="email" aria-describedby="ff-hint-email" />
                   <p class="feedback-form__error" id="ff-error-email" hidden></p>
                 </div>
 
-                <div class="feedback-form__field" data-ff-method-panel="phone" data-ff-field-wrap="phone" hidden>
+                <div class="feedback-form__field" id="ff-method-panel-phone" data-ff-method-panel="phone" data-ff-field-wrap="phone" hidden>
                   <label class="feedback-form__label" for="ff-phone">Phone number</label>
                   <p class="feedback-form__field-hint" id="ff-hint-phone">We may call from a private or blocked number.</p>
                   <input class="feedback-form__input" type="tel" id="ff-phone" name="phone" autocomplete="tel" aria-describedby="ff-hint-phone" />
                   <p class="feedback-form__error" id="ff-error-phone" hidden></p>
                 </div>
 
-                <div data-ff-method-panel="post" hidden>
+                <div id="ff-method-panel-post" data-ff-method-panel="post" hidden>
                   <div class="feedback-form__fields feedback-form__fields--tight">
                     <p class="feedback-form__field-hint">Written responses can take 2&ndash;3 weeks to arrive.</p>
                     <div class="feedback-form__field" data-ff-field-wrap="address_line_1">
@@ -902,26 +902,26 @@
                   </fieldset>
 
                   <div class="feedback-form__reveal" id="ff-recipient-contact" data-ff-reveal="recipient" hidden>
-                    <fieldset class="feedback-form__fieldset" data-ff-field-wrap="recipient_contact_method">
+                    <fieldset class="feedback-form__fieldset" data-ff-field-wrap="recipient_contact_method" aria-describedby="ff-hint-recipient_contact_method">
                       <legend class="feedback-form__label">How should we contact them?</legend>
-                      <p class="feedback-form__field-hint">Select all that apply.</p>
-                      <div class="feedback-form__options feedback-form__options--nested">
+                      <p class="feedback-form__field-hint" id="ff-hint-recipient_contact_method">Select all that apply.</p>
+                      <div class="feedback-form__options feedback-form__options--nested feedback-form__options--row">
                         <label class="feedback-form__option feedback-form__option--checkbox">
-                          <input type="checkbox" name="recipient_contact_method" value="email" id="ff-recipient_contact_method" />
+                          <input type="checkbox" name="recipient_contact_method" value="email" id="ff-recipient_contact_method" aria-controls="ff-recipient-panel-email" />
                           <span class="feedback-form__control" aria-hidden="true"></span>
                           <span class="feedback-form__option-body">
                             <span class="feedback-form__option-title">Email</span>
                           </span>
                         </label>
                         <label class="feedback-form__option feedback-form__option--checkbox">
-                          <input type="checkbox" name="recipient_contact_method" value="phone" />
+                          <input type="checkbox" name="recipient_contact_method" value="phone" aria-controls="ff-recipient-panel-phone" />
                           <span class="feedback-form__control" aria-hidden="true"></span>
                           <span class="feedback-form__option-body">
                             <span class="feedback-form__option-title">Phone</span>
                           </span>
                         </label>
                         <label class="feedback-form__option feedback-form__option--checkbox">
-                          <input type="checkbox" name="recipient_contact_method" value="post" />
+                          <input type="checkbox" name="recipient_contact_method" value="post" aria-controls="ff-recipient-panel-post" />
                           <span class="feedback-form__control" aria-hidden="true"></span>
                           <span class="feedback-form__option-body">
                             <span class="feedback-form__option-title">Post</span>
@@ -931,17 +931,17 @@
                       <p class="feedback-form__error" id="ff-error-recipient_contact_method" hidden></p>
                     </fieldset>
 
-                    <div class="feedback-form__field" data-ff-recipient-panel="email" data-ff-field-wrap="recipient_email" hidden>
+                    <div class="feedback-form__field" id="ff-recipient-panel-email" data-ff-recipient-panel="email" data-ff-field-wrap="recipient_email" hidden>
                       <label class="feedback-form__label" for="ff-recipient_email">Their email address</label>
                       <input class="feedback-form__input" type="email" id="ff-recipient_email" name="recipient_email" />
                       <p class="feedback-form__error" id="ff-error-recipient_email" hidden></p>
                     </div>
-                    <div class="feedback-form__field" data-ff-recipient-panel="phone" data-ff-field-wrap="recipient_phone" hidden>
+                    <div class="feedback-form__field" id="ff-recipient-panel-phone" data-ff-recipient-panel="phone" data-ff-field-wrap="recipient_phone" hidden>
                       <label class="feedback-form__label" for="ff-recipient_phone">Their phone number</label>
                       <input class="feedback-form__input" type="tel" id="ff-recipient_phone" name="recipient_phone" />
                       <p class="feedback-form__error" id="ff-error-recipient_phone" hidden></p>
                     </div>
-                    <div class="feedback-form__field" data-ff-recipient-panel="post" data-ff-field-wrap="recipient_postal_address" hidden>
+                    <div class="feedback-form__field" id="ff-recipient-panel-post" data-ff-recipient-panel="post" data-ff-field-wrap="recipient_postal_address" hidden>
                       <label class="feedback-form__label" for="ff-recipient_postal_address">Their postal address</label>
                       <p class="feedback-form__field-hint" id="ff-hint-recipient_postal_address">Include street, suburb, state and postcode.</p>
                       <textarea class="feedback-form__textarea" id="ff-recipient_postal_address" name="recipient_postal_address" maxlength="2500" aria-describedby="ff-hint-recipient_postal_address"></textarea>
