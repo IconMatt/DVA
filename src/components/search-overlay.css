@@ -125,13 +125,14 @@
 }
 
 /* ---------- Submit button ---------- */
-/* Inactive (no field interaction): muted warm tone. */
+/* Inactive (no field interaction): muted brown. brown-700 is the lightest */
+/* tint that keeps white label text at WCAG AA (6.1:1) — brown-500 fails at 4.03:1. */
 /* Active (field focused or has value): dark brown. */
 /* Sizing inherited from .button — matches the outline-pill family. */
 .search-overlay__submit {
   align-self: flex-start;
-  background: var(--color-brown-500);
-  border-color: var(--color-brown-500);
+  background: var(--color-brown-700);
+  border-color: var(--color-brown-700);
   color: var(--color-white);
   transition:
     background-color var(--transition-base),

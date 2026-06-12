@@ -714,6 +714,15 @@
 
       <div class="results-section">
         <!--
+          Heading order: the page h1 ("Find a service") is followed by h3
+          service-card titles, so this visually-hidden h2 bridges the gap
+          (Lighthouse heading-order failure, 12 Jun 2026). Same pattern as
+          the bridging h2s on resources-landing.html.
+          Drupal handoff: emit from the view header (area plugin or
+          views-view--service-directory.html.twig) — do not drop in the port.
+        -->
+        <h2 class="visually-hidden">Search results</h2>
+        <!--
           Drupal handoff — Active filters (Views exposed-filter summary)
           Source:     Search API view "service_directory" — exposed filter
                       summary block placed above the results.
@@ -862,7 +871,12 @@
                 THEMENAME_preprocess_node__service__list_card —
                 - derive open/closed status, today's hours summary,
                   distance string;
-                - build aria-labels for save and tags-toggle buttons;
+                - build aria-labels for save and tags-toggle buttons.
+                  Disambiguate services sharing a title (append suburb)
+                  so no two save buttons carry the same accessible name;
+                - build the CTA accessible name: visible "View service
+                  details" plus a visually-hidden " for [title]" suffix
+                  (same disambiguation), through t() with @title;
                 - slice tags into 6 visible + N hidden, set
                   data-show-text/data-hide-text counts on the toggle;
                 - expose data-service-id, data-lat, data-lng on the article
@@ -879,9 +893,10 @@
                 - Tags-overflow toggle and hours toggle are progressive
                   enhancements — markup must work with JS off (toggle
                   hidden, all tags visible, hours table visible).
-                - Heading-order: this <h3> sits under the page <h1> with no
-                  intermediate <h2>. Promote a "Results" / "26 services
-                  found" line to <h2>, or downgrade card titles to <h2>.
+                - Heading-order: card titles are <h3> under the
+                  visually-hidden <h2>Search results</h2> at the top of
+                  .results-section. The Drupal port must keep that h2
+                  (view header) or this h3 fails heading-order again.
             -->
             <li>
               <article class="service-card" data-service-id="lifeline-crisis-support" data-lat="-33.8688" data-lng="151.2093">
@@ -982,7 +997,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Lifeline Telephone Crisis Support</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1096,7 +1111,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Counselling for War Veterans</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1110,7 +1125,7 @@
                     <p class="service-card__status service-card__status--closed">Closed now</p>
                     <h3 class="service-card__title">Mental Health Services</h3>
                   </div>
-                  <button class="site-header__pill service-card__save" type="button" aria-pressed="false" aria-label="Save Mental Health Services">
+                  <button class="site-header__pill service-card__save" type="button" aria-pressed="false" aria-label="Save Mental Health Services, Collingwood">
                     <span>Save</span>
                     <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
                   </button>
@@ -1235,7 +1250,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Mental Health Services, Collingwood</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1249,7 +1264,7 @@
                     <p class="service-card__status service-card__status--closed">Closed now</p>
                     <h3 class="service-card__title">Mental Health Services</h3>
                   </div>
-                  <button class="site-header__pill service-card__save" type="button" aria-pressed="false" aria-label="Save Mental Health Services">
+                  <button class="site-header__pill service-card__save" type="button" aria-pressed="false" aria-label="Save Mental Health Services, Hawthorn">
                     <span>Save</span>
                     <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
                   </button>
@@ -1374,7 +1389,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Mental Health Services, Hawthorn</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1483,7 +1498,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Safe Zone Support</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1591,7 +1606,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Open Arms, Veterans &amp; Families Counselling</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1712,7 +1727,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Veterans Counselling</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1793,7 +1808,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Veterans' Liaison &amp; Counselling</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -1915,7 +1930,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Defence Member &amp; Family Support</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -2038,7 +2053,7 @@
 
                 <footer class="service-card__footer">
                   <a class="site-header__pill service-card__cta" href="#">
-                    <span>View service details</span>
+                    <span>View service details<span class="visually-hidden"> for Counselling &amp; Psychological Support for Individuals, Couples &amp; Families</span></span>
                     <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />
                   </a>
                 </footer>
@@ -2740,7 +2755,7 @@
               '<h3 class="map-pin-detail__title"></h3>',
               '<p class="map-pin-detail__address"></p>',
               '<a class="site-header__pill map-pin-detail__cta" href="#">',
-              '  <span>View service details</span>',
+              '  <span>View service details<span class="visually-hidden map-pin-detail__cta-name"></span></span>',
               '  <img src="assets/images/icons/right-arrow.svg" alt="" width="16" height="16" />',
               '</a>'
             ].join('');
@@ -2784,6 +2799,7 @@
             popupEl.querySelector('.map-pin-detail__title').textContent = point.title;
             popupEl.querySelector('.map-pin-detail__address').textContent = point.address;
             popupEl.querySelector('.map-pin-detail__cta').setAttribute('href', point.url);
+            popupEl.querySelector('.map-pin-detail__cta-name').textContent = ' for ' + point.title;
             popupEl.hidden = false;
           }
 

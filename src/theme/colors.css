@@ -59,7 +59,10 @@
 
   /* Semantic roles — generate utilities like bg-ink, text-ink-muted, border-warm-strong */
   --color-ink: var(--color-ironbark);
-  --color-ink-muted: var(--color-ironbark-50);
+  /* Muted text must hold WCAG AA — ironbark-50 (#817f7d) is 4.03:1 on white,
+     under the 4.5:1 minimum for body-size text (Lighthouse, 12 Jun 2026).
+     ironbark-50 remains available for non-text uses (hairlines, icon tints). */
+  --color-ink-muted: var(--color-ironbark-75);
   --color-ink-inverse: var(--color-white);
   --color-link: var(--color-ironbark);
   --color-link-hover: var(--color-ironbark-75);

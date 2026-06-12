@@ -601,7 +601,7 @@
           <header class="resource-listing__header" data-animate>
             <h2 class="resource-listing__title" id="resources-title">Latest resources</h2>
             <div class="resource-listing__header-actions">
-              <a class="resource-listing__link" href="#">More</a>
+              <a class="resource-listing__link" href="#">More resources</a>
               <div class="resource-listing__controls" role="group" aria-label="Latest resources navigation">
                 <p class="resource-listing__page" aria-live="polite" data-resource-carousel-status>
                   1-3 of 8
@@ -1291,6 +1291,9 @@
           field_card_excerpt  (text long)
           field_card_cta_text (text, default "Read more")
           field_card_cta_link (link)
+        Preprocess (card_news):
+          Append a visually-hidden ": [node title]" suffix to the CTA so
+          repeated "Read more" links carry distinct accessible names.
         Risks:
           - .card__media-image here vs .card__image on resource cards —
             align naming before SDC.
@@ -1303,7 +1306,7 @@
           <header class="news-listing__header" data-animate>
             <h2 class="news-listing__title" id="news-title">Latest news</h2>
             <div class="news-listing__header-actions">
-              <a class="news-listing__link" href="#">More</a>
+              <a class="news-listing__link" href="#">More news</a>
               <div class="news-listing__controls" role="group" aria-label="Latest news navigation">
                 <p class="news-listing__page" aria-live="polite" data-news-carousel-status>
                   1-3 of 3
@@ -1380,7 +1383,7 @@
                       wellbeing, and navigate life after leaving the military.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: How to find balance in life again after service</span></a>
                     </p>
                   </div>
                 </article>
@@ -1417,7 +1420,7 @@
                       health and connection.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Building strong veteran and family support in Australia</span></a>
                     </p>
                   </div>
                 </article>
@@ -1454,7 +1457,7 @@
                       meaningful activities, and reconnect with what matters.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more</a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Exploring purpose and fulfilling activities after service</span></a>
                     </p>
                   </div>
                 </article>

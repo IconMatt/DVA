@@ -976,7 +976,8 @@ legend.feedback-form__label {
 
 .feedback-form__input::placeholder,
 .feedback-form__textarea::placeholder {
-  color: var(--color-brown-500);
+  /* ink-muted, not brown-500 — placeholder hints are text and must hold AA. */
+  color: var(--color-ink-muted);
 }
 
 .feedback-form__confirm-panel {
