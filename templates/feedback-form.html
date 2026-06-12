@@ -1,0 +1,2159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="../" />
+    <title>Feedback — Veteran and Family Wellbeing Agency</title>
+    <meta
+      name="description"
+      content="Make a complaint, compliment or suggestion about the Veteran and Family Wellbeing Agency or this website, including services delivered on our behalf by providers."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Halant:wght@400;600&display=swap"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body id="top" class="page page--feedback-form">
+    <!--
+      ================================================================
+      Feedback form page — chrome (header, search overlay, mobile nav,
+      CTA tray, footer) mirrors the other templates. The form body is
+      intentionally a placeholder so the visual scaffolding can be
+      iterated on; add the feedback form inside <main> above the
+      .cta-tray when it's built.
+      ================================================================
+    -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="site-header__pill site-header__pill--exit" href="https://www.bom.gov.au/">
+      <span>Quick exit</span>
+      <img
+        class="site-header__pill-icon"
+        src="assets/images/icons/Property 1=Close.svg"
+        alt=""
+        width="14"
+        height="14"
+      />
+    </a>
+
+    <header class="site-header" role="banner">
+      <div class="site-header__inner container">
+        <a class="site-header__brand" href="/" aria-label="Veteran and Family Wellbeing Agency home">
+          <img
+            class="site-header__logo"
+            src="assets/images/logo.svg"
+            alt=""
+            width="198"
+            height="36"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-nav__list">
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Find a service</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Wellbeing resources</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="about-landing.html">About</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-header__utility">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Property 1=Search.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>Search</span>
+          </button>
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Star.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+          <button class="site-header__pill site-header__pill--menu" type="button" data-menu-trigger aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+            <span>Menu</span>
+            <span class="site-header__menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search overlay (sitewide search + service search) -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search options" hidden>
+      <div class="search-overlay__inner container">
+        <div class="search-overlay__header">
+          <h2 class="search-overlay__title">Search Options</h2>
+          <button class="search-overlay__close" type="button" aria-label="Close search">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
+        <hr class="search-overlay__divider search-overlay__divider--header" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Sitewide search</h3>
+          <form class="search-overlay__form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-site-search"
+                    name="q"
+                    type="search"
+                    placeholder="Search site content…"
+                  />
+                  <label class="service-search__label" for="overlay-site-search">
+                    Search site content
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button class="button search-overlay__submit" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <hr class="search-overlay__divider" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Search for a service</h3>
+          <form class="search-overlay__service-form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-keyword"
+                    name="q"
+                    type="search"
+                    placeholder="Service, topic or provider…"
+                  />
+                  <label class="service-search__label" for="overlay-service-keyword">
+                    Search by service, topic or provider
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/location.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-location"
+                    name="location"
+                    type="text"
+                    placeholder="E.g. Richmond VIC or 3141"
+                  />
+                  <label class="service-search__label" for="overlay-service-location">
+                    Suburb or postcode (optional)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button search-overlay__submit" type="submit">
+              Find a service
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+      <div class="mobile-nav__inner">
+        <nav class="mobile-nav__nav" aria-label="Primary">
+          <ul class="mobile-nav__list">
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Find a service
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/doc-search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Wellbeing resources
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="about-landing.html">
+                About
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Contact
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="mobile-nav__search">
+            <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger-mobile aria-expanded="false" aria-controls="search-overlay">
+              <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+              <span>Search</span>
+            </button>
+          </div>
+        </nav>
+
+        <div class="mobile-nav__footer">
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main" class="site-main">
+      <!--
+        Feedback header — breadcrumb + H1 + lead + hero image. Same
+        two-column .service-search-collection treatment as about-landing
+        (cream card + photo); the grid + Brush panel styles are scoped to
+        .page--feedback-form in src/components/service-search.css.
+        Replace the hero image src once a final Feedback asset is provided.
+
+        Drupal handoff — Feedback form page
+        Structure:  Webform module ("feedback" webform) rendered on a
+                    page at /about/feedback, or a core contact form if
+                    Webform isn't available. Not a paragraph type — the
+                    form is configuration, not editorial content.
+        Fields:     feedback type (complaint | compliment | suggestion),
+                    message, optional name/email for response. Confirm
+                    final field list with the Drupal developer.
+        Preprocess: none for this header block; H1 + lead come from the
+                    page node (title + field_page_lead) or webform
+                    description. Breadcrumb from the menu trail.
+      -->
+      <div class="service-search-band">
+      <div class="service-search-collection">
+      <section class="service-search" id="feedback" aria-labelledby="feedback-title">
+        <div class="service-search__inner container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb__list">
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="/">Home</a></li>
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="#">Contact</a></li>
+              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">Feedback form</li>
+            </ol>
+          </nav>
+
+          <h1 class="service-search__title" id="feedback-title" data-animate>
+            Feedback form
+          </h1>
+
+          <p class="service-search__lead intro" data-animate>
+            If you would like to make a Complaint, Compliment or Suggestion to
+            us about the agency or website. This includes services delivered on
+            our behalf by providers.
+          </p>
+        </div>
+      </section>
+      <figure class="service-search__media" data-animate>
+        <img
+          src="assets/images/transition.png"
+          alt=""
+          data-parallax-media
+          data-parallax-mode="translate"
+          data-parallax-buffer-ratio="0.08"
+          data-parallax-speed="0.06"
+          data-parallax-limit="30"
+        />
+      </figure>
+      </div>
+      </div>
+
+      <!--
+        Feedback form — multi-step flow per docs/feedback-form-build-brief.md.
+        Compliments/suggestions = 4 steps, complaints = 6 steps. One screen
+        visible at a time; the flow script (second <script> block below)
+        owns branching, validation, draft persistence, and the review build.
+
+        Drupal handoff — Webform module ("feedback" webform) at
+        /contact/feedback. Each [data-ff-screen] step maps to a webform
+        page (wizard); conditional reveals map to webform #states. The
+        client-side flow script is prototype-only — Drupal Webform's wizard,
+        validation, and draft saving replace it wholesale. Field machine
+        names below match the brief's data model (feedback_type,
+        on_behalf.*, raised_elsewhere.*, feedback.*, response.*).
+        Step h2s would become per-page h1s in Drupal (one question per
+        page); this static page keeps them h2 because the page owns the h1.
+        raised_date is month/year only (per the screen-3 hint) — confirm
+        against rule 9's day/month/year convention with the form owner.
+      -->
+      <div class="feedback-form" data-ff>
+        <div class="feedback-form__panel">
+
+          <!-- Screen 0 — Landing -->
+          <section class="feedback-form__screen" data-ff-screen="landing" aria-labelledby="ff-landing-heading">
+            <div class="feedback-form__col">
+              <p class="feedback-form__eyebrow" data-animate>Feedback form</p>
+              <h2 class="feedback-form__heading" id="ff-landing-heading" tabindex="-1" data-animate>
+                Your feedback helps us improve our services for veterans, serving
+                members, and their families.
+              </h2>
+              <p class="feedback-form__intro" data-animate>
+                Whether it's a compliment, suggestion, or complaint, we want to
+                hear from you. The form takes about 5&ndash;10 minutes. You can
+                save your progress and come back later, and you can choose to
+                stay anonymous.
+              </p>
+
+              <div class="feedback-form__banner" data-ff-resume hidden>
+                <p>You have a saved draft. Would you like to pick up where you left off?</p>
+                <div class="feedback-form__actions">
+                  <button class="button button--primary" type="button" data-ff-resume-yes>Resume draft</button>
+                  <button class="button button--secondary feedback-form__back" type="button" data-ff-resume-no>Start again</button>
+                </div>
+              </div>
+
+              <div class="feedback-form__actions" data-animate>
+                <button class="quick-link feedback-form__start" type="button" data-ff-start>
+                  <span class="feedback-form__start-body">
+                    <span class="quick-link__title">Start feedback form</span>
+                    <span class="quick-link__text">Complete our online form to share your feedback</span>
+                  </span>
+                  <span class="quick-link__arrow" aria-hidden="true">
+                    <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                  </span>
+                </button>
+              </div>
+
+              <div class="feedback-form__divider" aria-hidden="true" data-animate>or</div>
+
+              <p class="feedback-form__intro" data-animate>Prefer to talk to someone? Call the Helpline on:</p>
+              <p class="feedback-form__phone" data-animate>
+                <span class="feedback-form__phone-icon">
+                  <img src="assets/images/icons/phone.svg" alt="" width="22" height="22" />
+                </span>
+                <a class="feedback-form__phone-number" href="tel:1800011222">1800 011 222</a>
+              </p>
+            </div>
+          </section>
+
+          <!-- Step — Feedback type (1 of 4 / 1 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="type" aria-labelledby="ff-type-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 1 of 4</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-type-heading" tabindex="-1">
+                What type of feedback are you providing?
+              </h2>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="feedback_type">
+                <legend class="visually-hidden">What type of feedback are you providing?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="feedback_type" value="compliment" id="ff-feedback_type" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Compliment</span>
+                      <span class="feedback-form__option-hint">Tell us what we did well</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="feedback_type" value="suggestion" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Suggestion</span>
+                      <span class="feedback-form__option-hint">An idea to improve our services</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="feedback_type" value="complaint" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Complaint</span>
+                      <span class="feedback-form__option-hint">Something didn't meet your expectations</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="ff-error-feedback_type" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — On behalf of a client? (complaints only, 2 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="onbehalf" aria-labelledby="ff-onbehalf-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 2 of 6</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-onbehalf-heading" tabindex="-1">
+                Are you making this complaint on behalf of an Agency client?
+              </h2>
+
+              <p class="feedback-form__banner">
+                We can usually only accept a complaint from a third party (e.g. a
+                family member) if the client has given their permission, unless
+                relevant Privacy or Guardianship rules allow us to act without it.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="on_behalf">
+                <legend class="visually-hidden">Are you making this complaint on behalf of an Agency client?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="on_behalf" value="no" id="ff-on_behalf" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">No, the complaint is about my own experience</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="on_behalf" value="yes" aria-controls="ff-onbehalf-details" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Yes, I am complaining on behalf of someone else</span>
+                      <span class="feedback-form__option-hint">We'll ask for their details</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="ff-error-on_behalf" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__reveal" id="ff-onbehalf-details" data-ff-reveal="onbehalf" hidden>
+                <h3 class="feedback-form__reveal-heading">Family member or client details</h3>
+                <div class="feedback-form__field-row">
+                  <div class="feedback-form__field" data-ff-field-wrap="client_first_name">
+                    <label class="feedback-form__label" for="ff-client_first_name">Their first name</label>
+                    <input class="feedback-form__input" type="text" id="ff-client_first_name" name="client_first_name" autocomplete="off" />
+                    <p class="feedback-form__error" id="ff-error-client_first_name" hidden></p>
+                  </div>
+                  <div class="feedback-form__field" data-ff-field-wrap="client_surname">
+                    <label class="feedback-form__label" for="ff-client_surname">Their surname</label>
+                    <input class="feedback-form__input" type="text" id="ff-client_surname" name="client_surname" autocomplete="off" />
+                    <p class="feedback-form__error" id="ff-error-client_surname" hidden></p>
+                  </div>
+                </div>
+                <div class="feedback-form__field">
+                  <label class="feedback-form__label" for="ff-client_relationship">Your relationship to them (optional)</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-client_relationship">For example, daughter, carer, advocate.</p>
+                  <input class="feedback-form__input" type="text" id="ff-client_relationship" name="client_relationship" aria-describedby="ff-hint-client_relationship" />
+                </div>
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="consent_confirmed">
+                  <legend class="visually-hidden">Permission confirmation</legend>
+                  <div class="feedback-form__options feedback-form__options--nested">
+                    <label class="feedback-form__option feedback-form__option--checkbox">
+                      <input type="checkbox" name="consent_confirmed" value="yes" id="ff-consent_confirmed" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">
+                          I confirm this person knows I am making this complaint and
+                          has given their permission, or I believe permission rules
+                          do not apply in this case.
+                        </span>
+                      </span>
+                    </label>
+                  </div>
+                  <p class="feedback-form__error" id="ff-error-consent_confirmed" hidden></p>
+                </fieldset>
+              </div>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Raised elsewhere? (complaints only, 3 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="raised" aria-labelledby="ff-raised-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 3 of 6</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-raised-heading" tabindex="-1">
+                Have you raised this complaint with anyone else?
+              </h2>
+              <p class="feedback-form__hint">
+                This helps us coordinate with other offices and avoid asking you to
+                repeat yourself. It does not affect how seriously we treat your
+                complaint.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="raised_elsewhere">
+                <legend class="visually-hidden">Have you raised this complaint with anyone else?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="raised_elsewhere" value="no" id="ff-raised_elsewhere" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">No, this is the first time I'm raising it</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="raised_elsewhere" value="yes" aria-controls="ff-raised-details" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Yes, I've raised it with someone else</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="ff-error-raised_elsewhere" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__reveal" id="ff-raised-details" data-ff-reveal="raised" hidden>
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="raised_with">
+                  <legend class="feedback-form__label">Who did you contact?</legend>
+                  <div class="feedback-form__options feedback-form__options--nested">
+                    <label class="feedback-form__option feedback-form__option--checkbox">
+                      <input type="checkbox" name="raised_with" value="Minister" id="ff-raised_with" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Minister</span>
+                      </span>
+                    </label>
+                    <label class="feedback-form__option feedback-form__option--checkbox">
+                      <input type="checkbox" name="raised_with" value="Local MP" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Local MP</span>
+                      </span>
+                    </label>
+                    <label class="feedback-form__option feedback-form__option--checkbox">
+                      <input type="checkbox" name="raised_with" value="Commonwealth Ombudsman" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Commonwealth Ombudsman</span>
+                      </span>
+                    </label>
+                    <label class="feedback-form__option feedback-form__option--checkbox">
+                      <input type="checkbox" name="raised_with" value="Other" aria-controls="ff-raised-other" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Other</span>
+                      </span>
+                    </label>
+                  </div>
+                  <p class="feedback-form__error" id="ff-error-raised_with" hidden></p>
+                </fieldset>
+
+                <div class="feedback-form__field" id="ff-raised-other" data-ff-field-wrap="raised_with_other" hidden>
+                  <label class="feedback-form__label" for="ff-raised_with_other">Who else did you contact?</label>
+                  <input class="feedback-form__input" type="text" id="ff-raised_with_other" name="raised_with_other" />
+                  <p class="feedback-form__error" id="ff-error-raised_with_other" hidden></p>
+                </div>
+
+                <fieldset class="feedback-form__fieldset">
+                  <legend class="feedback-form__label">When did you contact them? (optional)</legend>
+                  <p class="feedback-form__field-hint" id="ff-hint-raised_date">An approximate date is fine. For example, 3 2026.</p>
+                  <div class="feedback-form__date-row">
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="ff-raised_date_month">Month</label>
+                      <input class="feedback-form__input feedback-form__input--month" type="text" inputmode="numeric" id="ff-raised_date_month" name="raised_date_month" aria-describedby="ff-hint-raised_date" />
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="ff-raised_date_year">Year</label>
+                      <input class="feedback-form__input feedback-form__input--year" type="text" inputmode="numeric" id="ff-raised_date_year" name="raised_date_year" aria-describedby="ff-hint-raised_date" />
+                    </div>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Your feedback (2 of 4 / 4 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="detail" aria-labelledby="ff-detail-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 2 of 4</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-detail-heading" tabindex="-1">Your feedback</h2>
+
+              <div class="feedback-form__fields">
+                <div class="feedback-form__field" data-ff-field-wrap="feedback_detail">
+                  <label class="feedback-form__label" for="ff-feedback_detail">Tell us about your feedback</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-feedback_detail">
+                    Include what happened, when, and who or which service was
+                    involved. Don't include anyone else's personal information
+                    unless it's needed.
+                  </p>
+                  <textarea class="feedback-form__textarea" id="ff-feedback_detail" name="feedback_detail" maxlength="2500" aria-describedby="ff-hint-feedback_detail"></textarea>
+                  <p class="feedback-form__counter" data-ff-counter aria-live="polite" hidden></p>
+                  <p class="feedback-form__error" id="ff-error-feedback_detail" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="outcome_sought">
+                  <label class="feedback-form__label" for="ff-outcome_sought">What outcome would you like to see? (optional)</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-outcome_sought">
+                    For example, an apology, a decision reviewed, or a process improved.
+                  </p>
+                  <textarea class="feedback-form__textarea" id="ff-outcome_sought" name="outcome_sought" maxlength="2500" aria-describedby="ff-hint-outcome_sought"></textarea>
+                  <p class="feedback-form__counter" data-ff-counter aria-live="polite" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="ill_treatment">
+                  <label class="feedback-form__label" for="ff-ill_treatment">Does your feedback relate to ill treatment?</label>
+                  <div class="feedback-form__select-wrap">
+                    <!-- Option list per brief; confirm against the production form. -->
+                    <select class="feedback-form__select" id="ff-ill_treatment" name="ill_treatment">
+                      <option value="">Please select</option>
+                      <option value="no">No</option>
+                      <option value="yes">Yes</option>
+                      <option value="not-sure">Not sure</option>
+                    </select>
+                  </div>
+                  <p class="feedback-form__banner" data-ff-ill-banner hidden>
+                    Thank you for telling us. Reports involving ill treatment are
+                    reviewed with priority.
+                  </p>
+                  <p class="feedback-form__error" id="ff-error-ill_treatment" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="provider_details">
+                  <label class="feedback-form__label" for="ff-provider_details">Provider or contractor details (optional)</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-provider_details">
+                    If your feedback relates to a specific provider or contractor,
+                    include their name and location.
+                  </p>
+                  <textarea class="feedback-form__textarea" id="ff-provider_details" name="provider_details" maxlength="2500" aria-describedby="ff-hint-provider_details"></textarea>
+                  <p class="feedback-form__counter" data-ff-counter aria-live="polite" hidden></p>
+                </div>
+              </div>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Response preference (3 of 4 / 5 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="response" aria-labelledby="ff-response-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 3 of 4</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-response-heading" tabindex="-1">
+                Would you like a response to your feedback?
+              </h2>
+              <p class="feedback-form__hint">
+                You can stay anonymous. If you do, we won't be able to contact you
+                or let you know the outcome.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="wants_response">
+                <legend class="visually-hidden">Would you like a response to your feedback?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="wants_response" value="anonymous" id="ff-wants_response" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">No, I want to remain anonymous</span>
+                      <span class="feedback-form__option-hint">Your feedback is recorded without personal details</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="wants_response" value="contact" aria-controls="ff-contact-details" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Yes, contact me about my feedback</span>
+                      <span class="feedback-form__option-hint">We'll use the details below to follow up</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="ff-error-wants_response" hidden></p>
+              </fieldset>
+
+              <p class="feedback-form__banner" data-ff-anon-banner hidden>
+                We'll still act on your feedback, but we won't be able to update
+                you on what happens next.
+              </p>
+
+              <div class="feedback-form__reveal" id="ff-contact-details" data-ff-reveal="contact" hidden>
+                <div class="feedback-form__field-row">
+                  <div class="feedback-form__field" data-ff-field-wrap="first_name">
+                    <label class="feedback-form__label" for="ff-first_name">First name</label>
+                    <input class="feedback-form__input" type="text" id="ff-first_name" name="first_name" autocomplete="given-name" />
+                    <p class="feedback-form__error" id="ff-error-first_name" hidden></p>
+                  </div>
+                  <div class="feedback-form__field" data-ff-field-wrap="surname">
+                    <label class="feedback-form__label" for="ff-surname">Surname</label>
+                    <input class="feedback-form__input" type="text" id="ff-surname" name="surname" autocomplete="family-name" />
+                    <p class="feedback-form__error" id="ff-error-surname" hidden></p>
+                  </div>
+                </div>
+
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="contact_method">
+                  <legend class="feedback-form__label">How should we contact you?</legend>
+                  <div class="feedback-form__options feedback-form__options--nested">
+                    <label class="feedback-form__option">
+                      <input type="radio" name="contact_method" value="email" id="ff-contact_method" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Email</span>
+                      </span>
+                    </label>
+                    <label class="feedback-form__option">
+                      <input type="radio" name="contact_method" value="phone" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Phone</span>
+                      </span>
+                    </label>
+                    <label class="feedback-form__option">
+                      <input type="radio" name="contact_method" value="post" />
+                      <span class="feedback-form__control" aria-hidden="true"></span>
+                      <span class="feedback-form__option-body">
+                        <span class="feedback-form__option-title">Post</span>
+                      </span>
+                    </label>
+                  </div>
+                  <p class="feedback-form__error" id="ff-error-contact_method" hidden></p>
+                </fieldset>
+
+                <div class="feedback-form__field" data-ff-method-panel="email" data-ff-field-wrap="email" hidden>
+                  <label class="feedback-form__label" for="ff-email">Email address</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-email">We'll only use this to respond to your feedback.</p>
+                  <input class="feedback-form__input" type="email" id="ff-email" name="email" autocomplete="email" aria-describedby="ff-hint-email" />
+                  <p class="feedback-form__error" id="ff-error-email" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-method-panel="phone" data-ff-field-wrap="phone" hidden>
+                  <label class="feedback-form__label" for="ff-phone">Phone number</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-phone">We may call from a private or blocked number.</p>
+                  <input class="feedback-form__input" type="tel" id="ff-phone" name="phone" autocomplete="tel" aria-describedby="ff-hint-phone" />
+                  <p class="feedback-form__error" id="ff-error-phone" hidden></p>
+                </div>
+
+                <div data-ff-method-panel="post" hidden>
+                  <div class="feedback-form__fields feedback-form__fields--tight">
+                    <p class="feedback-form__field-hint">Written responses can take 2&ndash;3 weeks to arrive.</p>
+                    <div class="feedback-form__field" data-ff-field-wrap="address_line_1">
+                      <label class="feedback-form__label" for="ff-address_line_1">Address line 1</label>
+                      <input class="feedback-form__input" type="text" id="ff-address_line_1" name="address_line_1" autocomplete="address-line1" />
+                      <p class="feedback-form__error" id="ff-error-address_line_1" hidden></p>
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="ff-address_line_2">Address line 2 (optional)</label>
+                      <input class="feedback-form__input" type="text" id="ff-address_line_2" name="address_line_2" autocomplete="address-line2" />
+                    </div>
+                    <div class="feedback-form__field-row">
+                      <div class="feedback-form__field" data-ff-field-wrap="suburb">
+                        <label class="feedback-form__label" for="ff-suburb">Suburb or town</label>
+                        <input class="feedback-form__input" type="text" id="ff-suburb" name="suburb" autocomplete="address-level2" />
+                        <p class="feedback-form__error" id="ff-error-suburb" hidden></p>
+                      </div>
+                      <div class="feedback-form__field" data-ff-field-wrap="state">
+                        <label class="feedback-form__label" for="ff-state">State or territory</label>
+                        <div class="feedback-form__select-wrap">
+                          <select class="feedback-form__select" id="ff-state" name="state">
+                            <option value="">Please select</option>
+                            <option>ACT</option>
+                            <option>NSW</option>
+                            <option>NT</option>
+                            <option>QLD</option>
+                            <option>SA</option>
+                            <option>TAS</option>
+                            <option>VIC</option>
+                            <option>WA</option>
+                          </select>
+                        </div>
+                        <p class="feedback-form__error" id="ff-error-state" hidden></p>
+                      </div>
+                    </div>
+                    <div class="feedback-form__field" data-ff-field-wrap="postcode">
+                      <label class="feedback-form__label" for="ff-postcode">Postcode</label>
+                      <input class="feedback-form__input feedback-form__input--postcode" type="text" inputmode="numeric" id="ff-postcode" name="postcode" autocomplete="postal-code" />
+                      <p class="feedback-form__error" id="ff-error-postcode" hidden></p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="feedback-form__field">
+                  <label class="feedback-form__label" for="ff-dva_file_number">DVA file number (optional)</label>
+                  <p class="feedback-form__field-hint" id="ff-hint-dva_file_number">
+                    Providing this helps us link your feedback to your records faster.
+                  </p>
+                  <input class="feedback-form__input" type="text" id="ff-dva_file_number" name="dva_file_number" aria-describedby="ff-hint-dva_file_number" />
+                </div>
+
+                <!-- On-behalf complaints only — who should receive the response. -->
+                <div data-ff-recipient-block hidden>
+                  <fieldset class="feedback-form__fieldset" data-ff-field-wrap="response_recipient">
+                    <legend class="feedback-form__label">Who should we respond to?</legend>
+                    <div class="feedback-form__options feedback-form__options--nested">
+                      <label class="feedback-form__option">
+                        <input type="radio" name="response_recipient" value="me" id="ff-response_recipient" />
+                        <span class="feedback-form__control" aria-hidden="true"></span>
+                        <span class="feedback-form__option-body">
+                          <span class="feedback-form__option-title">Me</span>
+                        </span>
+                      </label>
+                      <label class="feedback-form__option">
+                        <input type="radio" name="response_recipient" value="client" aria-controls="ff-recipient-contact" />
+                        <span class="feedback-form__control" aria-hidden="true"></span>
+                        <span class="feedback-form__option-body">
+                          <span class="feedback-form__option-title">The person I'm complaining for</span>
+                        </span>
+                      </label>
+                    </div>
+                    <p class="feedback-form__error" id="ff-error-response_recipient" hidden></p>
+                  </fieldset>
+
+                  <div class="feedback-form__reveal" id="ff-recipient-contact" data-ff-reveal="recipient" hidden>
+                    <fieldset class="feedback-form__fieldset" data-ff-field-wrap="recipient_contact_method">
+                      <legend class="feedback-form__label">How should we contact them?</legend>
+                      <div class="feedback-form__options feedback-form__options--nested">
+                        <label class="feedback-form__option">
+                          <input type="radio" name="recipient_contact_method" value="email" id="ff-recipient_contact_method" />
+                          <span class="feedback-form__control" aria-hidden="true"></span>
+                          <span class="feedback-form__option-body">
+                            <span class="feedback-form__option-title">Email</span>
+                          </span>
+                        </label>
+                        <label class="feedback-form__option">
+                          <input type="radio" name="recipient_contact_method" value="phone" />
+                          <span class="feedback-form__control" aria-hidden="true"></span>
+                          <span class="feedback-form__option-body">
+                            <span class="feedback-form__option-title">Phone</span>
+                          </span>
+                        </label>
+                        <label class="feedback-form__option">
+                          <input type="radio" name="recipient_contact_method" value="post" />
+                          <span class="feedback-form__control" aria-hidden="true"></span>
+                          <span class="feedback-form__option-body">
+                            <span class="feedback-form__option-title">Post</span>
+                          </span>
+                        </label>
+                      </div>
+                      <p class="feedback-form__error" id="ff-error-recipient_contact_method" hidden></p>
+                    </fieldset>
+
+                    <div class="feedback-form__field" data-ff-recipient-panel="email" data-ff-field-wrap="recipient_email" hidden>
+                      <label class="feedback-form__label" for="ff-recipient_email">Their email address</label>
+                      <input class="feedback-form__input" type="email" id="ff-recipient_email" name="recipient_email" />
+                      <p class="feedback-form__error" id="ff-error-recipient_email" hidden></p>
+                    </div>
+                    <div class="feedback-form__field" data-ff-recipient-panel="phone" data-ff-field-wrap="recipient_phone" hidden>
+                      <label class="feedback-form__label" for="ff-recipient_phone">Their phone number</label>
+                      <input class="feedback-form__input" type="tel" id="ff-recipient_phone" name="recipient_phone" />
+                      <p class="feedback-form__error" id="ff-error-recipient_phone" hidden></p>
+                    </div>
+                    <div class="feedback-form__field" data-ff-recipient-panel="post" data-ff-field-wrap="recipient_postal_address" hidden>
+                      <label class="feedback-form__label" for="ff-recipient_postal_address">Their postal address</label>
+                      <p class="feedback-form__field-hint" id="ff-hint-recipient_postal_address">Include street, suburb, state and postcode.</p>
+                      <textarea class="feedback-form__textarea" id="ff-recipient_postal_address" name="recipient_postal_address" maxlength="2500" aria-describedby="ff-hint-recipient_postal_address"></textarea>
+                      <p class="feedback-form__error" id="ff-error-recipient_postal_address" hidden></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Review and submit (4 of 4 / 6 of 6) -->
+          <section class="feedback-form__screen" data-ff-screen="review" aria-labelledby="ff-review-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__top">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <div class="feedback-form__progress">
+                  <p class="feedback-form__progress-label" data-ff-progress-label>Step 4 of 4</p>
+                  <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                </div>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__heading" id="ff-review-heading" tabindex="-1">
+                Review and submit your feedback
+              </h2>
+
+              <p class="feedback-form__banner">
+                Check your answers before submitting. Use Change to edit any answer.
+              </p>
+
+              <div class="feedback-form__summary" data-ff-summary></div>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="declaration_confirmed">
+                <legend class="visually-hidden">Declaration</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="declaration_confirmed" value="yes" id="ff-declaration_confirmed" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">
+                        The information I have provided is true to the best of my knowledge.
+                      </span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="ff-error-declaration_confirmed" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__actions">
+                <button class="button button--primary" type="button" data-ff-submit>Submit feedback</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Screen — Confirmation -->
+          <section class="feedback-form__screen" data-ff-screen="confirmation" aria-labelledby="ff-confirmation-heading" hidden>
+            <div class="feedback-form__col">
+              <h2 class="feedback-form__heading" id="ff-confirmation-heading" tabindex="-1">
+                Thank you for reaching out to the Veteran and Family Wellbeing Agency
+              </h2>
+
+              <div class="feedback-form__confirm-panel">
+                <p>
+                  <span class="feedback-form__icon-box" aria-hidden="true">
+                    <img src="assets/images/icons/check.svg" alt="" width="22" height="22" />
+                  </span>
+                </p>
+                <p>Your feedback has been received.</p>
+                <p>Your reference number is <strong class="feedback-form__reference" data-ff-reference>FB-00000000</strong></p>
+                <p data-ff-confirm-contact></p>
+              </div>
+            </div>
+
+            <!-- Outside .feedback-form__col so the heading + three resource
+                 CTAs span the panel's full content width. -->
+            <h3 class="feedback-form__resources-heading">
+              Our website has wellbeing resources and information about services.
+            </h3>
+            <ul class="quick-links feedback-form__resources">
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--referral" href="services-directory.html">
+                    <span class="quick-link__title">Find a service</span>
+                    <span class="quick-link__text">Search for services near you.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--referral" href="resources-landing.html">
+                    <span class="quick-link__title">Wellbeing resources for you</span>
+                    <span class="quick-link__text">Browse wellbeing information for veterans and families.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--emergency" href="#">
+                    <span class="quick-link__title">Get urgent help now</span>
+                    <span class="quick-link__text">Access 24/7 crisis and urgent support.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+            </ul>
+          </section>
+
+          <!-- Phone + urgent-help footer — repeated on every step (hidden on
+               landing, which carries its own, and on confirmation). -->
+          <div class="feedback-form__channel-footer" data-ff-channel-footer hidden>
+            <p>Prefer to talk to someone? Call the Helpline on <a href="tel:1800011222">1800 011 222</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="cta-tray" aria-labelledby="cta-tray-title">
+        <div class="cta-tray__inner container">
+          <h2 class="cta-tray__title" id="cta-tray-title" data-animate>Not sure where to start?</h2>
+          <ul class="quick-links quick-links--tray" data-animate-stagger>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#find-a-service">
+                <span class="quick-link__title">Find a service</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Wellbeing resources</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Contact us</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link quick-link--emergency" href="#">
+                <span class="quick-link__title">Get urgent help now</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner container">
+        <div class="site-footer__logos">
+          <img
+            class="site-footer__logo site-footer__logo--government"
+            src="assets/images/austalian government logo.svg"
+            alt="Australian Government"
+            width="134"
+            height="69"
+          />
+          <span class="site-footer__logo-divider" aria-hidden="true"></span>
+          <img
+            class="site-footer__logo site-footer__logo--agency"
+            src="assets/images/logo.svg"
+            alt="Veteran and Family Wellbeing Agency"
+            width="230"
+            height="42"
+          />
+        </div>
+
+        <div class="site-footer__brand">
+          <p class="site-footer__acknowledgement">
+            The Veteran and Family Wellbeing Agency acknowledges the Traditional
+            Custodians of the lands we live on. We honour the contributions of
+            all Aboriginal and Torres Strait Islander people that have served,
+            whose contributions have helped to shape our nation.
+          </p>
+          <nav aria-label="Social media">
+            <ul class="social-links">
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Instagram">
+                  <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Facebook">
+                  <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="YouTube">
+                  <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__list">
+            <li class="site-footer__item site-footer__item--heading"><a class="site-footer__link site-footer__link--heading" href="about-landing.html">About the Agency</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">How we help</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">News</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="feedback-form.html">Contact and feedback</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">I need urgent help</a></li>
+          </ul>
+        </nav>
+
+        <a class="site-footer__back-to-top" href="#top">
+          <img
+            class="site-footer__back-icon"
+            src="assets/images/icons/Property 1=Left arrow.svg"
+            alt=""
+            width="18"
+            height="18"
+          />
+          <span>Back to top</span>
+        </a>
+        <hr class="site-footer__rule" aria-hidden="true" />
+        <p class="site-footer__copyright">&copy; 2026 Copyright</p>
+        <ul class="site-footer__legal-list">
+          <li><a class="site-footer__link" href="#">Privacy</a></li>
+          <li><a class="site-footer__link" href="#">Terms and Conditions</a></li>
+          <li><a class="site-footer__link" href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        var trapFocus = function (container, e) {
+          var focusable = Array.prototype.slice.call(
+            container.querySelectorAll('a[href], button:not([disabled]):not([hidden]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+          );
+          if (focusable.length < 2) return;
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        };
+
+        // Staggered entrance animations
+        var animated = document.querySelectorAll('[data-animate]');
+        document.querySelectorAll('[data-animate-stagger]').forEach(function (group) {
+          var children = group.querySelectorAll(':scope > [data-animate]');
+          children.forEach(function (el, i) {
+            if (!el.style.getPropertyValue('--animate-delay')) {
+              el.style.setProperty('--animate-delay', (i * 80) + 'ms');
+            }
+          });
+        });
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          animated.forEach(function (el) { el.classList.add('is-visible'); });
+        } else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+          animated.forEach(function (el) { io.observe(el); });
+          document.documentElement.classList.add('js-animations');
+        }
+
+        // Parallax — translate-mode only. ticking flag throttles to one rAF/frame.
+        if (!reduced) {
+          var mediaLayers = document.querySelectorAll('[data-parallax-media]');
+          if (mediaLayers.length) {
+            var parallaxTicking = false;
+            var updateParallax = function () {
+              var vh = window.innerHeight;
+              var viewportCenter = vh / 2;
+              mediaLayers.forEach(function (el) {
+                var speed = parseFloat(el.dataset.parallaxSpeed) || 0.03;
+                var limit = parseFloat(el.dataset.parallaxLimit) || 8;
+                var bufferRatio = parseFloat(el.dataset.parallaxBufferRatio) || 0.08;
+                var rect = el.getBoundingClientRect();
+                var elCenter = rect.top + rect.height / 2;
+                var offset = viewportCenter - elCenter;
+                var movement = Math.max(-limit, Math.min(limit, offset * speed));
+                var buffer = Math.max(limit + 2, rect.height * bufferRatio);
+
+                if (el.dataset.parallaxMode === 'testimonial') {
+                  el.style.setProperty('--testimonial-image-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-offset', movement + 'px');
+                } else {
+                  el.style.setProperty('--card-media-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-offset', movement + 'px');
+                }
+              });
+              parallaxTicking = false;
+            };
+            window.addEventListener('scroll', function () {
+              if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+              }
+            }, { passive: true });
+            window.addEventListener('resize', updateParallax, { passive: true });
+            updateParallax();
+          }
+        }
+
+        // Mobile nav
+        var mobileNav = document.getElementById('mobile-nav');
+        var menuTrigger = document.querySelector('[data-menu-trigger]');
+
+        function openMobileNav() {
+          mobileNav.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          menuTrigger.setAttribute('aria-expanded', 'true');
+          menuTrigger.setAttribute('aria-label', 'Close navigation');
+          var firstFocusable = mobileNav.querySelector('button:not([disabled]):not([hidden]), a[href]');
+          if (firstFocusable) firstFocusable.focus();
+        }
+
+        function closeMobileNav() {
+          mobileNav.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          menuTrigger.setAttribute('aria-expanded', 'false');
+          menuTrigger.setAttribute('aria-label', 'Open navigation');
+          menuTrigger.focus();
+        }
+
+        if (mobileNav && menuTrigger) {
+          menuTrigger.addEventListener('click', function () {
+            if (mobileNav.hasAttribute('hidden')) {
+              openMobileNav();
+            } else {
+              closeMobileNav();
+            }
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!mobileNav.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeMobileNav();
+              } else if (e.key === 'Tab') {
+                trapFocus(mobileNav, e);
+              }
+            }
+          });
+        }
+
+        // Search overlay
+        var searchOverlay = document.getElementById('search-overlay');
+        var searchTrigger = document.querySelector('[data-search-trigger]');
+        var searchTriggerMobile = document.querySelector('[data-search-trigger-mobile]');
+        var overlayCloseBtn = searchOverlay && searchOverlay.querySelector('.search-overlay__close');
+        var lastSearchTrigger = searchTrigger;
+
+        function openSearchOverlay(trigger) {
+          lastSearchTrigger = trigger || searchTrigger;
+          searchOverlay.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'true');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'true');
+          if (overlayCloseBtn) overlayCloseBtn.focus();
+        }
+
+        function closeSearchOverlay() {
+          searchOverlay.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'false');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'false');
+          if (lastSearchTrigger) lastSearchTrigger.focus();
+        }
+
+        if (searchOverlay && searchTrigger) {
+          searchTrigger.addEventListener('click', function () { openSearchOverlay(searchTrigger); });
+          if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', function () { openSearchOverlay(searchTriggerMobile); });
+          if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
+          searchOverlay.addEventListener('click', function (e) {
+            if (e.target === searchOverlay) closeSearchOverlay();
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!searchOverlay.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeSearchOverlay();
+              } else if (e.key === 'Tab') {
+                trapFocus(searchOverlay, e);
+              }
+            }
+          });
+        }
+
+        // Button activation: inactive (zest) until a field in that form is focused or has a value.
+        var activatableForms = document.querySelectorAll('.search-overlay form, .service-search__form');
+        activatableForms.forEach(function (form) {
+          var submitBtn = form.querySelector('.search-overlay__submit');
+          if (!submitBtn) return;
+          var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+          var formFocused = false;
+
+          function syncButton() {
+            var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+            submitBtn.classList.toggle('is-active', formFocused || hasValue);
+          }
+
+          inputs.forEach(function (inp) {
+            inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+            inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+            inp.addEventListener('input', syncButton);
+          });
+        });
+
+        var backToTop = document.querySelector('.site-footer__back-to-top');
+        if (backToTop) {
+          backToTop.addEventListener('click', function (e) {
+            if (reduced) return;
+            e.preventDefault();
+            var startY = window.scrollY || window.pageYOffset;
+            if (startY === 0) return;
+            var duration = 1400;
+            var startTime = null;
+            var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
+            var step = function (now) {
+              if (startTime === null) startTime = now;
+              var elapsed = now - startTime;
+              var t = Math.min(1, elapsed / duration);
+              window.scrollTo({ top: startY * (1 - easeOutCubic(t)), behavior: 'instant' });
+              if (t < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+          });
+        }
+
+        // Hide the sticky header on scroll-down, reveal it on scroll-up.
+        (function () {
+          var siteHeader = document.querySelector('.site-header');
+          if (!siteHeader) return;
+          var lastY = window.scrollY || 0;
+          var threshold = 80;
+          var headerTicking = false;
+          window.addEventListener('scroll', function () {
+            if (headerTicking) return;
+            window.requestAnimationFrame(function () {
+              var y = window.scrollY || 0;
+              if (y > 0) siteHeader.classList.add('is-scrolled');
+              else siteHeader.classList.remove('is-scrolled');
+
+              if (y < threshold) {
+                siteHeader.classList.remove('is-hidden');
+              } else if (y > lastY) {
+                siteHeader.classList.add('is-hidden');
+              } else if (y < lastY) {
+                siteHeader.classList.remove('is-hidden');
+              }
+              lastY = y;
+              headerTicking = false;
+            });
+            headerTicking = true;
+          }, { passive: true });
+        })();
+      })();
+    </script>
+
+    <!-- Feedback form flow — branching, validation, draft persistence,
+         review build. Prototype-only: Drupal Webform's wizard replaces this. -->
+    <script>
+      (function () {
+        var root = document.querySelector('[data-ff]');
+        if (!root) return;
+
+        var DRAFT_KEY = 'vfwa-feedback-draft-v1';
+        var DRAFT_MAX_AGE = 14 * 24 * 60 * 60 * 1000; // 14 days
+        var CHAR_LIMIT_RATIO = 0.75;
+
+        var state = {};
+        var currentScreen = 'landing';
+        var editReturn = false;
+
+        var screens = {};
+        root.querySelectorAll('[data-ff-screen]').forEach(function (el) {
+          screens[el.getAttribute('data-ff-screen')] = el;
+        });
+
+        var channelFooter = root.querySelector('[data-ff-channel-footer]');
+
+        // ------------------------------------------------------------------
+        // Path / progress
+        // ------------------------------------------------------------------
+        var PATH_COMPLAINT = ['type', 'onbehalf', 'raised', 'detail', 'response', 'review'];
+        var PATH_DEFAULT = ['type', 'detail', 'response', 'review'];
+
+        function path() {
+          return state.feedback_type === 'complaint' ? PATH_COMPLAINT : PATH_DEFAULT;
+        }
+
+        // ------------------------------------------------------------------
+        // State collection
+        // ------------------------------------------------------------------
+        function collectState() {
+          state = {};
+          root.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (!el.name) return;
+            if (el.type === 'radio') {
+              if (el.checked) state[el.name] = el.value;
+            } else if (el.type === 'checkbox') {
+              if (el.name === 'raised_with') {
+                if (!state.raised_with) state.raised_with = [];
+                if (el.checked) state.raised_with.push(el.value);
+              } else {
+                state[el.name] = el.checked;
+              }
+            } else {
+              state[el.name] = el.value;
+            }
+          });
+        }
+
+        function applyState(data) {
+          root.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (!el.name || !(el.name in data)) return;
+            var v = data[el.name];
+            if (el.type === 'radio') {
+              el.checked = el.value === v;
+            } else if (el.type === 'checkbox') {
+              if (el.name === 'raised_with') {
+                el.checked = Array.isArray(v) && v.indexOf(el.value) !== -1;
+              } else {
+                el.checked = !!v;
+              }
+            } else {
+              el.value = v == null ? '' : v;
+            }
+          });
+          collectState();
+          syncReveals();
+        }
+
+        // ------------------------------------------------------------------
+        // Draft persistence
+        // ------------------------------------------------------------------
+        function saveDraft() {
+          collectState();
+          try {
+            localStorage.setItem(DRAFT_KEY, JSON.stringify({
+              data: state,
+              screen: currentScreen === 'confirmation' ? 'landing' : currentScreen,
+              savedAt: Date.now()
+            }));
+          } catch (e) { /* private mode — drafts simply don't persist */ }
+        }
+
+        function readDraft() {
+          try {
+            var raw = localStorage.getItem(DRAFT_KEY);
+            if (!raw) return null;
+            var draft = JSON.parse(raw);
+            if (!draft || !draft.data || Date.now() - draft.savedAt > DRAFT_MAX_AGE) {
+              localStorage.removeItem(DRAFT_KEY);
+              return null;
+            }
+            var hasContent = Object.keys(draft.data).some(function (k) {
+              var v = draft.data[k];
+              return Array.isArray(v) ? v.length : v !== '' && v !== false && v != null;
+            });
+            return hasContent ? draft : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function clearDraft() {
+          try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* noop */ }
+        }
+
+        var draftTimer = null;
+        root.addEventListener('input', function () {
+          window.clearTimeout(draftTimer);
+          draftTimer = window.setTimeout(saveDraft, 400);
+        });
+
+        // ------------------------------------------------------------------
+        // Screen switching
+        // ------------------------------------------------------------------
+        function show(id) {
+          currentScreen = id;
+          Object.keys(screens).forEach(function (key) {
+            screens[key].hidden = key !== id;
+          });
+
+          var steps = path();
+          var idx = steps.indexOf(id);
+          if (idx !== -1) {
+            var label = screens[id].querySelector('[data-ff-progress-label]');
+            var fill = screens[id].querySelector('[data-ff-progress-fill]');
+            if (label) label.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
+            if (fill) fill.style.setProperty('--ff-progress', Math.round(((idx + 1) / steps.length) * 100) + '%');
+          }
+
+          if (channelFooter) {
+            channelFooter.hidden = id === 'landing' || id === 'confirmation';
+          }
+
+          var continueBtn = screens[id].querySelector('[data-ff-continue]');
+          if (continueBtn) {
+            continueBtn.textContent = editReturn ? 'Save and return to review' : 'Continue';
+          }
+
+          var heading = screens[id].querySelector('.feedback-form__heading');
+          if (heading) heading.focus();
+          root.scrollIntoView({ block: 'start', behavior: 'auto' });
+        }
+
+        // ------------------------------------------------------------------
+        // Conditional reveals
+        // ------------------------------------------------------------------
+        function revealHasValues(reveal) {
+          var filled = false;
+          reveal.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (el.type === 'radio' || el.type === 'checkbox') {
+              if (el.checked) filled = true;
+            } else if (el.value.trim() !== '') {
+              filled = true;
+            }
+          });
+          return filled;
+        }
+
+        function clearReveal(reveal) {
+          reveal.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (el.type === 'radio' || el.type === 'checkbox') el.checked = false;
+            else el.value = '';
+          });
+          reveal.querySelectorAll('[data-ff-reveal], [data-ff-method-panel], [data-ff-recipient-panel]').forEach(function (el) {
+            el.hidden = true;
+          });
+        }
+
+        // Radio-controlled reveal with clear-on-collapse confirm. Cancelling
+        // the confirm reverts the radio to the revealing option.
+        function bindRevealRadio(name, revealValue, reveal) {
+          var radios = root.querySelectorAll('input[name="' + name + '"]');
+          radios.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+              var revealer = root.querySelector('input[name="' + name + '"][value="' + revealValue + '"]');
+              if (radio.value === revealValue) {
+                reveal.hidden = false;
+              } else {
+                if (!reveal.hidden && revealHasValues(reveal)) {
+                  if (!window.confirm('Changing this answer will clear the details you entered. Continue?')) {
+                    if (revealer) revealer.checked = true;
+                    return;
+                  }
+                  clearReveal(reveal);
+                }
+                reveal.hidden = true;
+              }
+              collectState();
+            });
+          });
+        }
+
+        bindRevealRadio('on_behalf', 'yes', document.getElementById('ff-onbehalf-details'));
+        bindRevealRadio('raised_elsewhere', 'yes', document.getElementById('ff-raised-details'));
+        bindRevealRadio('wants_response', 'contact', document.getElementById('ff-contact-details'));
+        bindRevealRadio('response_recipient', 'client', document.getElementById('ff-recipient-contact'));
+
+        // Anonymous info banner.
+        root.querySelectorAll('input[name="wants_response"]').forEach(function (radio) {
+          radio.addEventListener('change', function () {
+            var banner = root.querySelector('[data-ff-anon-banner]');
+            if (banner) banner.hidden = radio.value !== 'anonymous';
+          });
+        });
+
+        // "Other" checkbox reveal on the raised-with group.
+        var otherBox = root.querySelector('input[name="raised_with"][value="Other"]');
+        var otherField = document.getElementById('ff-raised-other');
+        if (otherBox && otherField) {
+          otherBox.addEventListener('change', function () {
+            var input = document.getElementById('ff-raised_with_other');
+            if (!otherBox.checked && input.value.trim() !== '') {
+              if (!window.confirm('Unticking Other will clear who else you contacted. Continue?')) {
+                otherBox.checked = true;
+                return;
+              }
+              input.value = '';
+            }
+            otherField.hidden = !otherBox.checked;
+          });
+        }
+
+        // Contact-method panels — exactly one renders per selection. Values
+        // in unselected panels are kept in inputs but excluded from review
+        // and submission.
+        function bindMethodPanels(name, panelAttr) {
+          root.querySelectorAll('input[name="' + name + '"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+              root.querySelectorAll('[' + panelAttr + ']').forEach(function (panel) {
+                panel.hidden = panel.getAttribute(panelAttr) !== radio.value;
+              });
+            });
+          });
+        }
+
+        bindMethodPanels('contact_method', 'data-ff-method-panel');
+        bindMethodPanels('recipient_contact_method', 'data-ff-recipient-panel');
+
+        // Ill-treatment priority banner.
+        var illSelect = document.getElementById('ff-ill_treatment');
+        if (illSelect) {
+          illSelect.addEventListener('change', function () {
+            var banner = root.querySelector('[data-ff-ill-banner]');
+            if (banner) banner.hidden = !(illSelect.value === 'yes' || illSelect.value === 'not-sure');
+          });
+        }
+
+        // Re-sync every reveal from input state (used after a draft restore).
+        function syncReveals() {
+          var pairs = [
+            ['on_behalf', 'yes', 'ff-onbehalf-details'],
+            ['raised_elsewhere', 'yes', 'ff-raised-details'],
+            ['wants_response', 'contact', 'ff-contact-details'],
+            ['response_recipient', 'client', 'ff-recipient-contact']
+          ];
+          pairs.forEach(function (pair) {
+            var reveal = document.getElementById(pair[2]);
+            if (reveal) reveal.hidden = state[pair[0]] !== pair[1];
+          });
+          if (otherField) otherField.hidden = !(state.raised_with || []).length || (state.raised_with || []).indexOf('Other') === -1;
+          var anonBanner = root.querySelector('[data-ff-anon-banner]');
+          if (anonBanner) anonBanner.hidden = state.wants_response !== 'anonymous';
+          root.querySelectorAll('[data-ff-method-panel]').forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-ff-method-panel') !== state.contact_method;
+          });
+          root.querySelectorAll('[data-ff-recipient-panel]').forEach(function (panel) {
+            panel.hidden = panel.getAttribute('data-ff-recipient-panel') !== state.recipient_contact_method;
+          });
+          var recipientBlock = root.querySelector('[data-ff-recipient-block]');
+          if (recipientBlock) {
+            recipientBlock.hidden = !(state.feedback_type === 'complaint' && state.on_behalf === 'yes');
+          }
+          if (illSelect) {
+            var illBanner = root.querySelector('[data-ff-ill-banner]');
+            if (illBanner) illBanner.hidden = !(state.ill_treatment === 'yes' || state.ill_treatment === 'not-sure');
+          }
+        }
+
+        // ------------------------------------------------------------------
+        // Character counters — appear once 75% of the limit is consumed.
+        // ------------------------------------------------------------------
+        root.querySelectorAll('textarea[maxlength]').forEach(function (area) {
+          var counter = area.closest('.feedback-form__field') &&
+            area.closest('.feedback-form__field').querySelector('[data-ff-counter]');
+          if (!counter) return;
+          var max = parseInt(area.getAttribute('maxlength'), 10);
+          area.addEventListener('input', function () {
+            var used = area.value.length;
+            if (used >= max * CHAR_LIMIT_RATIO) {
+              counter.hidden = false;
+              counter.textContent = used.toLocaleString() + ' of ' + max.toLocaleString() + ' characters used';
+            } else {
+              counter.hidden = true;
+            }
+          });
+        });
+
+        // ------------------------------------------------------------------
+        // Validation — on Continue only. Inline errors + linked summary.
+        // ------------------------------------------------------------------
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function isAuPhone(value) {
+          var digits = value.replace(/[\s()-]/g, '');
+          return /^(\+?61\d{9}|0\d{9}|1[38]\d{8}|1[38]\d{4})$/.test(digits);
+        }
+
+        function validators(screen) {
+          collectState();
+          var errors = [];
+          var add = function (key, msg) { errors.push({ key: key, msg: msg }); };
+
+          if (screen === 'type') {
+            if (!state.feedback_type) add('feedback_type', 'Select the type of feedback you are providing.');
+          }
+
+          if (screen === 'onbehalf') {
+            if (!state.on_behalf) add('on_behalf', 'Select whether you are complaining on behalf of an Agency client.');
+            if (state.on_behalf === 'yes') {
+              if (!state.client_first_name.trim()) add('client_first_name', 'Enter their first name.');
+              if (!state.client_surname.trim()) add('client_surname', 'Enter their surname.');
+              if (!state.consent_confirmed) add('consent_confirmed', "Confirm you have permission to complain on this person's behalf.");
+            }
+          }
+
+          if (screen === 'raised') {
+            if (!state.raised_elsewhere) add('raised_elsewhere', 'Select whether you have raised this complaint with anyone else.');
+            if (state.raised_elsewhere === 'yes') {
+              if (!(state.raised_with || []).length) add('raised_with', 'Select who you contacted.');
+              if ((state.raised_with || []).indexOf('Other') !== -1 && !state.raised_with_other.trim()) {
+                add('raised_with_other', 'Tell us who else you contacted.');
+              }
+            }
+          }
+
+          if (screen === 'detail') {
+            if (!state.feedback_detail.trim()) add('feedback_detail', 'Tell us about your feedback.');
+            if (!state.ill_treatment) add('ill_treatment', 'Select whether your feedback relates to ill treatment.');
+          }
+
+          if (screen === 'response') {
+            if (!state.wants_response) add('wants_response', 'Select whether you would like a response to your feedback.');
+            if (state.wants_response === 'contact') {
+              if (!state.first_name.trim()) add('first_name', 'Enter your first name.');
+              if (!state.surname.trim()) add('surname', 'Enter your surname.');
+              if (!state.contact_method) add('contact_method', 'Select how we should contact you.');
+              if (state.contact_method === 'email' && !EMAIL_RE.test(state.email.trim())) {
+                add('email', 'Enter your email address in the format name@example.com.');
+              }
+              if (state.contact_method === 'phone' && !isAuPhone(state.phone)) {
+                add('phone', 'Enter an Australian phone number, like 02 6123 4567 or 0412 345 678.');
+              }
+              if (state.contact_method === 'post') {
+                if (!state.address_line_1.trim()) add('address_line_1', 'Enter your street address.');
+                if (!state.suburb.trim()) add('suburb', 'Enter your suburb or town.');
+                if (!state.state) add('state', 'Select your state or territory.');
+                if (!/^\d{4}$/.test(state.postcode.trim())) add('postcode', 'Enter a postcode, like 2600.');
+              }
+              if (state.feedback_type === 'complaint' && state.on_behalf === 'yes') {
+                if (!state.response_recipient) add('response_recipient', 'Select who we should respond to.');
+                if (state.response_recipient === 'client') {
+                  if (!state.recipient_contact_method) add('recipient_contact_method', 'Select how we should contact them.');
+                  if (state.recipient_contact_method === 'email' && !EMAIL_RE.test(state.recipient_email.trim())) {
+                    add('recipient_email', 'Enter their email address in the format name@example.com.');
+                  }
+                  if (state.recipient_contact_method === 'phone' && !isAuPhone(state.recipient_phone)) {
+                    add('recipient_phone', 'Enter an Australian phone number, like 02 6123 4567 or 0412 345 678.');
+                  }
+                  if (state.recipient_contact_method === 'post' && !state.recipient_postal_address.trim()) {
+                    add('recipient_postal_address', 'Enter their postal address.');
+                  }
+                }
+              }
+            }
+          }
+
+          if (screen === 'review') {
+            if (!state.declaration_confirmed) add('declaration_confirmed', 'Confirm your information is true to the best of your knowledge.');
+          }
+
+          return errors;
+        }
+
+        function clearErrors(screenEl) {
+          screenEl.querySelectorAll('.feedback-form__error').forEach(function (el) {
+            el.hidden = true;
+            el.textContent = '';
+          });
+          screenEl.querySelectorAll('.has-error').forEach(function (el) {
+            el.classList.remove('has-error');
+          });
+          var summary = screenEl.querySelector('[data-ff-errors]');
+          if (summary) summary.hidden = true;
+        }
+
+        function showErrors(screenEl, errors) {
+          var summary = screenEl.querySelector('[data-ff-errors]');
+          var list = screenEl.querySelector('[data-ff-errors-list]');
+          list.innerHTML = '';
+          errors.forEach(function (err) {
+            var inline = document.getElementById('ff-error-' + err.key);
+            if (inline) {
+              inline.textContent = err.msg;
+              inline.hidden = false;
+            }
+            var wrap = screenEl.querySelector('[data-ff-field-wrap="' + err.key + '"]');
+            if (wrap) wrap.classList.add('has-error');
+
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = '#ff-' + err.key;
+            a.textContent = err.msg;
+            a.addEventListener('click', function (e) {
+              e.preventDefault();
+              var target = document.getElementById('ff-' + err.key);
+              if (target) target.focus();
+            });
+            li.appendChild(a);
+            list.appendChild(li);
+          });
+          summary.hidden = false;
+          summary.focus();
+        }
+
+        // ------------------------------------------------------------------
+        // Review summary
+        // ------------------------------------------------------------------
+        function notProvided(value) {
+          return value && value.trim() !== '' ? value : 'Not provided';
+        }
+
+        function buildReview() {
+          collectState();
+          var container = root.querySelector('[data-ff-summary]');
+          container.innerHTML = '';
+
+          var typeLabels = { compliment: 'Compliment', suggestion: 'Suggestion', complaint: 'Complaint' };
+          var illLabels = { no: 'No', yes: 'Yes', 'not-sure': 'Not sure' };
+          var methodLabels = { email: 'Email', phone: 'Phone', post: 'Post' };
+          var isComplaint = state.feedback_type === 'complaint';
+
+          var sections = [];
+
+          sections.push({
+            title: 'Feedback type',
+            screen: 'type',
+            rows: [{ key: 'What type of feedback are you providing?', value: typeLabels[state.feedback_type] || 'Not provided' }]
+          });
+
+          if (isComplaint) {
+            var behalfRows = [{
+              key: 'Are you making this complaint on behalf of an Agency client?',
+              value: state.on_behalf === 'yes' ? 'Yes, I am complaining on behalf of someone else' : 'No, the complaint is about my own experience'
+            }];
+            if (state.on_behalf === 'yes') {
+              behalfRows.push({ key: 'Their name', value: (state.client_first_name + ' ' + state.client_surname).trim() });
+              behalfRows.push({ key: 'Your relationship to them', value: notProvided(state.client_relationship) });
+              behalfRows.push({ key: 'Permission confirmed', value: state.consent_confirmed ? 'Confirmed' : 'Not confirmed' });
+            }
+            sections.push({ title: 'On behalf of a client?', screen: 'onbehalf', rows: behalfRows });
+
+            var raisedRows = [{
+              key: 'Have you raised this complaint with anyone else?',
+              value: state.raised_elsewhere === 'yes' ? "Yes, I've raised it with someone else" : "No, this is the first time I'm raising it"
+            }];
+            if (state.raised_elsewhere === 'yes') {
+              var who = (state.raised_with || []).map(function (v) {
+                return v === 'Other' ? 'Other — ' + state.raised_with_other : v;
+              }).join(', ');
+              raisedRows.push({ key: 'Who did you contact?', value: who });
+              var when = (state.raised_date_month + ' ' + state.raised_date_year).trim();
+              raisedRows.push({ key: 'When did you contact them?', value: notProvided(when) });
+            }
+            sections.push({ title: 'Raised elsewhere?', screen: 'raised', rows: raisedRows });
+          }
+
+          sections.push({
+            title: 'Your feedback',
+            screen: 'detail',
+            rows: [
+              { key: 'Tell us about your feedback', value: state.feedback_detail, clamp: true },
+              { key: 'What outcome would you like to see?', value: notProvided(state.outcome_sought), clamp: true },
+              { key: 'Does your feedback relate to ill treatment?', value: illLabels[state.ill_treatment] || 'Not provided' },
+              { key: 'Provider or contractor details', value: notProvided(state.provider_details), clamp: true }
+            ]
+          });
+
+          var responseRows = [];
+          if (state.wants_response === 'anonymous') {
+            responseRows.push({ key: 'Response preference', value: 'Anonymous — no response will be sent' });
+          } else {
+            responseRows.push({ key: 'Name', value: (state.first_name + ' ' + state.surname).trim() });
+            responseRows.push({ key: 'How should we contact you?', value: methodLabels[state.contact_method] || 'Not provided' });
+            if (state.contact_method === 'email') responseRows.push({ key: 'Email address', value: state.email });
+            if (state.contact_method === 'phone') responseRows.push({ key: 'Phone number', value: state.phone });
+            if (state.contact_method === 'post') {
+              var address = [state.address_line_1, state.address_line_2, state.suburb, (state.state + ' ' + state.postcode).trim()]
+                .filter(function (part) { return part && part.trim() !== ''; })
+                .join('\n');
+              responseRows.push({ key: 'Postal address', value: address });
+            }
+            responseRows.push({ key: 'DVA file number', value: notProvided(state.dva_file_number) });
+            if (isComplaint && state.on_behalf === 'yes') {
+              responseRows.push({
+                key: 'Who should we respond to?',
+                value: state.response_recipient === 'client' ? "The person I'm complaining for" : 'Me'
+              });
+              if (state.response_recipient === 'client') {
+                responseRows.push({ key: 'How should we contact them?', value: methodLabels[state.recipient_contact_method] || 'Not provided' });
+                if (state.recipient_contact_method === 'email') responseRows.push({ key: 'Their email address', value: state.recipient_email });
+                if (state.recipient_contact_method === 'phone') responseRows.push({ key: 'Their phone number', value: state.recipient_phone });
+                if (state.recipient_contact_method === 'post') responseRows.push({ key: 'Their postal address', value: state.recipient_postal_address, clamp: true });
+              }
+            }
+          }
+          sections.push({ title: 'Response preference', screen: 'response', rows: responseRows });
+
+          sections.forEach(function (section) {
+            var sectionEl = document.createElement('div');
+            sectionEl.className = 'feedback-form__summary-section';
+
+            var heading = document.createElement('h3');
+            heading.className = 'feedback-form__summary-heading';
+            heading.textContent = section.title;
+            sectionEl.appendChild(heading);
+
+            var listEl = document.createElement('div');
+            listEl.className = 'feedback-form__summary-list';
+
+            section.rows.forEach(function (row, i) {
+              var rowEl = document.createElement('div');
+              rowEl.className = 'feedback-form__summary-row';
+
+              var keyEl = document.createElement('p');
+              keyEl.className = 'feedback-form__summary-key';
+              keyEl.textContent = row.key;
+              rowEl.appendChild(keyEl);
+
+              var valueEl = document.createElement('p');
+              valueEl.className = 'feedback-form__summary-value';
+              valueEl.textContent = row.value || 'Not provided';
+              rowEl.appendChild(valueEl);
+
+              if (i === 0) {
+                var change = document.createElement('button');
+                change.type = 'button';
+                change.className = 'feedback-form__summary-change';
+                change.textContent = 'Change';
+                change.setAttribute('aria-label', 'Change ' + section.title);
+                change.addEventListener('click', function () {
+                  editReturn = true;
+                  show(section.screen);
+                });
+                rowEl.appendChild(change);
+              }
+
+              // Long free-text answers clamp to ~6 lines with a Show more toggle.
+              if (row.clamp && row.value && row.value.length > 360) {
+                valueEl.classList.add('feedback-form__summary-value--clamp');
+                var more = document.createElement('button');
+                more.type = 'button';
+                more.className = 'feedback-form__summary-more';
+                more.textContent = 'Show more';
+                more.setAttribute('aria-expanded', 'false');
+                more.addEventListener('click', function () {
+                  var open = valueEl.classList.toggle('is-open');
+                  more.textContent = open ? 'Show less' : 'Show more';
+                  more.setAttribute('aria-expanded', open ? 'true' : 'false');
+                });
+                rowEl.appendChild(more);
+              }
+
+              listEl.appendChild(rowEl);
+            });
+
+            sectionEl.appendChild(listEl);
+            container.appendChild(sectionEl);
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Navigation
+        // ------------------------------------------------------------------
+        root.querySelectorAll('[data-ff-continue]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var screenEl = screens[currentScreen];
+            clearErrors(screenEl);
+            var errors = validators(currentScreen);
+            if (errors.length) {
+              showErrors(screenEl, errors);
+              return;
+            }
+            saveDraft();
+
+            var steps = path();
+            if (editReturn) {
+              // Re-route check: switching to Complaint via Review introduces
+              // unanswered complaint-only steps — walk them before Review.
+              var firstUnanswered = null;
+              if (state.feedback_type === 'complaint') {
+                if (!state.on_behalf && currentScreen !== 'onbehalf') firstUnanswered = 'onbehalf';
+                else if (!state.raised_elsewhere && currentScreen !== 'raised' && state.on_behalf) firstUnanswered = 'raised';
+              }
+              if (currentScreen === 'onbehalf' && !state.raised_elsewhere) firstUnanswered = 'raised';
+              if (firstUnanswered) {
+                syncReveals();
+                show(firstUnanswered);
+                return;
+              }
+              editReturn = false;
+              syncReveals();
+              buildReview();
+              show('review');
+              return;
+            }
+
+            var next = steps[steps.indexOf(currentScreen) + 1];
+            syncReveals();
+            if (next === 'review') buildReview();
+            show(next);
+          });
+        });
+
+        root.querySelectorAll('[data-ff-back]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var steps = path();
+            var idx = steps.indexOf(currentScreen);
+            if (editReturn) {
+              editReturn = false;
+              buildReview();
+              show('review');
+              return;
+            }
+            show(idx <= 0 ? 'landing' : steps[idx - 1]);
+          });
+        });
+
+        var startBtn = root.querySelector('[data-ff-start]');
+        if (startBtn) {
+          startBtn.addEventListener('click', function () {
+            show('type');
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Submit (prototype: simulated; Drupal Webform owns the real POST)
+        // ------------------------------------------------------------------
+        var submitBtn = root.querySelector('[data-ff-submit]');
+        if (submitBtn) {
+          submitBtn.addEventListener('click', function () {
+            var screenEl = screens.review;
+            clearErrors(screenEl);
+            var errors = validators('review');
+            if (errors.length) {
+              showErrors(screenEl, errors);
+              return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting…';
+
+            window.setTimeout(function () {
+              var ref = 'FB-';
+              for (var i = 0; i < 8; i++) {
+                ref += 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'.charAt(Math.floor(Math.random() * 32));
+              }
+              root.querySelector('[data-ff-reference]').textContent = ref;
+
+              var contactLine = root.querySelector('[data-ff-confirm-contact]');
+              if (state.wants_response === 'anonymous') {
+                contactLine.textContent = "Because you chose to stay anonymous, we won't contact you, but your feedback will be reviewed and acted on.";
+              } else {
+                var channels = { email: 'your email address', phone: 'your phone', post: 'your postal address' };
+                contactLine.textContent = "We've sent a confirmation to " + (channels[state.contact_method] || 'your contact details') + '. We aim to respond within 28 days.';
+              }
+
+              clearDraft();
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit feedback';
+              show('confirmation');
+            }, 900);
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Resume prompt
+        // ------------------------------------------------------------------
+        var draft = readDraft();
+        var resumeBanner = root.querySelector('[data-ff-resume]');
+        if (draft && resumeBanner) {
+          resumeBanner.hidden = false;
+          resumeBanner.querySelector('[data-ff-resume-yes]').addEventListener('click', function () {
+            applyState(draft.data);
+            var target = draft.screen && screens[draft.screen] && draft.screen !== 'landing' ? draft.screen : 'type';
+            if (path().indexOf(target) === -1) target = 'type';
+            show(target);
+          });
+          resumeBanner.querySelector('[data-ff-resume-no]').addEventListener('click', function () {
+            clearDraft();
+            resumeBanner.hidden = true;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

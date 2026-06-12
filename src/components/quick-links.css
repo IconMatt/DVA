@@ -67,7 +67,7 @@
 .quick-link__text {
   grid-column: 1;
   grid-row: 2;
-  font-size: clamp(0.9302rem, 0.8867rem + 0.1942vw, 1.0613rem);
+  font-size: var(--text-description);
   line-height: var(--line-height-snug);
   color: var(--color-brown-900);
 }
@@ -131,7 +131,9 @@
 
   position: relative;
   overflow: hidden;
-  background-color: var(--overlay-brown-40);
+  /* Tint raised 40% -> 60% so white text clears WCAG AA over bright regions
+     of the hero photograph behind the blur (a11y: quick-link__title/__text). */
+  background-color: var(--overlay-brown-60);
   background-clip: padding-box;
   /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-backdrop-filter: var(--quick-link-glass-backdrop);

@@ -1,0 +1,2010 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <base href="../" />
+    <title>Referral form — Veteran and Family Wellbeing Agency</title>
+    <meta
+      name="description"
+      content="Request extra assistance finding wellbeing services and support for yourself or someone you know — complete the Veteran and Family Wellbeing Agency referral form or call the Helpline."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Halant:wght@400;600&display=swap"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body id="top" class="page page--referral-form">
+    <!--
+      ================================================================
+      Referral form page — chrome (header, search overlay, mobile nav,
+      CTA tray, footer) mirrors the other templates. The multi-step
+      referral flow reuses the .feedback-form component shell with the
+      referral-flow variants (centred step header, left-aligned
+      questions, spread actions row).
+      ================================================================
+    -->
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <a class="site-header__pill site-header__pill--exit" href="https://www.bom.gov.au/">
+      <span>Quick exit</span>
+      <img
+        class="site-header__pill-icon"
+        src="assets/images/icons/Property 1=Close.svg"
+        alt=""
+        width="14"
+        height="14"
+      />
+    </a>
+
+    <header class="site-header" role="banner">
+      <div class="site-header__inner container">
+        <a class="site-header__brand" href="/" aria-label="Veteran and Family Wellbeing Agency home">
+          <img
+            class="site-header__logo"
+            src="assets/images/logo.svg"
+            alt=""
+            width="198"
+            height="36"
+          />
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-nav__list">
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Find a service</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Wellbeing resources</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="about-landing.html">About</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="site-header__utility">
+          <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger aria-expanded="false" aria-controls="search-overlay">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Property 1=Search.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>Search</span>
+          </button>
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img
+              class="site-header__pill-icon"
+              src="assets/images/icons/Star.svg"
+              alt=""
+              width="18"
+              height="18"
+            />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+          <button class="site-header__pill site-header__pill--menu" type="button" data-menu-trigger aria-expanded="false" aria-controls="mobile-nav" aria-label="Open navigation">
+            <span>Menu</span>
+            <span class="site-header__menu-icon" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search overlay (sitewide search + service search) -->
+    <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search options" hidden>
+      <div class="search-overlay__inner container">
+        <div class="search-overlay__header">
+          <h2 class="search-overlay__title">Search Options</h2>
+          <button class="search-overlay__close" type="button" aria-label="Close search">
+            <img src="assets/images/icons/Property 1=Close.svg" alt="" width="20" height="20" />
+          </button>
+        </div>
+
+        <hr class="search-overlay__divider search-overlay__divider--header" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Sitewide search</h3>
+          <form class="search-overlay__form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-site-search"
+                    name="q"
+                    type="search"
+                    placeholder="Search site content…"
+                  />
+                  <label class="service-search__label" for="overlay-site-search">
+                    Search site content
+                  </label>
+                </div>
+              </div>
+            </div>
+            <button class="button search-overlay__submit" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+
+        <hr class="search-overlay__divider" />
+
+        <div class="search-overlay__section">
+          <h3 class="search-overlay__section-title">Search for a service</h3>
+          <form class="search-overlay__service-form" role="search" action="#" method="get">
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/search.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-keyword"
+                    name="q"
+                    type="search"
+                    placeholder="Service, topic or provider…"
+                  />
+                  <label class="service-search__label" for="overlay-service-keyword">
+                    Search by service, topic or provider
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="service-search__field">
+              <div class="service-search__input-wrap">
+                <span class="service-search__input-icon" aria-hidden="true">
+                  <img src="assets/images/icons/location.svg" alt="" width="18" height="18" />
+                </span>
+                <div class="service-search__input-body">
+                  <input
+                    class="service-search__input"
+                    id="overlay-service-location"
+                    name="location"
+                    type="text"
+                    placeholder="E.g. Richmond VIC or 3141"
+                  />
+                  <label class="service-search__label" for="overlay-service-location">
+                    Suburb or postcode (optional)
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <button class="button search-overlay__submit" type="submit">
+              Find a service
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation" hidden>
+      <div class="mobile-nav__inner">
+        <nav class="mobile-nav__nav" aria-label="Primary">
+          <ul class="mobile-nav__list">
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Find a service
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/doc-search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Wellbeing resources
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="about-landing.html">
+                About
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Contact
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="mobile-nav__search">
+            <button class="site-header__pill site-header__pill--search" type="button" data-search-trigger-mobile aria-expanded="false" aria-controls="search-overlay">
+              <img class="site-header__pill-icon" src="assets/images/icons/Property 1=Search.svg" alt="" width="18" height="18" />
+              <span>Search</span>
+            </button>
+          </div>
+        </nav>
+
+        <div class="mobile-nav__footer">
+          <button class="site-header__pill site-header__pill--bookmark" type="button" aria-label="Saved items">
+            <img class="site-header__pill-icon" src="assets/images/icons/Star.svg" alt="" width="18" height="18" />
+            <span>0</span>
+          </button>
+          <a class="site-header__pill site-header__pill--help" href="#">
+            <span>24/7 support</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <main id="main" class="site-main">
+      <!--
+        Referral header — breadcrumb + H1 + lead + hero image. Same
+        two-column .service-search-collection treatment as about-landing
+        and feedback-form; the grid + Brush panel styles are scoped to
+        .page--referral-form in src/components/service-search.css.
+        Replace the hero image src once a final Referral asset is provided.
+      -->
+      <div class="service-search-band">
+      <div class="service-search-collection">
+      <section class="service-search" id="referral" aria-labelledby="referral-title">
+        <div class="service-search__inner container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb__list">
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="/">Home</a></li>
+              <li class="breadcrumb__item"><a class="breadcrumb__link" href="about-landing.html">About</a></li>
+              <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">Referral form</li>
+            </ol>
+          </nav>
+
+          <h1 class="service-search__title" id="referral-title" data-animate>
+            Referral form
+          </h1>
+
+          <p class="service-search__lead intro" data-animate>
+            If you would like assistance from the Agency or you would like to
+            make a referral of someone who needs support.
+          </p>
+        </div>
+      </section>
+      <figure class="service-search__media" data-animate>
+        <img
+          src="assets/images/transition.png"
+          alt=""
+          data-parallax-media
+          data-parallax-mode="translate"
+          data-parallax-buffer-ratio="0.08"
+          data-parallax-speed="0.06"
+          data-parallax-limit="30"
+        />
+      </figure>
+      </div>
+      </div>
+
+      <!--
+        Referral form — multi-step flow per docs/Referral Form Flow.png.
+        Myself path = 5 steps, on-behalf path = 7 steps (the mock shows a
+        static "of 7"; totals here re-number per branch, matching the
+        feedback form's behaviour). One screen visible at a time; the
+        flow script (second <script> block below) owns branching,
+        validation, draft persistence, and the review build.
+
+        Drupal handoff — Webform module ("referral" webform) at
+        /about/referral. Each [data-ff-screen] step maps to a webform
+        wizard page; the urgent-triage "Yes" routes to the urgent support
+        options page in production (this prototype reveals the emergency
+        quick-link inline instead). Date of birth uses three separate
+        Day/Month/Year fields (gov-form pattern, per the feedback brief's
+        date convention) instead of the mock's single dd/mm/yyyy input —
+        no separators to type, no datepicker dependency; Webform's date
+        element can replace it.
+      -->
+      <div class="feedback-form" data-ff>
+        <div class="feedback-form__panel">
+
+          <!-- Screen 0 — Landing -->
+          <section class="feedback-form__screen" data-ff-screen="landing" aria-labelledby="rf-landing-heading">
+            <div class="feedback-form__col">
+              <p class="feedback-form__eyebrow" data-animate>Assistance and referrals</p>
+              <h2 class="feedback-form__heading" id="rf-landing-heading" tabindex="-1" data-animate>
+                Do you need extra assistance finding wellbeing services and
+                support for yourself or someone you know?
+              </h2>
+
+              <p class="feedback-form__intro" data-animate>
+                Ask a staff member to contact you by filling in the form below.
+              </p>
+
+              <div class="feedback-form__banner" data-ff-resume hidden>
+                <p>You have a saved draft. Would you like to pick up where you left off?</p>
+                <div class="feedback-form__actions">
+                  <button class="button button--primary" type="button" data-ff-resume-yes>Resume draft</button>
+                  <button class="button button--secondary feedback-form__back" type="button" data-ff-resume-no>Start again</button>
+                </div>
+              </div>
+
+              <div class="feedback-form__actions" data-animate>
+                <button class="quick-link feedback-form__start" type="button" data-ff-start>
+                  <span class="feedback-form__start-body">
+                    <span class="quick-link__title">Start referral form</span>
+                    <span class="quick-link__text">Complete our online form to request support</span>
+                  </span>
+                  <span class="quick-link__arrow" aria-hidden="true">
+                    <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                  </span>
+                </button>
+              </div>
+
+              <div class="feedback-form__divider" aria-hidden="true" data-animate>or</div>
+
+              <p class="feedback-form__intro" data-animate>Prefer to talk to someone? Call the Helpline on:</p>
+              <p class="feedback-form__phone" data-animate>
+                <span class="feedback-form__phone-icon">
+                  <img src="assets/images/icons/phone.svg" alt="" width="22" height="22" />
+                </span>
+                <a class="feedback-form__phone-number" href="tel:1800111222">1800 111 222</a>
+              </p>
+            </div>
+          </section>
+
+          <!-- Step — Before we continue (urgent triage, 1 of 5 / 1 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="urgent" aria-labelledby="rf-urgent-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 1 of 5</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-urgent-question" tabindex="-1">Before we continue</h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                We want to check, are you or someone you're contacting us about
+                in immediate danger or needing urgent help right now?
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="urgent_check">
+                <legend class="visually-hidden">Is urgent help needed right now?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="urgent_check" value="yes" id="rf-urgent_check" aria-controls="rf-urgent-options" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Yes, urgent help is needed right now</span>
+                      <span class="feedback-form__option-hint">You'll be taken to urgent support options</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="urgent_check" value="no" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">No, urgent help is not needed right now</span>
+                      <span class="feedback-form__option-hint">I need extra assistance to find wellbeing services and support for myself or someone I know</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-urgent_check" hidden></p>
+              </fieldset>
+
+              <!-- Production routes to the urgent support options page;
+                   the prototype reveals the emergency entry point inline. -->
+              <div class="feedback-form__reveal feedback-form__reveal--plain" id="rf-urgent-options" data-ff-reveal="urgent" hidden>
+                <ul class="quick-links feedback-form__urgent-links">
+                  <li class="quick-links__item">
+                    <a class="quick-link quick-link--emergency" href="#">
+                      <span class="quick-link__title">Get urgent help now</span>
+                      <span class="quick-link__text">Access 24/7 crisis and urgent support services right away.</span>
+                      <span class="quick-link__arrow" aria-hidden="true">
+                        <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Who is this support for? (2 of 5 / 2 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="who" aria-labelledby="rf-who-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 2 of 5</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-who-question" tabindex="-1">Who is this support for?</h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                Is this support for you, or are you reaching out on behalf of someone else?
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="support_for">
+                <legend class="visually-hidden">Who is this support for?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="support_for" value="myself" id="rf-support_for" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">I need assistance to find wellbeing services and support for myself</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="support_for" value="someone-else" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">I am seeking assistance on behalf of someone else</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-support_for" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Your contact details (myself path, 3 of 5) -->
+          <section class="feedback-form__screen" data-ff-screen="contact-self" aria-labelledby="rf-contact-self-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 3 of 5</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-contact-self-question" tabindex="-1">Your contact details</h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                To help our team get in touch and offer the right support, we'll
+                ask for a few contact details.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="my_type">
+                <legend class="feedback-form__label">Are you a</legend>
+                <div class="feedback-form__options feedback-form__options--nested">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="my_type" value="serving" id="rf-my_type" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Serving Member</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="my_type" value="veteran" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Veteran</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="my_type" value="family" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Family member of a Veteran (including Serving Members)</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-my_type" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__fields">
+                <div class="feedback-form__field-row">
+                  <div class="feedback-form__field" data-ff-field-wrap="first_name">
+                    <label class="feedback-form__label" for="rf-first_name">First name</label>
+                    <input class="feedback-form__input" type="text" id="rf-first_name" name="first_name" autocomplete="given-name" placeholder="Enter your first name" />
+                    <p class="feedback-form__error" id="rf-error-first_name" hidden></p>
+                  </div>
+                  <div class="feedback-form__field" data-ff-field-wrap="surname">
+                    <label class="feedback-form__label" for="rf-surname">Surname</label>
+                    <input class="feedback-form__input" type="text" id="rf-surname" name="surname" autocomplete="family-name" placeholder="Enter your surname" />
+                    <p class="feedback-form__error" id="rf-error-surname" hidden></p>
+                  </div>
+                </div>
+
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="dob">
+                  <legend class="feedback-form__label">Date of birth</legend>
+                  <p class="feedback-form__field-hint" id="rf-hint-dob">For example, 27 3 1985.</p>
+                  <div class="feedback-form__date-row">
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-dob">Day</label>
+                      <input class="feedback-form__input feedback-form__input--day" type="text" inputmode="numeric" id="rf-dob" name="dob_day" autocomplete="bday-day" aria-describedby="rf-hint-dob" />
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-dob_month">Month</label>
+                      <input class="feedback-form__input feedback-form__input--month" type="text" inputmode="numeric" id="rf-dob_month" name="dob_month" autocomplete="bday-month" aria-describedby="rf-hint-dob" />
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-dob_year">Year</label>
+                      <input class="feedback-form__input feedback-form__input--year" type="text" inputmode="numeric" id="rf-dob_year" name="dob_year" autocomplete="bday-year" aria-describedby="rf-hint-dob" />
+                    </div>
+                  </div>
+                  <p class="feedback-form__error" id="rf-error-dob" hidden></p>
+                </fieldset>
+
+                <div class="feedback-form__field" data-ff-field-wrap="email">
+                  <label class="feedback-form__label" for="rf-email">Email</label>
+                  <input class="feedback-form__input" type="email" id="rf-email" name="email" autocomplete="email" placeholder="your@email.com" />
+                  <p class="feedback-form__error" id="rf-error-email" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="phone">
+                  <label class="feedback-form__label" for="rf-phone">Phone</label>
+                  <input class="feedback-form__input" type="tel" id="rf-phone" name="phone" autocomplete="tel" placeholder="0400 000 000" />
+                  <p class="feedback-form__error" id="rf-error-phone" hidden></p>
+                </div>
+
+                <div class="feedback-form__field">
+                  <label class="feedback-form__label" for="rf-dva_file_number">DVA file number (optional)</label>
+                  <input class="feedback-form__input" type="text" id="rf-dva_file_number" name="dva_file_number" />
+                </div>
+              </div>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Does the person know? (on-behalf path, 3 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="aware" aria-labelledby="rf-aware-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 3 of 7</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <p class="feedback-form__sub-banner">Thank you for looking out for someone else</p>
+
+              <h2 class="feedback-form__question" id="rf-aware-question" tabindex="-1">
+                Does the person know that you're reaching out for support on their behalf?
+              </h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                This helps us understand how to best support them. It's okay if
+                they don't know yet.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="person_aware">
+                <legend class="visually-hidden">Does the person know that you're reaching out for support on their behalf?</legend>
+                <div class="feedback-form__options">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="person_aware" value="yes" id="rf-person_aware" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Yes, they know</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="person_aware" value="no" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">No, they don't know</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-person_aware" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Your contact details (on-behalf path, 4 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="contact-referrer" aria-labelledby="rf-contact-referrer-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 4 of 7</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-contact-referrer-question" tabindex="-1">Your contact details</h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                We'll ask for a few details about you, in case our team needs to
+                check in with you.
+              </p>
+
+              <div class="feedback-form__fields">
+                <div class="feedback-form__field-row">
+                  <div class="feedback-form__field" data-ff-field-wrap="ref_first_name">
+                    <label class="feedback-form__label" for="rf-ref_first_name">First name</label>
+                    <input class="feedback-form__input" type="text" id="rf-ref_first_name" name="ref_first_name" autocomplete="given-name" placeholder="Enter your first name" />
+                    <p class="feedback-form__error" id="rf-error-ref_first_name" hidden></p>
+                  </div>
+                  <div class="feedback-form__field" data-ff-field-wrap="ref_surname">
+                    <label class="feedback-form__label" for="rf-ref_surname">Surname</label>
+                    <input class="feedback-form__input" type="text" id="rf-ref_surname" name="ref_surname" autocomplete="family-name" placeholder="Enter your surname" />
+                    <p class="feedback-form__error" id="rf-error-ref_surname" hidden></p>
+                  </div>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="ref_email">
+                  <label class="feedback-form__label" for="rf-ref_email">Email</label>
+                  <input class="feedback-form__input" type="email" id="rf-ref_email" name="ref_email" autocomplete="email" placeholder="your@email.com" />
+                  <p class="feedback-form__error" id="rf-error-ref_email" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="ref_phone">
+                  <label class="feedback-form__label" for="rf-ref_phone">Phone</label>
+                  <input class="feedback-form__input" type="tel" id="rf-ref_phone" name="ref_phone" autocomplete="tel" placeholder="0400 000 000" />
+                  <p class="feedback-form__error" id="rf-error-ref_phone" hidden></p>
+                </div>
+
+                <div class="feedback-form__field">
+                  <label class="feedback-form__label" for="rf-organisation">Organisation (optional)</label>
+                  <input class="feedback-form__input" type="text" id="rf-organisation" name="organisation" autocomplete="organization" placeholder="Enter organisation name" />
+                </div>
+              </div>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Person needing support (on-behalf path, 5 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="person" aria-labelledby="rf-person-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 5 of 7</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-person-question" tabindex="-1">Person needing support</h2>
+              <p class="feedback-form__hint feedback-form__hint--left">
+                We'll also ask for some details about the person needing support,
+                so we can reach out to them if appropriate.
+              </p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="person_type">
+                <legend class="feedback-form__label">Is the person you are enquiring for a</legend>
+                <div class="feedback-form__options feedback-form__options--nested">
+                  <label class="feedback-form__option">
+                    <input type="radio" name="person_type" value="serving" id="rf-person_type" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Serving Member</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="person_type" value="veteran" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Veteran</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option">
+                    <input type="radio" name="person_type" value="family" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Family member of a Veteran (including Serving Members)</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-person_type" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__fields">
+                <div class="feedback-form__field-row">
+                  <div class="feedback-form__field" data-ff-field-wrap="person_first_name">
+                    <label class="feedback-form__label" for="rf-person_first_name">First name</label>
+                    <input class="feedback-form__input" type="text" id="rf-person_first_name" name="person_first_name" autocomplete="off" placeholder="Enter their first name" />
+                    <p class="feedback-form__error" id="rf-error-person_first_name" hidden></p>
+                  </div>
+                  <div class="feedback-form__field" data-ff-field-wrap="person_surname">
+                    <label class="feedback-form__label" for="rf-person_surname">Surname</label>
+                    <input class="feedback-form__input" type="text" id="rf-person_surname" name="person_surname" autocomplete="off" placeholder="Enter their surname" />
+                    <p class="feedback-form__error" id="rf-error-person_surname" hidden></p>
+                  </div>
+                </div>
+
+                <fieldset class="feedback-form__fieldset" data-ff-field-wrap="person_dob">
+                  <legend class="feedback-form__label">Date of birth</legend>
+                  <p class="feedback-form__field-hint" id="rf-hint-person_dob">For example, 27 3 1985.</p>
+                  <div class="feedback-form__date-row">
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-person_dob">Day</label>
+                      <input class="feedback-form__input feedback-form__input--day" type="text" inputmode="numeric" id="rf-person_dob" name="person_dob_day" autocomplete="off" aria-describedby="rf-hint-person_dob" />
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-person_dob_month">Month</label>
+                      <input class="feedback-form__input feedback-form__input--month" type="text" inputmode="numeric" id="rf-person_dob_month" name="person_dob_month" autocomplete="off" aria-describedby="rf-hint-person_dob" />
+                    </div>
+                    <div class="feedback-form__field">
+                      <label class="feedback-form__label" for="rf-person_dob_year">Year</label>
+                      <input class="feedback-form__input feedback-form__input--year" type="text" inputmode="numeric" id="rf-person_dob_year" name="person_dob_year" autocomplete="off" aria-describedby="rf-hint-person_dob" />
+                    </div>
+                  </div>
+                  <p class="feedback-form__error" id="rf-error-person_dob" hidden></p>
+                </fieldset>
+
+                <div class="feedback-form__field" data-ff-field-wrap="person_email">
+                  <label class="feedback-form__label" for="rf-person_email">Email</label>
+                  <input class="feedback-form__input" type="email" id="rf-person_email" name="person_email" autocomplete="off" placeholder="their@email.com" />
+                  <p class="feedback-form__error" id="rf-error-person_email" hidden></p>
+                </div>
+
+                <div class="feedback-form__field" data-ff-field-wrap="person_phone">
+                  <label class="feedback-form__label" for="rf-person_phone">Phone</label>
+                  <input class="feedback-form__input" type="tel" id="rf-person_phone" name="person_phone" autocomplete="off" placeholder="0400 000 000" />
+                  <p class="feedback-form__error" id="rf-error-person_phone" hidden></p>
+                </div>
+
+                <div class="feedback-form__field">
+                  <label class="feedback-form__label" for="rf-person_dva_file_number">DVA file number (optional)</label>
+                  <input class="feedback-form__input" type="text" id="rf-person_dva_file_number" name="person_dva_file_number" />
+                </div>
+              </div>
+
+              <p class="feedback-form__banner">
+                We won't be able to share any information back to you without
+                that person's consent.
+              </p>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Wellbeing areas (4 of 5 / 6 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="areas" aria-labelledby="rf-areas-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 4 of 5</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-areas-question" tabindex="-1">
+                Which areas best describe the kind of wellbeing services and support needed?
+              </h2>
+              <p class="feedback-form__hint feedback-form__hint--left">You can choose as many as feel relevant.</p>
+
+              <fieldset class="feedback-form__fieldset" data-ff-field-wrap="wellbeing_areas">
+                <legend class="visually-hidden">Which areas best describe the kind of wellbeing services and support needed?</legend>
+                <div class="feedback-form__options feedback-form__options--grid">
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Financial Wellbeing" id="rf-wellbeing_areas" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Financial Wellbeing</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Meaning and Spirituality" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Meaning and Spirituality</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Education and Skills" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Education and Skills</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Social Support and Connection" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Social Support and Connection</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Employment and Meaningful Activities" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Employment and Meaningful Activities</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Health and Wellbeing" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Health and Wellbeing</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Safety and Security" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Safety and Security</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Family, Children and Caring" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Family, Children and Caring</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Housing" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Housing</span>
+                    </span>
+                  </label>
+                  <label class="feedback-form__option feedback-form__option--checkbox">
+                    <input type="checkbox" name="wellbeing_areas" value="Transitioning from Service" />
+                    <span class="feedback-form__control" aria-hidden="true"></span>
+                    <span class="feedback-form__option-body">
+                      <span class="feedback-form__option-title">Transitioning from Service</span>
+                    </span>
+                  </label>
+                </div>
+                <p class="feedback-form__error" id="rf-error-wellbeing_areas" hidden></p>
+              </fieldset>
+
+              <div class="feedback-form__fields">
+                <div class="feedback-form__field" data-ff-field-wrap="additional_info">
+                  <label class="feedback-form__label" for="rf-additional_info">
+                    If you'd like, you can share a bit more about what's going on
+                  </label>
+                  <p class="feedback-form__field-hint" id="rf-hint-additional_info">
+                    Please don't include names or other identifying details in this section.
+                  </p>
+                  <textarea class="feedback-form__textarea" id="rf-additional_info" name="additional_info" maxlength="2500" aria-describedby="rf-hint-additional_info" placeholder="Share any additional context that might help us understand your situation better…"></textarea>
+                  <p class="feedback-form__counter" data-ff-counter aria-live="polite" hidden></p>
+                </div>
+              </div>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-continue>Continue</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Step — Review and submit (5 of 5 / 7 of 7) -->
+          <section class="feedback-form__screen" data-ff-screen="review" aria-labelledby="rf-review-question" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label" data-ff-progress-label>Step 5 of 5</p>
+                <span class="feedback-form__progress-bar"><span class="feedback-form__progress-fill" data-ff-progress-fill></span></span>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <div class="feedback-form__error-summary" tabindex="-1" data-ff-errors hidden>
+                <h2 class="feedback-form__error-summary-title">There is a problem</h2>
+                <ul data-ff-errors-list></ul>
+              </div>
+
+              <h2 class="feedback-form__question" id="rf-review-question" tabindex="-1">Review and submit your referral</h2>
+
+              <p class="feedback-form__banner">
+                Check your answers before submitting. Use Edit to change any answer.
+              </p>
+
+              <div class="feedback-form__summary" data-ff-summary></div>
+
+              <div class="feedback-form__actions feedback-form__actions--spread">
+                <button class="button button--secondary feedback-form__back" type="button" data-ff-back>
+                  <span class="feedback-form__back-icon" aria-hidden="true">
+                    <img src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="16" height="16" />
+                  </span>
+                  <span>Back</span>
+                </button>
+                <button class="button button--primary" type="button" data-ff-submit>Submit referral</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Screen — Confirmation -->
+          <section class="feedback-form__screen" data-ff-screen="confirmation" aria-labelledby="rf-confirmation-heading" hidden>
+            <div class="feedback-form__col">
+              <div class="feedback-form__step-header">
+                <p class="feedback-form__progress-label">Submitted</p>
+                <p class="feedback-form__step-title">Referral form</p>
+              </div>
+
+              <h2 class="feedback-form__heading" id="rf-confirmation-heading" tabindex="-1">
+                Thank you for reaching out to the Veteran and Family Wellbeing Agency.
+              </h2>
+
+              <p class="feedback-form__banner feedback-form__banner--confirm">
+                <span class="feedback-form__icon-box" aria-hidden="true">
+                  <img src="assets/images/icons/check.svg" alt="" width="22" height="22" />
+                </span>
+                <strong>Our team has received your request.</strong>
+                An automatic email response has been sent to confirm your submission.
+              </p>
+
+            </div>
+
+            <!-- Outside .feedback-form__col so the heading + three resource
+                 CTAs span the panel's full content width. -->
+            <h3 class="feedback-form__resources-heading">
+              Our website has wellbeing resources and information about services.
+            </h3>
+            <ul class="quick-links feedback-form__resources">
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--referral" href="services-directory.html">
+                    <span class="quick-link__title">Find a service</span>
+                    <span class="quick-link__text">Search for services that match your needs and location.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--referral" href="resources-landing.html">
+                    <span class="quick-link__title">Wellbeing resources for you</span>
+                    <span class="quick-link__text">Browse wellbeing resources for veterans, families and support networks.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+                <li class="quick-links__item">
+                  <a class="quick-link quick-link--emergency" href="#">
+                    <span class="quick-link__title">Get urgent help now</span>
+                    <span class="quick-link__text">Access 24/7 crisis and urgent support services right away.</span>
+                    <span class="quick-link__arrow" aria-hidden="true">
+                      <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                    </span>
+                  </a>
+                </li>
+            </ul>
+          </section>
+
+          <!-- Phone footer — repeated on every step (hidden on landing,
+               which carries its own, and on confirmation). -->
+          <div class="feedback-form__channel-footer" data-ff-channel-footer hidden>
+            <p>Prefer to talk to someone? Call the Helpline on <a href="tel:1800111222">1800 111 222</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <section class="cta-tray" aria-labelledby="cta-tray-title">
+        <div class="cta-tray__inner container">
+          <h2 class="cta-tray__title" id="cta-tray-title" data-animate>Not sure where to start?</h2>
+          <ul class="quick-links quick-links--tray" data-animate-stagger>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#find-a-service">
+                <span class="quick-link__title">Find a service</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Search.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Wellbeing resources</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link" href="#">
+                <span class="quick-link__title">Contact us</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/footer-contact.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="quick-links__item" data-animate>
+              <a class="quick-link quick-link--emergency" href="#">
+                <span class="quick-link__title">Get urgent help now</span>
+                <span class="quick-link__arrow" aria-hidden="true">
+                  <img src="assets/images/icons/right-arrow.svg" alt="" width="21" height="21" />
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner container">
+        <div class="site-footer__logos">
+          <img
+            class="site-footer__logo site-footer__logo--government"
+            src="assets/images/austalian government logo.svg"
+            alt="Australian Government"
+            width="134"
+            height="69"
+          />
+          <span class="site-footer__logo-divider" aria-hidden="true"></span>
+          <img
+            class="site-footer__logo site-footer__logo--agency"
+            src="assets/images/logo.svg"
+            alt="Veteran and Family Wellbeing Agency"
+            width="230"
+            height="42"
+          />
+        </div>
+
+        <div class="site-footer__brand">
+          <p class="site-footer__acknowledgement">
+            The Veteran and Family Wellbeing Agency acknowledges the Traditional
+            Custodians of the lands we live on. We honour the contributions of
+            all Aboriginal and Torres Strait Islander people that have served,
+            whose contributions have helped to shape our nation.
+          </p>
+          <nav aria-label="Social media">
+            <ul class="social-links">
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Instagram">
+                  <img class="social-links__icon" src="assets/images/icons/social-instagram.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="Facebook">
+                  <img class="social-links__icon" src="assets/images/icons/social-facebook.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+              <li class="social-links__item">
+                <a class="social-links__link" href="#" aria-label="YouTube">
+                  <img class="social-links__icon" src="assets/images/icons/social-youtube.svg" alt="" width="22" height="22" />
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__list">
+            <li class="site-footer__item site-footer__item--heading"><a class="site-footer__link site-footer__link--heading" href="about-landing.html">About the Agency</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">How we help</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">News</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="feedback-form.html">Contact and feedback</a></li>
+            <li class="site-footer__item"><a class="site-footer__link" href="#">I need urgent help</a></li>
+          </ul>
+        </nav>
+
+        <a class="site-footer__back-to-top" href="#top">
+          <img
+            class="site-footer__back-icon"
+            src="assets/images/icons/Property 1=Left arrow.svg"
+            alt=""
+            width="18"
+            height="18"
+          />
+          <span>Back to top</span>
+        </a>
+        <hr class="site-footer__rule" aria-hidden="true" />
+        <p class="site-footer__copyright">&copy; 2026 Copyright</p>
+        <ul class="site-footer__legal-list">
+          <li><a class="site-footer__link" href="#">Privacy</a></li>
+          <li><a class="site-footer__link" href="#">Terms and Conditions</a></li>
+          <li><a class="site-footer__link" href="#">Accessibility</a></li>
+        </ul>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        var trapFocus = function (container, e) {
+          var focusable = Array.prototype.slice.call(
+            container.querySelectorAll('a[href], button:not([disabled]):not([hidden]), input:not([disabled]), [tabindex]:not([tabindex="-1"])')
+          );
+          if (focusable.length < 2) return;
+          var first = focusable[0];
+          var last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        };
+
+        // Staggered entrance animations
+        var animated = document.querySelectorAll('[data-animate]');
+        document.querySelectorAll('[data-animate-stagger]').forEach(function (group) {
+          var children = group.querySelectorAll(':scope > [data-animate]');
+          children.forEach(function (el, i) {
+            if (!el.style.getPropertyValue('--animate-delay')) {
+              el.style.setProperty('--animate-delay', (i * 80) + 'ms');
+            }
+          });
+        });
+
+        if (reduced || !('IntersectionObserver' in window)) {
+          animated.forEach(function (el) { el.classList.add('is-visible'); });
+        } else {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+          animated.forEach(function (el) { io.observe(el); });
+          document.documentElement.classList.add('js-animations');
+        }
+
+        // Parallax — translate-mode only. ticking flag throttles to one rAF/frame.
+        if (!reduced) {
+          var mediaLayers = document.querySelectorAll('[data-parallax-media]');
+          if (mediaLayers.length) {
+            var parallaxTicking = false;
+            var updateParallax = function () {
+              var vh = window.innerHeight;
+              var viewportCenter = vh / 2;
+              mediaLayers.forEach(function (el) {
+                var speed = parseFloat(el.dataset.parallaxSpeed) || 0.03;
+                var limit = parseFloat(el.dataset.parallaxLimit) || 8;
+                var bufferRatio = parseFloat(el.dataset.parallaxBufferRatio) || 0.08;
+                var rect = el.getBoundingClientRect();
+                var elCenter = rect.top + rect.height / 2;
+                var offset = viewportCenter - elCenter;
+                var movement = Math.max(-limit, Math.min(limit, offset * speed));
+                var buffer = Math.max(limit + 2, rect.height * bufferRatio);
+
+                if (el.dataset.parallaxMode === 'testimonial') {
+                  el.style.setProperty('--testimonial-image-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--testimonial-image-parallax-offset', movement + 'px');
+                } else {
+                  el.style.setProperty('--card-media-parallax-buffer', buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-buffer-negative', '-' + buffer + 'px');
+                  el.style.setProperty('--card-media-parallax-offset', movement + 'px');
+                }
+              });
+              parallaxTicking = false;
+            };
+            window.addEventListener('scroll', function () {
+              if (!parallaxTicking) {
+                requestAnimationFrame(updateParallax);
+                parallaxTicking = true;
+              }
+            }, { passive: true });
+            window.addEventListener('resize', updateParallax, { passive: true });
+            updateParallax();
+          }
+        }
+
+        // Mobile nav
+        var mobileNav = document.getElementById('mobile-nav');
+        var menuTrigger = document.querySelector('[data-menu-trigger]');
+
+        function openMobileNav() {
+          mobileNav.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          menuTrigger.setAttribute('aria-expanded', 'true');
+          menuTrigger.setAttribute('aria-label', 'Close navigation');
+          var firstFocusable = mobileNav.querySelector('button:not([disabled]):not([hidden]), a[href]');
+          if (firstFocusable) firstFocusable.focus();
+        }
+
+        function closeMobileNav() {
+          mobileNav.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          menuTrigger.setAttribute('aria-expanded', 'false');
+          menuTrigger.setAttribute('aria-label', 'Open navigation');
+          menuTrigger.focus();
+        }
+
+        if (mobileNav && menuTrigger) {
+          menuTrigger.addEventListener('click', function () {
+            if (mobileNav.hasAttribute('hidden')) {
+              openMobileNav();
+            } else {
+              closeMobileNav();
+            }
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!mobileNav.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeMobileNav();
+              } else if (e.key === 'Tab') {
+                trapFocus(mobileNav, e);
+              }
+            }
+          });
+        }
+
+        // Search overlay
+        var searchOverlay = document.getElementById('search-overlay');
+        var searchTrigger = document.querySelector('[data-search-trigger]');
+        var searchTriggerMobile = document.querySelector('[data-search-trigger-mobile]');
+        var overlayCloseBtn = searchOverlay && searchOverlay.querySelector('.search-overlay__close');
+        var lastSearchTrigger = searchTrigger;
+
+        function openSearchOverlay(trigger) {
+          lastSearchTrigger = trigger || searchTrigger;
+          searchOverlay.removeAttribute('hidden');
+          document.body.style.overflow = 'hidden';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'true');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'true');
+          if (overlayCloseBtn) overlayCloseBtn.focus();
+        }
+
+        function closeSearchOverlay() {
+          searchOverlay.setAttribute('hidden', '');
+          document.body.style.overflow = '';
+          if (searchTrigger) searchTrigger.setAttribute('aria-expanded', 'false');
+          if (searchTriggerMobile) searchTriggerMobile.setAttribute('aria-expanded', 'false');
+          if (lastSearchTrigger) lastSearchTrigger.focus();
+        }
+
+        if (searchOverlay && searchTrigger) {
+          searchTrigger.addEventListener('click', function () { openSearchOverlay(searchTrigger); });
+          if (searchTriggerMobile) searchTriggerMobile.addEventListener('click', function () { openSearchOverlay(searchTriggerMobile); });
+          if (overlayCloseBtn) overlayCloseBtn.addEventListener('click', closeSearchOverlay);
+          searchOverlay.addEventListener('click', function (e) {
+            if (e.target === searchOverlay) closeSearchOverlay();
+          });
+          document.addEventListener('keydown', function (e) {
+            if (!searchOverlay.hasAttribute('hidden')) {
+              if (e.key === 'Escape') {
+                closeSearchOverlay();
+              } else if (e.key === 'Tab') {
+                trapFocus(searchOverlay, e);
+              }
+            }
+          });
+        }
+
+        // Button activation: inactive (zest) until a field in that form is focused or has a value.
+        var activatableForms = document.querySelectorAll('.search-overlay form, .service-search__form');
+        activatableForms.forEach(function (form) {
+          var submitBtn = form.querySelector('.search-overlay__submit');
+          if (!submitBtn) return;
+          var inputs = Array.prototype.slice.call(form.querySelectorAll('input'));
+          var formFocused = false;
+
+          function syncButton() {
+            var hasValue = inputs.some(function (inp) { return inp.value.trim() !== ''; });
+            submitBtn.classList.toggle('is-active', formFocused || hasValue);
+          }
+
+          inputs.forEach(function (inp) {
+            inp.addEventListener('focus', function () { formFocused = true; syncButton(); });
+            inp.addEventListener('blur', function () { formFocused = false; syncButton(); });
+            inp.addEventListener('input', syncButton);
+          });
+        });
+
+        var backToTop = document.querySelector('.site-footer__back-to-top');
+        if (backToTop) {
+          backToTop.addEventListener('click', function (e) {
+            if (reduced) return;
+            e.preventDefault();
+            var startY = window.scrollY || window.pageYOffset;
+            if (startY === 0) return;
+            var duration = 1400;
+            var startTime = null;
+            var easeOutCubic = function (t) { return 1 - Math.pow(1 - t, 3); };
+            var step = function (now) {
+              if (startTime === null) startTime = now;
+              var elapsed = now - startTime;
+              var t = Math.min(1, elapsed / duration);
+              window.scrollTo({ top: startY * (1 - easeOutCubic(t)), behavior: 'instant' });
+              if (t < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+          });
+        }
+
+        // Hide the sticky header on scroll-down, reveal it on scroll-up.
+        (function () {
+          var siteHeader = document.querySelector('.site-header');
+          if (!siteHeader) return;
+          var lastY = window.scrollY || 0;
+          var threshold = 80;
+          var headerTicking = false;
+          window.addEventListener('scroll', function () {
+            if (headerTicking) return;
+            window.requestAnimationFrame(function () {
+              var y = window.scrollY || 0;
+              if (y > 0) siteHeader.classList.add('is-scrolled');
+              else siteHeader.classList.remove('is-scrolled');
+
+              if (y < threshold) {
+                siteHeader.classList.remove('is-hidden');
+              } else if (y > lastY) {
+                siteHeader.classList.add('is-hidden');
+              } else if (y < lastY) {
+                siteHeader.classList.remove('is-hidden');
+              }
+              lastY = y;
+              headerTicking = false;
+            });
+            headerTicking = true;
+          }, { passive: true });
+        })();
+      })();
+    </script>
+
+    <!-- Referral form flow — branching, validation, draft persistence,
+         review build. Prototype-only: Drupal Webform's wizard replaces this. -->
+    <script>
+      (function () {
+        var root = document.querySelector('[data-ff]');
+        if (!root) return;
+
+        var DRAFT_KEY = 'vfwa-referral-draft-v1';
+        var DRAFT_MAX_AGE = 14 * 24 * 60 * 60 * 1000; // 14 days
+        var CHAR_LIMIT_RATIO = 0.75;
+
+        var state = {};
+        var currentScreen = 'landing';
+        var editReturn = false;
+
+        var screens = {};
+        root.querySelectorAll('[data-ff-screen]').forEach(function (el) {
+          screens[el.getAttribute('data-ff-screen')] = el;
+        });
+
+        var channelFooter = root.querySelector('[data-ff-channel-footer]');
+        var urgentReveal = document.getElementById('rf-urgent-options');
+
+        // ------------------------------------------------------------------
+        // Path / progress — myself = 5 steps, on-behalf = 7 steps
+        // ------------------------------------------------------------------
+        var PATH_SELF = ['urgent', 'who', 'contact-self', 'areas', 'review'];
+        var PATH_BEHALF = ['urgent', 'who', 'aware', 'contact-referrer', 'person', 'areas', 'review'];
+
+        function path() {
+          return state.support_for === 'someone-else' ? PATH_BEHALF : PATH_SELF;
+        }
+
+        // ------------------------------------------------------------------
+        // State collection
+        // ------------------------------------------------------------------
+        function collectState() {
+          state = {};
+          root.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (!el.name) return;
+            if (el.type === 'radio') {
+              if (el.checked) state[el.name] = el.value;
+            } else if (el.type === 'checkbox') {
+              if (el.name === 'wellbeing_areas') {
+                if (!state.wellbeing_areas) state.wellbeing_areas = [];
+                if (el.checked) state.wellbeing_areas.push(el.value);
+              } else {
+                state[el.name] = el.checked;
+              }
+            } else {
+              state[el.name] = el.value;
+            }
+          });
+        }
+
+        function applyState(data) {
+          root.querySelectorAll('input, select, textarea').forEach(function (el) {
+            if (!el.name || !(el.name in data)) return;
+            var v = data[el.name];
+            if (el.type === 'radio') {
+              el.checked = el.value === v;
+            } else if (el.type === 'checkbox') {
+              if (el.name === 'wellbeing_areas') {
+                el.checked = Array.isArray(v) && v.indexOf(el.value) !== -1;
+              } else {
+                el.checked = !!v;
+              }
+            } else {
+              el.value = v == null ? '' : v;
+            }
+          });
+          collectState();
+          syncReveals();
+        }
+
+        // ------------------------------------------------------------------
+        // Draft persistence
+        // ------------------------------------------------------------------
+        function saveDraft() {
+          collectState();
+          try {
+            localStorage.setItem(DRAFT_KEY, JSON.stringify({
+              data: state,
+              screen: currentScreen === 'confirmation' ? 'landing' : currentScreen,
+              savedAt: Date.now()
+            }));
+          } catch (e) { /* private mode — drafts simply don't persist */ }
+        }
+
+        function readDraft() {
+          try {
+            var raw = localStorage.getItem(DRAFT_KEY);
+            if (!raw) return null;
+            var draft = JSON.parse(raw);
+            if (!draft || !draft.data || Date.now() - draft.savedAt > DRAFT_MAX_AGE) {
+              localStorage.removeItem(DRAFT_KEY);
+              return null;
+            }
+            var hasContent = Object.keys(draft.data).some(function (k) {
+              var v = draft.data[k];
+              return Array.isArray(v) ? v.length : v !== '' && v !== false && v != null;
+            });
+            return hasContent ? draft : null;
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function clearDraft() {
+          try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* noop */ }
+        }
+
+        var draftTimer = null;
+        root.addEventListener('input', function () {
+          window.clearTimeout(draftTimer);
+          draftTimer = window.setTimeout(saveDraft, 400);
+        });
+
+        // ------------------------------------------------------------------
+        // Screen switching
+        // ------------------------------------------------------------------
+        function show(id) {
+          currentScreen = id;
+          Object.keys(screens).forEach(function (key) {
+            screens[key].hidden = key !== id;
+          });
+
+          var steps = path();
+          var idx = steps.indexOf(id);
+          if (idx !== -1) {
+            var label = screens[id].querySelector('[data-ff-progress-label]');
+            var fill = screens[id].querySelector('[data-ff-progress-fill]');
+            if (label) label.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
+            if (fill) fill.style.setProperty('--ff-progress', Math.round(((idx + 1) / steps.length) * 100) + '%');
+          }
+
+          if (channelFooter) {
+            channelFooter.hidden = id === 'landing' || id === 'confirmation';
+          }
+
+          var continueBtn = screens[id].querySelector('[data-ff-continue]');
+          if (continueBtn) {
+            continueBtn.textContent = editReturn ? 'Save and return to review' : 'Continue';
+          }
+
+          var heading = screens[id].querySelector('.feedback-form__question, .feedback-form__heading');
+          if (heading) heading.focus();
+          root.scrollIntoView({ block: 'start', behavior: 'auto' });
+        }
+
+        // ------------------------------------------------------------------
+        // Urgent-triage reveal — "Yes" shows the urgent support entry point.
+        // ------------------------------------------------------------------
+        root.querySelectorAll('input[name="urgent_check"]').forEach(function (radio) {
+          radio.addEventListener('change', function () {
+            urgentReveal.hidden = radio.value !== 'yes';
+            collectState();
+          });
+        });
+
+        // Re-sync reveals from input state (used after a draft restore).
+        function syncReveals() {
+          if (urgentReveal) urgentReveal.hidden = state.urgent_check !== 'yes';
+        }
+
+        // ------------------------------------------------------------------
+        // Character counter — appears once 75% of the limit is consumed.
+        // ------------------------------------------------------------------
+        root.querySelectorAll('textarea[maxlength]').forEach(function (area) {
+          var counter = area.closest('.feedback-form__field') &&
+            area.closest('.feedback-form__field').querySelector('[data-ff-counter]');
+          if (!counter) return;
+          var max = parseInt(area.getAttribute('maxlength'), 10);
+          area.addEventListener('input', function () {
+            var used = area.value.length;
+            if (used >= max * CHAR_LIMIT_RATIO) {
+              counter.hidden = false;
+              counter.textContent = used.toLocaleString() + ' of ' + max.toLocaleString() + ' characters used';
+            } else {
+              counter.hidden = true;
+            }
+          });
+        });
+
+        // ------------------------------------------------------------------
+        // Validation — on Continue only. Inline errors + linked summary.
+        // ------------------------------------------------------------------
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function isAuPhone(value) {
+          var digits = (value || '').replace(/[\s()-]/g, '');
+          return /^(\+?61\d{9}|0\d{9}|1[38]\d{8}|1[38]\d{4})$/.test(digits);
+        }
+
+        // Three-field date (Day / Month / Year) — gov-form pattern, no
+        // separators for the user to type.
+        function isValidDateParts(dayStr, monthStr, yearStr) {
+          if (!/^\d{1,2}$/.test((dayStr || '').trim()) ||
+              !/^\d{1,2}$/.test((monthStr || '').trim()) ||
+              !/^\d{4}$/.test((yearStr || '').trim())) return false;
+          var day = parseInt(dayStr, 10);
+          var month = parseInt(monthStr, 10);
+          var year = parseInt(yearStr, 10);
+          var date = new Date(year, month - 1, day);
+          return year >= 1900 &&
+            date.getFullYear() === year &&
+            date.getMonth() === month - 1 &&
+            date.getDate() === day &&
+            date <= new Date();
+        }
+
+        function formatDateParts(dayStr, monthStr, yearStr) {
+          return [(dayStr || '').trim(), (monthStr || '').trim(), (yearStr || '').trim()].join('/');
+        }
+
+        function validators(screen) {
+          collectState();
+          var errors = [];
+          var add = function (key, msg) { errors.push({ key: key, msg: msg }); };
+
+          if (screen === 'urgent') {
+            if (!state.urgent_check) add('urgent_check', "Select whether you or the person you're contacting us about needs urgent help right now.");
+          }
+
+          if (screen === 'who') {
+            if (!state.support_for) add('support_for', 'Select who this support is for.');
+          }
+
+          if (screen === 'contact-self') {
+            if (!state.my_type) add('my_type', 'Select whether you are a serving member, veteran or family member.');
+            if (!state.first_name.trim()) add('first_name', 'Enter your first name.');
+            if (!state.surname.trim()) add('surname', 'Enter your surname.');
+            if (!isValidDateParts(state.dob_day, state.dob_month, state.dob_year)) add('dob', 'Enter your date of birth — for example, 27 3 1985.');
+            if (!EMAIL_RE.test(state.email.trim())) add('email', 'Enter your email address in the format name@example.com.');
+            if (!isAuPhone(state.phone)) add('phone', 'Enter an Australian phone number, like 02 6123 4567 or 0412 345 678.');
+          }
+
+          if (screen === 'aware') {
+            if (!state.person_aware) add('person_aware', "Select whether the person knows you're reaching out on their behalf.");
+          }
+
+          if (screen === 'contact-referrer') {
+            if (!state.ref_first_name.trim()) add('ref_first_name', 'Enter your first name.');
+            if (!state.ref_surname.trim()) add('ref_surname', 'Enter your surname.');
+            if (!EMAIL_RE.test(state.ref_email.trim())) add('ref_email', 'Enter your email address in the format name@example.com.');
+            if (!isAuPhone(state.ref_phone)) add('ref_phone', 'Enter an Australian phone number, like 02 6123 4567 or 0412 345 678.');
+          }
+
+          if (screen === 'person') {
+            if (!state.person_type) add('person_type', 'Select whether they are a serving member, veteran or family member.');
+            if (!state.person_first_name.trim()) add('person_first_name', 'Enter their first name.');
+            if (!state.person_surname.trim()) add('person_surname', 'Enter their surname.');
+            if (!isValidDateParts(state.person_dob_day, state.person_dob_month, state.person_dob_year)) add('person_dob', 'Enter their date of birth — for example, 27 3 1985.');
+            if (!EMAIL_RE.test(state.person_email.trim())) add('person_email', 'Enter their email address in the format name@example.com.');
+            if (!isAuPhone(state.person_phone)) add('person_phone', 'Enter an Australian phone number, like 02 6123 4567 or 0412 345 678.');
+          }
+
+          if (screen === 'areas') {
+            if (!(state.wellbeing_areas || []).length) add('wellbeing_areas', 'Select at least one wellbeing area.');
+          }
+
+          return errors;
+        }
+
+        // Error anchors target the screen's own inputs — the shared
+        // first_name/surname/email/phone names render on two screens, so
+        // resolve ids within the active screen first.
+        function focusTargetFor(screenEl, key) {
+          var input = screenEl.querySelector('[name="' + key + '"]');
+          return input || document.getElementById('rf-' + key);
+        }
+
+        function errorElFor(screenEl, key) {
+          var wrap = screenEl.querySelector('[data-ff-field-wrap="' + key + '"]');
+          return wrap && wrap.querySelector('.feedback-form__error');
+        }
+
+        function clearErrors(screenEl) {
+          screenEl.querySelectorAll('.feedback-form__error').forEach(function (el) {
+            el.hidden = true;
+            el.textContent = '';
+          });
+          screenEl.querySelectorAll('.has-error').forEach(function (el) {
+            el.classList.remove('has-error');
+          });
+          var summary = screenEl.querySelector('[data-ff-errors]');
+          if (summary) summary.hidden = true;
+        }
+
+        function showErrors(screenEl, errors) {
+          var summary = screenEl.querySelector('[data-ff-errors]');
+          var list = screenEl.querySelector('[data-ff-errors-list]');
+          list.innerHTML = '';
+          errors.forEach(function (err) {
+            var inline = errorElFor(screenEl, err.key);
+            if (inline) {
+              inline.textContent = err.msg;
+              inline.hidden = false;
+            }
+            var wrap = screenEl.querySelector('[data-ff-field-wrap="' + err.key + '"]');
+            if (wrap) wrap.classList.add('has-error');
+
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = '#rf-' + err.key;
+            a.textContent = err.msg;
+            a.addEventListener('click', function (e) {
+              e.preventDefault();
+              var target = focusTargetFor(screenEl, err.key);
+              if (target) target.focus();
+            });
+            li.appendChild(a);
+            list.appendChild(li);
+          });
+          summary.hidden = false;
+          summary.focus();
+        }
+
+        // ------------------------------------------------------------------
+        // Review summary
+        // ------------------------------------------------------------------
+        function notProvided(value) {
+          return value && value.trim() !== '' ? value : 'Not provided';
+        }
+
+        function buildReview() {
+          collectState();
+          var container = root.querySelector('[data-ff-summary]');
+          container.innerHTML = '';
+
+          var typeLabels = {
+            serving: 'Serving Member',
+            veteran: 'Veteran',
+            family: 'Family member of a Veteran (including Serving Members)'
+          };
+          var isBehalf = state.support_for === 'someone-else';
+
+          var sections = [];
+
+          sections.push({
+            title: 'Referral type',
+            screen: 'who',
+            rows: [{
+              key: 'Who is this support for?',
+              value: isBehalf ? 'On behalf of someone else' : 'For myself'
+            }]
+          });
+
+          if (isBehalf) {
+            sections.push({
+              title: 'Does the person know?',
+              screen: 'aware',
+              rows: [{
+                key: "Does the person know that you're reaching out for support on their behalf?",
+                value: state.person_aware === 'yes' ? 'Yes, they know' : "No, they don't know"
+              }]
+            });
+          }
+
+          var yourRows = [];
+          if (isBehalf) {
+            yourRows.push({ key: 'Name', value: (state.ref_first_name + ' ' + state.ref_surname).trim() });
+            yourRows.push({ key: 'Email', value: state.ref_email });
+            yourRows.push({ key: 'Phone', value: state.ref_phone });
+            yourRows.push({ key: 'Organisation', value: notProvided(state.organisation) });
+          } else {
+            yourRows.push({ key: 'I am a', value: typeLabels[state.my_type] || 'Not provided' });
+            yourRows.push({ key: 'Name', value: (state.first_name + ' ' + state.surname).trim() });
+            yourRows.push({ key: 'Date of birth', value: formatDateParts(state.dob_day, state.dob_month, state.dob_year) });
+            yourRows.push({ key: 'Email', value: state.email });
+            yourRows.push({ key: 'Phone', value: state.phone });
+            yourRows.push({ key: 'DVA file number', value: notProvided(state.dva_file_number) });
+          }
+          sections.push({
+            title: 'Your details',
+            screen: isBehalf ? 'contact-referrer' : 'contact-self',
+            rows: yourRows
+          });
+
+          if (isBehalf) {
+            sections.push({
+              title: 'Person needing support',
+              screen: 'person',
+              rows: [
+                { key: 'They are a', value: typeLabels[state.person_type] || 'Not provided' },
+                { key: 'Name', value: (state.person_first_name + ' ' + state.person_surname).trim() },
+                { key: 'Date of birth', value: formatDateParts(state.person_dob_day, state.person_dob_month, state.person_dob_year) },
+                { key: 'Email', value: state.person_email },
+                { key: 'Phone', value: state.person_phone },
+                { key: 'DVA file number', value: notProvided(state.person_dva_file_number) }
+              ]
+            });
+          }
+
+          sections.push({
+            title: 'Wellbeing areas',
+            screen: 'areas',
+            rows: [{
+              key: 'Which areas best describe the kind of wellbeing services and support needed?',
+              value: (state.wellbeing_areas || []).join('\n') || 'Not provided'
+            }]
+          });
+
+          sections.push({
+            title: 'Additional information',
+            screen: 'areas',
+            rows: [{
+              key: "If you'd like, you can share a bit more about what's going on",
+              value: notProvided(state.additional_info),
+              clamp: true
+            }]
+          });
+
+          sections.forEach(function (section) {
+            var sectionEl = document.createElement('div');
+            sectionEl.className = 'feedback-form__summary-section';
+
+            var heading = document.createElement('h3');
+            heading.className = 'feedback-form__summary-heading';
+            heading.textContent = section.title;
+            sectionEl.appendChild(heading);
+
+            var listEl = document.createElement('div');
+            listEl.className = 'feedback-form__summary-list';
+
+            section.rows.forEach(function (row, i) {
+              var rowEl = document.createElement('div');
+              rowEl.className = 'feedback-form__summary-row';
+
+              var keyEl = document.createElement('p');
+              keyEl.className = 'feedback-form__summary-key';
+              keyEl.textContent = row.key;
+              rowEl.appendChild(keyEl);
+
+              var valueEl = document.createElement('p');
+              valueEl.className = 'feedback-form__summary-value';
+              valueEl.textContent = row.value || 'Not provided';
+              rowEl.appendChild(valueEl);
+
+              if (i === 0) {
+                var change = document.createElement('button');
+                change.type = 'button';
+                change.className = 'feedback-form__summary-change';
+                change.textContent = 'Edit';
+                change.setAttribute('aria-label', 'Edit ' + section.title);
+                change.addEventListener('click', function () {
+                  editReturn = true;
+                  show(section.screen);
+                });
+                rowEl.appendChild(change);
+              }
+
+              if (row.clamp && row.value && row.value.length > 360) {
+                valueEl.classList.add('feedback-form__summary-value--clamp');
+                var more = document.createElement('button');
+                more.type = 'button';
+                more.className = 'feedback-form__summary-more';
+                more.textContent = 'Show more';
+                more.setAttribute('aria-expanded', 'false');
+                more.addEventListener('click', function () {
+                  var open = valueEl.classList.toggle('is-open');
+                  more.textContent = open ? 'Show less' : 'Show more';
+                  more.setAttribute('aria-expanded', open ? 'true' : 'false');
+                });
+                rowEl.appendChild(more);
+              }
+
+              listEl.appendChild(rowEl);
+            });
+
+            sectionEl.appendChild(listEl);
+            container.appendChild(sectionEl);
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Navigation
+        // ------------------------------------------------------------------
+        root.querySelectorAll('[data-ff-continue]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var screenEl = screens[currentScreen];
+            clearErrors(screenEl);
+            var errors = validators(currentScreen);
+            if (errors.length) {
+              showErrors(screenEl, errors);
+              return;
+            }
+
+            // Urgent triage: "Yes" routes to urgent support options instead
+            // of advancing (revealed inline in the prototype).
+            if (currentScreen === 'urgent' && state.urgent_check === 'yes') {
+              urgentReveal.hidden = false;
+              var urgentLink = urgentReveal.querySelector('a');
+              if (urgentLink) urgentLink.focus();
+              return;
+            }
+
+            saveDraft();
+
+            var steps = path();
+            if (editReturn) {
+              // Re-route check: switching to the on-behalf path via Review
+              // introduces unanswered steps — walk them before Review.
+              var firstUnanswered = null;
+              if (state.support_for === 'someone-else') {
+                if (!state.person_aware && currentScreen !== 'aware') firstUnanswered = 'aware';
+                else if (!state.person_type && currentScreen !== 'person' && state.person_aware) firstUnanswered = 'person';
+              }
+              if (currentScreen === 'aware' && !state.person_type) firstUnanswered = 'person';
+              if (firstUnanswered) {
+                syncReveals();
+                show(firstUnanswered);
+                return;
+              }
+              editReturn = false;
+              syncReveals();
+              buildReview();
+              show('review');
+              return;
+            }
+
+            var next = steps[steps.indexOf(currentScreen) + 1];
+            syncReveals();
+            if (next === 'review') buildReview();
+            show(next);
+          });
+        });
+
+        root.querySelectorAll('[data-ff-back]').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var steps = path();
+            var idx = steps.indexOf(currentScreen);
+            if (editReturn) {
+              editReturn = false;
+              buildReview();
+              show('review');
+              return;
+            }
+            show(idx <= 0 ? 'landing' : steps[idx - 1]);
+          });
+        });
+
+        var startBtn = root.querySelector('[data-ff-start]');
+        if (startBtn) {
+          startBtn.addEventListener('click', function () {
+            show('urgent');
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Submit (prototype: simulated; Drupal Webform owns the real POST)
+        // ------------------------------------------------------------------
+        var submitBtn = root.querySelector('[data-ff-submit]');
+        if (submitBtn) {
+          submitBtn.addEventListener('click', function () {
+            var screenEl = screens.review;
+            clearErrors(screenEl);
+            var errors = validators('review');
+            if (errors.length) {
+              showErrors(screenEl, errors);
+              return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting…';
+
+            window.setTimeout(function () {
+              clearDraft();
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Submit referral';
+              show('confirmation');
+            }, 900);
+          });
+        }
+
+        // ------------------------------------------------------------------
+        // Resume prompt
+        // ------------------------------------------------------------------
+        var draft = readDraft();
+        var resumeBanner = root.querySelector('[data-ff-resume]');
+        if (draft && resumeBanner) {
+          resumeBanner.hidden = false;
+          resumeBanner.querySelector('[data-ff-resume-yes]').addEventListener('click', function () {
+            applyState(draft.data);
+            var target = draft.screen && screens[draft.screen] && draft.screen !== 'landing' ? draft.screen : 'urgent';
+            if (path().indexOf(target) === -1) target = 'urgent';
+            show(target);
+          });
+          resumeBanner.querySelector('[data-ff-resume-no]').addEventListener('click', function () {
+            clearDraft();
+            resumeBanner.hidden = true;
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

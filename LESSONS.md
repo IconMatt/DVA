@@ -29,3 +29,4 @@ Read before starting work. Append (don't edit) when something goes wrong.
   backdrop-filter: var(--site-header-backdrop);
   ```
   Single-function values (`blur(6px)`) aren't affected — only multi-function `backdrop-filter` / `filter` / `transform` lists need the var() workaround.
+- `getComputedStyle` traps when verifying styles in the preview browser: (1) `transform` resolves to `none` for any element without a layout box — e.g. inside a `hidden` form screen — even when the declaration is correct and every sibling property reads fine. Make the element visible before concluding the transform is broken. (2) A backgrounded tab freezes CSS transitions at `currentTime: 0`, so a transitioned property (e.g. an error border-color) reads its *start* value indefinitely; `el.getAnimations().forEach(a => a.finish())` fast-forwards them for verification.

@@ -24,12 +24,15 @@ main > .service-search-band:first-child {
   background: var(--color-coastal);
 }
 
-/* Wellbeing-resources family + about-landing use Brush for the breadcrumb /
-   search panel (resource-library = resources-landing + resource-all). */
+/* Wellbeing-resources family + about-landing + feedback-form use Brush for
+   the breadcrumb / search panel (resource-library = resources-landing +
+   resource-all). */
 .page--resource-collection .service-search,
 .page--resource-library .service-search,
 .page--resource-article .service-search,
-.page--about-landing .service-search {
+.page--about-landing .service-search,
+.page--feedback-form .service-search,
+.page--referral-form .service-search {
   background: var(--color-brush);
 }
 
@@ -274,7 +277,9 @@ main > .service-search-band:first-child {
 /* ---------------------------------------------------------------------------- */
 .page--resource-collection,
 .page--resource-article,
-.page--about-landing {
+.page--about-landing,
+.page--feedback-form,
+.page--referral-form {
   .service-search-collection {
     display: grid;
     gap: var(--space-s);

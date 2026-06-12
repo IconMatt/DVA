@@ -16,6 +16,12 @@
   /* Step-5: H1 standard. Max raised to 4.5rem so heading keeps growing past
      1440px design breakpoint. Below 1440px, modular scale is unchanged. */
   --text-step-5: clamp(1.9559rem, 1.7266rem + 1.0191vw, 4.5rem);
+
+  /* Description — card body / hint scale shared by quick-link cards and
+     the form components (option hints, field hints, question intros).
+     Sits between step--1 and step-0; originally authored as the
+     .quick-link__text one-off. */
+  --text-description: clamp(0.9302rem, 0.8867rem + 0.1942vw, 1.0613rem);
 }
 
 /* Legacy mirrors so component CSS using --step-* and font-size aliases

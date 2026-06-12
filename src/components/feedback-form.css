@@ -1,0 +1,1034 @@
+/* Feedback form — multi-step form (landing → steps → review → confirmation).
+   One screen visible at a time; flow logic lives in the template's inline
+   script. Fields are the "traditional" labelled pattern (label above a
+   bordered white box) — not the floating-label .service-search style — but
+   share its 3.5rem min-height, fluid radius, and type scale so both field
+   families read as one system. */
+
+.feedback-form {
+  /* Focus-ring override per the accessibility checklist: the global Wattle
+     ring is ~1.15:1 against this component's white/Brush surfaces (needs
+     3:1). Ink reads at 8–11:1 on every form surface. Scoped — the global
+     ring is untouched elsewhere. */
+  --color-focus: var(--color-brown-900);
+
+  background: var(--color-macadamia);
+  padding-block: var(--space-s) var(--space-2xl);
+  /* Inherits into every span/label/legend in the form (option titles,
+     hints, card text) — the base p/li/dd rule doesn't reach those.
+     Headings keep text-wrap: balance from base/typography.css, since a
+     declared element style beats an inherited value. */
+  text-wrap: pretty;
+}
+
+/* Rounded Brush panel — same bleed-wrap rhythm as .service-search so the
+   panel lines up with the header card above it. */
+.feedback-form__panel {
+  margin-inline: 0.75rem;
+  background: var(--color-brush);
+  border-radius: var(--radius-hero);
+  padding-block: var(--space-2xl);
+  padding-inline: var(--space-l);
+
+  @media (min-width: 840px) {
+    margin-inline: 0.9rem;
+    padding-inline: calc(var(--container-padding) - 0.9rem);
+  }
+}
+
+/* Centred measure for screen content. Wide enough for two-column name
+   fields, narrow enough to keep questions readable. */
+.feedback-form__col {
+  max-width: 46.5rem;
+  margin-inline: auto;
+}
+
+.feedback-form__screen[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Screen header — Back (top-left) + "Step x of y" + progress bar          */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-s);
+  margin-bottom: var(--space-l);
+}
+
+.feedback-form__top .feedback-form__back {
+  justify-self: start;
+}
+
+/* Back pill — mirrors .service-detail__back: transparent outline (from
+   .button--secondary), arrow in a sized container, dark fill on hover with
+   the arrow flipped white so it stays legible on the Ironbark fill. */
+.feedback-form__back {
+  background: transparent;
+}
+
+.feedback-form__back-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.feedback-form__back-icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: filter var(--transition-base);
+}
+
+.feedback-form__back:hover .feedback-form__back-icon img {
+  filter: brightness(0) invert(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-form__back-icon img {
+    transition: none;
+  }
+}
+
+.feedback-form__progress {
+  grid-column: 2;
+  text-align: center;
+}
+
+.feedback-form__progress-label {
+  margin: 0;
+  /* Lift the base p { max-width: 70ch } reading cap — at this small font
+     size 70ch is narrower than the header, so the left-anchored box made
+     the centred text sit left of the title. It's a caption, not body copy. */
+  max-width: none;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__progress-bar {
+  width: clamp(8rem, 30vw, 12rem);
+  height: 0.375rem;
+  margin-top: var(--space-3xs);
+  margin-inline: auto;
+  background: var(--color-white);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.feedback-form__progress-fill {
+  display: block;
+  /* --ff-progress is set inline from JS (dynamic value). */
+  width: var(--ff-progress, 0%);
+  height: 100%;
+  background: var(--color-brown-900);
+  border-radius: inherit;
+  transition: width var(--transition-base);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Headings and copy                                                       */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__eyebrow {
+  margin: 0 0 var(--space-m);
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* Serif heading — same recipe as .feedback-form__step-title (and
+   .cta-tray__title) so landing, question, and confirmation headings read
+   at one scale. Receives focus on step change (tabindex="-1" in markup). */
+.feedback-form__heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--step-4);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
+  color: var(--color-brown-900);
+  text-align: center;
+}
+
+.feedback-form__heading:focus {
+  outline: none;
+}
+
+.feedback-form__intro,
+.feedback-form__hint {
+  margin: var(--space-s) auto 0;
+  max-width: 38rem;
+  font-size: var(--step-0);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-900);
+  text-align: center;
+}
+
+.feedback-form__hint {
+  font-size: var(--text-description);
+  color: var(--color-brown-700);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Fields — traditional labelled inputs                                    */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__fields {
+  display: grid;
+  gap: var(--space-m);
+  margin-top: var(--space-xl);
+}
+
+/* Field stacks nested inside a reveal — the reveal's own gap provides the
+   top spacing. */
+.feedback-form__fields--tight {
+  margin-top: 0;
+}
+
+.feedback-form__field {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+.feedback-form__label {
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brown-900);
+}
+
+/* Visible group legends ("Are you a", "How should we contact you?") get
+   the same gap to their options as a field label has to its input (the
+   .feedback-form__field grid gap). */
+legend.feedback-form__label {
+  margin-bottom: var(--space-3xs);
+}
+
+.feedback-form__field-hint {
+  margin: 0;
+  font-size: var(--text-description);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-700);
+}
+
+.feedback-form__input,
+.feedback-form__select,
+.feedback-form__textarea {
+  width: 100%;
+  min-height: 3.5rem;
+  padding: var(--space-2xs) var(--space-s);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  color: var(--color-brown-900);
+  background: var(--color-white);
+  border: 1px solid var(--color-brown-900);
+
+  /* Same fluid radius as .service-search__input-wrap (10px → 14px). */
+  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
+  transition: border-color var(--transition-base);
+}
+
+.feedback-form__input:focus-visible,
+.feedback-form__select:focus-visible,
+.feedback-form__textarea:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.feedback-form__textarea {
+  min-height: 9rem;
+  resize: vertical;
+  line-height: var(--line-height-normal);
+}
+
+/* Select — native element with a border-drawn chevron on the wrapper so no
+   extra icon asset is needed. */
+.feedback-form__select-wrap {
+  position: relative;
+}
+
+.feedback-form__select {
+  appearance: none;
+  padding-right: var(--space-xl);
+  cursor: pointer;
+}
+
+.feedback-form__select-wrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: var(--space-s);
+  width: 0.625rem;
+  height: 0.625rem;
+  border-right: 2px solid var(--color-brown-900);
+  border-bottom: 2px solid var(--color-brown-900);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* Narrow fields — date parts and postcode. */
+.feedback-form__date-row {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.feedback-form__input--month,
+.feedback-form__input--day {
+  width: 5rem;
+}
+
+.feedback-form__input--year {
+  width: 7rem;
+}
+
+.feedback-form__input--postcode {
+  width: 8rem;
+}
+
+/* Two-up name row at md+. */
+.feedback-form__field-row {
+  display: grid;
+  gap: var(--space-m);
+
+  @media (min-width: 840px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Character counter — hidden until 75% of the limit is consumed (JS). */
+.feedback-form__counter {
+  margin: 0;
+  font-size: var(--step--1);
+  color: var(--color-brown-700);
+  text-align: right;
+}
+
+.feedback-form__counter[hidden] {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Radio / checkbox option cards                                           */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.feedback-form__options {
+  display: grid;
+  gap: var(--space-xs);
+  margin-top: var(--space-xl);
+}
+
+/* Secondary option groups inside a reveal (e.g. "How should we contact
+   you?") sit tighter under their label. */
+.feedback-form__options--nested {
+  margin-top: 0;
+}
+
+/* Options directly after a question hint — the hint's bottom margin owns
+   the gap (field-section rhythm). Margins don't collapse through the
+   fieldset boundary, so without this the two stack to m + xl. */
+.feedback-form__hint--left + .feedback-form__fieldset .feedback-form__options {
+  margin-top: 0;
+}
+
+/* A fields stack continuing after an option group (or directly after the
+   question hint) keeps the same field-section gap as the rows inside it,
+   instead of the larger screen-level --space-xl. */
+.feedback-form__fieldset + .feedback-form__fields,
+.feedback-form__hint--left + .feedback-form__fields {
+  margin-top: var(--space-m);
+}
+
+.feedback-form__option {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  background: var(--color-white);
+  border: 1px solid var(--color-brown-900);
+  border-radius: clamp(0.625rem, 0.5rem + 0.625vw, 0.875rem);
+  cursor: pointer;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.feedback-form__option:hover {
+  background: var(--color-sand);
+}
+
+/* Native input is the accessible control; visually replaced by __control. */
+.feedback-form__option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  opacity: 0;
+}
+
+.feedback-form__control {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.125rem;
+  background: var(--color-white);
+  border: 2px solid var(--color-brown-900);
+  border-radius: 50%;
+  transition: border-color var(--transition-base);
+}
+
+.feedback-form__option input:checked + .feedback-form__control {
+  border-width: 0.5rem;
+}
+
+/* Checkbox flavour — square control with a border-drawn tick. */
+.feedback-form__option--checkbox .feedback-form__control {
+  position: relative;
+  border-radius: var(--radius-sm);
+}
+
+.feedback-form__option--checkbox input:checked + .feedback-form__control {
+  background: var(--color-brown-900);
+  border-width: 2px;
+}
+
+.feedback-form__option--checkbox input:checked + .feedback-form__control::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.4375rem;
+  height: 0.75rem;
+  border-right: 2px solid var(--color-white);
+  border-bottom: 2px solid var(--color-white);
+  /* Centre on the box; -58% (not -50%) optically centres the tick since
+     its visual mass sits below the geometric centre once rotated. The
+     custom property guards the multi-function list from the minifier
+     stripping the separator space (see LESSONS.md). */
+  --ff-tick-transform: translate(-50%, -58%) rotate(45deg);
+
+  transform: var(--ff-tick-transform);
+}
+
+.feedback-form__option input:focus-visible ~ .feedback-form__control {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.feedback-form__option-body {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+/* Option title — body-size label at medium weight (same recipe as
+   .feedback-form__label, the field-label foundation); the hint sits below
+   at the description size in muted ink so the two read as title +
+   secondary line. */
+.feedback-form__option-title {
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-brown-900);
+  line-height: var(--line-height-snug);
+}
+
+.feedback-form__option-hint {
+  font-size: var(--text-description);
+  color: var(--color-brown-700);
+  line-height: var(--line-height-normal);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Conditional reveal                                                      */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__reveal {
+  display: grid;
+  gap: var(--space-m);
+  margin-top: var(--space-m);
+  padding: var(--space-m);
+  background: var(--overlay-white-45);
+  border-radius: var(--radius-lg);
+}
+
+.feedback-form__reveal[hidden] {
+  display: none;
+}
+
+.feedback-form__reveal-heading {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Banners                                                                 */
+/* ---------------------------------------------------------------------- */
+
+/* Info banner — Wattle surface, leading info icon, body-size text. */
+.feedback-form__banner {
+  /* Icon + text row; the inline text collapses into one anonymous flex
+     item, so multi-line text wraps beside the icon, not under it. */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  /* Lift the base p { max-width: 70ch } reading cap — banners are full-width
+     panels, not body copy, so they should span the form column like the
+     option cards, not stop short at the measure cap. */
+  max-width: none;
+  margin-top: var(--space-m);
+  padding: var(--space-s) var(--space-m);
+  font-size: var(--step-0);
+  line-height: var(--line-height-normal);
+  color: var(--color-brown-900);
+  background: var(--color-wattle);
+  border-radius: var(--radius-lg);
+}
+
+/* Leading info icon — masked so it takes the banner's ink (the source SVG
+   strokes use currentColor, which renders black as a plain background).
+   The top margin centres the icon on the first text line box. */
+.feedback-form__banner::before {
+  content: "";
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: calc((1em * var(--line-height-normal) - 1.25rem) / 2);
+  background-color: currentColor;
+  -webkit-mask: center / contain no-repeat url("../assets/images/icons/info.svg");
+  mask: center / contain no-repeat url("../assets/images/icons/info.svg");
+}
+
+.feedback-form__banner[hidden] {
+  display: none;
+}
+
+/* Confirmation banner — centred stack: tick in an icon box above the
+   text. The real icon-box span replaces the inline info icon. */
+.feedback-form__banner--confirm {
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2xs);
+  padding: var(--space-m);
+  text-align: center;
+}
+
+.feedback-form__banner--confirm::before {
+  content: none;
+}
+
+.feedback-form__banner a {
+  color: inherit;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Urgent-help banner — Wattle surface so it stands apart from info. */
+.feedback-form__banner--urgent {
+  background: var(--color-wattle);
+}
+
+/* Resume-draft prompt — centred, slightly heavier text, and a tighter gap
+   to its buttons than the default banner/actions rhythm. Stays a stacked
+   block (it holds text + buttons) with no leading icon. */
+.feedback-form__banner[data-ff-resume] {
+  display: block;
+  text-align: center;
+}
+
+.feedback-form__banner[data-ff-resume]::before {
+  content: none;
+}
+
+.feedback-form__banner[data-ff-resume] p {
+  margin: 0;
+  font-weight: var(--font-weight-medium);
+}
+
+.feedback-form__banner[data-ff-resume] .feedback-form__actions {
+  margin-top: var(--space-s);
+}
+
+/* Error summary — anchors focus to each invalid field. */
+.feedback-form__error-summary {
+  margin-bottom: var(--space-l);
+  padding: var(--space-s) var(--space-m);
+  background: var(--color-error-bg);
+  border: 2px solid var(--color-error);
+  border-radius: var(--radius-lg);
+}
+
+.feedback-form__error-summary[hidden] {
+  display: none;
+}
+
+.feedback-form__error-summary:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 1px;
+}
+
+.feedback-form__error-summary-title {
+  margin: 0;
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__error-summary ul {
+  margin: var(--space-2xs) 0 0;
+  padding-left: var(--space-m);
+}
+
+.feedback-form__error-summary a {
+  color: var(--color-error);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Inline field error. */
+.feedback-form__error {
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-error);
+}
+
+.feedback-form__error[hidden] {
+  display: none;
+}
+
+.feedback-form__field.has-error .feedback-form__input,
+.feedback-form__field.has-error .feedback-form__select,
+.feedback-form__field.has-error .feedback-form__textarea,
+.feedback-form__fieldset.has-error .feedback-form__input,
+.feedback-form__fieldset.has-error .feedback-form__option {
+  border: 2px solid var(--color-error);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Actions row + secondary channels                                        */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-s);
+  margin-top: var(--space-xl);
+}
+
+/* Form buttons read at body-text size (the global .button stays at the
+   header-pill scale); weight is unchanged from the .button base. */
+.feedback-form .button {
+  font-size: var(--step-0);
+}
+
+/* Continue buttons carry a trailing right-arrow. Drawn as a mask so it
+   inherits the button's white text colour (the source SVG is fixed dark
+   ink) and as a pseudo-element so it survives the flow script rewriting
+   the button label via textContent ("Save and return to review"). The
+   .button base is inline-flex with gap, so the arrow spaces itself. */
+.feedback-form [data-ff-continue]::after {
+  content: "";
+  width: 1.125rem;
+  height: 1.125rem;
+  background-color: currentColor;
+  -webkit-mask: center / contain no-repeat url("../assets/images/icons/right-arrow.svg");
+  mask: center / contain no-repeat url("../assets/images/icons/right-arrow.svg");
+}
+
+/* Landing "Start feedback form" — reuses the .quick-link card vocabulary
+   (white card, title left, Coastal arrow tile right) as a button. */
+.feedback-form__start {
+  --icon-bg: var(--color-coastal);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  /* Wide enough that the one-sentence description sits on a single line. */
+  max-width: 34rem;
+  min-height: 0;
+  margin-inline: auto;
+  background: var(--color-white);
+  border-color: var(--color-white);
+  /* Match the CTA-tray quick-link radius (.quick-links--tray) instead of
+     the base .quick-link's hero-scale rounding. */
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  text-align: left;
+  cursor: pointer;
+}
+
+.feedback-form__start:hover {
+  --icon-bg: var(--color-sky);
+
+  background: var(--color-macadamia);
+  border-color: var(--color-macadamia);
+}
+
+/* Divider — rule with a centred "or". Type matches .feedback-form__intro;
+   the rule lines take currentColor so they always match the text. */
+.feedback-form__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  max-width: 28rem;
+  margin: var(--space-l) auto;
+  color: var(--color-brown-900);
+  font-size: var(--step-0);
+  line-height: var(--line-height-normal);
+}
+
+.feedback-form__divider::before,
+.feedback-form__divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid currentColor;
+}
+
+/* Phone channel — icon tile + serif number. */
+.feedback-form__phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  margin-top: var(--space-m);
+}
+
+/* Icon box — the Coastal tile shared by the phone row and the
+   confirmation tick (same tile vocabulary as .quick-link__arrow). */
+.feedback-form__phone-icon,
+.feedback-form__icon-box {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--color-coastal);
+  border-radius: var(--radius-sm);
+}
+
+.feedback-form__phone-icon img,
+.feedback-form__icon-box img {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.feedback-form__phone-number {
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  color: var(--color-brown-900);
+  text-decoration: none;
+}
+
+.feedback-form__phone-number:hover {
+  text-decoration: underline;
+}
+
+/* Per-step footer — phone alternative + urgent help, repeated under every
+   step (brief rules 10 and 13). */
+.feedback-form__channel-footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-m);
+  border-top: 1px solid var(--color-brown-300);
+  /* Body-text size — matches .feedback-form__intro. */
+  font-size: var(--step-0);
+  color: var(--color-brown-700);
+  text-align: center;
+}
+
+.feedback-form__channel-footer p {
+  margin: 0 0 var(--space-2xs);
+  /* Lift the base p reading cap so the text centres on the full footer
+     width rather than inside a left-anchored 70ch box. */
+  max-width: none;
+}
+
+.feedback-form__channel-footer a {
+  color: var(--color-brown-900);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Review screen                                                           */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__summary {
+  margin-top: var(--space-l);
+  display: grid;
+  gap: var(--space-l);
+}
+
+.feedback-form__summary-section {
+  background: var(--overlay-white-45);
+  border-radius: var(--radius-lg);
+  padding: var(--space-m);
+}
+
+.feedback-form__summary-heading {
+  margin: 0 0 var(--space-s);
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__summary-list {
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.feedback-form__summary-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3xs) var(--space-s);
+  padding-block: var(--space-xs);
+  border-top: 1px solid var(--color-brown-300);
+}
+
+.feedback-form__summary-row:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.feedback-form__summary-key {
+  grid-column: 1;
+  margin: 0;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__summary-value {
+  grid-column: 1;
+  margin: 0;
+  font-size: var(--step-0);
+  color: var(--color-brown-900);
+  white-space: pre-line;
+  overflow-wrap: anywhere;
+}
+
+/* Long answers clamp to ~6 lines until "Show more" (JS toggles .is-open). */
+.feedback-form__summary-value--clamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+}
+
+.feedback-form__summary-value--clamp.is-open {
+  display: block;
+  -webkit-line-clamp: none;
+}
+
+.feedback-form__summary-change,
+.feedback-form__summary-more {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: start;
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.feedback-form__summary-more {
+  grid-column: 1;
+  grid-row: auto;
+  justify-self: start;
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Confirmation                                                            */
+/* ---------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------- */
+/* Referral-flow variants — the referral form reuses this block with a     */
+/* different screen anatomy: centred step header (label + serif form title */
+/* over a rule), left-aligned questions, Back/Continue spread across the   */
+/* bottom row, and a two-column checkbox grid.                             */
+/* ---------------------------------------------------------------------- */
+
+.feedback-form__step-header {
+  margin-bottom: var(--space-l);
+  padding-bottom: var(--space-m);
+  border-bottom: 1px solid var(--color-brown-300);
+  text-align: center;
+}
+
+/* Matches .cta-tray__title ("Not sure where to start?") — same serif
+   display face, step-4 size, tight line-height and -0.015em tracking.
+   Top margin matches the header's padding-bottom (--space-m) so the gap
+   above the title (from the step label) mirrors the gap below it (to the
+   rule). */
+.feedback-form__step-title {
+  margin: var(--space-m) 0 0;
+  font-family: var(--font-display);
+  font-size: var(--step-4);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
+  color: var(--color-brown-900);
+}
+
+/* Serif interstitial banner ("Thank you for looking out for someone        */
+/* else") — sits between the step header rule and the question.            */
+.feedback-form__sub-banner {
+  margin: 0 0 var(--space-l);
+  padding-bottom: var(--space-m);
+  border-bottom: 1px solid var(--color-brown-300);
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--step-3);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  text-align: center;
+}
+
+/* Left-aligned question heading (vs the centred serif .feedback-form__heading). */
+.feedback-form__question {
+  margin: var(--space-l) 0 0;
+  font-size: var(--step-2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__question:focus {
+  outline: none;
+}
+
+.feedback-form__hint--left {
+  margin-inline: 0;
+  /* Same gap below the hint as between field sections (--space-m, the
+     .feedback-form__fields gap). Collapses into the --space-xl top margin
+     of options/fields blocks where present, so only tighter screens (e.g.
+     a fieldset legend directly after the hint) gain space. */
+  margin-bottom: var(--space-m);
+  max-width: none;
+  text-align: left;
+  font-size: var(--text-description);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+}
+
+/* Two-column option grid (wellbeing areas). */
+.feedback-form__options--grid {
+  @media (min-width: 840px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Back bottom-left / Continue bottom-right. */
+.feedback-form__actions--spread {
+  justify-content: space-between;
+}
+
+/* Start card with a description line — title + text stack left of the arrow. */
+.feedback-form__start-body {
+  display: grid;
+  gap: var(--space-3xs);
+}
+
+/* Plain reveal — drops the panel surface (background + padding) so a
+   revealed element that's already a card (the urgent CTA) doesn't sit in a
+   box-in-a-box. Keeps the top margin for spacing from the options above. */
+.feedback-form__reveal--plain {
+  padding: 0;
+  background: none;
+}
+
+/* Urgent-triage reveal — single emergency quick-link, Wattle resting /
+   Sand hover to match the hero + about-grid emergency treatment. */
+.feedback-form__urgent-links {
+  grid-template-columns: 1fr;
+}
+
+.feedback-form__urgent-links .quick-link--emergency {
+  --icon-bg: var(--color-macadamia);
+
+  background: var(--color-wattle);
+  border-color: var(--color-wattle);
+}
+
+.feedback-form__urgent-links .quick-link--emergency:hover {
+  --icon-bg: var(--color-white);
+
+  background: var(--color-sand);
+  border-color: var(--color-sand);
+}
+
+.feedback-form__input::placeholder,
+.feedback-form__textarea::placeholder {
+  color: var(--color-brown-500);
+}
+
+.feedback-form__confirm-panel {
+  margin-top: var(--space-l);
+  padding: var(--space-m);
+  background: var(--color-success-bg);
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.feedback-form__confirm-panel p {
+  margin: 0 0 var(--space-2xs);
+  /* Lift the base p reading cap so centred content sits on the panel's
+     true centre line. */
+  max-width: none;
+  font-size: var(--step-0);
+  color: var(--color-brown-900);
+}
+
+.feedback-form__reference {
+  font-size: var(--step-2);
+  font-weight: var(--font-weight-semibold);
+}
+
+.feedback-form__resources {
+  margin-top: var(--space-xl);
+}
+
+/* Heading for the confirmation resource cards — serif display one tier
+   below the thank-you heading; clear space above, tight gap to the cards. */
+.feedback-form__resources-heading {
+  margin: var(--space-xl) 0 0;
+  font-family: var(--font-display);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--step-3);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.015em;
+  color: var(--color-brown-900);
+  text-align: center;
+}
+
+.feedback-form__resources-heading + .feedback-form__resources {
+  margin-top: var(--space-m);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-form__progress-fill,
+  .feedback-form__option,
+  .feedback-form__control,
+  .feedback-form__input,
+  .feedback-form__select,
+  .feedback-form__textarea {
+    transition: none;
+  }
+}
