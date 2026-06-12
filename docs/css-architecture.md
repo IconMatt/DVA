@@ -6,7 +6,7 @@ The stylesheet is layered. Each layer consumes only the layers below it. The dep
 theme       →  design tokens (@theme blocks — colours, type, space, radius, breakpoints, motion)
 base        →  element resets, global typography, prose wrapper
 utilities   →  layout primitives (.u-container, .u-grid), scroll-animation host
-components  →  BEM components (32 files, one per block)
+components  →  BEM components (one file per block)
 page        →  page-specific overrides (kept tiny)
 ```
 
@@ -49,7 +49,7 @@ Utilities are **not** layout shortcuts in the Tailwind sense. There is no `.mt-4
 
 ### `src/components/` — BEM components
 
-One BEM block per file. 32 files. Each file owns everything that starts with that block name. Variants live in the same file unless they grow large enough to justify splitting.
+One BEM block per file. Each file owns everything that starts with that block name. Variants live in the same file unless they grow large enough to justify splitting.
 
 Components author plain CSS against the `var(--token)` API. `@apply` is allowed but rare — most rules read like:
 
@@ -104,7 +104,7 @@ Page-specific tweaks live in `src/utilities/home-page.css` (legacy filename — 
 @import "./utilities/container.css";
 @import "./utilities/scroll-animations.css";
 
-/* Components — 32 BEM files */
+/* Components — one BEM file per block */
 @import "./components/buttons.css";
 @import "./components/site-header.css";
 /* …etc */

@@ -35,7 +35,7 @@ For single-file tweaks, small fixes, or copy changes, proceed directly.
 Keep plans brief: 3–6 bullets maximum.
 
 ## Working style
-- Reuse existing patterns before creating new ones. There are already 32 BEM components in `src/components/`. Look there first.
+- Reuse existing patterns before creating new ones. `src/components/` already holds a BEM component for most patterns. Look there first.
 - Keep templates thin and styles predictable.
 - When creating a component, document where it maps to Drupal (paragraph type → preprocess → SDC).
 - Read `LESSONS.md` before starting work and avoid repeating known mistakes.
@@ -53,7 +53,7 @@ Keep plans brief: 3–6 bullets maximum.
 - `npm run build` — one-shot, minified → `css/main.css`
 - `npm run verify` — alias for `build`
 
-The build is driven by `src/main.css`, which `@import`s the token files, base styles, utilities, and 32 component files in order. `@source "../templates"` and `@source "../index.html"` tell Tailwind where to scan for utility classes used in markup.
+The build is driven by `src/main.css`, which `@import`s the token files, base styles, utilities, and every component file in order. `@source "../templates"` and `@source "../index.html"` tell Tailwind where to scan for utility classes used in markup.
 
 ## Foundations setup (clamp-calculator prompts)
 

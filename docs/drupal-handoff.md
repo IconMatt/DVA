@@ -6,7 +6,7 @@ Ensure all front-end work can be translated cleanly into a Drupal 11+ theme usin
 The target theme is a Mercury-derived custom theme (copied from Mercury's starterkit; **not** subthemed). Tailwind v4 is the build system; BEM is the public class API; CVA is **not** used.
 
 ## Template philosophy
-- Keep HTML components modular and portable. The 32 BEM components under `src/components/` map 1:1 to SDC components in the theme.
+- Keep HTML components modular and portable. The BEM components under `src/components/` map 1:1 to SDC components in the theme.
 - Assume Drupal will output data into thin Twig templates inside SDC folders.
 - Avoid logic-heavy template assumptions. Conditional class lists are computed in preprocess, not in Twig.
 
