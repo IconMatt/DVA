@@ -349,7 +349,7 @@
                 <span class="feedback-form__phone-icon">
                   <img src="assets/images/icons/phone.svg" alt="" width="22" height="22" />
                 </span>
-                <a class="feedback-form__phone-number" href="tel:1800111222">1800 111 222</a>
+                <a class="feedback-form__phone-number" href="tel:1800789789">1800 789 789</a>
               </p>
             </div>
           </section>
@@ -965,7 +965,7 @@
               <h2 class="feedback-form__question" id="rf-review-question" tabindex="-1">Review and submit your referral</h2>
 
               <p class="feedback-form__banner">
-                Check your answers before submitting. Use Edit to change any answer.
+                Check your answers before submitting. Use Change to edit any answer.
               </p>
 
               <div class="feedback-form__summary" data-ff-summary></div>
@@ -1043,7 +1043,7 @@
           <!-- Phone footer — repeated on every step (hidden on landing,
                which carries its own, and on confirmation). -->
           <div class="feedback-form__channel-footer" data-ff-channel-footer hidden>
-            <p>Prefer to talk to someone? Call the Helpline on <a href="tel:1800111222">1800 111 222</a>.</p>
+            <p>Prefer to talk to someone? Call the Helpline on <a href="tel:1800789789">1800 789 789</a>.</p>
           </div>
         </div>
       </div>
@@ -1854,8 +1854,8 @@
                 var change = document.createElement('button');
                 change.type = 'button';
                 change.className = 'feedback-form__summary-change';
-                change.textContent = 'Edit';
-                change.setAttribute('aria-label', 'Edit ' + section.title);
+                change.textContent = 'Change';
+                change.setAttribute('aria-label', 'Change ' + section.title);
                 change.addEventListener('click', function () {
                   editReturn = true;
                   show(section.screen);

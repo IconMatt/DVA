@@ -48,20 +48,8 @@
 }
 
 /* ---------------------------------------------------------------------- */
-/* Screen header — Back (top-left) + "Step x of y" + progress bar          */
+/* Back pill + step progress (header anatomy lives in __step-header below) */
 /* ---------------------------------------------------------------------- */
-
-.feedback-form__top {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: var(--space-s);
-  margin-bottom: var(--space-l);
-}
-
-.feedback-form__top .feedback-form__back {
-  justify-self: start;
-}
 
 /* Back pill — mirrors .service-detail__back: transparent outline (from
    .button--secondary), arrow in a sized container, dark fill on hover with
@@ -93,11 +81,6 @@
   .feedback-form__back-icon img {
     transition: none;
   }
-}
-
-.feedback-form__progress {
-  grid-column: 2;
-  text-align: center;
 }
 
 .feedback-form__progress-label {
@@ -859,10 +842,10 @@ legend.feedback-form__label {
 /* ---------------------------------------------------------------------- */
 
 /* ---------------------------------------------------------------------- */
-/* Referral-flow variants — the referral form reuses this block with a     */
-/* different screen anatomy: centred step header (label + serif form title */
-/* over a rule), left-aligned questions, Back/Continue spread across the   */
-/* bottom row, and a two-column checkbox grid.                             */
+/* Shared step anatomy (feedback + referral forms): centred step header    */
+/* (label + progress bar + serif form title over a rule), left-aligned     */
+/* questions, Back/Continue spread across the bottom row, and a            */
+/* two-column checkbox grid.                                               */
 /* ---------------------------------------------------------------------- */
 
 .feedback-form__step-header {

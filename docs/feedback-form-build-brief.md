@@ -22,7 +22,7 @@ Use our existing design system components (radio groups, text inputs, selects, t
 10. **Urgent help is always reachable.** A persistent banner or footer link "Get urgent help now" (links to Open Arms 1800 011 046 and Lifeline 13 11 14) appears on the landing page and on every step, not just the confirmation.
 11. **Accessibility.** WCAG 2.2 AA. One question per screen heading (h1). Radio groups use fieldset/legend. Focus moves to the h1 on step change. All conditional reveals are announced (aria-expanded / aria-live as appropriate). Form works fully with keyboard only.
 12. **Free-text limits.** All textareas have a 2,500-character limit with a live character counter that appears once 75% is consumed.
-13. **Phone alternative.** The landing page offers the phone channel (1800 011 222) as an equal alternative to the form, and the footer of every step repeats it.
+13. **Phone alternative.** The landing page offers the phone channel (1800 789 789) as an equal alternative to the form, and the footer of every step repeats it.
 14. **Naming.** Every screen header reads "Feedback form". (The previous build mislabelled the review screen "Referral form" — do not reproduce this.)
 
 ---
@@ -59,7 +59,7 @@ No step indicator.
 
 **Primary action:** Button — "Start feedback form".
 
-**Secondary channel:** Divider with "or", then: "Prefer to talk to someone? Call us on **1800 011 222**" (tel: link).
+**Secondary channel:** Divider with "or", then: "Prefer to talk to someone? Call us on **1800 789 789**" (tel: link).
 
 **Urgent help banner:** "If you or someone you know needs urgent support, call Open Arms on 1800 011 046 or Lifeline on 13 11 14." (links)
 
@@ -165,7 +165,7 @@ No step indicator.
 
 1. `first_name` — text input, label "First name", required. Validation: "Enter your first name."
 2. `surname` — text input, label "Surname", required. Validation: "Enter your surname."
-3. `contact_method` — radio group (or segmented control), label "How should we contact you?", required: Email / Phone / Post. Validation: "Select how we should contact you." Exactly one of the following three fields renders, matching the selection:
+3. `contact_method` — checkbox group (multi-select), label "How should we contact you?", hint "Select all that apply.", required (at least one): Email / Phone / Post. Validation: "Select how we should contact you." One of the following detail blocks renders per selected method:
    - Email → `email` — email input, label "Email address", required. Hint: "We'll only use this to respond to your feedback." Validation: format check.
    - Phone → `phone` — tel input, label "Phone number", required. Hint: "We may call from a private or blocked number." Validation: AU phone format, accept landline and mobile.
    - Post → `postal_address` — address fields per design system (address lines, suburb, state select, postcode), required. Hint: "Written responses can take 2–3 weeks to arrive."
@@ -188,7 +188,7 @@ No step indicator.
 2. On behalf of a client? (complaints only — include the person's details and consent confirmation if applicable)
 3. Raised elsewhere? (complaints only — include who and when if applicable)
 4. Your feedback (all four fields; truncate long text to ~6 lines with "Show more")
-5. Response preference — if anonymous, show "Anonymous — no response will be sent". If contact details given, show name, method, and the relevant detail only (never show fields for unselected methods).
+5. Response preference — if anonymous, show "Anonymous — no response will be sent". If contact details given, show name, the selected methods, and the relevant detail per selected method only (never show fields for unselected methods).
 
 Skipped/hidden questions never appear. Optional questions left blank show "Not provided".
 
@@ -225,7 +225,7 @@ No step indicator. Draft state is cleared on successful submission.
   feedback: { detail, outcome_sought?, ill_treatment, provider_details? },
   response: {
     wants_response,
-    contact?: { first_name, surname, method, email? | phone? | postal_address?, dva_file_number? },
+    contact?: { first_name, surname, methods[], email?, phone?, postal_address?, dva_file_number? },
     response_recipient?,            // on-behalf complaints only
     recipient_contact?              // if response_recipient = client
   },
