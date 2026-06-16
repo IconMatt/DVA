@@ -166,20 +166,6 @@
   }
 }
 
-/* Decorative status dot — small red circle in the top-right of the portrait. */
-.testimonial__portrait::after {
-  content: "";
-  position: absolute;
-  top: var(--space-s);
-  right: var(--space-s);
-  width: 0.875rem;
-  height: 0.875rem;
-  border-radius: 50%;
-  background: var(--color-error);
-  z-index: 2;
-  pointer-events: none;
-}
-
 .testimonial__portrait-image {
   --testimonial-image-parallax-offset: 0px;
 
