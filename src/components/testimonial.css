@@ -160,7 +160,12 @@
 
   @media (min-width: 840px) {
     grid-column: 2;
-    grid-row: 1 / span 2;
+    /* Sit in the flexible row only — NOT spanning into the controls row.
+       A fixed aspect-ratio element spanning the quote-sized row makes the
+       row 1/2 boundary track the quote height, so a shorter quote shifted
+       the portrait and controls upward. Pinned to row 1 (bottom-aligned)
+       it holds position regardless of quote length. */
+    grid-row: 1;
     align-self: end;
     width: 100%;
   }

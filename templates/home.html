@@ -1814,6 +1814,49 @@
             showTestimonial(activeTestimonialIndex + 1);
           });
 
+          // Lock the band to the tallest slide so paging never changes its
+          // height. Measure each quote at its natural height (the CSS
+          // min-height clamp stays the floor), take the max, and pin it as an
+          // inline min-height. Recompute after fonts load and on resize, since
+          // wrapping — and the fluid quote font-size — shift which slide is
+          // tallest per viewport. textContent is restored synchronously, so no
+          // intermediate slide ever paints.
+          var lockTestimonialHeight = function () {
+            if (testimonialIsChanging) {
+              return;
+            }
+
+            var activeQuote = testimonials[activeTestimonialIndex].quote;
+            testimonialCarousel.style.minHeight = '';
+
+            var tallest = 0;
+            for (var i = 0; i < testimonials.length; i++) {
+              testimonialText.textContent = testimonials[i].quote;
+              var slideHeight = testimonialCarousel.offsetHeight;
+              if (slideHeight > tallest) {
+                tallest = slideHeight;
+              }
+            }
+
+            testimonialText.textContent = activeQuote;
+
+            if (tallest > 0) {
+              testimonialCarousel.style.minHeight = tallest + 'px';
+            }
+          };
+
+          lockTestimonialHeight();
+
+          if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(lockTestimonialHeight);
+          }
+
+          var testimonialResizeTimer;
+          window.addEventListener('resize', function () {
+            window.clearTimeout(testimonialResizeTimer);
+            testimonialResizeTimer = window.setTimeout(lockTestimonialHeight, 150);
+          });
+
           setTestimonialControls();
         }
 
