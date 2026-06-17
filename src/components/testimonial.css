@@ -59,6 +59,14 @@
   padding-block: var(--space-xl) calc((var(--container-padding) - 0.75rem) * 1.5);
   gap: var(--space-xl);
   grid-template-columns: 1fr;
+  /* Single-column (<840) row model mirrors the ≥840 fix below: quote pinned to
+     the top row, a flexible 1fr track absorbs the slack left by a shorter quote,
+     and the portrait + controls stay anchored to the bottom of the fixed
+     min-height card. Without these rows the portrait sits in normal flow right
+     below the quote and rides upward when a shorter quote loads — a visible
+     slide-to-slide jump. (Holds only while the tallest quote fits inside
+     min-height; if a quote overflows it, raise min-height to match.) */
+  grid-template-rows: auto 1fr auto;
 
   @media (min-width: 840px) {
     padding-block: var(--space-2xl) calc(var(--container-padding) - 0.9rem);
@@ -155,6 +163,10 @@
   margin: 0;
   overflow: hidden;
   justify-self: end;
+  /* Bottom-anchored in the single-column row model (see .testimonial__inner).
+     The ≥840 query below re-pins it to row 1 of the two-column grid. */
+  grid-row: 2;
+  align-self: end;
   background: var(--color-slate-500);
   border-radius: var(--radius-xl);
 

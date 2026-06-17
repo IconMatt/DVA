@@ -24,6 +24,12 @@ Use our existing design system components (radio groups, text inputs, selects, t
 12. **Free-text limits.** All textareas have a 2,500-character limit with a live character counter that appears once 75% is consumed.
 13. **Phone alternative.** The landing page offers the phone channel (1800 789 789) as an equal alternative to the form, and the footer of every step repeats it.
 14. **Naming.** Every screen header reads "Feedback form". (The previous build mislabelled the review screen "Referral form" — do not reproduce this.)
+15. **Spam protection (anti-automation).** The form carries layered, server-validated anti-automation:
+    - **Honeypot / timing trap — always on, zero friction.** An off-screen decoy field plus a minimum submit-time check that silently reject bots. Invisible to real users and assistive tech (`aria-hidden`, `tabindex="-1"`, `autocomplete="off"`).
+    - **Accessible CAPTCHA on the final submit — defence-in-depth.** Must meet WCAG 2.2 AA: no image-only or audio-only-fallback challenge. Prefer an invisible/score-based or checkbox challenge with a working non-visual path. Renders on Review and submit, above the Submit button, and must not break keyboard focus order (rule 11).
+    - **Server-side is authoritative.** The client never decides whether a submission is human; a failed challenge returns the user to Review with all answers preserved (rule 7 error pattern) and a clear, non-leaky message.
+    - **Compensating controls.** WAF and rate limiting are expected at the infrastructure layer; the CAPTCHA is additional, not a substitute. Implementation/configuration is Drupal-side (CAPTCHA / Honeypot / Antibot on the Webform); this brief requires only that the protection exists and is accessible. If the security owner accepts the risk on WAF + rate limiting alone, record that decision here.
+    *(Addresses a pen-test Low-severity finding: no anti-automation on the feedback form.)*
 
 ---
 
@@ -193,6 +199,8 @@ No step indicator.
 Skipped/hidden questions never appear. Optional questions left blank show "Not provided".
 
 **Declaration (above submit):** checkbox, required: "The information I have provided is true to the best of my knowledge." Validation: "Confirm your information is true to the best of your knowledge."
+
+**Spam protection:** A Honeypot/timing trap runs invisibly throughout the flow; the accessible CAPTCHA/challenge (global rule 15) renders here, above the Submit button, without disrupting keyboard focus order.
 
 **Buttons:** Back / "Submit feedback" (primary). On submit: disable button, show loading state, handle API failure with a retryable error banner that preserves all data.
 

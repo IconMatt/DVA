@@ -1,6 +1,11 @@
-/* Hamburger — hidden once desktop nav is visible. */
+/* Hamburger — hidden once the desktop nav is visible.
+   Swap point is 1240px, NOT the lg breakpoint (1120px). With the full primary
+   nav present, the header row (brand + nav + utility pills) stops fitting on one
+   line below ~1220px and the pills wrap to a second row. Switching to the mobile
+   menu at 1240px keeps the swap aligned to the moment the row would overflow.
+   All three swap rules (here + the two in site-header.css) must share this value. */
 .site-header__pill--menu {
-  @media (min-width: 1120px) {
+  @media (min-width: 1240px) {
     display: none;
   }
 }
