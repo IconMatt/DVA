@@ -306,13 +306,13 @@
         Feedback form — multi-step flow per docs/feedback-form-build-brief.md.
         Compliments/suggestions = 4 steps, complaints = 6 steps. One screen
         visible at a time; the flow script (second <script> block below)
-        owns branching, validation, draft persistence, and the review build.
+        owns branching, validation, and the review build.
 
         Drupal handoff — Webform module ("feedback" webform) at
         /contact/feedback. Each [data-ff-screen] step maps to a webform
         page (wizard); conditional reveals map to webform #states. The
-        client-side flow script is prototype-only — Drupal Webform's wizard,
-        validation, and draft saving replace it wholesale. Field machine
+        client-side flow script is prototype-only — Drupal Webform's wizard
+        and validation replace it wholesale. Field machine
         names below match the brief's data model (feedback_type,
         on_behalf.*, raised_elsewhere.*, feedback.*, response.*).
         Step h2s would become per-page h1s in Drupal (one question per
@@ -333,18 +333,9 @@
               </h2>
               <p class="feedback-form__intro" data-animate>
                 Whether it's a compliment, suggestion, or complaint, we want to
-                hear from you. The form takes about 5&ndash;10 minutes. You can
-                save your progress and come back later, and you can choose to
-                stay anonymous.
+                hear from you. The form takes about 5&ndash;10 minutes, and you
+                can choose to stay anonymous.
               </p>
-
-              <div class="feedback-form__banner" data-ff-resume hidden>
-                <p>You have a saved draft. Would you like to pick up where you left off?</p>
-                <div class="feedback-form__actions">
-                  <button class="button button--primary" type="button" data-ff-resume-yes>Resume draft</button>
-                  <button class="button button--secondary feedback-form__back" type="button" data-ff-resume-no>Start again</button>
-                </div>
-              </div>
 
               <div class="feedback-form__actions" data-animate>
                 <button class="quick-link feedback-form__start" type="button" data-ff-start>
@@ -1442,15 +1433,13 @@
       })();
     </script>
 
-    <!-- Feedback form flow — branching, validation, draft persistence,
-         review build. Prototype-only: Drupal Webform's wizard replaces this. -->
+    <!-- Feedback form flow — branching, validation, review build.
+         Prototype-only: Drupal Webform's wizard replaces this. -->
     <script>
       (function () {
         var root = document.querySelector('[data-ff]');
         if (!root) return;
 
-        var DRAFT_KEY = 'vfwa-feedback-draft-v1';
-        var DRAFT_MAX_AGE = 14 * 24 * 60 * 60 * 1000; // 14 days
         var CHAR_LIMIT_RATIO = 0.75;
 
         var state = {};
@@ -1498,69 +1487,6 @@
             }
           });
         }
-
-        function applyState(data) {
-          root.querySelectorAll('input, select, textarea').forEach(function (el) {
-            if (!el.name || !(el.name in data)) return;
-            var v = data[el.name];
-            if (el.type === 'radio') {
-              el.checked = el.value === v;
-            } else if (el.type === 'checkbox') {
-              if (CHECKBOX_GROUPS.indexOf(el.name) !== -1) {
-                el.checked = Array.isArray(v) && v.indexOf(el.value) !== -1;
-              } else {
-                el.checked = !!v;
-              }
-            } else {
-              el.value = v == null ? '' : v;
-            }
-          });
-          collectState();
-          syncReveals();
-        }
-
-        // ------------------------------------------------------------------
-        // Draft persistence
-        // ------------------------------------------------------------------
-        function saveDraft() {
-          collectState();
-          try {
-            localStorage.setItem(DRAFT_KEY, JSON.stringify({
-              data: state,
-              screen: currentScreen === 'confirmation' ? 'landing' : currentScreen,
-              savedAt: Date.now()
-            }));
-          } catch (e) { /* private mode — drafts simply don't persist */ }
-        }
-
-        function readDraft() {
-          try {
-            var raw = localStorage.getItem(DRAFT_KEY);
-            if (!raw) return null;
-            var draft = JSON.parse(raw);
-            if (!draft || !draft.data || Date.now() - draft.savedAt > DRAFT_MAX_AGE) {
-              localStorage.removeItem(DRAFT_KEY);
-              return null;
-            }
-            var hasContent = Object.keys(draft.data).some(function (k) {
-              var v = draft.data[k];
-              return Array.isArray(v) ? v.length : v !== '' && v !== false && v != null;
-            });
-            return hasContent ? draft : null;
-          } catch (e) {
-            return null;
-          }
-        }
-
-        function clearDraft() {
-          try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* noop */ }
-        }
-
-        var draftTimer = null;
-        root.addEventListener('input', function () {
-          window.clearTimeout(draftTimer);
-          draftTimer = window.setTimeout(saveDraft, 400);
-        });
 
         // ------------------------------------------------------------------
         // Screen switching
@@ -2056,7 +1982,6 @@
               showErrors(screenEl, errors);
               return;
             }
-            saveDraft();
 
             var steps = path();
             if (editReturn) {
@@ -2144,7 +2069,6 @@
                 contactLine.textContent = "We've sent a confirmation to " + destination + '. We aim to respond within 28 days.';
               }
 
-              clearDraft();
               submitBtn.disabled = false;
               submitBtn.textContent = 'Submit feedback';
               show('confirmation');
@@ -2152,24 +2076,6 @@
           });
         }
 
-        // ------------------------------------------------------------------
-        // Resume prompt
-        // ------------------------------------------------------------------
-        var draft = readDraft();
-        var resumeBanner = root.querySelector('[data-ff-resume]');
-        if (draft && resumeBanner) {
-          resumeBanner.hidden = false;
-          resumeBanner.querySelector('[data-ff-resume-yes]').addEventListener('click', function () {
-            applyState(draft.data);
-            var target = draft.screen && screens[draft.screen] && draft.screen !== 'landing' ? draft.screen : 'type';
-            if (path().indexOf(target) === -1) target = 'type';
-            show(target);
-          });
-          resumeBanner.querySelector('[data-ff-resume-no]').addEventListener('click', function () {
-            clearDraft();
-            resumeBanner.hidden = true;
-          });
-        }
       })();
     </script>
   </body>

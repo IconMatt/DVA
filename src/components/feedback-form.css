@@ -521,27 +521,6 @@ legend.feedback-form__label {
   background: var(--color-wattle);
 }
 
-/* Resume-draft prompt — centred, slightly heavier text, and a tighter gap
-   to its buttons than the default banner/actions rhythm. Stays a stacked
-   block (it holds text + buttons) with no leading icon. */
-.feedback-form__banner[data-ff-resume] {
-  display: block;
-  text-align: center;
-}
-
-.feedback-form__banner[data-ff-resume]::before {
-  content: none;
-}
-
-.feedback-form__banner[data-ff-resume] p {
-  margin: 0;
-  font-weight: var(--font-weight-medium);
-}
-
-.feedback-form__banner[data-ff-resume] .feedback-form__actions {
-  margin-top: var(--space-s);
-}
-
 /* Error summary — anchors focus to each invalid field. */
 .feedback-form__error-summary {
   margin-bottom: var(--space-l);

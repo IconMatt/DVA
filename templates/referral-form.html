@@ -295,7 +295,7 @@
         static "of 7"; totals here re-number per branch, matching the
         feedback form's behaviour). One screen visible at a time; the
         flow script (second <script> block below) owns branching,
-        validation, draft persistence, and the review build.
+        validation, and the review build.
 
         Drupal handoff — Webform module ("referral" webform) at
         /about/referral. Each [data-ff-screen] step maps to a webform
@@ -322,14 +322,6 @@
               <p class="feedback-form__intro" data-animate>
                 Ask a staff member to contact you by filling in the form below.
               </p>
-
-              <div class="feedback-form__banner" data-ff-resume hidden>
-                <p>You have a saved draft. Would you like to pick up where you left off?</p>
-                <div class="feedback-form__actions">
-                  <button class="button button--primary" type="button" data-ff-resume-yes>Resume draft</button>
-                  <button class="button button--secondary feedback-form__back" type="button" data-ff-resume-no>Start again</button>
-                </div>
-              </div>
 
               <div class="feedback-form__actions" data-animate>
                 <button class="quick-link feedback-form__start" type="button" data-ff-start>
@@ -1412,15 +1404,13 @@
       })();
     </script>
 
-    <!-- Referral form flow — branching, validation, draft persistence,
-         review build. Prototype-only: Drupal Webform's wizard replaces this. -->
+    <!-- Referral form flow — branching, validation, review build.
+         Prototype-only: Drupal Webform's wizard replaces this. -->
     <script>
       (function () {
         var root = document.querySelector('[data-ff]');
         if (!root) return;
 
-        var DRAFT_KEY = 'vfwa-referral-draft-v1';
-        var DRAFT_MAX_AGE = 14 * 24 * 60 * 60 * 1000; // 14 days
         var CHAR_LIMIT_RATIO = 0.75;
 
         var state = {};
@@ -1466,69 +1456,6 @@
             }
           });
         }
-
-        function applyState(data) {
-          root.querySelectorAll('input, select, textarea').forEach(function (el) {
-            if (!el.name || !(el.name in data)) return;
-            var v = data[el.name];
-            if (el.type === 'radio') {
-              el.checked = el.value === v;
-            } else if (el.type === 'checkbox') {
-              if (el.name === 'wellbeing_areas') {
-                el.checked = Array.isArray(v) && v.indexOf(el.value) !== -1;
-              } else {
-                el.checked = !!v;
-              }
-            } else {
-              el.value = v == null ? '' : v;
-            }
-          });
-          collectState();
-          syncReveals();
-        }
-
-        // ------------------------------------------------------------------
-        // Draft persistence
-        // ------------------------------------------------------------------
-        function saveDraft() {
-          collectState();
-          try {
-            localStorage.setItem(DRAFT_KEY, JSON.stringify({
-              data: state,
-              screen: currentScreen === 'confirmation' ? 'landing' : currentScreen,
-              savedAt: Date.now()
-            }));
-          } catch (e) { /* private mode — drafts simply don't persist */ }
-        }
-
-        function readDraft() {
-          try {
-            var raw = localStorage.getItem(DRAFT_KEY);
-            if (!raw) return null;
-            var draft = JSON.parse(raw);
-            if (!draft || !draft.data || Date.now() - draft.savedAt > DRAFT_MAX_AGE) {
-              localStorage.removeItem(DRAFT_KEY);
-              return null;
-            }
-            var hasContent = Object.keys(draft.data).some(function (k) {
-              var v = draft.data[k];
-              return Array.isArray(v) ? v.length : v !== '' && v !== false && v != null;
-            });
-            return hasContent ? draft : null;
-          } catch (e) {
-            return null;
-          }
-        }
-
-        function clearDraft() {
-          try { localStorage.removeItem(DRAFT_KEY); } catch (e) { /* noop */ }
-        }
-
-        var draftTimer = null;
-        root.addEventListener('input', function () {
-          window.clearTimeout(draftTimer);
-          draftTimer = window.setTimeout(saveDraft, 400);
-        });
 
         // ------------------------------------------------------------------
         // Screen switching
@@ -1909,8 +1836,6 @@
               return;
             }
 
-            saveDraft();
-
             var steps = path();
             if (editReturn) {
               // Re-route check: switching to the on-behalf path via Review
@@ -1979,7 +1904,6 @@
             submitBtn.textContent = 'Submitting…';
 
             window.setTimeout(function () {
-              clearDraft();
               submitBtn.disabled = false;
               submitBtn.textContent = 'Submit referral';
               show('confirmation');
@@ -1987,24 +1911,6 @@
           });
         }
 
-        // ------------------------------------------------------------------
-        // Resume prompt
-        // ------------------------------------------------------------------
-        var draft = readDraft();
-        var resumeBanner = root.querySelector('[data-ff-resume]');
-        if (draft && resumeBanner) {
-          resumeBanner.hidden = false;
-          resumeBanner.querySelector('[data-ff-resume-yes]').addEventListener('click', function () {
-            applyState(draft.data);
-            var target = draft.screen && screens[draft.screen] && draft.screen !== 'landing' ? draft.screen : 'urgent';
-            if (path().indexOf(target) === -1) target = 'urgent';
-            show(target);
-          });
-          resumeBanner.querySelector('[data-ff-resume-no]').addEventListener('click', function () {
-            clearDraft();
-            resumeBanner.hidden = true;
-          });
-        }
       })();
     </script>
   </body>

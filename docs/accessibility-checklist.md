@@ -40,7 +40,7 @@ The project targets WCAG 2.2 AA. Criteria new in 2.2 that automated tools largel
 - Target size minimum (2.5.8): interactive targets ≥ 24×24 px — check pills, filter chips, carousel controls.
 - Consistent help (3.2.6): the urgent-help banner/link sits in the same place on every screen of a flow.
 - Focus not obscured (2.4.11): the sticky header must not cover the focused element when tabbing.
-- Redundant entry (3.3.7): multi-step forms re-use previously entered data (draft persistence covers this).
+- Redundant entry (3.3.7): multi-step forms re-use previously entered data (in-session state re-uses answers across Back/Continue — no client-side draft storage).
 - 4.1.1 Parsing was removed in 2.2 — disregard legacy audit findings about parsing errors.
 
 ## Testing

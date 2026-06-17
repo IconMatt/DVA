@@ -14,7 +14,7 @@ Use our existing design system components (radio groups, text inputs, selects, t
 2. **Identity is asked last, not first.** No personal details are requested until the Response preference step (the second-to-last step). Date of birth is never collected. DVA file number is optional and only shown on the Response preference step.
 3. **Anonymity and response preference are one question.** A single "Would you like a response to your feedback?" question replaces the old separate "Do you wish to remain anonymous?" and "How would you like us to respond?" steps. Anonymous users are never asked for contact details or response method anywhere in the flow.
 4. **Conditional reveal, not separate screens.** Selecting an option that needs more detail expands fields inline on the same screen (accordion/progressive disclosure), exactly one level deep. Collapsing a section clears its values after a confirm if any field was filled.
-5. **State persistence.** All answers persist in client state across Back/Continue. Provide save-and-resume: persist draft to localStorage (or session API if available) and offer "Resume your draft?" on return. Drafts expire after 14 days.
+5. **In-session state only — no client-side storage.** All answers persist in memory across Back/Continue within the open session. Do **not** write to localStorage/sessionStorage and do **not** offer save-and-resume — closing the tab discards progress. (Removed deliberately: the form can hold sensitive complaint data, which must not be persisted in the browser. Server-side draft storage behind authentication would be a separate, scoped decision.)
 6. **Back behaviour.** Every step except the landing page has a Back button (top-left of the button row). Back never loses data. When a user reaches a step via an Edit link from the Review screen, the Continue button reads "Save and return to review" and returns them directly to Review.
 7. **Validation.** Validate on Continue, not on blur. Show inline errors below the field plus an error summary at the top of the step that links (anchor + focus) to each invalid field. Error messages state what to do, e.g. "Enter your email address in the format name@example.com".
 8. **Required/optional convention.** Most fields are required, so mark only optional fields with "(optional)" after the label. Do not use asterisks.
@@ -61,7 +61,7 @@ No step indicator.
 
 **Heading:** Your feedback helps us improve our services for veterans, serving members, and their families.
 
-**Body copy:** Whether it's a compliment, suggestion, or complaint, we want to hear from you. The form takes about 5–10 minutes. You can save your progress and come back later, and you can choose to stay anonymous.
+**Body copy:** Whether it's a compliment, suggestion, or complaint, we want to hear from you. The form takes about 5–10 minutes, and you can choose to stay anonymous.
 
 **Primary action:** Button — "Start feedback form".
 
@@ -208,7 +208,7 @@ Skipped/hidden questions never appear. Optional questions left blank show "Not p
 
 ## Screen 7 — Confirmation
 
-No step indicator. Draft state is cleared on successful submission.
+No step indicator.
 
 **Heading (h1):** Thank you for reaching out to the Veteran and Family Wellbeing Agency
 
@@ -238,7 +238,7 @@ No step indicator. Draft state is cleared on successful submission.
     recipient_contact?              // if response_recipient = client
   },
   declaration_confirmed: true,
-  submitted_at, draft_started_at
+  submitted_at
 }
 ```
 
