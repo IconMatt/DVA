@@ -154,6 +154,24 @@
   background: var(--color-slate-700);
 }
 
+/* External-link badge — Sky fill at rest, → White on card hover/focus.
+   Pairs with the footer "Go to external resource" affordance and the
+   off-site icon (same Sky → White treatment) to flag results that leave
+   the site. */
+.card--resource .card__badge--external {
+  background: var(--color-sky);
+  transition: background-color var(--transition-base);
+}
+
+.card--resource:hover .card__badge--external,
+.card--resource:focus-within .card__badge--external {
+  background: var(--color-white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card--resource .card__badge--external { transition: none; }
+}
+
 .card--resource .card__badge-icon {
   width: 1rem;
   height: 1rem;
@@ -411,6 +429,27 @@
 
 .card--resource.card--external .card__arrow-icon {
   transform: none;
+}
+
+/* Search results are a full-width single-column list, not the 3-up browse
+   grid — so the default text-left / icon-right split leaves the off-site
+   icon floating far from its "Go to external resource" label. Group the icon
+   with the label on the left instead. Page-scoped: the browse-page cards
+   (narrow grid, icon sits close to the label) keep the standard split. */
+.page--search-results .card--resource.card--external .card__meta {
+  justify-content: flex-start;
+}
+
+.page--search-results .card--resource.card--external .card__arrow {
+  order: -1;
+  /* Match the External-link badge: Sky at rest, White on card hover/focus
+     (overrides the default Sand-stone → Zest). */
+  background: var(--color-sky);
+}
+
+.page--search-results .card--resource.card--external:hover .card__arrow,
+.page--search-results .card--resource.card--external:focus-within .card__arrow {
+  background: var(--color-white);
 }
 
 /* ----- News card (with media) ----- */
