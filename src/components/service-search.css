@@ -408,6 +408,29 @@ main > .service-search-band:first-child {
   }
 }
 
+/* Home "Veteran and Family Hubs" two-panel band: when the grid stacks on */
+/* narrow screens, show the photo first (on top) with the text card below. */
+/* Desktop keeps the side-by-side text-left / image-right order (reset to 0). */
+/* Scoped to .two-panel-section so the about-landing / resource-collection */
+/* panels (which share .service-search-collection) keep their text-first stack. */
+.two-panel-section .service-search__media {
+  order: -1;
+}
+
+@media (min-width: 840px) {
+  .two-panel-section .service-search__media {
+    order: 0;
+  }
+}
+
+/* The title is the first child of this panel (no breadcrumb/eyebrow above it, */
+/* unlike the resource-collection / about-landing panels that share the */
+/* .page--resource-collection title margin). Zero its top margin so the */
+/* symmetric .service-search__inner padding reads balanced top-to-bottom. */
+.two-panel-section .service-search__title {
+  margin-block-start: 0;
+}
+
 /* Article actions row — back link on the left, save pill on the right. */
 /* Lives outside the cream banner card, sits between banner and content. */
 /* Overrides the service-detail-context margin on .service-detail__back — */

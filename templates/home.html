@@ -72,6 +72,7 @@
           <ul class="site-nav__list">
             <li class="site-nav__item"><a class="site-nav__link" href="#">Find a service</a></li>
             <li class="site-nav__item"><a class="site-nav__link" href="#">Wellbeing resources</a></li>
+            <li class="site-nav__item"><a class="site-nav__link" href="#">Find a hub</a></li>
             <li class="site-nav__item"><a class="site-nav__link" href="#">About</a></li>
             <li class="site-nav__item"><a class="site-nav__link" href="#">News</a></li>
             <li class="site-nav__item"><a class="site-nav__link" href="#">Contact</a></li>
@@ -255,10 +256,26 @@
               </a>
             </li>
             <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                Find a hub
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
               <a class="mobile-nav__link" href="about-landing.html">
                 About
                 <span class="mobile-nav__link-icon" aria-hidden="true">
                   <img src="assets/images/icons/info.svg" alt="" width="22" height="22" />
+                </span>
+              </a>
+            </li>
+            <li class="mobile-nav__item">
+              <a class="mobile-nav__link" href="#">
+                News
+                <span class="mobile-nav__link-icon" aria-hidden="true">
+                  <img src="assets/images/icons/Property 1=Folder.svg" alt="" width="22" height="22" />
                 </span>
               </a>
             </li>
@@ -348,10 +365,10 @@
                 </a>
               </li>
               <li class="quick-links__item" data-animate>
-                <a class="quick-link quick-link--glass" href="tel:1800789789">
-                  <span class="quick-link__title">1800 789 789</span>
+                <a class="quick-link quick-link--glass" href="tel:1800823922">
+                  <span class="quick-link__title">1800 823 922</span>
                   <span class="quick-link__text">
-                    Available 8am&ndash;5pm (local time zones) Monday&ndash;Friday Australia-wide
+                    Available 8:30 am &ndash; 5:00 pm, Monday to Friday (local time, Australia-wide)
                   </span>
                   <span class="quick-link__arrow" aria-hidden="true">
                     <img src="assets/images/icons/phone.svg" alt="" width="20" height="20" />
@@ -490,7 +507,7 @@
               data-parallax-speed="0.03"
               data-parallax-limit="8"
             ></span>
-            veterans and families find supports, understand
+            veterans and families to find supports, understand
             <span
               class="mission-statement__inline-media"
               aria-hidden="true"
@@ -539,16 +556,15 @@
         <div class="feature-promo__inner container">
           <div class="feature-promo__body" data-animate>
             <span class="feature-promo__icon" aria-hidden="true">
-              <img src="assets/images/icons/icon-logo.svg" alt="" width="24" height="24" />
+              <img src="assets/images/icon-domains/health.svg" alt="" width="24" height="24" />
             </span>
-            <p class="feature-promo__eyebrow">Transitioning from the ADF</p>
+            <p class="feature-promo__eyebrow">Wellbeing resource collection</p>
             <h2 class="feature-promo__title" id="feature-promo-title">
-              Wellbeing resources for navigating life after the ADF
+              I am a family member
             </h2>
             <p class="feature-promo__text">
-              Find practical information and trusted resources to help with life
-              after service. Explore support for health, housing, work, finances,
-              family life and staying connected as you navigate change.
+              Find practical information and trusted resources in this wellbeing
+              collection.
             </p>
             <p class="feature-promo__actions">
               <!-- Primary CTA (brown-900 fill + white text = same colours as the
@@ -556,7 +572,7 @@
                    inverted to white via brightness-0 invert since the SVG has a
                    hard-coded brown fill. -->
               <a class="button button--primary" href="#">
-                22 Wellbeing resources
+                78 Wellbeing resources
                 <img class="brightness-0 invert" src="assets/images/icons/right-arrow.svg" alt="" width="18" height="18" aria-hidden="true" />
               </a>
             </p>
@@ -564,8 +580,8 @@
           <div class="feature-promo__media" aria-hidden="true" data-animate>
             <img
               class="feature-promo__media-img"
-              src="assets/images/man-and-child-on-shoulders.png"
-              srcset="assets/images/man-and-child-on-shoulders.png 935w"
+              src="assets/images/DVA6380.jpg"
+              srcset="assets/images/DVA6380.jpg 1681w"
               sizes="(min-width: 840px) calc(50vw - 4vw - 0.75rem), calc(100vw - 3rem)"
               alt=""
               data-parallax
@@ -605,7 +621,7 @@
               <a class="resource-listing__link" href="#">More resources</a>
               <div class="resource-listing__controls" role="group" aria-label="Latest resources navigation">
                 <p class="resource-listing__page" aria-live="polite" data-resource-carousel-status>
-                  1-3 of 8
+                  1-3 of 3
                 </p>
                 <button
                   class="resource-listing__control resource-listing__control--previous"
@@ -691,12 +707,13 @@
                         />
                         Pinned
                       </span>
-                      <span class="card__badge">Brochure</span>
+                      <span class="card__badge">Factsheet</span>
                     </div>
                     <button
                       class="card__save"
                       type="button"
-                      aria-label="Save resource: Building your support network after transition"
+                      aria-pressed="false"
+                      aria-label="Save resource: Experiencing difficulty with drugs and alcohol"
                     >
                       <img
                         class="card__save-icon"
@@ -711,17 +728,20 @@
                   <div class="card__content">
                     <h3 class="card__title">
                       <a class="card__title-link" href="#">
-                        Building your support network after transition
+                        Experiencing difficulty with drugs and alcohol
                       </a>
                     </h3>
                     <div class="card__copy">
                       <p class="card__excerpt">
-                        How to maintain connections and build new relationships after
-                        leaving the Defence Force.
+                        Alcohol and other drug use can affect health, relationships
+                        and daily life, but support is available for veterans, families
+                        and carers. With the right help, recovery is possible, and
+                        people can improve wellbeing, rebuild connections and find a
+                        way forward.
                       </p>
                       <ul class="tag-list">
-                        <li class="tag-list__item"><span class="tag">Transitioning</span></li>
-                        <li class="tag-list__item"><span class="tag">Veterans</span></li>
+                        <li class="tag-list__item"><span class="tag">Safety and Security</span></li>
+                        <li class="tag-list__item"><span class="tag">Health and Wellbeing</span></li>
                       </ul>
                     </div>
                     <figure class="card__media" aria-hidden="true">
@@ -732,15 +752,15 @@
                         data-parallax-buffer-ratio="0.08"
                         data-parallax-speed="0.02"
                         data-parallax-limit="6"
-                        src="assets/images/site/Support image 5.png"
-                        srcset="assets/images/site/Support image 5.png 2000w"
+                        src="assets/images/DVA1201.jpg"
+                        srcset="assets/images/DVA1201.jpg 243w"
                         sizes="(min-width: 1120px) 6.75rem, (min-width: 840px) 7rem, 28vw"
                         alt=""
                       />
                     </figure>
                   </div>
                   <footer class="card__meta">
-                    <p class="card__date">Updated 10 Mar 2026</p>
+                    <p class="card__date">Published 2 Jun 2026</p>
                     <span class="card__arrow" aria-hidden="true">
                       <img
                         class="card__arrow-icon"
@@ -754,402 +774,184 @@
                 </article>
               </li>
 
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Article</span>
+              <li class="card-grid__item" data-animate data-resource-carousel-item>
+                <article class="card card--resource card--external">
+                  <header class="card__header">
+                    <div class="card__badges">
+                      <span class="card__badge">External link</span>
+                    </div>
+                    <button
+                      class="card__save"
+                      type="button"
+                      aria-pressed="false"
+                      aria-label="Save resource: Fishing Licence Discount"
+                    >
+                      <img
+                        class="card__save-icon"
+                        src="assets/images/icons/Star.svg"
+                        alt=""
+                        width="22"
+                        height="22"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </header>
+                  <div class="card__content">
+                    <h3 class="card__title">
+                      <a
+                        class="card__title-link"
+                        href="https://www.ifs.tas.gov.au/the-rules/angling-licence"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="Fishing Licence Discount (opens in a new tab)"
+                      >
+                        Fishing Licence Discount
+                      </a>
+                    </h3>
+                    <div class="card__copy">
+                      <p class="card__excerpt">
+                        A Recreational Fishing Licence (RFL) covers all forms of
+                        recreational fishing in all of Tasmania&rsquo;s marine,
+                        estuarine and inland waters.
+                      </p>
+                      <ul class="tag-list">
+                        <li class="tag-list__item"><span class="tag">Financial Wellbeing</span></li>
+                        <li class="tag-list__item"><span class="tag">Health and Wellbeing</span></li>
+                      </ul>
+                    </div>
                   </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Medicare for veterans">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Medicare for veterans</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      Guidance on setting up Medicare and understanding its benefits
-                      for you and your family.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Veterans</span></li>
-                      <li class="tag-list__item"><span class="tag">Health</span></li>
-                    </ul>
-                  </div>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
+                  <footer class="card__meta">
+                    <p class="card__external-link">Go to external resource</p>
+                    <span class="card__arrow" aria-hidden="true">
+                      <img
+                        class="card__arrow-icon"
+                        src="assets/images/icons/Property 1=External link.svg"
+                        alt=""
+                        width="22"
+                        height="22"
+                      />
+                    </span>
+                  </footer>
+                </article>
+              </li>
 
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource card--with-media">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Factsheet</span>
+              <li class="card-grid__item" data-animate data-resource-carousel-item>
+                <article class="card card--resource card--external">
+                  <header class="card__header">
+                    <div class="card__badges">
+                      <span class="card__badge">External link</span>
+                    </div>
+                    <button
+                      class="card__save"
+                      type="button"
+                      aria-pressed="false"
+                      aria-label="Save resource: Coplay Program"
+                    >
+                      <img
+                        class="card__save-icon"
+                        src="assets/images/icons/Star.svg"
+                        alt=""
+                        width="22"
+                        height="22"
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </header>
+                  <div class="card__content">
+                    <h3 class="card__title">
+                      <a
+                        class="card__title-link"
+                        href="https://coworkcoplay.com.au/programs/adelaide/"
+                        target="_blank"
+                        rel="noopener"
+                        aria-label="Coplay Program (opens in a new tab)"
+                      >
+                        Coplay Program
+                      </a>
+                    </h3>
+                    <div class="card__copy">
+                      <p class="card__excerpt">
+                        Designed to support Defence and veteran families by providing
+                        a space for career development and community building.
+                      </p>
+                      <ul class="tag-list">
+                        <li class="tag-list__item"><span class="tag">Employment and Meaningful Activity</span></li>
+                      </ul>
+                    </div>
                   </div>
-                  <button
-                    class="card__save"
-                    type="button"
-                    aria-label="Save resource: Peer support programs: What to expect"
-                  >
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">
-                      Peer support programs: What to expect
-                    </a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      An overview of peer support services and how connecting with
-                      other veterans can help.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Transitioning</span></li>
-                      <li class="tag-list__item"><span class="tag">Veterans</span></li>
-                      <li class="tag-list__item"><span class="tag">Social support &amp; connection</span></li>
-                    </ul>
-                  </div>
-                  <figure class="card__media" aria-hidden="true">
-                    <img
-                      class="card__image"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                      src="assets/images/site/Support image 7.png"
-                      srcset="assets/images/site/Support image 7.png 2000w"
-                      sizes="(min-width: 1120px) 6.75rem, (min-width: 840px) 7rem, 28vw"
-                      alt=""
-                    />
-                  </figure>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
+                  <footer class="card__meta">
+                    <p class="card__external-link">Go to external resource</p>
+                    <span class="card__arrow" aria-hidden="true">
+                      <img
+                        class="card__arrow-icon"
+                        src="assets/images/icons/Property 1=External link.svg"
+                        alt=""
+                        width="22"
+                        height="22"
+                      />
+                    </span>
+                  </footer>
+                </article>
+              </li>
 
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource card--with-media">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Guide</span>
-                  </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Housing support after service">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Housing support after service</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      Practical steps for finding stable housing and understanding
-                      what support is available.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Housing</span></li>
-                      <li class="tag-list__item"><span class="tag">Veterans</span></li>
-                    </ul>
-                  </div>
-                  <figure class="card__media" aria-hidden="true">
-                    <img
-                      class="card__image"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                      src="assets/images/site/Support image 4.png"
-                      srcset="assets/images/site/Support image 4.png 2000w"
-                      sizes="(min-width: 1120px) 6.75rem, (min-width: 840px) 7rem, 28vw"
-                      alt=""
-                    />
-                  </figure>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
-
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Checklist</span>
-                  </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Financial wellbeing checklist">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Financial wellbeing checklist</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      A short checklist to help plan bills, entitlements, savings
-                      and everyday money decisions.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Finances</span></li>
-                      <li class="tag-list__item"><span class="tag">Planning</span></li>
-                    </ul>
-                  </div>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
-
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource card--with-media">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Article</span>
-                  </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Finding work and study options">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Finding work and study options</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      Explore study pathways, job support and skills recognition
-                      after leaving service.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Work</span></li>
-                      <li class="tag-list__item"><span class="tag">Transitioning</span></li>
-                    </ul>
-                  </div>
-                  <figure class="card__media" aria-hidden="true">
-                    <img
-                      class="card__image"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                      src="assets/images/site/Support image 6.png"
-                      srcset="assets/images/site/Support image 6.png 2000w"
-                      sizes="(min-width: 1120px) 6.75rem, (min-width: 840px) 7rem, 28vw"
-                      alt=""
-                    />
-                  </figure>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
-
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Brochure</span>
-                  </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Family wellbeing planning guide">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Family wellbeing planning guide</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      Conversation prompts and resources to help families plan
-                      support together.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Families</span></li>
-                      <li class="tag-list__item"><span class="tag">Wellbeing</span></li>
-                    </ul>
-                  </div>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
-
-            <li class="card-grid__item" data-animate data-resource-carousel-item>
-              <article class="card card--resource card--with-media">
-                <header class="card__header">
-                  <div class="card__badges">
-                    <span class="card__badge">Article</span>
-                  </div>
-                  <button class="card__save" type="button" aria-label="Save resource: Staying connected with local services">
-                    <img
-                      class="card__save-icon"
-                      src="assets/images/icons/Star.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                      aria-hidden="true"
-                    />
-                  </button>
-                </header>
-                <div class="card__content">
-                  <h3 class="card__title">
-                    <a class="card__title-link" href="#">Staying connected with local services</a>
-                  </h3>
-                  <div class="card__copy">
-                    <p class="card__excerpt">
-                      How to find local programs, peer networks and community
-                      services that fit your needs.
-                    </p>
-                    <ul class="tag-list">
-                      <li class="tag-list__item"><span class="tag">Community</span></li>
-                      <li class="tag-list__item"><span class="tag">Support</span></li>
-                    </ul>
-                  </div>
-                  <figure class="card__media" aria-hidden="true">
-                    <img
-                      class="card__image"
-                      data-parallax-media
-                      data-parallax-mode="translate"
-                      data-parallax-buffer-ratio="0.08"
-                      data-parallax-speed="0.02"
-                      data-parallax-limit="6"
-                      src="assets/images/site/Support image 1.png"
-                      srcset="assets/images/site/Support image 1.png 2000w"
-                      sizes="(min-width: 1120px) 6.75rem, (min-width: 840px) 7rem, 28vw"
-                      alt=""
-                    />
-                  </figure>
-                </div>
-                <footer class="card__meta">
-                  <p class="card__date">Updated 10 Mar 2026</p>
-                  <span class="card__arrow" aria-hidden="true">
-                    <img
-                      class="card__arrow-icon"
-                      src="assets/images/icons/Property 1=Left arrow.svg"
-                      alt=""
-                      width="22"
-                      height="22"
-                    />
-                  </span>
-                </footer>
-              </article>
-            </li>
             <li class="card-grid__spacer" aria-hidden="true"></li>
           </ul>
           </div>
         </div>
       </section>
+
+      <!--
+        Drupal handoff — Veteran and Family Hubs (paragraph: two_panel / collection promo)
+        Mirrors the .service-search-collection two-panel band used on the
+        resource-collection + about-landing templates: an inset cream panel
+        (heading + body + CTA) paired with a parallax media figure on the right.
+        Fields:
+          field_hub_title    (text, default "Veteran and Family Hubs")
+          field_hub_body     (text long)
+          field_hub_cta_text (text, default "Find a hub")
+          field_hub_cta_link (link)
+          field_hub_image    (image)
+        Twig:
+          Reuses the .service-search shell; the CTA is a .button--primary rather
+          than the floating-label search form the collection landing uses.
+          (Drupal emits .heading--level-2 / .prose / .to-bottom here — we keep
+          the prototype's .service-search__title / __lead / .button conventions
+          so the merge takes ours.)
+        Risks:
+          - Image needs srcset + sizes on lift (LESSONS.md). DVA798_1 today.
+      -->
+      <div class="service-search-band page--resource-collection two-panel-section">
+      <div class="service-search-collection">
+      <section class="service-search" id="veteran-and-family-hubs" aria-labelledby="veteran-and-family-hubs-title">
+        <div class="service-search__inner container">
+          <h2 class="service-search__title" id="veteran-and-family-hubs-title" data-animate>
+            Veteran and Family Hubs
+          </h2>
+
+          <p class="service-search__lead intro" data-animate>
+            Veteran and Families&rsquo; Hubs are dedicated, welcoming community
+            spaces designed to support current and former Australian Defence
+            Force (ADF) members and their families.
+          </p>
+
+          <p data-animate>
+            <a class="button button--primary" href="#">Find a hub</a>
+          </p>
+        </div>
+      </section>
+      <figure class="service-search__media" data-animate>
+        <img
+          src="assets/images/DVA798_1.jpg"
+          alt="Two people at a computer"
+          data-parallax-media
+          data-parallax-mode="translate"
+          data-parallax-buffer-ratio="0.08"
+          data-parallax-speed="0.06"
+          data-parallax-limit="30"
+        />
+      </figure>
+      </div>
+      </div>
 
       <!--
         Drupal handoff — Testimonial carousel (paragraph: testimonial_carousel)
@@ -1372,19 +1174,20 @@
                       data-parallax-speed="0.02"
                       data-parallax-limit="6"
                     />
-                    <span class="card__badge">Health</span>
+                    <span class="card__badge">Support</span>
                   </figure>
                   <div class="card__body">
-                    <p class="card__date">4 March 2026</p>
+                    <p class="card__date">29 May 2026</p>
                     <h3 class="card__title">
-                      <a class="card__title-link" href="#">How to find balance in life again after service</a>
+                      <a class="card__title-link" href="#">Finding Support Starts With One Small Step</a>
                     </h3>
                     <p class="card__excerpt">
-                      Discover practical strategies to build routine, strengthen
-                      wellbeing, and navigate life after leaving the military.
+                      Life can feel overwhelming when you&rsquo;re carrying too much
+                      on your own. For veterans, serving members, and families
+                      connected to Defence, challenges can come in many forms.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: How to find balance in life again after service</span></a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Finding Support Starts With One Small Step</span></a>
                     </p>
                   </div>
                 </article>
@@ -1409,19 +1212,20 @@
                       data-parallax-speed="0.02"
                       data-parallax-limit="6"
                     />
-                    <span class="card__badge">Support</span>
+                    <span class="card__badge">Events</span>
                   </figure>
                   <div class="card__body">
-                    <p class="card__date">12 March 2026</p>
+                    <p class="card__date">29 May 2026</p>
                     <h3 class="card__title">
-                      <a class="card__title-link" href="#">Building strong veteran and family support in Australia</a>
+                      <a class="card__title-link" href="#">Community Wellbeing Day to Connect Community with Support Services</a>
                     </h3>
                     <p class="card__excerpt">
-                      Learn how relationships and local networks improve mental
-                      health and connection.
+                      Veterans, serving members, families, carers, and community
+                      supporters are invited to attend the upcoming Veterans and
+                      Families Community Wellbeing Day, a free public event.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Building strong veteran and family support in Australia</span></a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Community Wellbeing Day to Connect Community with Support Services</span></a>
                     </p>
                   </div>
                 </article>
@@ -1446,19 +1250,21 @@
                       data-parallax-speed="0.02"
                       data-parallax-limit="6"
                     />
-                    <span class="card__badge">Events</span>
+                    <span class="card__badge">Wellbeing</span>
                   </figure>
                   <div class="card__body">
-                    <p class="card__date">26 March 2026</p>
+                    <p class="card__date">29 May 2026</p>
                     <h3 class="card__title">
-                      <a class="card__title-link" href="#">Exploring purpose and fulfilling activities after service</a>
+                      <a class="card__title-link" href="#">New Veteran Wellbeing Workshop Series Launching This Winter</a>
                     </h3>
                     <p class="card__excerpt">
-                      Discover practical ways to explore new goals, engage in
-                      meaningful activities, and reconnect with what matters.
+                      A new peer-led wellbeing workshop series has been announced to
+                      help veterans and families build stronger social connections,
+                      improve wellbeing, and access practical support in their local
+                      communities.
                     </p>
                     <p class="card__actions">
-                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: Exploring purpose and fulfilling activities after service</span></a>
+                      <a class="button button--tertiary" href="#">Read more<span class="visually-hidden">: New Veteran Wellbeing Workshop Series Launching This Winter</span></a>
                     </p>
                   </div>
                 </article>

@@ -16,7 +16,7 @@
   padding-block: var(--space-s) var(--space-2xl);
   /* Inherits into every span/label/legend in the form (option titles,
      hints, card text) — the base p/li/dd rule doesn't reach those.
-     Headings keep text-wrap: balance from base/typography.css, since a
+     Headings carry their own text-wrap from base/typography.css, since a
      declared element style beats an inherited value. */
   text-wrap: pretty;
 }

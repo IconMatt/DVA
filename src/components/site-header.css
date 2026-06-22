@@ -51,9 +51,9 @@
   gap: var(--space-s);
   padding-block: clamp(0.875rem, 2.2vw, 5.25rem);
 
-  /* Compact (mobile-menu) header mode — paired with the 1240px nav swap. Max is */
-  /* one below the min (1239/1240) so the two ranges never overlap. */
-  @media (max-width: 1239px) {
+  /* Compact (mobile-menu) header mode — paired with the 1360px nav swap. Max is */
+  /* one below the min (1359/1360) so the two ranges never overlap. */
+  @media (max-width: 1359px) {
     padding-block-start: 2.25rem;
   }
 }
@@ -81,10 +81,11 @@
 .site-nav {
   display: none;
 
-  /* 1240px, not the lg breakpoint (1120px): the header row overflows and the */
-  /* utility pills wrap below ~1220px once the full nav is present. See the */
-  /* note in mobile-nav.css — all three swap rules share this value. */
-  @media (min-width: 1240px) {
+  /* 1360px, not the lg breakpoint (1120px): with the full six-item nav the */
+  /* header row (brand + nav + utility pills) only fits on one line above */
+  /* ~1340px; below that the pills wrap to a second row. See the note in */
+  /* mobile-nav.css — all three swap rules share this value. */
+  @media (min-width: 1360px) {
     display: block;
     margin-inline-start: clamp(1.25rem, 1.0714rem + 0.7143vw, 1.75rem);
   }

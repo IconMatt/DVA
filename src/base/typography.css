@@ -7,7 +7,7 @@ h1, h2, h3, h4 {
   color: var(--color-brown-900);
   font-kerning: normal;
   letter-spacing: 0;
-  text-wrap: balance;
+  text-wrap: pretty;
 }
 
 p, li, dd {

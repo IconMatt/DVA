@@ -67,6 +67,12 @@
   @media (min-width: 840px) { padding-inline: calc(var(--container-padding) - 0.9rem); }
 }
 
+/* News listing has no pager after the grid (resource pages do), so add the */
+/* bottom breathing room the pager would otherwise provide before the CTA tray. */
+.page--news .resource-results-band {
+  padding-block-end: var(--space-3xl);
+}
+
 /* Match the Latest pill's right edge to the search submit's right edge above. */
 /* .active-filters already has bleed-content padding to land on the page grid; */
 /* .results-controls inherits no such padding so Latest would otherwise extend */

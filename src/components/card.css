@@ -465,9 +465,13 @@
     border-color var(--transition-base);
 }
 
+/* Hover background is Brush. The button-hover case comes from .card--news:hover */
+/* here; the body-hover case is already Brush via the generic */
+/* .card:has(.card__title-link:hover) rule — so the colour stays consistent */
+/* whether the pointer is on the card body or the Read more button. */
 .card--news:hover,
 .card--news:focus-within {
-  background: var(--color-sand-stone);
+  background: var(--color-brush);
   border-color: transparent;
 }
 
@@ -536,12 +540,17 @@
   position: relative;
   z-index: 1;
   color: var(--color-brown-900);
+  background: transparent;
   border-color: var(--color-brown-900);
 }
 
-.card--news .button:hover,
-.card--news .button:focus-visible {
-  color: var(--color-brown-900);
-  background: var(--color-zest);
-  border-color: var(--color-zest);
+/* Default is an outline button; the CARD's hover/focus state fills it solid. */
+/* Driven by the card state (not the button's own :hover) so there's no */
+/* separate button-level hover — and this overrides .button--tertiary:hover */
+/* (sweet-grass) when the button itself is the hovered element. */
+.card--news:hover .button,
+.card--news:focus-within .button {
+  color: var(--color-ink-inverse);
+  background: var(--color-brown-900);
+  border-color: var(--color-brown-900);
 }
