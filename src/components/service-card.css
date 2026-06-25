@@ -47,6 +47,32 @@
   background: var(--color-slate-300);
 }
 
+/* Badge row in the card header — availability status plus any */
+/* service-attribute badges (e.g. National). Mirrors */
+/* .service-detail__badges on the detail page. */
+.service-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs);
+}
+
+/* Service-attribute badge — status-pill geometry, distinct slate fill */
+/* so it doesn't read as an availability state. */
+.service-card__badge {
+  margin: 0;
+  padding: var(--space-3xs) var(--space-2xs);
+  font-size: var(--step--2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  border-radius: var(--radius-sm);
+}
+
+.service-card__badge--national {
+  color: var(--color-ink-inverse);
+  background: var(--color-slate-700);
+}
+
 .service-card__save {
   flex: none;
 }

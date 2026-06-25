@@ -129,6 +129,29 @@
   }
 }
 
+/* Static, centred catchment-area label for national services that have */
+/* no single location. Lives in the map container (not the draggable */
+/* pane), so it stays put while the map pans/zooms. Mirrors */
+/* .service-detail__status (zest badge) at body paragraph size. */
+.results-layout__map-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  margin: 0;
+  padding: var(--space-3xs) var(--space-2xs);
+  font-size: var(--step-0);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  background: var(--color-zest);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 4px var(--overlay-brown-40);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
 /* Below md: the user picks one column at a time via .results-view-toggle. */
 /* Above md: data-view is ignored — both columns render side-by-side. */
 @media (max-width: 839px) {

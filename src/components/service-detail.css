@@ -32,6 +32,38 @@
   background: var(--color-slate-300);
 }
 
+/* Badge row above the H1 — holds the availability status plus any */
+/* service-attribute badges (e.g. National). Flex so they sit inline. */
+.service-detail__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2xs);
+  margin-block-end: var(--space-2xs);
+}
+
+/* Inside the row the status owns no outer margin; the row gap spaces it. */
+.service-detail__badges .service-detail__status {
+  margin: 0;
+}
+
+/* Service-attribute badge — same geometry as the status pill, distinct */
+/* slate fill so it doesn't read as an availability state. */
+.service-detail__badge {
+  margin: 0;
+  padding: var(--space-3xs) var(--space-2xs);
+  font-size: var(--step--2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+
+.service-detail__badge--national {
+  color: var(--color-ink-inverse);
+  background: var(--color-slate-700);
+}
+
 /* Save action sits at the bottom-right of the band, scoped to the */
 /* service-detail page so the directory's .service-search__inner stays */
 /* untouched. Mobile keeps it inline (right-aligned) under the subtitle */
