@@ -149,7 +149,9 @@
   border-radius: var(--radius-sm);
   box-shadow: 0 1px 4px var(--overlay-brown-40);
   pointer-events: none;
-  white-space: nowrap;
+  max-width: calc(100% - var(--space-l));
+  text-align: center;
+  text-wrap: balance;
 }
 
 /* Below md: the user picks one column at a time via .results-view-toggle. */
