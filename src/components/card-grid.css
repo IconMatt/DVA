@@ -14,6 +14,22 @@
   }
 }
 
+/* Four-up grid for compact cards (contact-card on get-urgent-support):
+   1-col phone → 2-col at sm → 3-col at md → 4-col at lg. */
+.card-grid--four {
+  @media (min-width: 560px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1120px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* Resources-landing audience grid — flow columns by available width
    instead of fixed breakpoints, so the tablet-portrait range (≈760–840px)
    gets 2 columns instead of dropping to 1. auto-fit + minmax fits as many
@@ -66,6 +82,7 @@
 }
 
 .card-grid__item > .card,
-.card-grid__item > .service-card {
+.card-grid__item > .service-card,
+.card-grid__item > .contact-card {
   width: 100%;
 }

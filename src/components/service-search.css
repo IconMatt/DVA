@@ -32,7 +32,8 @@ main > .service-search-band:first-child {
 .page--resource-article .service-search,
 .page--about-landing .service-search,
 .page--feedback-form .service-search,
-.page--referral-form .service-search {
+.page--referral-form .service-search,
+.page--get-urgent-support .service-search {
   background: var(--color-brush);
 }
 
@@ -58,10 +59,12 @@ main > .service-search-band:first-child {
   margin-bottom: var(--space-m);
 }
 
-/* Restore the base h1 size on the resource library landing — it's a
-   content/listing page, not a search-led hero like services-directory,
-   so its H1 reads at the true step-5 from base/_typography.scss. */
-.page--resource-library .service-search__title {
+/* Restore the true h1 size (step-5) on content pages — they aren't search-led
+   heroes like services-directory (whose H1 is held to step-4 / "h2 size"), so
+   their H1 must read larger than the section H2s. resource-library landing and
+   get-urgent-support (a crisis-services directory) both fall in this group. */
+.page--resource-library .service-search__title,
+.page--get-urgent-support .service-search__title {
   font-size: var(--step-5);
 }
 

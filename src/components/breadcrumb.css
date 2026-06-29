@@ -62,9 +62,11 @@
   }
 }
 
-/* Resource article: drop the current-page crumb — the H1 already labels */
-/* the page, so showing it twice in the same panel is noise. Page-scoped so */
-/* directory / detail pages keep their full trail. */
-.page--resource-article .breadcrumb__item--current {
+/* Drop the current-page crumb where the H1 already labels the page, so it */
+/* isn't shown twice in the same panel. Page-scoped so directory / detail */
+/* pages keep their full trail. The <li> stays in the DOM (aria-current intact */
+/* for assistive tech); only the visual crumb — and its separator — is hidden. */
+.page--resource-article .breadcrumb__item--current,
+.page--get-urgent-support .breadcrumb__item--current {
   display: none;
 }

@@ -1,0 +1,58 @@
+/* Emergency notice — a Wattle call-out that sits inside the page-header panel
+   (.service-search) on get-urgent-support, below the H1. The phone sits in a
+   white rounded box that mirrors the .quick-link__arrow icon box used by the
+   CTAs (2.5rem square, --radius-sm, white fill, Ironbark icon).
+
+   Drupal handoff: a small `emergency_notice` paragraph (or a hard-coded region
+   in the page template) — field_emergency_text (text) + a fixed phone link.
+   Lives in the same consistent-help slot on every crisis screen (WCAG 3.2.6). */
+
+.emergency-notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  margin-block-start: var(--space-l);
+  /* Match the .contact-card padding so the call-out reads as the same family. */
+  padding: var(--space-m);
+  background: var(--color-wattle);
+  border-radius: var(--radius-xl);
+}
+
+/* White icon box — same geometry/treatment as .quick-link__arrow. */
+.emergency-notice__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  color: var(--color-brown-900);
+}
+
+.emergency-notice__icon svg,
+.emergency-notice__icon img {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.emergency-notice__text {
+  margin: 0;
+  max-width: none;
+  font-size: var(--step-1);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brown-900);
+}
+
+.emergency-notice__text a {
+  color: inherit;
+  text-underline-offset: 0.18em;
+}
+
+.emergency-notice__text a:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}

@@ -263,6 +263,15 @@
   }
 }
 
+/* Visible section heading above an about-grid. about-landing hides its title
+   (.visually-hidden); pages that group several grids under named headings
+   (get-urgent-support) use this. Inherits the base <h2> type (Figtree,
+   --step-4, weight 400) so it matches every other section heading — only the
+   bottom margin is component-specific. */
+.about-grid__title {
+  margin: 0 0 var(--space-m);
+}
+
 /* Stack 1-col on mobile, step up to 2-col at sm, 3-col at md+. Equalise */
 /* heights across both rows once the grid is 3-up so all six cards size */
 /* to the tallest card's content. */
