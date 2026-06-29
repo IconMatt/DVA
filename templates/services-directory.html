@@ -2171,7 +2171,9 @@
                         drupalSettings so the map opens centred on the
                         user's query.
           -->
-          <div id="results-map" class="results-layout__map" aria-label="Map of service locations"></div>
+          <div id="results-map" class="results-layout__map" aria-label="Map of service locations">
+            <p class="results-layout__map-badge">The map shows 1–10 of <a class="results-layout__map-badge-link" href="#results-pagination">26 results</a></p>
+          </div>
         </div>
 
         <!--
@@ -2191,7 +2193,7 @@
                       pager output doesn't introduce direction-specific
                       spans.
         -->
-        <nav class="pagination" aria-label="Pagination">
+        <nav class="pagination" id="results-pagination" aria-label="Pagination">
           <button class="pagination__nav pagination__nav--previous" type="button" aria-label="Previous page" disabled>
             <img class="pagination__nav-icon" src="assets/images/icons/Property 1=Left arrow.svg" alt="" width="22" height="22" />
           </button>
@@ -3015,6 +3017,17 @@
             headerTicking = true;
           }, { passive: true });
         })();
+
+        // Map badge "26 results" link → scroll the pager into view so the
+        // back/next controls + "1–10 of 26 results" summary are revealed.
+        var mapBadgeLink = document.querySelector('.results-layout__map-badge-link');
+        var resultsPager = document.getElementById('results-pagination');
+        if (mapBadgeLink && resultsPager) {
+          mapBadgeLink.addEventListener('click', function (e) {
+            e.preventDefault();
+            resultsPager.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'end' });
+          });
+        }
       })();
     </script>
   </body>

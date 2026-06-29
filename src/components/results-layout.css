@@ -154,6 +154,54 @@
   text-wrap: balance;
 }
 
+/* Info badge pinned to the top-centre of the map — states which slice of the
+   result set the pins represent. Sits above Leaflet's panes (z-index up to
+   ~700) and ignores pointer events so map drag/zoom passes through. Top-centre
+   keeps it clear of the zoom controls (top-left). */
+.results-layout__map-badge {
+  position: absolute;
+  top: var(--space-s);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  margin: 0;
+  padding: var(--space-3xs) var(--space-s);
+  font-size: var(--step--1);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--color-brown-900);
+  background: var(--color-white);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-md);
+  pointer-events: none;
+  /* Keep the badge on one line; it sizes to its text and stays centred. */
+  max-width: calc(100% - var(--space-s));
+  white-space: nowrap;
+}
+
+/* The badge sets pointer-events: none so map drag passes through; the link
+   re-enables them just for itself and scrolls to the pager (see inline JS).
+   Scoped under the badge so it beats Leaflet's `.leaflet-container a`
+   (#0078A8) — the link reads as the badge text colour, just underlined. */
+.results-layout__map-badge .results-layout__map-badge-link {
+  pointer-events: auto;
+  color: var(--color-brown-900);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.results-layout__map-badge-link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+/* Anchor target for the badge link — leave a gap so the controls aren't flush
+   against the viewport edge when scrolled into view. */
+#results-pagination {
+  scroll-margin-block-end: var(--space-l);
+}
+
 /* Below md: the user picks one column at a time via .results-view-toggle. */
 /* Above md: data-view is ignored — both columns render side-by-side. */
 @media (max-width: 839px) {
